@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#333">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=5.1.4" color="#333">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="Android,Notes,Compose,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aJIEw's Self Talk" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="跟随官方文档学习 Compose 的第二篇。第一篇：Thinking in Compose。  Layout in ComposeThemingAndroid 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material De">
+<meta name="keywords" content="Android,Notes,Compose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Layout and State">
+<meta property="og:url" content="https://ajiew.me/layout-and-state/index.html">
+<meta property="og:site_name" content="aJIEw&#39;s Self Talk">
+<meta property="og:description" content="跟随官方文档学习 Compose 的第二篇。第一篇：Thinking in Compose。  Layout in ComposeThemingAndroid 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material De">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png">
+<meta property="og:image" content="https://ajiew.me/assets/2021-03-19/constraint_layout_example.png">
+<meta property="og:image" content="https://ajiew.me/assets/2021-03-19/unidirectional_data_flow.png">
+<meta property="og:updated_time" content="2021-04-20T00:36:41.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Layout and State">
+<meta name="twitter:description" content="跟随官方文档学习 Compose 的第二篇。第一篇：Thinking in Compose。  Layout in ComposeThemingAndroid 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material De">
+<meta name="twitter:image" content="https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ajiew.me/layout-and-state/">
+
+
+
+
+
+  <title>Layout and State | aJIEw's Self Talk</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aJIEw's Self Talk</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Think | Write | Share</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ajiew.me/layout-and-state/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aJIEw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aJIEw's Self Talk">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Layout and State</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-19T20:30:00+08:00">
+                2021-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"> 阅读数 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png" width="80%/">
+
+
+<blockquote>
+<p>跟随<a href="https://developer.android.com/courses/pathways/compose" target="_blank" rel="noopener">官方文档</a>学习 Compose 的第二篇。第一篇：<a href="https://ajiew.github.io/thinking-in-compose" target="_blank" rel="noopener">Thinking in Compose</a>。</p>
+</blockquote>
+<h2 id="Layout-in-Compose"><a href="#Layout-in-Compose" class="headerlink" title="Layout in Compose"></a><a href="https://developer.android.com/jetpack/compose/layout" target="_blank" rel="noopener">Layout</a> in Compose</h2><h3 id="Theming"><a href="#Theming" class="headerlink" title="Theming"></a><a href="https://developer.android.com/jetpack/compose/themes" target="_blank" rel="noopener">Theming</a></h3><p>Android 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material Design 主题或者自定义主题变得前所未有地简单和高效。</p>
+<p>Compose 框架内置了 Material Design 主题，所有的组件都构建在该主题之上，与此同时，也非常易于自定义。<code>MaterialTheme</code> 由 <code>color</code>、<code>typography</code> 和 <code>shape</code> 三部分组成，所有的主题都是以树型的方式自顶向下应用到组件之上的，多个主题可以嵌套使用，因此，我们可以非常灵活地应用、修改、重用主题。又因为 Compose 中自定义组件非常常见，所以我们可以修改、应用主题到单个组件的级别。</p>
+<a id="more"></a>
+
+<h3 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h3><p>Modifier 有点像 React-Native 中的 StyleSheet，你可以使用它修改 composable 组件的外观、行为，添加额外信息等。Modifier 和普通的 Kotlin 对象没什么区别，可以作为变量使用，也可以和其它 Modifier 组合起来使用。</p>
+<p>相比传统的 View 的属性，Modifier 还有一个额外的优势，那就是可以根据当前上下文推断出那些属性可用，防止你用错。另外，Modifer 属性应用的顺序也会直接影响到组件的外观。比如，<code>Modifier.padding(8.dp).clickable{}</code> 和 <code>Modifier.clickable{}.padding(8.dp)</code> 的可点击区域的大小是不同的，前者可点击区域在 padding 之内，后者可点击区域包括了 padding。</p>
+<h3 id="Slots-APIs"><a href="#Slots-APIs" class="headerlink" title="Slots APIs"></a>Slots APIs</h3><p>Compose 中绝大多数内置组件的最后一个参数都是 <code>content: @Composable () -&gt; Unit</code>，结合 Koltin 的 <a href="https://kotlinlang.org/docs/lambdas.html#passing-a-lambda-to-the-last-parameter" target="_blank" rel="noopener"><strong>trailing lambda</strong></a> 的语法，我们就可以很方便地写出相互嵌套的组件：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Button &#123;</span><br><span class="line">    Row &#123;</span><br><span class="line">        MyImage()</span><br><span class="line">        Spacer(<span class="number">4</span>.dp)</span><br><span class="line">        Text(<span class="string">"Button"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Custom-Layout"><a href="#Custom-Layout" class="headerlink" title="Custom Layout"></a>Custom Layout</h3><p>Compose 中最基础的组件是 <code>Column</code>、<code>Row</code> 和 <code>Box</code>，通过它们我们可以组合出复杂的布局。但是，我们有时候可能也会用到一些更复杂的布局，这个时候就需要通过自定义 <a href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main-release:compose/ui/ui/src/commonMain/kotlin/androidx/compose/ui/layout/Layout.kt" target="_blank" rel="noopener"><code>Layout</code></a> 组件了。</p>
+<h4 id="Compose-中的布局原则"><a href="#Compose-中的布局原则" class="headerlink" title="Compose 中的布局原则"></a>Compose 中的布局原则</h4><p>每个 composable 函数在执行之后都会释放出 UI 组件并被添加到视图树中，每个元素都有一个父元素以及多个（可能的）子元素，而且该元素有一个相对父元素的坐标 (x,y) 和大小 (width &amp; height)。每个元素在被添加到视图树之前，都需要被测量一次，并且需要满足父元素的限制条件，比如最小和最大的宽高。如果元素具有子元素，那么还需要测量其所有的子元素决定其自身的大小之后再被绘制出来。</p>
+<p><strong>Compose 不允许元素多次测量</strong>，也就是说所有的元素<strong>只能测量一次</strong>，这么做的原因当然是为了性能考虑。因为 recomposition 的存在，如果同一个元素多次被测量会造成极大的性能浪费，尤其是在 UI 树嵌套很深的情况下，如果所有元素都测量多次以上，那么整个视图树 recomposition 的性能消耗将是巨大的。</p>
+<h4 id="自定义-LayoutModifier"><a href="#自定义-LayoutModifier" class="headerlink" title="自定义 LayoutModifier"></a>自定义 LayoutModifier</h4><p>我们可以通过实现（扩展函数）Modifler 的 <code>layout()</code> 函数来修改如何显示一个元素。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">customLayoutModifier</span><span class="params">(...)</span></span> = Modifier.layout &#123; measurable, constraints -&gt;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现 LayoutModifier 需要用到两个参数：</p>
+<ul>
+<li><code>measurable</code>：代表需要被测量和放置的元素</li>
+<li><code>constraints</code>：元素最小和最大的宽和高等</li>
+</ul>
+<p>除此之外，我们通过调用 <code>layout()</code> 返回一个 <code>MeasureResult</code> 供 LayoutModifer 确定测量结果（大小、对齐方式、位置等）：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> Modifier.<span class="title">customLayoutModifier</span><span class="params">(...)</span></span> = Modifier.layout &#123; measurable, constraints -&gt;</span><br><span class="line">    <span class="comment">// measure UI</span></span><br><span class="line">    <span class="keyword">val</span> placeable = measurable.measure(constraints)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// do other things</span></span><br><span class="line"></span><br><span class="line">    layout(placeable.width, height) &#123;</span><br><span class="line">        <span class="comment">// place it</span></span><br><span class="line">        placeable.placeRelative(<span class="number">0</span>, paddingY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意在 <code>layout()</code> 函数中，必须调用 <code>placeXXX()</code> 函数，否则元素将不可见。</p>
+<h4 id="自定义-Layout"><a href="#自定义-Layout" class="headerlink" title="自定义 Layout"></a>自定义 Layout</h4><p>除了自定义如何排列元素之外，我们还可以自定义 Layout。与自定义 LayoutModifier 类似，首先需要测量所有子元素的位置，然后根据 constraints 放置到合适的位置。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">CustomLayout</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    modifier: <span class="type">Modifier</span> = Modifier,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="comment">// custom layout attributes goes here</span></span></span></span><br><span class="line"><span class="function"><span class="params">    content: @<span class="type">Composable</span> () -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span> &#123;</span><br><span class="line">    Layout(</span><br><span class="line">        modifier = modifier,</span><br><span class="line">        content = content</span><br><span class="line">    ) &#123; measurables, constraints -&gt;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Measure each child</span></span><br><span class="line">        <span class="keyword">val</span> placeables = measurables.map &#123; measurable -&gt;</span><br><span class="line">            measurable.measure(constraints)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Set the size</span></span><br><span class="line">        layout(constraints.maxWidth, constraints.maxHeight) &#123;</span><br><span class="line">            placeables.forEach &#123; placeable -&gt;</span><br><span class="line">                <span class="comment">// Position each item</span></span><br><span class="line">                placeable.placeRelative(x = <span class="number">0</span>, y = calculated)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Constraint-Layout"><a href="#Constraint-Layout" class="headerlink" title="Constraint Layout"></a>Constraint Layout</h3><p>尽管在 Compose 框架中，布局嵌套的深度对性能的影响并不是太大，但是我们依旧可以在一些布局复杂的场景中使用 Constraint Layout 来简化布局的实现。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">TestConstraintLayout</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ConstraintLayout(modifier = Modifier.fillMaxHeight()) &#123;</span><br><span class="line">        <span class="keyword">val</span> (button1, button2, button3, button4, text) = createRefs()</span><br><span class="line"></span><br><span class="line">        Button(onClick = &#123; <span class="comment">/*TODO*/</span> &#125;,</span><br><span class="line">            modifier = Modifier.constrainAs(button1) &#123;</span><br><span class="line">                start.linkTo(parent.start, <span class="number">16</span>.dp)</span><br><span class="line">                top.linkTo(parent.top, <span class="number">16</span>.dp)</span><br><span class="line">            &#125;) &#123;</span><br><span class="line">            Text(text = <span class="string">"Button1"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Button(onClick = &#123; <span class="comment">/*TODO*/</span> &#125;,</span><br><span class="line">            modifier = Modifier.constrainAs(button2) &#123;</span><br><span class="line">                top.linkTo(button1.top)</span><br><span class="line">                end.linkTo(parent.end, <span class="number">16</span>.dp)</span><br><span class="line">            &#125;) &#123;</span><br><span class="line">            Text(text = <span class="string">"Button2"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Button(onClick = &#123; <span class="comment">/*TODO*/</span> &#125;,</span><br><span class="line">            modifier = Modifier.constrainAs(button3) &#123;</span><br><span class="line">                start.linkTo(button1.start)</span><br><span class="line">                bottom.linkTo(parent.bottom, <span class="number">16</span>.dp)</span><br><span class="line">            &#125;) &#123;</span><br><span class="line">            Text(text = <span class="string">"Button3"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Button(onClick = &#123; <span class="comment">/*TODO*/</span> &#125;,</span><br><span class="line">            modifier = Modifier.constrainAs(button4) &#123;</span><br><span class="line">                top.linkTo(button3.top)</span><br><span class="line">                end.linkTo(button2.end)</span><br><span class="line">            &#125;) &#123;</span><br><span class="line">            Text(text = <span class="string">"Button4"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Text(text = <span class="string">"Center"</span>, modifier = Modifier.constrainAs(text) &#123;</span><br><span class="line">            top.linkTo(parent.top)</span><br><span class="line">            bottom.linkTo(parent.bottom)</span><br><span class="line">            start.linkTo(parent.start)</span><br><span class="line">            end.linkTo(parent.end)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">        Button(onClick = &#123; <span class="comment">/*TODO*/</span> &#125;,</span><br><span class="line">            modifier = Modifier.constrainAs(createRef()) &#123;</span><br><span class="line">                centerHorizontallyTo(parent)</span><br><span class="line">                top.linkTo(text.bottom, <span class="number">24</span>.dp)</span><br><span class="line">            &#125;) &#123;</span><br><span class="line">            Text(text = <span class="string">"Button5"</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> barrier = createEndBarrier(button1, text)</span><br><span class="line">        Text(</span><br><span class="line">            text = <span class="string">"To Be or Not To Be, that's a question"</span>,</span><br><span class="line">            modifier = Modifier.constrainAs(createRef()) &#123;</span><br><span class="line">                top.linkTo(text.top)</span><br><span class="line">                start.linkTo(barrier, <span class="number">8</span>.dp)</span><br><span class="line">                end.linkTo(parent.end)</span><br><span class="line"></span><br><span class="line">                <span class="comment">// wrap content according to the constraints</span></span><br><span class="line">                width = Dimension.preferredWrapContent</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="../assets/2021-03-19/constraint_layout_example.png" width="30%/">
+
+<p>Compose 中的 Constraint Layout 的用法和 View 系统中的 <a href="https://developer.android.com/training/constraint-layout" target="_blank" rel="noopener">ConstraintLayout</a> 的用法差不多，主要包括以下几个部分：</p>
+<ul>
+<li>使用 <code>createRef()</code> 或者 <code>createRefs()</code> 来创建引用，其中 <code>parent</code> 是默认会被创建的引用</li>
+<li>使用 <code>Modifier.constrainAs(referenceName)</code> 来创建约束内容</li>
+<li>使用 <code>linkTo</code>、<code>centerHorizontallyTo</code> 等方法约束布局，还可以使用 <code>width</code> 等自定义 <code>Dimension</code></li>
+<li>使用 <code>createXxxBarrier</code>、<code>createGuidelineFromXxx</code>、<code>createHorizontalChain</code> 等方法创建帮助约束</li>
+</ul>
+<p>除此之外，我们还可以使用动态约束，比如下面这个例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">DecoupledConstraintLayout</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 根据不同的屏幕方向使用不同的 Constraint sets</span></span><br><span class="line">    BoxWithConstraints &#123;</span><br><span class="line">        <span class="keyword">val</span> constraints = <span class="keyword">if</span> (maxWidth &lt; maxHeight) &#123;</span><br><span class="line">            decoupledConstraints(margin = <span class="number">16</span>.dp) <span class="comment">// Portrait constraints</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            decoupledConstraints(margin = <span class="number">32</span>.dp) <span class="comment">// Landscape constraints</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ConstraintLayout(constraints) &#123;</span><br><span class="line">            Button(</span><br><span class="line">                onClick = &#123; <span class="comment">/* Do something */</span> &#125;,</span><br><span class="line">                modifier = Modifier.layoutId(<span class="string">"button"</span>)</span><br><span class="line">            ) &#123;</span><br><span class="line">                Text(<span class="string">"Button"</span>)</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Text(<span class="string">"Text"</span>, Modifier.layoutId(<span class="string">"text"</span>))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create your own constraint sets</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">decoupledConstraints</span><span class="params">(margin: <span class="type">Dp</span>)</span></span>: ConstraintSet &#123;</span><br><span class="line">    <span class="keyword">return</span> ConstraintSet &#123;</span><br><span class="line">        <span class="keyword">val</span> button = createRefFor(<span class="string">"button"</span>)</span><br><span class="line">        <span class="keyword">val</span> text = createRefFor(<span class="string">"text"</span>)</span><br><span class="line"></span><br><span class="line">        constrain(button) &#123;</span><br><span class="line">            top.linkTo(parent.top, margin = margin)</span><br><span class="line">        &#125;</span><br><span class="line">        constrain(text) &#123;</span><br><span class="line">            top.linkTo(button.bottom, margin)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Intrinsic"><a href="#Intrinsic" class="headerlink" title="Intrinsic"></a>Intrinsic</h3><p>之前说过自定义布局的时候，Compose 只允许我们测量一次，否则会报错，但是，当我们需要在 measure 之前就知道布局的宽高信息的时候，该怎么办呢？这个时候就需要用到 Intrinsic 信息了，包括：</p>
+<ul>
+<li><code>(min|max)IntrinsicWidth</code>：在当前高度下，最小或最大的可用布局宽度</li>
+<li><code>(min|max)IntrinsicHeight</code>：在当前宽度下，最小或最大的可用布局高度</li>
+</ul>
+<p>使用例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">TwoText</span><span class="params">(modifier: <span class="type">Modifier</span> = Modifier, text1: <span class="type">String</span>, text2: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">    Row(modifier = modifier.height(IntrinsicSize.Min)) &#123;</span><br><span class="line">        Text(text = text1,</span><br><span class="line">            modifier = Modifier.weight(<span class="number">1f</span>).wrapContentWidth(Alignment.CenterHorizontally))</span><br><span class="line"></span><br><span class="line">        Divider(color = Color.Black,</span><br><span class="line">            modifier = Modifier</span><br><span class="line">            .fillMaxHeight()</span><br><span class="line">            .width(<span class="number">1</span>.dp))</span><br><span class="line"></span><br><span class="line">        Text(text = text2,</span><br><span class="line">            modifier = Modifier.weight(<span class="number">1f</span>).wrapContentWidth(Alignment.CenterHorizontally))</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时，Row 的高度是由子元素中高度最高的元素决定的，而 Divider 因为使用了 <code>fillMaxHeight()</code> 所以其高度会填充此最小高度。</p>
+<h2 id="State-in-Compose"><a href="#State-in-Compose" class="headerlink" title="State in Compose"></a><a href="https://developer.android.com/jetpack/compose/state" target="_blank" rel="noopener">State</a> in Compose</h2><h3 id="什么是-State"><a href="#什么是-State" class="headerlink" title="什么是 State"></a>什么是 State</h3><blockquote>
+<p><strong>State</strong> in an application is <strong>any value that can change</strong> over time.</p>
+<p>For example it may be a value stored in a Room database, a variable on a class, or even the current value read from an accelerometer.</p>
+</blockquote>
+<p>官方的解释是，应用中任何会随时间发生变化的值都可以被称作 State，比如网络状态，应用数据，UI 动画等等。</p>
+<h3 id="创建-State"><a href="#创建-State" class="headerlink" title="创建 State"></a>创建 State</h3><p>我们可以通过使用 <code>mutableStateOf()</code> 给 composable 函数添加内部状态，当状态改变的时候，依赖该状态的 composable 函数会自动再次执行。创建 State 主要有以下几种方法：</p>
+<ul>
+<li><code>val state = remember { mutableStateOf(default) }</code>，直接取得 <code>MutableState</code></li>
+<li><code>var value by remember { mutableStateOf(default) }</code>，通过关键字 <code>by</code>，以委托的方式初始化，需要导入 <code>androidx.compose.runtime.getValue</code> 和 <code>androidx.compose.runtime.setValue</code></li>
+<li><code>val (value, setValue) = remember { mutableStateOf(default) }</code>，通过解构 <code>MutableState</code> 获得 setter 和 getter 函数</li>
+</ul>
+<h3 id="记住-State"><a href="#记住-State" class="headerlink" title="记住 State"></a>记住 State</h3><p>注意到上面创建 State 的方法中，全都使用了 <code>remember()</code> 函数，该函数用于记住该状态，如果不记住状态，那么该状态每次都会在 recomposation 的过程中被重新初始化。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> color = remember(key1 = todo.id, calculation = &#123; randomTint() &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>remember()</code> 函数接受 key 和 calculation 函数，如果不传 key 则只有在 composition 才调用 calculation，否则会先比较 key 是否发生变化，然后再决定是否调用。</p>
+<p>在使用 <code>remember()</code> 之前，需要问自己的一件事是：该状态是否有可能需要暴露给外界？如果是，那么就把它定义为 composable 函数的参数；否则，才使用局部变量。</p>
+<p>另外，还需要注意到，当 Compose 组件被移除的时候，其「记住」的状态也会被移除，这在 LazyColumn 等组件中尤其需要注意，当列表长度很长并在可见区域之外时，组件可能会被移除掉并在回到原位置后重新渲染组件，因此记住的状态也会丢失。所以 <code>remember()</code> 只适用于记住一些暂时的状态。</p>
+<h3 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h3><p><strong>Unidirectional data flow</strong>，即事件向上流动（事件输入），状态向下流动（更新状态）。比如 ViewModel 中通过方法调用传送事件，最后通过 LiveData 将状态更新通知给 UI。</p>
+<p><img src="../assets/2021-03-19/unidirectional_data_flow.png" alt="unidirectional_data_flow"></p>
+<p>Compose 中所有的内置组件都被设计成是单向数据流的，也即都是 Stateless 的。</p>
+<h3 id="结合-ViewModel-的使用"><a href="#结合-ViewModel-的使用" class="headerlink" title="结合 ViewModel 的使用"></a>结合 ViewModel 的使用</h3><p>为了实现单向数据流和达到解耦的目的，我们可以将事件处理放到 ViewModel 中，再通过 LiveData 实现对状态更新的监听：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CounterViewModel</span> : <span class="type">ViewModel</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> _count = MutableLiveData(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">val</span> count: LiveData&lt;<span class="built_in">Int</span>&gt; = _count</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">updateCount</span><span class="params">(count: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        _count.value = count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CounterActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">val</span> viewModel <span class="keyword">by</span> viewModels&lt;CounterViewModel&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContent &#123;</span><br><span class="line">            Surface &#123;</span><br><span class="line">                Counter(count = viewModel.count.observeAsState().value!!,</span><br><span class="line">                    updateCount = &#123; viewModel.updateCount(it) &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这里关键的一步是对 <code>count</code> 值的监听，使用 <code>observeAsState()</code> 将 ViewModel 中的 LiveData 转换为可触发 recomposition 的 State。</p>
+<h3 id="状态提升"><a href="#状态提升" class="headerlink" title="状态提升"></a>状态提升</h3><p>有时候，composable 函数可能需要将状态暴露给调用方，比如调用方需要通过获取状态进行一些操作或者为了方便测试，这种做法称为状态提升（state hoisting）。状态提升可以避免重复状态的出现以及引入 bug，因为如果在一个 composable 函数中使用了过多状态，通常会增加代码复杂度从而使得代码难以维护和容易产生 bug。</p>
+<p>我们可以通过在 composable 函数中添加状态值（Value）和状态改变器（onValueChange: (T) -&gt; Unit）来实现状态提升：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Composable</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">Counter</span><span class="params">(count: <span class="type">Int</span>, updateCount: (<span class="type">Int</span>) -&gt; <span class="type">Unit</span>)</span></span> &#123;</span><br><span class="line">    Button(onClick = &#123; updateCount(count + <span class="number">1</span>) &#125;) &#123;</span><br><span class="line">        Text(<span class="string">"I've been clicked <span class="variable">$count</span> times"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用状态提升的好处是<strong>只有创建该 composable 函数的地方，才能修改其状态</strong>。我们可以通过状态提升将一个 Stateful 组件转换成一个 Stateless 组件，而 Stateless 组件的优势是可以更方便地组合重用。</p>
+<p>另外，在使用状态提升时，第一步需要考虑组件的<strong>状态树</strong>，尤其是在组件是由多个子组件嵌套形成的时候，需要考虑该组件的使用场景，以及应该将该状态提升到哪一级。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    aJIEw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://ajiew.me/layout-and-state/" title="Layout and State">https://ajiew.me/layout-and-state/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="external nofollow" target="_blank">CC BY 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+            <a href="/tags/Compose/" rel="tag"># Compose</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/thinking-in-compose/" rel="next" title="Thinking in Compose">
+                <i class="fa fa-chevron-left"></i> Thinking in Compose
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021-3/" rel="prev" title="改变要有耐心">
+                改变要有耐心 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4" alt="aJIEw">
+            
+              <p class="site-author-name" itemprop="name">aJIEw</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ajiew" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ajiew42" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ajiew42@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hexojs/hexo" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/next-theme" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout-in-Compose"><span class="nav-text">Layout in Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Theming"><span class="nav-text">Theming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modifier"><span class="nav-text">Modifier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slots-APIs"><span class="nav-text">Slots APIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Custom-Layout"><span class="nav-text">Custom Layout</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Compose-中的布局原则"><span class="nav-text">Compose 中的布局原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义-LayoutModifier"><span class="nav-text">自定义 LayoutModifier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义-Layout"><span class="nav-text">自定义 Layout</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constraint-Layout"><span class="nav-text">Constraint Layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intrinsic"><span class="nav-text">Intrinsic</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State-in-Compose"><span class="nav-text">State in Compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-State"><span class="nav-text">什么是 State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-State"><span class="nav-text">创建 State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#记住-State"><span class="nav-text">记住 State</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单向数据流"><span class="nav-text">单向数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结合-ViewModel-的使用"><span class="nav-text">结合 ViewModel 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态提升"><span class="nav-text">状态提升</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aJIEw</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">Based on ❤️  <a target="_blank" href="https://github.com/aJIEw/aJIEw.github.io">Github Pages</a> ❤️</div>
+
+<div style="position: absolute; right: 150px; top: 7px;"><a target="_blank" href="https://info.flagcounter.com/FuGu"><img src="https://s11.flagcounter.com/count2/FuGu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_5/maxflags_5/viewers_0/labels_0/pageviews_0/flags_0/percent_1/" alt="Free counters!" border="0"></a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ajiew.me/layout-and-state/';
+          this.page.identifier = 'layout-and-state/';
+          this.page.title = 'Layout and State';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-ajiew-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 20037,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

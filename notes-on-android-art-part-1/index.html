@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#333">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=5.1.4" color="#333">
+
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+  <meta name="keywords" content="Android,Notes,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aJIEw's Self Talk" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。  Activity 生命周期 新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。 onRestoreInstanceState 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部">
+<meta name="keywords" content="Android,Notes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（一）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-1/index.html">
+<meta property="og:site_name" content="aJIEw&#39;s Self Talk">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。  Activity 生命周期 新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。 onRestoreInstanceState 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-04/android-logo.jpg">
+<meta property="og:updated_time" content="2021-04-20T00:36:41.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 开发艺术探索学习笔记（一）">
+<meta name="twitter:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。  Activity 生命周期 新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。 onRestoreInstanceState 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-12-04/android-logo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ajiew.me/notes-on-android-art-part-1/">
+
+
+
+
+
+  <title>Android 开发艺术探索学习笔记（一） | aJIEw's Self Talk</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aJIEw's Self Talk</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Think | Write | Share</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ajiew.me/notes-on-android-art-part-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aJIEw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aJIEw's Self Talk">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android 开发艺术探索学习笔记（一）</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T21:41:00+08:00">
+                2019-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"> 阅读数 <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/assets/2019-12-04/android-logo.jpg" alt></p>
+<blockquote>
+<p>  结合 <a href="https://developer.android.com/guide" target="_blank" rel="noopener">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。</p>
+</blockquote>
+<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a><a href="https://developer.android.com/guide/components/activities/activity-lifecycle" target="_blank" rel="noopener">Activity 生命周期</a></h3><ul>
+<li>新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。</li>
+<li><a href="https://developer.android.com/reference/android/app/Activity#onRestoreInstanceState(android.os.Bundle)" target="_blank" rel="noopener">onRestoreInstanceState</a> 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部分 View 都会帮我们做一些基本的状态恢复，但是必须为 View 提供 ID，可以查看对应的 View 中的 onRestoreInstanceState 方法了解具体恢复了哪些内容。</li>
+<li><a href="https://developer.android.com/reference/android/app/Activity#onSaveInstanceState(android.os.Bundle)" target="_blank" rel="noopener">onSaveInstanceState</a> 方法会在 onStop 之后被调用（targetSdkVersion &gt;= 28），可以在这里保存一些轻量的数据。它可以作为生命周期方法的补充，但是有些时候并不会被调用，比如从 A 中启动 B 的时候，如果 A 未被回收那么系统就不会调用 onSaveInstanceState。</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="Activity-的启动模式"><a href="#Activity-的启动模式" class="headerlink" title="Activity 的启动模式"></a>Activity 的启动模式</h3><h4 id="四种启动模式"><a href="#四种启动模式" class="headerlink" title="四种启动模式"></a><a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#ManifestForTasks" target="_blank" rel="noopener">四种启动模式</a></h4><ul>
+<li>standard：每次都会在<strong>当前任务栈</strong>中启动一个新的 Activity 实例。使用场景：默认配置，商品详情页。</li>
+<li>singleTop：栈顶复用，再次启动时会调用 <strong>onNewIntent()</strong> 而不是 onCreate()。使用场景：登录页、通知推送页。</li>
+<li>singleTask：栈内复用，一般与 <strong>taskAffinity</strong> 结合使用，与 singleTop 类似，如果在请求的目标栈中已有实例存在，则会调用 onNewIntent()。另外，singleTask 启动模式还有 <strong><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP" target="_blank" rel="noopener">CLEAR_TOP</a></strong> 的效果，比如 A、B 两个 activity 位于同一个任务栈，如果 A 是 singleTask，而且被另一个任务栈的 activity 再次启动，则 B 会出栈。使用场景：App 主页面、WebView 页面、只能出现单一页面的场景。</li>
+<li>singleInstance：加强的 singleTask，只能单独位于一个任务栈中。使用场景：系统 Launcher、锁屏键、来电显示等系统应用。</li>
+</ul>
+<h4 id="关于-taskAffinity"><a href="#关于-taskAffinity" class="headerlink" title="关于 taskAffinity"></a>关于 <a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#Affinities" target="_blank" rel="noopener"><code>taskAffinity</code></a></h4><ul>
+<li>指定 Activity 在哪个栈中运行，默认使用 applicationId。</li>
+<li>具有相同 taskAffinity 的 activity 会被放入同一个栈中。</li>
+<li>一般需要配合 singleTask 启动模式来使用。</li>
+</ul>
+<h4 id="关于-allowTaskReparenting"><a href="#关于-allowTaskReparenting" class="headerlink" title="关于 allowTaskReparenting"></a>关于 <a href="https://developer.android.com/guide/topics/manifest/application-element.html#reparent" target="_blank" rel="noopener"><code>allowTaskReparenting</code></a></h4><ul>
+<li>当启动该 activity 的时候，如果该 activity 存在相同的 taskAffinity 的栈，则会被移动到那个栈里。比如一个浏览器应用 App A 中的 activity A 指定了 allowTaskReparenting，同时与主 activity 位于同一个任务栈中。那么当你在别的应用 App B 中，点击了一个链接打开了 A，然后再返回桌面打开浏览器应用，会直接打开 activity A 而不是主 activity，而当我们返回 App B 的时候，会发现这个 activity A 已经不在了（被移动到了 App A 的任务栈中）。</li>
+<li>我们一般结合 singleTask 并指定单独的栈来使用 allowTaskReparenting。</li>
+</ul>
+<h4 id="关于-Intent-Flags"><a href="#关于-Intent-Flags" class="headerlink" title="关于 Intent Flags"></a>关于 <a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#IntentFlagsForTasks" target="_blank" rel="noopener">Intent Flags</a></h4><ul>
+<li><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK" target="_blank" rel="noopener">FLAG_ACTIVITY_NEW_TASK</a> 对应启动模式中的 singleTask。</li>
+<li><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_SINGLE_TOP" target="_blank" rel="noopener">FLAG_ACTIVITY_SINGLE_TOP</a> 对应启动模式中的 singleTop。</li>
+<li><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP" target="_blank" rel="noopener">FLAG_ACTIVITY_CLEAR_TOP</a> 具有清除栈中它上面所有 activity 的效果，一般结合 singleTask 使用，可以使得对应任务栈中的 activity 重新响应 intent 以及新传入的数据。</li>
+<li><a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS" target="_blank" rel="noopener">FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</a>，不显示在最近活动中</li>
+</ul>
+<h4 id="singleTask-和-singleInstance-的区别"><a href="#singleTask-和-singleInstance-的区别" class="headerlink" title="singleTask 和 singleInstance 的区别"></a>singleTask 和 singleInstance 的区别</h4><ul>
+<li><p>singleTask 启动模式下，当栈和 activity 都不存在的时候，系统会创建一个新的 activity 放入新的栈内，如果栈存在则直接将 activity 入栈，而且除了相同 taskAffinity 的 activity 之外，还<strong>允许</strong>其他 activity (i.e. standard  和 singleTop 的 activity) 入栈。</p>
+</li>
+<li><p>singleInstance 启动模式下的 activity <strong>不允许其他 activity 入栈</strong>，也就是说栈内永远只有这一个 activity。</p>
+</li>
+</ul>
+<h3 id="IntentFilter-的匹配规则"><a href="#IntentFilter-的匹配规则" class="headerlink" title="IntentFilter 的匹配规则"></a>IntentFilter 的匹配规则</h3><h4 id="关于-IntentFilter-的组成"><a href="#关于-IntentFilter-的组成" class="headerlink" title="关于 IntentFilter 的组成"></a>关于 <a href="https://developer.android.com/guide/components/intents-filters#Receiving" target="_blank" rel="noopener">IntentFilter 的组成</a></h4><ul>
+<li>一组 IntentFilter 可以由多个 <code>action</code> <code>category</code> <code>data</code> 组成，必须同时匹配 <code>action</code> <code>category</code> <code>data</code> 才能成功启动对应的组件。</li>
+<li>如果该组件只能处理特定某几种的 <code>action</code> <code>category</code> <code>data</code> 组合，那么你就必须创建多个对应的 IntentFilter 而不是把他们全都放一起。</li>
+</ul>
+<h4 id="关于-通过匹配测试"><a href="#关于-通过匹配测试" class="headerlink" title="关于 通过匹配测试"></a>关于 <a href="https://developer.android.com/guide/components/intents-filters#Resolution" target="_blank" rel="noopener">通过匹配测试</a></h4><ul>
+<li>action：指定接收动作类型，用 <code>android:name</code> 指定，可以有 0 个或者多个。一个 Intent 想要匹配成功，则必须至少匹配上一个 <code>action</code>，intent-filter 中可以指定比 Intent 中更多的 <code>action</code>。另外，<ul>
+<li>如果 intent-filter 没有指定 action，则所有 Intent 都无法匹配成功；</li>
+<li>如果 Intent 没有指定 action，那么这个 Intent 会通过所有指定了 action 的 intent-filter。</li>
+</ul>
+</li>
+<li>cateogry：指定接收分类。如果 Intent 中指定了多个 <code>category</code>，那么必须全都匹配上才能匹配成功。其他与 <code>action</code> 相同。<ul>
+<li>使用隐式 Intent 的时候，系统默认添加上一个 CATEGORY_DEFAULT，所以如果你想要匹配成功就必须添加 <strong>android.intent.category.DEFAULT</strong></li>
+</ul>
+</li>
+<li>data：指定 URI 和 MIME type<ul>
+<li>URI 包括以下属性：<code>scheme</code>, <code>host</code>, <code>port</code>, <code>path</code>，host 有时也称为 authority。<ul>
+<li>完整格式：<code>&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;</code></li>
+<li>例子：<code>content://com.example.project:200/folder/subfolder/etc</code></li>
+<li>每个属性都是可选的，但是有先后依赖关系，比如如果没有指定 <code>scheme</code>，那么即使指定了 <code>host</code> 或者 <code>port</code> 或者 <code>path</code> 也是无效的。</li>
+<li>URI 支持部分匹配。</li>
+</ul>
+</li>
+<li>完整 MIME type 列表可参考 <a href="http://www.iana.org/assignments/media-types/index.htm" target="_blank" rel="noopener">IANA MIME Media Types</a>，不同机型支持的 MIME type 有所不同。</li>
+<li>URI 和 MIME type 匹配有如下规则：<ul>
+<li>完全匹配，比如如果 Intent 只指定了 MIME type，那么所有只指定了 MIME type 都会通过匹配。</li>
+<li>如果 intent-filter 指定了 MIME type，那么默认支持 <code>content:</code> or <code>file:</code> URI，即如果 Intent 指定了该 MIME type 同时又指定了 scheme 为 <code>content</code> 或者 <code>file</code> 则可以匹配成功。</li>
+</ul>
+</li>
+<li>如果要为 Intent 设置完整的 data 和 type，必须调用 setDataAndType，因为 setData 和 setType 会相互消除。</li>
+</ul>
+</li>
+</ul>
+<h4 id="关于-Intent-匹配"><a href="#关于-Intent-匹配" class="headerlink" title="关于 Intent 匹配"></a>关于 <a href="https://developer.android.com/guide/components/intents-filters#imatch" target="_blank" rel="noopener">Intent 匹配</a></h4><ul>
+<li>我们可以使用 <code>PackageManager</code> 的 <code>resove...</code> 以及 <code>query...</code> 方法，来确定是否存在可以调用的组件，前者会返回匹配到的最佳组件，后者返回所有匹配到的组件。</li>
+<li>记得使用 MATCH_DEFAULT_ONLY flag 来过滤掉没有声明 android.intent.category.DEFAULT 的组件。</li>
+</ul>
+<hr>
+<h3 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h3><ul>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-1/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-2/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-3/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-4/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-5/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li><a href="https://ajiew.github.io/notes-on-android-art-part-6/" target="_blank" rel="noopener">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    aJIEw
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://ajiew.me/notes-on-android-art-part-1/" title="Android 开发艺术探索学习笔记（一）">https://ajiew.me/notes-on-android-art-part-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by/4.0/deed.en" rel="external nofollow" target="_blank">CC BY 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Notes/" rel="tag"># Notes</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/philippines-travel-notes/" rel="next" title="九月，去菲律宾看海">
+                <i class="fa fa-chevron-left"></i> 九月，去菲律宾看海
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/notes-on-android-art-part-2/" rel="prev" title="Android 开发艺术探索学习笔记（二）">
+                Android 开发艺术探索学习笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4" alt="aJIEw">
+            
+              <p class="site-author-name" itemprop="name">aJIEw</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ajiew" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ajiew42" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ajiew42@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/hexojs/hexo" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com/next-theme" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-生命周期"><span class="nav-text">Activity 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-的启动模式"><span class="nav-text">Activity 的启动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#四种启动模式"><span class="nav-text">四种启动模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-taskAffinity"><span class="nav-text">关于 taskAffinity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-allowTaskReparenting"><span class="nav-text">关于 allowTaskReparenting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Intent-Flags"><span class="nav-text">关于 Intent Flags</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#singleTask-和-singleInstance-的区别"><span class="nav-text">singleTask 和 singleInstance 的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentFilter-的匹配规则"><span class="nav-text">IntentFilter 的匹配规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-IntentFilter-的组成"><span class="nav-text">关于 IntentFilter 的组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-通过匹配测试"><span class="nav-text">关于 通过匹配测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于-Intent-匹配"><span class="nav-text">关于 Intent 匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系列文章"><span class="nav-text">系列文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">aJIEw</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+  <div class="footer-custom">Based on ❤️  <a target="_blank" href="https://github.com/aJIEw/aJIEw.github.io">Github Pages</a> ❤️</div>
+
+<div style="position: absolute; right: 150px; top: 7px;"><a target="_blank" href="https://info.flagcounter.com/FuGu"><img src="https://s11.flagcounter.com/count2/FuGu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_5/maxflags_5/viewers_0/labels_0/pageviews_0/flags_0/percent_1/" alt="Free counters!" border="0"></a></div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"> <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i></span> </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"> <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i></span> </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://ajiew.me/notes-on-android-art-part-1/';
+          this.page.identifier = 'notes-on-android-art-part-1/';
+          this.page.title = 'Android 开发艺术探索学习笔记（一）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-ajiew-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 20037,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
