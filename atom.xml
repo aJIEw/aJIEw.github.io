@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2021-04-30T15:17:25.664Z</updated>
+  <updated>2021-05-15T11:13:48.593Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Effective Dart 学习笔记</title>
+    <link href="https://ajiew.me/effective-dart-notes/"/>
+    <id>https://ajiew.me/effective-dart-notes/</id>
+    <published>2021-05-15T12:30:00.000Z</published>
+    <updated>2021-05-15T11:13:48.593Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/assets/2021-05-15/cover.png&quot; alt=&quot;cover&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;阅读 &lt;a href=&quot;https://dart.dev/guides/language/language-tour&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;language-tour&lt;/a&gt; 时做的一些笔记。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Style-Guide&quot;&gt;&lt;a href=&quot;#Style-Guide&quot; class=&quot;headerlink&quot; title=&quot;Style Guide&quot;&gt;&lt;/a&gt;Style Guide&lt;/h2&gt;&lt;p&gt;好代码一定是遵循良好代码风格的代码。前后一致的命名、排序和格式化使得代码具有更高的可读性。在整个 Dart 生态中维持一个规范统一的代码风格，可以使得程序员之间分享彼此的代码时，更容易阅读和互相学习。&lt;/p&gt;
+&lt;h3 id=&quot;Identifiers&quot;&gt;&lt;a href=&quot;#Identifiers&quot; class=&quot;headerlink&quot; title=&quot;Identifiers&quot;&gt;&lt;/a&gt;Identifiers&lt;/h3&gt;&lt;p&gt;Dart 中标识符有三种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UpperCamelCase：大驼峰命名法，每个单词首字母大写。&lt;/li&gt;
+&lt;li&gt;lowerCamelCase：小驼峰命名法，除了首个单词，其余每个单词首字母大写。&lt;/li&gt;
+&lt;li&gt;lowercase_with_underscores：带下划线的小写命名法，每个单词小写，用下划线分割单词。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="技术" scheme="https://ajiew.me/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Notes" scheme="https://ajiew.me/tags/Notes/"/>
+    
+      <category term="Dart" scheme="https://ajiew.me/tags/Dart/"/>
+    
+  </entry>
   
   <entry>
     <title>耐心地生活</title>
@@ -49,7 +82,7 @@
     <link href="https://ajiew.me/dart-notes/"/>
     <id>https://ajiew.me/dart-notes/</id>
     <published>2021-04-03T12:30:00.000Z</published>
-    <updated>2021-04-29T08:19:25.900Z</updated>
+    <updated>2021-05-15T11:08:41.563Z</updated>
     
     <summary type="html">
     
@@ -76,8 +109,6 @@
     
     
       <category term="Notes" scheme="https://ajiew.me/tags/Notes/"/>
-    
-      <category term="Flutter" scheme="https://ajiew.me/tags/Flutter/"/>
     
       <category term="Dart" scheme="https://ajiew.me/tags/Dart/"/>
     
@@ -323,7 +354,7 @@
     <link href="https://ajiew.me/vim-cheatsheet/"/>
     <id>https://ajiew.me/vim-cheatsheet/</id>
     <published>2020-12-21T12:30:00.000Z</published>
-    <updated>2021-04-20T00:36:41.582Z</updated>
+    <updated>2021-05-12T10:00:56.079Z</updated>
     
     <summary type="html">
     
@@ -544,36 +575,6 @@
 &lt;p&gt;2020 过去一半了，这半年发生了很多意想不到的事，但我相信最终一切都会过去的。每当意外来临的时候，都在提醒我们要珍惜自己所拥有的一切。时常感恩，不要抱怨，凡事努力做到最好，尽量把每一天过得充实有意义，这是身为普通人的我们唯一能做的了吧。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&quot;6-月-1-日-内驱力和低潮时的习惯&quot;&gt;&lt;a href=&quot;#6-月-1-日-内驱力和低潮时的习惯&quot; class=&quot;headerlink&quot; title=&quot;6 月 1 日 - 内驱力和低潮时的习惯&quot;&gt;&lt;/a&gt;6 月 1 日 - 内驱力和低潮时的习惯&lt;/h4&gt;&lt;p&gt;有时候觉得自己缺乏动力，做事的时候缺少激情，但是又不知道该如何去改变。之前看到过好像说是人的自我驱动力也有潮汐周期，一段时间内特别有学习的欲望，但是之后就会变得稍微消沉一些。想想也符合常识，要是一直处于亢奋状态，心理肌肉和生理肌肉都消耗不起。所以，在情绪低谷的时候，适合做一些不消耗太多意志力或者不太难的事。另外，养成好习惯也有帮助，这样，即使在不想做某些事的时候，我们依然可以凭借惯性去做，比如每天打扫房间等。再有就是养成运动的习惯也很重要，运动之后身体的肌肉会被唤醒，而一些感觉有压力、焦虑的情绪也会减轻不少，还能给大脑减压，让大脑在后台把一些需要时间慢慢消化的信息给处理掉。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-      <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>五月碎碎念</title>
-    <link href="https://ajiew.me/2020-5/"/>
-    <id>https://ajiew.me/2020-5/</id>
-    <published>2020-05-30T02:15:00.000Z</published>
-    <updated>2021-04-20T00:36:41.579Z</updated>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;owl-media&quot;&gt;&lt;div class=&quot;owl-media owl-video owl-youtube&quot;&gt;&lt;iframe src=&quot;//www.youtube.com/embed/rgv_c2xF2zk&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;br&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;新增了一个碎碎念的分类，用来发布自己日常的一些碎碎念。&lt;/p&gt;
-&lt;p&gt;碎碎念不像日记那么私密，但也不是流水账，它是包涵了个人思考的文字。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;我们每天都会产生许许多多的想法，如果不去刻意记录下来的话，这其中的大部分都会被遗忘掉。但是，我觉得一些有意思的想法是值得捕捉、记录下来供日后翻看的。也许对其他人没有意义，但是对我们自己却很有意义。不仅仅是能够记录自己当下的生活状态、所思所想，也能帮助我们理清思绪，锻炼通过写作表达自己观点的能力，发现对自己真正重要的东西等等。&lt;/p&gt;
-&lt;p&gt;另外，作为一枚&lt;del&gt;（单身狗）&lt;/del&gt;程序员，有时候可能会一整天都说不上几句话，所以，那些发生在大脑中的与自己的对话就显得特别重要了。但是，我们的思维有时候是跳脱且无序的，而文字可以更好地帮我们理清其中的逻辑，将一些创意和想法变成有条理的文字记录下来，未来也许也是一笔宝贵的财富。再者，我们日常生活中难免会有一些心情低落或者烦闷的时候，通过日记或者碎碎念的形式也能帮助自己排解掉一部分消极的情绪，然后用更积极的态度开始面对新一天的生活。&lt;/p&gt;
-&lt;p&gt;写作是一个反「&lt;a href=&quot;https://fs.blog/2018/11/entropy/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;熵&lt;/a&gt;」的过程，虽然一开始有点难，但是养成习惯之后会给我们今后的人生带来许多正面的影响。现在的我觉得，写作是这个时代下每个人都应该具有的能力。希望我的记录和分享也能启发到更多的人。&lt;/p&gt;
     
     </summary>
     

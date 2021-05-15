@@ -291,6 +291,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ajiew.me/notes-on-android-art-part-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aJIEw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aJIEw's Self Talk">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/notes-on-android-art-part-2/" itemprop="url">Android 开发艺术探索学习笔记（二）</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-07T14:47:00+08:00">
+                2019-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/assets/2019-12-07/android-logo.jpg" alt></p>
+<blockquote>
+<p>结合 <a href="https://developer.android.com/guide" target="_blank" rel="noopener">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第二章：IPC 机制。</p>
+</blockquote>
+<h3 id="What-How-Why"><a href="#What-How-Why" class="headerlink" title="What? How? Why?"></a>What? How? Why?</h3><h4 id="什么是-IPC？"><a href="#什么是-IPC？" class="headerlink" title="什么是 IPC？"></a>什么是 IPC？</h4><p>所谓的 IPC 是指进程间通信（<strong>I</strong>nter<strong>P</strong>rocess <strong>C</strong>ommunication 的缩写），我们知道 Linux 里可以通过管道、signal 等进行重定向、跨进程通信等，Android 中同样如此。一般情况下只要应用中使用了多个进程，那么就会涉及到进程间通信的问题。另外，由于每一个 Android 应用都是一个沙箱，独享一个进程，所以应用间数据共享同样也需要通过 IPC。</p>
+<h4 id="有哪些-IPC-的方式？"><a href="#有哪些-IPC-的方式？" class="headerlink" title="有哪些 IPC 的方式？"></a>有哪些 IPC 的方式？</h4><p>Android 中进程间通信的方式有很多，比如最常见的通过 <a href="https://developer.android.com/reference/android/content/Intent.html#putExtra(java.lang.String,%20android.os.Bundle)" target="_blank" rel="noopener">Intent.putExtra</a> 以及 <a href="https://developer.android.com/guide/topics/providers/content-providers" target="_blank" rel="noopener">Content Provider</a>，通过文件共享（需要注意并发读/写问题），通过 Socket，以及最重要的一种 IPC 方式，通过 <a href="https://developer.android.com/guide/components/bound-services.html#Creating" target="_blank" rel="noopener"><strong>绑定服务</strong></a>，其中最重要的部分是 Binder，<a href="https://developer.android.com/guide/components/bound-services.html#Messenger" target="_blank" rel="noopener">Messager</a> 和 <a href="https://developer.android.com/guide/components/aidl.html" target="_blank" rel="noopener">AIDL</a> 底层实现也是通过 Binder。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/notes-on-android-art-part-2/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+          
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ajiew.me/notes-on-android-art-part-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1574,188 +1758,6 @@
     
       
     
-      
-          
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ajiew.me/apple-developer-account-transfer-record/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="aJIEw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="aJIEw's Self Talk">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/apple-developer-account-transfer-record/" itemprop="url">Apple 开发者账户及应用迁移记录</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-15T21:05:00+08:00">
-                2019-06-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  971
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <img align="center" src="https://i.loli.net/2019/07/22/5d35d0cdaa93671993.jpg">
-
-<h4 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h4><p>最近接到一个迁移 Apple 开发者账号的任务，其实一开始只是想把原有的个人开发者账户升级成企业版，但是后来发现升级比较麻烦，需要创始人或者联合创始人申请，客服通过电话联系确认后才能处理，遂放弃。</p>
-<p>我们的需求是将个人账号下的 App 转移到一个企业账号下。由于公司原本没有注册过企业账户，所以可以直接以公司的名义注册一个新的账号，然后将申请的邓白氏码绑定到这个账号上并开通企业版开发者账号，再将原有的 App 迁移过来，最后再申请新的证书等，替换掉原有项目中的旧证书。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/apple-developer-account-transfer-record/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1810,7 +1812,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
