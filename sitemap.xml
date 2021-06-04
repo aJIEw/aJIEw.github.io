@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ajiew.me/2021-5/</loc>
+    
+    <lastmod>2021-06-04T15:06:43.276Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/2020-5/</loc>
+    
+    <lastmod>2021-06-04T15:01:34.641Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/kotlin-notes/</loc>
     
-    <lastmod>2021-05-23T14:38:02.255Z</lastmod>
+    <lastmod>2021-06-03T07:41:12.631Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/macos-config-tips/</loc>
+    
+    <lastmod>2021-06-02T09:04:08.564Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/software-list/</loc>
+    
+    <lastmod>2021-06-02T09:03:40.299Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/2021-4/</loc>
+    
+    <lastmod>2021-05-30T14:29:25.206Z</lastmod>
     
   </url>
   
@@ -37,23 +72,9 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2021-4/</loc>
-    
-    <lastmod>2021-04-30T15:17:25.664Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/flutter-notes/</loc>
     
     <lastmod>2021-04-29T08:17:43.071Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/software-list/</loc>
-    
-    <lastmod>2021-04-21T06:14:35.371Z</lastmod>
     
   </url>
   
@@ -86,6 +107,13 @@
   </url>
   
   <url>
+    <loc>https://ajiew.me/2021-2/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.585Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/thinking-in-compose/</loc>
     
     <lastmod>2021-04-20T00:36:41.585Z</lastmod>
@@ -100,21 +128,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2021-2/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.585Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/2021-1/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.584Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/macos-config-tips/</loc>
     
     <lastmod>2021-04-20T00:36:41.584Z</lastmod>
     
@@ -156,13 +170,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/northwest-road-trip-travel-notes/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.581Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/2020-9/</loc>
     
     <lastmod>2021-04-20T00:36:41.581Z</lastmod>
@@ -170,9 +177,9 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/self-ignite/</loc>
+    <loc>https://ajiew.me/northwest-road-trip-travel-notes/</loc>
     
-    <lastmod>2021-04-20T00:36:41.580Z</lastmod>
+    <lastmod>2021-04-20T00:36:41.581Z</lastmod>
     
   </url>
   
@@ -184,9 +191,9 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2020-5/</loc>
+    <loc>https://ajiew.me/self-ignite/</loc>
     
-    <lastmod>2021-04-20T00:36:41.579Z</lastmod>
+    <lastmod>2021-04-20T00:36:41.580Z</lastmod>
     
   </url>
   
@@ -194,13 +201,6 @@
     <loc>https://ajiew.me/2020-6/</loc>
     
     <lastmod>2021-04-20T00:36:41.579Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/react-native-tag-group/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.578Z</lastmod>
     
   </url>
   
@@ -219,14 +219,21 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/notes-on-android-art-part-6/</loc>
+    <loc>https://ajiew.me/react-native-tag-group/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.578Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/2019-year-in-review/</loc>
     
     <lastmod>2021-04-20T00:36:41.577Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://ajiew.me/2019-year-in-review/</loc>
+    <loc>https://ajiew.me/notes-on-android-art-part-6/</loc>
     
     <lastmod>2021-04-20T00:36:41.577Z</lastmod>
     
@@ -254,14 +261,14 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/notes-on-android-art-part-3/</loc>
+    <loc>https://ajiew.me/notes-on-android-art-part-4/</loc>
     
     <lastmod>2021-04-20T00:36:41.576Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://ajiew.me/notes-on-android-art-part-4/</loc>
+    <loc>https://ajiew.me/notes-on-android-art-part-3/</loc>
     
     <lastmod>2021-04-20T00:36:41.576Z</lastmod>
     
@@ -303,13 +310,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/apple-developer-account-transfer-record/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.573Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/tibet-travel-notes/</loc>
     
     <lastmod>2021-04-20T00:36:41.573Z</lastmod>
@@ -318,6 +318,13 @@
   
   <url>
     <loc>https://ajiew.me/react-native-dev-issues-record/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.573Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/apple-developer-account-transfer-record/</loc>
     
     <lastmod>2021-04-20T00:36:41.573Z</lastmod>
     
@@ -345,13 +352,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/fragment-lazy-load/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.572Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/2018-year-in-review/</loc>
     
     <lastmod>2021-04-20T00:36:41.572Z</lastmod>
@@ -359,14 +359,21 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/pixel-upgrade/</loc>
+    <loc>https://ajiew.me/fragment-lazy-load/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.572Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/rn-redux-introduction/</loc>
     
     <lastmod>2021-04-20T00:36:41.571Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://ajiew.me/rn-redux-introduction/</loc>
+    <loc>https://ajiew.me/pixel-upgrade/</loc>
     
     <lastmod>2021-04-20T00:36:41.571Z</lastmod>
     
@@ -380,13 +387,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/android-push-notification/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.571Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/provisioning-profile/</loc>
     
     <lastmod>2021-04-20T00:36:41.571Z</lastmod>
@@ -394,9 +394,9 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/android-call-forward/</loc>
+    <loc>https://ajiew.me/android-push-notification/</loc>
     
-    <lastmod>2021-04-20T00:36:41.570Z</lastmod>
+    <lastmod>2021-04-20T00:36:41.571Z</lastmod>
     
   </url>
   
@@ -408,7 +408,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/talk-about-change/</loc>
+    <loc>https://ajiew.me/android-call-forward/</loc>
     
     <lastmod>2021-04-20T00:36:41.570Z</lastmod>
     
@@ -416,6 +416,13 @@
   
   <url>
     <loc>https://ajiew.me/ding-ding-auto-punch-app/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.570Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/talk-about-change/</loc>
     
     <lastmod>2021-04-20T00:36:41.570Z</lastmod>
     
@@ -450,13 +457,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/talk-about-RTTI/</loc>
-    
-    <lastmod>2021-04-20T00:36:41.568Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/introducing-gradle-and-faq/</loc>
     
     <lastmod>2021-04-20T00:36:41.568Z</lastmod>
@@ -465,6 +465,13 @@
   
   <url>
     <loc>https://ajiew.me/2017-year-in-review/</loc>
+    
+    <lastmod>2021-04-20T00:36:41.568Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/talk-about-RTTI/</loc>
     
     <lastmod>2021-04-20T00:36:41.568Z</lastmod>
     
