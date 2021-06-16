@@ -123,7 +123,7 @@
 <meta property="og:description" content="IntroductionFlutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 main() 方法，main() 方法中调用了 runApp() 方法，它接收一个 Widget 作为参数。 1234567891011121314import &apos;package:flutter/material.dart&apos;;void main() &amp;#123;  runApp(Material">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ajiew.me/assets/2019-08-23/flutter-and-dart.png">
-<meta property="og:updated_time" content="2021-04-29T08:17:43.071Z">
+<meta property="og:updated_time" content="2021-06-16T02:58:42.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter 学习笔记">
 <meta name="twitter:description" content="IntroductionFlutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 main() 方法，main() 方法中调用了 runApp() 方法，它接收一个 Widget 作为参数。 1234567891011121314import &apos;package:flutter/material.dart&apos;;void main() &amp;#123;  runApp(Material">
@@ -473,7 +473,7 @@
 <p>创建 <code>AnimationController</code> 时需要传入一个 <code>vsync</code> 参数，它接收一个 <code>TickerProvider</code> 对象，主要负责创建 <code>Ticker</code>，用于在动画的每一帧提供回调。</p>
 <h4 id="Tween"><a href="#Tween" class="headerlink" title="Tween"></a>Tween</h4><p>默认情况下，<code>AnimationController</code> 控制的值的范围是数字区间 [0.0, 1.0]，如果我们需要构建 UI 的动画值在不同的范围或者使用不同的数据类型，就可以使用 <code>Tween</code> 来添加映射来生成不同的范围或数据类型的值。</p>
 <h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><h4 id="Widget-Element-RenderObject"><a href="#Widget-Element-RenderObject" class="headerlink" title="Widget/Element/RenderObject"></a>Widget/Element/RenderObject</h4><p>Flutter 中一切都是 Widget，但是所有 widget 最终的 layout 和渲染都是通过 <code>RenderObject</code> 来完成的，从创建到渲染大致的流程是：根据 Widget 树生成 Elevment 树，然后创建 <code>RenderObject</code> 并关联到 <code>Element.renderObject</code> 属性上，最后再通过 <code>RenderObject</code> 来完成布局和绘制。</p>
-<p>Element 是 Widget 在 UI 树中对应的实例对象，大多数 Element 只有一个 <code>renderObject</code>，除了少部分有多个子节点，最终所有 Element 的 <code>renderObject</code> 构成了一棵 Render Tree，即渲染树。</p>
+<p>Element 是 Widget 在 UI 树中对应的实例对象，大多数 Element 只有一个 <code>renderObject</code>，除了少部分有多个子节点。最终，所有 Element 的 <code>renderObject</code> 构成了一棵 Render Tree，即渲染树。</p>
 <p>即在 Flutter 中主要有三棵树：Widget Tree =&gt; Element Tree =&gt; RenderObejct Tree。</p>
 <h4 id="BuildContext-即-Element"><a href="#BuildContext-即-Element" class="headerlink" title="BuildContext 即 Element"></a><code>BuildContext</code> 即 Element</h4><p>创建这个接口是为了避免开发者直接操作 Element 对象。</p>
 <h4 id="RenderObejct-RenderBox"><a href="#RenderObejct-RenderBox" class="headerlink" title="RenderObejct/RenderBox"></a>RenderObejct/RenderBox</h4><p>每一个 Element 对应一个 RenderObject，它负责布局和绘制，但是它并没有定义子节点模型以及坐标系统，实际完成布局的（确定大小和位置）是通过 RenderBox。</p>
