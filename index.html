@@ -280,6 +280,8 @@
       
     
       
+    
+      
           
 
   
@@ -1222,192 +1224,6 @@
     
       
     
-      
-          
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ajiew.me/macos-config-tips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="aJIEw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="aJIEw's Self Talk">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/macos-config-tips/" itemprop="url">macOS 配置指南</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-05T19:15:00+08:00">
-                2021-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://www.techrepublic.com/a/hub/i/r/2017/12/11/9fac1c13-984f-429c-83a8-1a7a286271ae/resize/1200x/3a6056002ad89cefbd930cd12fb78e0b/macoshero.jpg" alt></p>
-<blockquote>
-<p>记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：<a href="https://ajiew.github.io/software-list/" target="_blank" rel="noopener">software-list</a>。</p>
-</blockquote>
-<h2 id="基础设置"><a href="#基础设置" class="headerlink" title="基础设置"></a>基础设置</h2><h3 id="最佳屏幕显示"><a href="#最佳屏幕显示" class="headerlink" title="最佳屏幕显示"></a>最佳屏幕显示</h3><p>为了让 Retina 屏幕发挥出最大的作用，让文字显示达到最佳效果，我们需要关闭 font smoothing<sup>[1]</sup> 和修改屏幕分辨率<sup>[2]</sup>。参考文章：<a href="https://tonsky.me/blog/monitors/" target="_blank" rel="noopener">Time to upgrade your monitor</a> by <a href="https://twitter.com/nikitonsky" target="_blank" rel="noopener">@Nikita</a>。</p>
-<p>对应的设置方法：</p>
-<p>1）打开 <strong>System Preferences &gt; General</strong>，解选 “Use font smoothing when available”；如果是 Big Sur 之后的系统，则需要通过在命令行中输入 <code>defaults -currentHost write -g AppleFontSmoothing -int 0</code> 并重启。</p>
-<p>2）打开 <strong>System Preferences &gt; Displays</strong>，Display 中 Resolution 选择 Scaled，然后选择 “Looks like 1536x960”（如果默认就是这个选项，那么就不需要修改了）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/macos-config-tips/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1462,7 +1278,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

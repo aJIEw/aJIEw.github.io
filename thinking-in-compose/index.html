@@ -123,7 +123,7 @@
 <meta property="og:description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png">
-<meta property="og:updated_time" content="2021-04-20T00:36:41.585Z">
+<meta property="og:updated_time" content="2021-06-23T07:15:36.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thinking in Compose">
 <meta name="twitter:description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
@@ -452,7 +452,7 @@
 </ul>
 <p>另外，composable 函数可能被多次执行，甚至每一帧执行一次（比如执行动画的时候），所以如果你的 composable 函数中包含一些耗时操作（比如读写 SharedPreference），最好放到子线程中进行，比如使用 <a href="https://kotlinlang.org/docs/coroutines-overview.html" target="_blank" rel="noopener">Coroutine</a> 并将结果作为参数传递到 composable 函数中。</p>
 <p>除此之外，在使用 Compose 的过程中还需要注意以下这些问题。</p>
-<h4 id="Composable-函数不一定会按顺序执行"><a href="#Composable-函数不一定会按顺序执行" class="headerlink" title="Composable 函数不一定会按顺序执行"></a>Composable 函数不一定会按顺序执行</h4><p>通过情况下，composable 函数的确会按顺序执行，但是当一个 composable 函数中包含其它 composable 函数时，就不一定是按顺序执行的了。Compose 框架会识别出具有更高优先级的 UI 组件，并对它们优先进行渲染。所以，当嵌套使用 composable 函数的时候，要记得每个 composable 函数必须是独立的，不能依赖其它 composable 函数的执行状态。</p>
+<h4 id="Composable-函数不一定会按顺序执行"><a href="#Composable-函数不一定会按顺序执行" class="headerlink" title="Composable 函数不一定会按顺序执行"></a>Composable 函数不一定会按顺序执行</h4><p>通常情况下，composable 函数的确会按顺序执行，但是当一个 composable 函数中包含其它 composable 函数时，就不一定是按顺序执行的了。Compose 框架会识别出具有更高优先级的 UI 组件，并对它们优先进行渲染。所以，当嵌套使用 composable 函数的时候，要记得每个 composable 函数必须是独立的，不能依赖其它 composable 函数的执行状态。</p>
 <h4 id="Composable-函数可能同步执行"><a href="#Composable-函数可能同步执行" class="headerlink" title="Composable 函数可能同步执行"></a>Composable 函数可能同步执行</h4><p>在 recomposition 过程中，为了加快运行速度，多个 composable 函数可能会同时被执行。另外，这也意味着某些 composable 函数会被放到后台子线程中执行。比如，当 composable 函数参数中包含 ViewModel 中的方法，那么该方法有可能在多个线程中被执行了多次。所以，我们不能在 composable 中引入 side-effects。</p>
 <h4 id="Recomposition-会尽可能多地被跳过"><a href="#Recomposition-会尽可能多地被跳过" class="headerlink" title="Recomposition 会尽可能多地被跳过"></a>Recomposition 会尽可能多地被跳过</h4><p>正如之前所说，Compose 只会更新需要更新的部分，剩下的部分会被跳过。</p>
 <h4 id="Recomposition-是乐观的并且可能会取消并重新执行"><a href="#Recomposition-是乐观的并且可能会取消并重新执行" class="headerlink" title="Recomposition 是乐观的并且可能会取消并重新执行"></a>Recomposition 是乐观的并且可能会取消并重新执行</h4><p>每当参数发生变化的时候，recomposition 就会发生。乐观的意思是 Compose 通常会认为在接收到新的参数变化之前，已经完成了上一次的 recomposition，所以，当参数发生变化时，如果上一次 recomposition 还没完成，Compose 会优先取消掉它并使用新的参数重新执行 recomposition。</p>
@@ -626,7 +626,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

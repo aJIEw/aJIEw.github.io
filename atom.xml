@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2021-06-04T15:06:43.276Z</updated>
+  <updated>2021-07-04T11:11:22.986Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>不停地浇灌下去吧</title>
+    <link href="https://ajiew.me/2021-6/"/>
+    <id>https://ajiew.me/2021-6/</id>
+    <published>2021-06-30T12:30:00.000Z</published>
+    <updated>2021-07-04T11:11:22.986Z</updated>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;owl-media&quot;&gt;&lt;div class=&quot;owl-media owl-video owl-youtube&quot;&gt;&lt;iframe src=&quot;//www.youtube.com/embed/Cw4IM3PEuJQ&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;br&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;六月，日子过得非常平淡，平淡到去翻时间日志的时候才发现，好像每天做的事都差不太多。唯一的变化是，从月中开始，重新捡起了阅读的习惯。花更多的空闲时间看书，感觉生活充实了不少，两个多礼拜里看完了《了不起的盖茨比》、Naval 宝典、Rework 和《窗边的小豆豆》，基本都是随意从书架上挑的书，还有的是无意间在书签里发现的，所以类型完全不同。不过，我却觉得这样没有目的的阅读反而更加让人觉得充实，因为没有目的，不为解决任何问题，只是为了享受阅读的乐趣。有时候觉得，阅读其实也是逃离现实的一种方式，尤其是阅读小说的时候，跟着主人公去体验他们的生活，感受他们的喜怒哀乐，然后从中汲取精神力量去面对现实生活。勇气、爱、秩序、力量、善良，这些都是阅读能提供给我的养料，而梦想就是我们心中那颗需要培养的种子，想要让它最终生根发芽，需要有足够的耐心。不停的浇灌下去吧。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+      <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>一直写下去</title>
     <link href="https://ajiew.me/2021-5/"/>
     <id>https://ajiew.me/2021-5/</id>
     <published>2021-05-31T12:30:00.000Z</published>
-    <updated>2021-06-04T15:06:43.276Z</updated>
+    <updated>2021-06-30T14:23:28.614Z</updated>
     
     <summary type="html">
     
@@ -30,7 +57,7 @@
 &lt;br&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;去年的这个时候发布了&lt;a href=&quot;https://ajiew.github.io/2020-5/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;第一篇&lt;/a&gt;碎碎念，那时的想法是通过碎碎念记录自己每天的想法以及锻炼写作的能力，没想到这么快一年过去了，每天不过三五百字的量，累积起来到现在居然也有十几万字了，差不多是一本小书的长度。写碎碎念带给我最大的变化是，我能够更加诚实地面对自己了。无论是生活中出现的烦恼或者是当天的感悟，通过文字记录下来之后，我能看到自己真实的想法到底是什么，并且发现真正的问题在哪。也就是说，通过写作我能更好地认识我自己。我觉得光凭这一点，我就应该继续写下去。虽然没有人看，产生的价值也有限，但是我们自己就是最大的观众，每个人都可以通过记录自己每天的想法剖析自己、观察自我成长的轨迹。&lt;/p&gt;
+&lt;p&gt;去年的这个时候发布了&lt;a href=&quot;https://ajiew.github.io/2020-5/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;第一篇&lt;/a&gt;碎碎念，那时的想法是通过碎碎念记录自己每天的想法以及锻炼写作的能力，没想到这么快一年过去了，每天不过三五百字的量，累积起来到现在居然也有十几万字了，差不多是一本小书的长度。写碎碎念带给我最大的变化是，我能够更加诚实地面对自己了。无论是生活中出现的烦恼或者是当天的感悟，通过文字记录下来之后，我能看到自己真实的想法到底是什么，并且发现真正的问题在哪。也就是说，通过写作我能更好地认识我自己。我觉得光凭这一点，我就应该继续写下去。虽然没有人看，产生的价值也有限，但是我自己就是最大的观众。每个人都可以通过记录自己每天的想法剖析自己、观察自我成长的轨迹。&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
@@ -137,7 +164,7 @@
     <link href="https://ajiew.me/dart-notes/"/>
     <id>https://ajiew.me/dart-notes/</id>
     <published>2021-04-03T12:30:00.000Z</published>
-    <updated>2021-06-16T03:42:50.074Z</updated>
+    <updated>2021-06-18T08:19:59.661Z</updated>
     
     <summary type="html">
     
@@ -233,7 +260,7 @@
     <link href="https://ajiew.me/thinking-in-compose/"/>
     <id>https://ajiew.me/thinking-in-compose/</id>
     <published>2021-03-09T12:30:00.000Z</published>
-    <updated>2021-04-20T00:36:41.585Z</updated>
+    <updated>2021-06-23T07:15:36.783Z</updated>
     
     <summary type="html">
     
@@ -552,34 +579,6 @@
 &lt;p&gt;  关于八月，工作之余，主线是阅读，看了很多书，有些还是之前已经看过一遍的，但是收获比第一遍看的时候多。而且养成了一个习惯，下班回到家之后做的第一件事是，先洗个苹果然后一边啃一边拿起 Kindle 开始看，就这样保持了两三天看完一本书的节奏。这要归功于月初的一次滑板摔伤，让我无法下班后就出去玩滑板了。不过还好摔得不太严重，只是尾骨附近肿了一点，一周左右就恢复了并没有影响到生活，也算是因祸得福吧。&lt;/p&gt;
 &lt;p&gt;  这个月最大的感受是，发现自己过去一直在被恐惧感支配着生活。害怕改变，害怕被拒绝，害怕不被认可，害怕失去已经拥有的东西，害怕面对真实的自己。因为恐惧，所以退缩，选择走一条相对安全的道路，结果把路越走越窄，恐惧的东西也越来越多。克服的方法其实非常简单，只要意识到恐惧只是我们大脑中想象出来的，当你勇敢地站起来面对问题、努力地去想办法解决问题的时候，恐惧感就消失了。无所畏惧，这是我们每个人都要追求达到的状态，相信自己一定能做到。&lt;/p&gt;
 &lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-      <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>七月碎碎念</title>
-    <link href="https://ajiew.me/2020-7/"/>
-    <id>https://ajiew.me/2020-7/</id>
-    <published>2020-07-31T12:30:00.000Z</published>
-    <updated>2021-04-20T00:36:41.580Z</updated>
-    
-    <summary type="html">
-    
-      &lt;div class=&quot;owl-media&quot;&gt;&lt;div class=&quot;owl-media owl-video owl-youtube&quot;&gt;&lt;iframe src=&quot;//www.youtube.com/embed/ygNNpvzuNFA&quot; frameborder=&quot;0&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;br&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月感觉过得特别漫长，好在是尤其漫长的梅雨季终于结束了，真正的夏天也来了：建筑外令人眩晕的耀眼阳光，午后不知疲倦的知了声，甜腻的冰淇淋，混杂了汗水与香水味的燥热空气，以及早上醒来后手臂上被蚊子叮咬的包。我喜欢夏天，它让我感到身边的一切都慵懒着，同时也充满了欲望。不要去担心未来会怎样，珍惜、享受、过好当下的每一刻就好了。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&quot;7-月-1-日-自我选择论&quot;&gt;&lt;a href=&quot;#7-月-1-日-自我选择论&quot; class=&quot;headerlink&quot; title=&quot;7 月 1 日 - 自我选择论&quot;&gt;&lt;/a&gt;7 月 1 日 - 自我选择论&lt;/h4&gt;&lt;p&gt;决定你的生活方式（人生状态）的不是其他任何人，而是你自己。–《被讨厌的勇气》&lt;/p&gt;
-&lt;p&gt;当我们在生活中遇到不如意的事情的时候，一开始难免会感到沮丧、失望，甚至会抱怨、诅咒他人，但是平静下来之后，需要思考造成目前这种状况出现的原因，不是别人，而是自己。无论是何种遭遇，我们都有选择权决定事态如何发展，就算一点都决定不了，至少还可以控制自己的情绪。如果你始终选择以积极的态度应对，那么就没有什么东西可以击倒你。&lt;/p&gt;
     
     </summary>
     

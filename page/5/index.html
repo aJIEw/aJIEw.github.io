@@ -291,6 +291,192 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ajiew.me/android-third-party-service-issues-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="aJIEw">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aJIEw's Self Talk">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/android-third-party-service-issues-notes/" itemprop="url">Android 第三方服务踩坑记录</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T18:44:00+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  511
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="https://i.loli.net/2019/08/20/faDm3KF7r5nUwlb.png" alt="Server Error"></p>
+<blockquote>
+<p>  这篇主要记录下自己在使用一些第三方服务时遇到的问题以及解决方法。</p>
+</blockquote>
+<h3 id="高德定位-API"><a href="#高德定位-API" class="headerlink" title="高德定位 API"></a>高德定位 API</h3><p>有天 debug 时突然发现 app 定位功能不能用了，然后看了下 log，发现使用的高德定位 API 有如下报错：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">debug: uploadlocation W/System: Ignoring header cookie because its value was <span class="keyword">null</span>.</span><br><span class="line">debug: uploadlocation W/onLocationChanged: &#123;<span class="string">"data"</span>:<span class="string">"保存成功"</span>,<span class="string">" status"</span>:<span class="number">0</span>&#125;</span><br><span class="line">debug W/System.err: com.amap.api.services.core.AMapEXception: 用户MD5安全码未通过</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.t.a(CoreUtil.java:<span class="number">137</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.t.b(CoreUtil.java:<span class="number">108</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.k.a(BasicHandler.java:<span class="number">107</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.coL.sl.k.g(BasicHandler.java:<span class="number">142</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.k.a(BasicHandler.java:<span class="number">116</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.be.getFromLocation(GeocodeSearchCore.java:<span class="number">86</span>)</span><br><span class="line">debug W/System.err: 	at com.amap.api.col.sl.be$<span class="number">1</span>.run(GeocodeSearchCore.java:<span class="number">144</span>)</span><br><span class="line">debug W/System.err: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1162</span>)</span><br><span class="line">debug W/System.err: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">636</span>)</span><br><span class="line">debug W/System.err: 	at java.lang.Thread.run(Thread.java:<span class="number">764</span>)</span><br></pre></td></tr></table></figure>
+
+<p>经搜索，查询到造成这种错误的原因主要是 API Key 和绑定的应用包名不一致。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/android-third-party-service-issues-notes/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+      
+    
+      
+          
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://ajiew.me/enable-daydream-on-oneplus-7-pro/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1389,198 +1575,6 @@
 
       
     
-      
-          
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ajiew.me/android-push-notification/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="aJIEw">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13328707?s=200&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="aJIEw's Self Talk">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/android-push-notification/" itemprop="url">Android 推送调研</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-08T16:51:00+08:00">
-                2018-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  835
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png" alt="Android Push  Notification"></p>
-<blockquote>
-<p>最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。</p>
-</blockquote>
-<p>首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。</p>
-<p>而安卓上的推送，由于国内无法使用 <a href="https://firebase.google.com/docs/cloud-messaging/" target="_blank" rel="noopener">FCM</a> (<a href="https://developers.google.com/android/guides/overview" target="_blank" rel="noopener">谷歌服务</a>被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于非自家系统，推送效果非常不理想，所以最好的做法是同时接入各个厂商的推送。</p>
-<p>常见的手机厂商推送有：</p>
-<ol>
-<li><a href="https://dev.mi.com/console/appservice/push.html" target="_blank" rel="noopener">小米 MIUI</a></li>
-<li><a href="https://developer.huawei.com/consumer/cn/service/hms/pushservice.html" target="_blank" rel="noopener">华为 EMUI</a></li>
-<li><a href="https://open.oppomobile.com/service/openservice#id=1" target="_blank" rel="noopener">OPPO ColorOS</a></li>
-<li><a href="https://dev.vivo.com.cn/openAbility/pushNews" target="_blank" rel="noopener">vivo FuntouchOS</a></li>
-<li><a href="https://open.flyme.cn/open-web/views/push.html" target="_blank" rel="noopener">魅族 Flyme</a></li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/android-push-notification/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-      
-    
   </section>
 
   
@@ -1635,7 +1629,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
