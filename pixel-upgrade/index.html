@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2018-09-22T16:50:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Tricks">
 <meta property="article:tag" content="Android">
+<meta property="article:tag" content="Tricks">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c603712f186267.png">
     
@@ -54,7 +54,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -214,7 +214,7 @@
   <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> update image<span class="hljs-regexp">*.img</span><br></code></pre></td></tr></table></figure>
 
 <p>  最后，修改后的 <code>flash-all.sh</code> 是这样的（Pixel XL 9.0.0 (PPR2.180905.006, Sep 2018)）：</p>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-keyword">if</span> ! grep -q dtbo.sig $(<span class="hljs-built_in">which</span> fastboot); <span class="hljs-keyword">then</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;fastboot too old&quot;</span><br>  <span class="hljs-built_in">exit</span> 1<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># remove userdata.img and update andoir-info.txt</span><br>zip -d image-marlin-ppr2.180905.006.zip userdata.img<br>zip -u image-marlin-ppr2.180905.006.zip android-info.txt<br><br>fastboot flash bootloader bootloader-marlin-8996-012001-1804121206.img<br>fastboot reboot-bootloader<br>sleep 5<br>fastboot update image-marlin-ppr2.180905.006.zip<br></code></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><br><span class="hljs-keyword">if</span> ! grep -q dtbo.sig $(<span class="hljs-built_in">which</span> fastboot); <span class="hljs-keyword">then</span><br>  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;fastboot too old&quot;</span><br>  <span class="hljs-built_in">exit</span> 1<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># remove userdata.img and update andoir-info.txt</span><br>zip -d image-marlin-ppr2.180905.006.zip userdata.img<br>zip -u image-marlin-ppr2.180905.006.zip android-info.txt<br><br>fastboot flash bootloader bootloader-marlin-8996-012001-1804121206.img<br>fastboot reboot-bootloader<br><span class="hljs-built_in">sleep</span> 5<br>fastboot update image-marlin-ppr2.180905.006.zip<br></code></pre></td></tr></table></figure>
 
 <ol start="6">
 <li>接下来手机连接电脑，进入 fastboot 模式：</li>

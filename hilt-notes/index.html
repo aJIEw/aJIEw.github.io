@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2021-12-12T12:30:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.737Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Notes">
 <meta property="article:tag" content="Android">
+<meta property="article:tag" content="Notes">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png">
     
@@ -54,7 +54,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -236,7 +236,7 @@
 <p>具体例子可以参考我的开源小项目：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/Jithub">Jithub</a></p>
 <h3 id="模块和组件"><a href="#模块和组件" class="headerlink" title="模块和组件"></a>模块和组件</h3><p>虽然 Hilt 大大简化了依赖注入的使用，但是使用方式上和 Dagger 并没有太大区别，最基础的组成部分依旧是模块和组件。对于某个 Hilt 模块，如果我们想要注入多个相同类型的依赖，同样需要通过定义限定符来实现。</p>
 <p>使用注解定义限定符（例子来自<a target="_blank" rel="noopener" href="https://developer.android.com/training/dependency-injection/hilt-android">官方文档</a>）：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthInterceptorOkHttpClient</span></span><br><br><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OtherInterceptorOkHttpClient</span></span><br></code></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AuthInterceptorOkHttpClient</span><br><br><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OtherInterceptorOkHttpClient</span><br></code></pre></td></tr></table></figure>
 
 <p>除此之外，我们还可以使用 Hilt 自带的限定符，比如 <code>@ActivityContext</code> 和 <code>@ApplicationContext</code> 等。</p>
 <h4 id="组件的使用细节"><a href="#组件的使用细节" class="headerlink" title="组件的使用细节"></a>组件的使用细节</h4><p>之前提到过对于不同的 Android 类，Hilt 会为之生成对应的组件，我们在模块中通过 <code>@InstalledIn</code> 引用组件，然后 Hilt 会将模块安装到对应的组件中，最后再把依赖注入到组件中。</p>

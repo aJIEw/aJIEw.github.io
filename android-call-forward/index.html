@@ -54,7 +54,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -256,7 +256,7 @@
 </tbody></table>
 <p>参考：<a target="_blank" rel="noopener" href="http://gd.10086.cn/commodity/options/detail/SVC_CALLFORWARD.shtml">中国移动呼叫转移设置使用</a> &amp; <a target="_blank" rel="noopener" href="http://www.sendsms.cn/download/cabe6252319447f75888ab17a49c8aa8.pdf">呼叫转移的命令代码</a></p>
 <h3 id="02-发起呼叫转移"><a href="#02-发起呼叫转移" class="headerlink" title="02 发起呼叫转移"></a>02 发起呼叫转移</h3><p>知道上述规则之后，其实发起呼叫转移就很简单了，首先保证你的应用已经声明了打电话的权限，然后只要发起 <code>Intent.ACTION_CALL</code> 的 Intent 就可以了。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">callForward</span>(<span class="hljs-params">Context context, <span class="hljs-built_in">String</span> forwardNumber</span>)</span> &#123;<br>    Intent dialIntent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_CALL,<br>    		Uri.parse(<span class="hljs-built_in">String</span>.format(<span class="hljs-string">&quot;tel:%s&quot;</span>, forwardNumber)));<br>    dialIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);<br>    context.startActivity(dialIntent);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-title function_">callForward</span>(<span class="hljs-params">Context context, <span class="hljs-built_in">String</span> forwardNumber</span>) &#123;<br>    <span class="hljs-title class_">Intent</span> dialIntent = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(<span class="hljs-title class_">Intent</span>.<span class="hljs-property">ACTION_CALL</span>,<br>    		<span class="hljs-title class_">Uri</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">String</span>.<span class="hljs-title function_">format</span>(<span class="hljs-string">&quot;tel:%s&quot;</span>, forwardNumber)));<br>    dialIntent.<span class="hljs-title function_">addFlags</span>(<span class="hljs-title class_">Intent</span>.<span class="hljs-property">FLAG_ACTIVITY_NEW_TASK</span>);<br>    context.<span class="hljs-title function_">startActivity</span>(dialIntent);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>其实这里可以结合我的上一篇文章做一点优化，对呼出的号码进行过滤，如果包含呼叫转移的前缀则对呼叫转移的类型进行判断并提示信息。具体请看：<a target="_blank" rel="noopener" href="https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls">安卓代替系统默认电话应用(Android 6.0+)与电话状态监听</a></p>
 <p>祝各位周末愉快！</p>
