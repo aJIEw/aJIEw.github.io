@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="记录下自己在 RN 开发中遇到的一些问题。  RN 组件相关TextInput Android 文字对齐问题  当 TextInput 高度超过一行文本时，发现文字显示在 iOS 上是顶端对齐，而在 Android 上则是垂直居中，如下图：  解决方法是通过为 TextInput 设置 textAlignVertical: &quot;top&quot; 属性，相关 issue 见：Render">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native - 踩坑纪录">
+<meta property="og:url" content="https://ajiew.me/react-native-dev-notes/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="记录下自己在 RN 开发中遇到的一些问题。  RN 组件相关TextInput Android 文字对齐问题  当 TextInput 高度超过一行文本时，发现文字显示在 iOS 上是顶端对齐，而在 Android 上则是垂直居中，如下图：  解决方法是通过为 TextInput 设置 textAlignVertical: &quot;top&quot; 属性，相关 issue 见：Render">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cef054aa433553.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cef0424f839098.png">
+<meta property="article:published_time" content="2019-04-23T15:05:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.726Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="React Native">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35cef054aa433553.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>React Native - 踩坑纪录</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/apple-developer-account-transfer/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/tibet/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/react-native-dev-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/react-native-dev-notes/&text=React Native - 踩坑纪录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/react-native-dev-notes/&is_video=false&description=React Native - 踩坑纪录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - 踩坑纪录&body=Check out this article: https://ajiew.me/react-native-dev-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/react-native-dev-notes/&name=React Native - 踩坑纪录&description=&lt;blockquote&gt;
+&lt;p&gt;记录下自己在 RN 开发中遇到的一些问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;RN-组件相关&#34;&gt;&lt;a href=&#34;#RN-组件相关&#34; class=&#34;headerlink&#34; title=&#34;RN 组件相关&#34;&gt;&lt;/a&gt;RN 组件相关&lt;/h3&gt;&lt;h4 id=&#34;TextInput&#34;&gt;&lt;a href=&#34;#TextInput&#34; class=&#34;headerlink&#34; title=&#34;TextInput&#34;&gt;&lt;/a&gt;TextInput&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;h5 id=&#34;Android-文字对齐问题&#34;&gt;&lt;a href=&#34;#Android-文字对齐问题&#34; class=&#34;headerlink&#34; title=&#34;Android 文字对齐问题&#34;&gt;&lt;/a&gt;Android 文字对齐问题&lt;/h5&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当 TextInput 高度超过一行文本时，发现文字显示在 iOS 上是顶端对齐，而在 Android 上则是垂直居中，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35cef054aa433553.png&#34; alt=&#34;text_input_differ&#34;&gt;&lt;/p&gt;
+&lt;p&gt;解决方法是通过为 TextInput 设置 &lt;code&gt;textAlignVertical: &amp;quot;top&amp;quot;&lt;/code&gt; 属性，相关 issue 见：&lt;a href=&#34;https://github.com/facebook/react-native/issues/13897&#34;&gt;Render Multiline Text at start instead of center&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/react-native-dev-notes/&t=React Native - 踩坑纪录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RN-%E7%BB%84%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">1.</span> <span class="toc-text">RN 组件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TextInput"><span class="toc-number">1.1.</span> <span class="toc-text">TextInput</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-%E6%96%87%E5%AD%97%E5%AF%B9%E9%BD%90%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">Android 文字对齐问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-%E4%B8%8A-TextInput-%E6%8E%A5%E6%94%B6%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E4%B9%8B%E5%90%8E%E9%94%AE%E7%9B%98%E6%97%A0%E6%B3%95%E8%87%AA%E5%8A%A8%E6%94%B6%E8%B5%B7"><span class="toc-number">1.1.2.</span> <span class="toc-text">Android 上 TextInput 接收获得焦点之后键盘无法自动收起</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iOS-%E4%B8%8A%E6%97%A0%E6%B3%95%E6%B8%85%E9%99%A4%E6%96%87%E5%AD%97"><span class="toc-number">1.1.3.</span> <span class="toc-text">iOS 上无法清除文字</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KeyboardAvoidingView"><span class="toc-number">1.2.</span> <span class="toc-text">KeyboardAvoidingView</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#behavior-%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.1.</span> <span class="toc-text">behavior 相关</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ImageBackground"><span class="toc-number">1.3.</span> <span class="toc-text">ImageBackground</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#imageStyle-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">imageStyle 属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FlatList-SectionList"><span class="toc-number">1.4.</span> <span class="toc-text">FlatList&#x2F;SectionList</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#contentContainerStyle-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">contentContainerStyle 属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.2.</span> <span class="toc-text">加载时的性能问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PanResponder"><span class="toc-number">1.5.</span> <span class="toc-text">PanResponder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UIManager"><span class="toc-number">1.6.</span> <span class="toc-text">UIManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96-Tips"><span class="toc-number">1.7.</span> <span class="toc-text">其他 Tips</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%96%B9%E5%BA%93%E7%9B%B8%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">三方库相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ant-design-react-native"><span class="toc-number">2.2.</span> <span class="toc-text">@ant-design&#x2F;react-native</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-redux"><span class="toc-number">2.3.</span> <span class="toc-text">react-redux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-scrollable-tab-view"><span class="toc-number">2.4.</span> <span class="toc-text">react-native-scrollable-tab-view</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-puti-pay"><span class="toc-number">2.5.</span> <span class="toc-text">react-native-puti-pay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-debugger"><span class="toc-number">2.6.</span> <span class="toc-text">react-native-debugger</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-router-flux"><span class="toc-number">2.7.</span> <span class="toc-text">react-native-router-flux</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-Android-%E4%B8%8A%E8%BF%9E%E7%BB%AD%E7%82%B9%E5%87%BB%E4%B8%A4%E6%AC%A1%E8%BF%94%E5%9B%9E%E9%94%AE%E9%80%80%E5%87%BA"><span class="toc-number">2.7.1.</span> <span class="toc-text">实现 Android 上连续点击两次返回键退出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8-Android-%E4%B8%8A%E7%82%B9%E5%87%BB%E8%BF%94%E5%9B%9E%E9%94%AE%E6%97%B6%E4%BD%BF-WebView-%E5%90%8E%E9%80%80%E4%B8%80%E9%A1%B5"><span class="toc-number">2.7.2.</span> <span class="toc-text">在 Android 上点击返回键时使 WebView 后退一页</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-amap3d"><span class="toc-number">2.8.</span> <span class="toc-text">react-native-amap3d</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E4%BB%A5%E5%8F%8A%E5%86%B2%E7%AA%81"><span class="toc-number">2.8.1.</span> <span class="toc-text">安装失败以及冲突</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E5%AD%98%E5%9C%A8%E6%97%A0%E6%B3%95%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9B%BE%E5%AE%9A%E4%BD%8D%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82"><span class="toc-number">2.8.2.</span> <span class="toc-text">在安卓上存在无法获取地图定位的问题。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">3.1.</span> <span class="toc-text">代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E8%8A%B1%E6%8B%AC%E5%8F%B7-%E5%BC%95%E5%8F%91%E7%9A%84%E6%83%A8%E6%A1%88%E3%80%82"><span class="toc-number">3.1.1.</span> <span class="toc-text">一个花括号 {} 引发的惨案。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS-%E7%9B%B8%E5%85%B3"><span class="toc-number">3.2.</span> <span class="toc-text">iOS 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%B0%83%E8%AF%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">模拟器调试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95"><span class="toc-number">3.2.2.</span> <span class="toc-text">真机调试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-%E7%9B%B8%E5%85%B3"><span class="toc-number">3.3.</span> <span class="toc-text">Android 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98"><span class="toc-number">3.3.1.</span> <span class="toc-text">其它问题</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        React Native - 踩坑纪录
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-04-23T15:05:00.000Z" itemprop="datePublished">2019-04-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/React-Native/" rel="tag">React Native</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>记录下自己在 RN 开发中遇到的一些问题。</p>
+</blockquote>
+<h3 id="RN-组件相关"><a href="#RN-组件相关" class="headerlink" title="RN 组件相关"></a>RN 组件相关</h3><h4 id="TextInput"><a href="#TextInput" class="headerlink" title="TextInput"></a>TextInput</h4><ol>
+<li><h5 id="Android-文字对齐问题"><a href="#Android-文字对齐问题" class="headerlink" title="Android 文字对齐问题"></a>Android 文字对齐问题</h5></li>
+</ol>
+<p>当 TextInput 高度超过一行文本时，发现文字显示在 iOS 上是顶端对齐，而在 Android 上则是垂直居中，如下图：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cef054aa433553.png" alt="text_input_differ"></p>
+<p>解决方法是通过为 TextInput 设置 <code>textAlignVertical: &quot;top&quot;</code> 属性，相关 issue 见：<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/13897">Render Multiline Text at start instead of center</a></p>
+<span id="more"></span>
+
+<ol start="2">
+<li><h5 id="Android-上-TextInput-接收获得焦点之后键盘无法自动收起"><a href="#Android-上-TextInput-接收获得焦点之后键盘无法自动收起" class="headerlink" title="Android 上 TextInput 接收获得焦点之后键盘无法自动收起"></a>Android 上 TextInput 接收获得焦点之后键盘无法自动收起</h5></li>
+</ol>
+<p>这时候我们可以给根布局设置接收触摸事件：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">onStartShouldSetResponder</span>=&#123;() =&gt; <span class="hljs-literal">true</span>&#125;<br><span class="hljs-attr">onResponderRelease</span>=&#123;() =&gt; Keyboard.dismiss()&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样当输入焦点之外区域触摸后，通过调用 Keyboard.dismiss() 方法强制收起键盘，曲线救国。</p>
+<ol start="3">
+<li><h5 id="iOS-上无法清除文字"><a href="#iOS-上无法清除文字" class="headerlink" title="iOS 上无法清除文字"></a>iOS 上无法清除文字</h5></li>
+</ol>
+<p>这个问题只出现在 RN 版本 0.55.x，如果不升级的话只能用下面比较不优雅的<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/18272#issuecomment-393250020">方式</a>来解决：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs react">clear() &#123;<br>  if (Platform.OS === &#x27;ios&#x27;) &#123;<br>    this.input.setNativeProps(&#123; text: &#x27; &#x27; &#125;);<br>  &#125;<br><br>  setTimeout(() =&gt; &#123;<br>    this.input.setNativeProps(&#123; text: &#x27;&#x27; &#125;);<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>相关 issue 见：<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/18272">issues/18272</a></p>
+<h4 id="KeyboardAvoidingView"><a href="#KeyboardAvoidingView" class="headerlink" title="KeyboardAvoidingView"></a>KeyboardAvoidingView</h4><ol>
+<li><h5 id="behavior-相关"><a href="#behavior-相关" class="headerlink" title="behavior 相关"></a><code>behavior</code> 相关</h5></li>
+</ol>
+<p>该组件在 Android 和 iOS 上的表现有区别，所以我们会区分平台使用不同的 behavior，比如下面这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;KeyboardAvoidingView<br>  behavior=&#123;Platform.OS === &#x27;android&#x27; ? null : &#x27;padding&#x27;&#125;<br>  keyboardVerticalOffset=&#123;64&#125;&gt;<br>  ...<br>&lt;/KeyboardAvoidingView&gt;<br></code></pre></td></tr></table></figure>
+
+<p><code>padding</code> 模式下，当键盘弹起的时候，你的 view 会向上弹起并被压缩。使用 <code>padding</code> 作为 behavior 的时候，在 iOS 上表现比较好，而在 Android 上则不设置 behavior 比较好。</p>
+<p><code>position</code> 模式下，view 整体会向上滑动。这种模式 Android 和 iOS 上表现一致，但是前提是此时 <code>KeyboardAvoidingView</code> 是根 view。同时这也会造成一个问题，那就是键盘弹出后，输入组件会一直占有焦点，这在安卓上还好，可以通过返回键关闭键盘，而在 iOS 设备上就会造成键盘无法被关闭的尴尬。解决这一问题的方法是通过在 <code>KeyboardAvoidingView</code> 设置接收触摸事件，当在输入焦点之外获得点击时收起键盘：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;KeyboardAvoidingView <br>  behavior=&#123;&#x27;position&#x27;&#125;<br>  onStartShouldSetResponder=&#123;(evt) =&gt; true&#125;<br>  onResponderRelease=&#123;() =&gt; Keyboard.dismiss()&#125;<br>/&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="ImageBackground"><a href="#ImageBackground" class="headerlink" title="ImageBackground"></a>ImageBackground</h4><ol>
+<li><h5 id="imageStyle-属性"><a href="#imageStyle-属性" class="headerlink" title="imageStyle 属性"></a><code>imageStyle</code> 属性</h5></li>
+</ol>
+<p>有没有发现给 ImageBackground 设置 <code>style</code> 的时候，其中某些属性似乎不起作用？比如设置 <code>border</code> 似乎没有效果。其实看下<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/blob/master/Libraries/Image/ImageBackground.js#L82">源码</a>就可以发现，原来 <code>style</code> 属性里面还有个 <code>imageStyle</code> 属性，类似 <code>border</code> 和 <code>borderRadius</code> 这样的属性要设置到 <code>imageStyle</code> 上才有效。</p>
+<h4 id="FlatList-SectionList"><a href="#FlatList-SectionList" class="headerlink" title="FlatList/SectionList"></a>FlatList/SectionList</h4><ol>
+<li><h5 id="contentContainerStyle-属性"><a href="#contentContainerStyle-属性" class="headerlink" title="contentContainerStyle 属性"></a><code>contentContainerStyle</code> 属性</h5></li>
+</ol>
+<p>与 ImageBackground 类似，在给 FlatList 设置 paddingBottom 的时候，发现不起作用，后来在这个 <a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/15707#issuecomment-340759872">issue</a> 下找到了解决办法：FlastList/SectionList 中有个 <code>contentContainerStyle</code> 属性，代表 list 中的 content 容器的 style 属性。所以如果想要为 list 设置 paddingBottom，在这个属性上设置才能起作用。</p>
+<ol start="2">
+<li><h5 id="加载时的性能问题"><a href="#加载时的性能问题" class="headerlink" title="加载时的性能问题"></a>加载时的性能问题</h5></li>
+</ol>
+<p>我们知道在 Android 中加载大量列表数据时，RecyclerView 的性能是比较好的，因为它可以复用 view，而在 RN 中如果你用 FlatList 直接加载成百上千的数据的时候，你会发现整个界面会变得非常卡，所以这种情况下我们就需要懒加载。FlatList 本身是支持增量加载的，只不过需要一些额外的处理。</p>
+<p>首先，FlatList 中有一个 <code>initialNumToRender</code> 属性，用于指定初始加载的数据，我们可以设置为 10，这个看你的需求了，一般根据 item 的高度来定。然后 FlatList 还有一个 <code>onEndReached</code> 属性，我们可以在这里定义一个方法，用于指定当列表滑动到底部的时候触发的事件。有了这两个属性，我们就可以对 FlatList 中的数据进行懒加载了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;FlatList<br>  style=&#123;styles.productListStyle&#125;<br>  data=&#123;this.state.productList&#125;<br>  renderItem=&#123;(&#123;item, index&#125;) =&gt; &lt;ProductItem /&gt;&#125;<br>  initialNumToRender=&#123;10&#125;<br>  numColumns=&#123;2&#125;<br>  onEndReached=&#123;() =&gt; this.lazyLoadProducts()&#125;<br>  onEndReachedThreshold=&#123;0.5&#125;<br>  ListHeaderComponent=&#123;this.props.ListHeaderComponent&#125;<br>  ListFooterComponent=&#123;(this.state.productList.length !== this.props.productList.length) ? &lt;ActivityIndicator style=&#123;styles.activityIndicator&#125; size=&#x27;large&#x27;/&gt; : undefined&#125;<br>/&gt;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，FlatList 中数据源来自 <code>this.state.productList</code>，然后在 <code>onEndReached</code> 中调用了一个 <code>lazyLoadProducts</code> 方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs react">lazyLoadProducts() &#123;<br>  if (this.state.productList.length === this.props.productList.length) &#123;<br>    return;<br>  &#125;<br>  this.setState(state =&gt; (&#123;<br>    productList: state.productList.concat(<br>      this.props.productList.slice(state.productList.length, this.state.productList.length + 10)<br>        .map(item =&gt; (&#123;...item, key: item.id&#125;)))<br>    &#125;));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>我们首先将完整的数据保存在 props 中，然后在 <code>onEndReached</code> 中每次多加载 10 条新数据。</p>
+<p>可以看到上面的 <code>FlatList</code> 中还定义了一个 <code>onEndReachedThreshold</code> 属性，表示 <code>FlatList</code> 可见部分离底部多远的时候会触发 <code>onEndReached</code> 方法。比如我们定义为 0.5，则如果可见部分为 10 条数据，那么当我们向下滑动 5 条数据的时候，就会去加载另外 5 条新数据。</p>
+<h4 id="PanResponder"><a href="#PanResponder" class="headerlink" title="PanResponder"></a>PanResponder</h4><ol>
+<li><code>onPanResponderMove</code> 和 <code>Animated.event()</code> 的结合使用</li>
+</ol>
+<p>利用 PanResponder 做了一个拖动调节图标位置的功能，网上找的方法是在 <code>onPanResponderMove</code> 中使用 <code>Animated.event()</code> 来对 View 进行移动。实现效果不错，但是发现一旦在 <code>onPanResponderMove </code> 中使用了 lambda 表达式后，就不起作用了。后来网上找到这个 <a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/15880">issue</a>，发现原来 <code>Animated.event()</code> 会返回一个方法，并且接收 <a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/panresponder">event</a> 和 gestureState 作为参数，所以我们只要去调用一下这个方法即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs react">onPanResponderMove: (evt, gestureState) =&gt; &#123;<br>  return Animated.event([null, &#123;<br>    dx: this.state.pan.x,<br>    dy: this.state.pan.y,<br>  &#125;])(evt, gestureState)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="UIManager"><a href="#UIManager" class="headerlink" title="UIManager"></a>UIManager</h4><p>我们可以使用 UIManager 来测量某个 view 的位置，这个在一些特殊的场合非常有用。</p>
+<p>测量某个 view 的位置前，我们首先需要获得该 view 的引用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;YourView<br>  ref=&#123;component =&gt; this.myView = component&#125;/&gt;<br></code></pre></td></tr></table></figure>
+
+<p>获得 view 的引用后，就可以通过 view 获得 <code>nodeHandle</code> 去测量 view 的位置了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs react">measurePosition() &#123;<br>  let nodeHandle = findNodeHandle(this.myView);<br>  if (nodeHandle) &#123;<br>    UIManager.measure(nodeHandle, (x, y, width, height, pageX, pageY) =&gt; &#123;<br>      // measure success, do something with the data<br>    &#125;);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>从示例代码中可以看到，在测量方法中，我们定义了一个测量成功的回调，我们可以在这里获得测量到的当前 view 的中心点坐标，高度，宽度，距离页面顶端的 x 坐标，y 坐标。</p>
+<h4 id="其他-Tips"><a href="#其他-Tips" class="headerlink" title="其他 Tips"></a>其他 Tips</h4><ol>
+<li> <code>diplay: none</code> 在 Android 上失效的问题</li>
+</ol>
+<p>这个一般是由于和 <code>position</code> 混用造成的，只要在需要使用 <code>display: none</code> 的组件外添加一个 <View> 用于控制 <code>absolute</code> 位置即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;View style=&#123;&#123;position: &#x27;absolute&#x27;&#125;&#125;&gt;<br>  &lt;View style=&#123;&#123;display: &#x27;none&#x27;&#125;&#125; /&gt;<br>&lt;/View&gt;<br></code></pre></td></tr></table></figure>
+
+<p>更进一步，为了防止你隐藏掉的 View 阻挡被覆盖的其他 View 的点击事件，以及在需要隐藏的 View 里存在可点击的组件，则还需要使用到 View 的 <a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/view#pointerevents">pointerEvents</a> 属性做以下设置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;View style=&#123;&#123;position: &#x27;absolute&#x27;&#125;&#125; pointerEvents=&#123;this.props.show ? &#x27;auto&#x27; : &#x27;none&#x27;&#125;&gt;<br>  &lt;View style=&#123;&#123;display: &#x27;none&#x27;&#125;&#125; /&gt;<br>&lt;/View&gt;<br></code></pre></td></tr></table></figure>
+
+<p>当展示出来的时候才可点击，如果隐藏则不接收点击事件。</p>
+<ol start="2">
+<li> 组件循环更新的问题</li>
+</ol>
+<p>有一种常见的场景是，当有一个组件 A 使用外部组件 B 的 state 作为 prop，并且组件 A 通过回调方法来传送数据（setState）给外部组件时，此时如果外部组件 B 在回调方法中也调用了 setState 方法，那么就会造成内部组件的 state 循环更新的问题。</p>
+<p>一种解决方法是在组件 A 中的每一个需要传送数据到外部组件中的方法（setState）中添加一个标记，然后在 <code>componentDidUpdate</code> 中根据该标记来判断是否应该对回调方法进行调用。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs react">// region 内部组件<br>componentDidUpdate(prevProps, prevState) &#123;<br>  // flag 为 true 时才进行回调<br>  if (this.state.stateUpdateFlag) &#123;<br>    // 通过回调传递数据给外部组件<br>    this.props.callback(_.omit(this.state, [&#x27;stateUpdateFlag&#x27;]));<br>    this.setState(&#123;stateUpdateFlag: false&#125;);<br>  &#125;<br>&#125;<br><br>_updateContent(data) &#123;<br>  // ... 其它代码<br>  this.setState(&#123;<br>      data,<br>      stateUpdateFlag: true<br>    &#125;);<br>  <br>  // 外部组件的回调方法中如果调用了 setState 方法，则用会造成内部组件 state 循环更新<br>  // this.props.callback(data);<br>&#125;<br>// endregion<br><br>// region 外部组件<br>render() &#123;<br>	return &lt;InnerComonent<br>	  innerData=&#123;this.state.formData&#125;<br>	  callback=&#123;(data) =&gt; this.setState(&#123;formData: data&#125;)&#125;/&gt;<br>&#125;<br>// endregion<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li> 屏幕闪动的问题</li>
+</ol>
+<p>在 RN 0.62 以上的版本，如果为图片添加 <code>flex: 1</code> 的 style 就会出现页面闪动的情况，去除之后就能解决。</p>
+<h3 id="三方库相关"><a href="#三方库相关" class="headerlink" title="三方库相关"></a>三方库相关</h3><h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><ol>
+<li><p>三方库无法下载，卡在 <code>checking installable status</code></p>
+<p> 这种情况大概率是你之前下载过，导致机子本地 npm 缓存与三方库冲突。此种情况，我一般通过全局安装，然后使用 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/link"><code>npm link</code></a> 来解决。</p>
+</li>
+<li><p>依赖未正确 link 导致的报错</p>
+<p> 很多时候安装三方库之后都会遇到各种各样的报错，这种时候不要慌，先对照三方库 README 检查下是不是缺了某些步骤，如果还是无法解决就去翻翻 issue，然后再使用谷歌搜索关键字。不要急着求助，因为 99.99% 的情况下，你遇到的问题别人早就已经遇到过了。</p>
+<p> 实在不行就把依赖删了然后重新安装并一步步检查 link 步骤有没有漏掉。</p>
+</li>
+<li><p> 重启电脑可以解决大部分令人原地爆炸的奇怪问题。</p>
+</li>
+</ol>
+<h4 id="ant-design-react-native"><a href="#ant-design-react-native" class="headerlink" title="@ant-design/react-native"></a><a target="_blank" rel="noopener" href="https://github.com/ant-design/ant-design-mobile">@ant-design/react-native</a></h4><ol>
+<li> 3.x 版本一些组件 bug 很多，比如 Modal 等，还有使用的 ViewPager 版本过旧，如果造成 “register two views with the same name RNCViewPager” 的问题可以尝试删除 @ant-design/react-native/node-module 下的 @react-native-community/viewpager。</li>
+</ol>
+<h4 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a><a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux">react-redux</a></h4><ol>
+<li>action 名字尽量不要和 reducer 的名字一样，这样会导致调用 action 的时候报 “xxx is not a function 的错误”。<br> 关于如何使用可以看我之前写的文章：<a target="_blank" rel="noopener" href="https://ajiew.github.io/rn-redux-introduction/">React Native - Redux 入门</a> 和 <a target="_blank" rel="noopener" href="https://ajiew.github.io/dive-into-rn-redux/">React Native - 从 Redux 进阶谈起</a></li>
+</ol>
+<h4 id="react-native-scrollable-tab-view"><a href="#react-native-scrollable-tab-view" class="headerlink" title="react-native-scrollable-tab-view"></a><a target="_blank" rel="noopener" href="https://github.com/ptomasroos/react-native-scrollable-tab-view">react-native-scrollable-tab-view</a></h4><p>在 Android 中，如果在该库的核心组件 <code>ScrollableTabView</code> 外嵌套使用了 <code>ScrollView</code> 的话，就会出现在 <code>ScrollableTabView</code> 中的内容无法显示的问题，在 iOS 上却又没有这个问题。</p>
+<p>找了很多解决方案，但是都不太可用，比如为 <code>ScrollView</code> 的 <code>contentContainerStyle</code> 设置 <code>&#123;flex: 1&#125;</code>。但是这样一来整个 <code>ScrollView</code> 就无法滚动了，所以摸索出一个可行的解决方案是为 <code>contentContainerStyle</code> 设置高度：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;ScrollView contentContainerStyle=&#123;Platform.OS === &#x27;android&#x27; ? &#123;height: 2000&#125; : null&#125;&gt;<br>  &lt;ScrollableTabView&gt;<br>    &lt;TabOne/&gt;<br>    &lt;TabTwo/&gt;<br>  &lt;/ScrollableTabView&gt;<br>&lt;/ScrollView&gt;<br></code></pre></td></tr></table></figure>
+
+<p>这种方法只能算是一个 hack 吧，即使是通过测量 view 的高度也不是很好，因为如果 tab 是很长的一个 list，会造成比较大的性能开销，而如果动态增加 ScrollView 的高度的话，要是 tab 里面包含长图也会需要做额外的处理。所以还是不推荐嵌套 ScrollView 使用。</p>
+<h4 id="react-native-puti-pay"><a href="#react-native-puti-pay" class="headerlink" title="react-native-puti-pay"></a><a target="_blank" rel="noopener" href="https://github.com/puti94/react-native-puti-pay">react-native-puti-pay</a></h4><p>这是一个微信和支付宝支付库，如果集成该库的同时也集成了 <a target="_blank" rel="noopener" href="https://github.com/yorkie/react-native-wechat">react-native-wechat</a>，则会造成冲突：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mel"><span class="hljs-keyword">duplicate</span> symbol _OBJC_CLASS_$_WechatAuthSDK.xx<br><span class="hljs-keyword">duplicate</span> symbol _OBJC_IVAR_$_WechatAuthSDK.xx<br>...<br></code></pre></td></tr></table></figure>
+
+<p>上面只列出了两种冲突项，全部的冲突项可能达几十个，主要是因为这两个库同时引用了 <code>libWeChatSDK.a</code>，所以只要删除其中一个库中的该引用即可。</p>
+<h4 id="react-native-debugger"><a href="#react-native-debugger" class="headerlink" title="react-native-debugger"></a><a target="_blank" rel="noopener" href="https://github.com/jhen0409/react-native-debugger">react-native-debugger</a></h4><p>配合 redux 使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs react">import &#123;applyMiddleware, combineReducers, compose, createStore&#125; from &#x27;redux&#x27;;<br><br>const allReducers = combineReducers(&#123;...&#125;);<br><br>// 开启 REDUX DEVTOOLS 支持<br>const composeEnhancers =<br>  typeof window === &#x27;object&#x27; &amp;&amp;<br>  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?<br>    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;<br>      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...<br>    &#125;) : compose;<br><br>// 通过 reducer生成 store (封装中间件)<br>let store = createStore(allReducers, composeEnhancers(applyMiddleware(thunkMiddleware)));<br><br>export default store;<br></code></pre></td></tr></table></figure>
+
+<p>在 console 中获取 AsyncStorage 中的数据：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">showAsyncStorageContentInDev()<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="react-native-router-flux"><a href="#react-native-router-flux" class="headerlink" title="react-native-router-flux"></a><a target="_blank" rel="noopener" href="https://github.com/aksonov/react-native-router-flux">react-native-router-flux</a></h4><ol>
+<li><h5 id="实现-Android-上连续点击两次返回键退出"><a href="#实现-Android-上连续点击两次返回键退出" class="headerlink" title="实现 Android 上连续点击两次返回键退出"></a>实现 Android 上连续点击两次返回键退出</h5></li>
+</ol>
+<p>这个在安卓上是比较常见的操作，但是在 RN 中结合 react-native-router-flux 使用却折腾了好长时间，这里记录下自己的实现方式。</p>
+<p>首先，react-native-router-flux 原生就支持，我们不需要通过自己去添加 BackHandler 监听器来实现。当我们使用 react-native-router-flux 时，我们一般用 <code>Router</code> 作为根节点，所以我们通过 <code>Router</code> 为其设置 <code>backAndroidHandler</code> 属性即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs react">let lastBackPressed = Date.now();<br>const onExitApp = () =&gt; &#123;<br>  if (Actions.currentScene !== &#x27;home&#x27;) &#123;<br>    Actions.pop();<br>    return true<br>  &#125;<br>  if (lastBackPressed &amp;&amp; Date.now() &lt; lastBackPressed + 2000) &#123;<br>    BackHandler.exitApp();<br>    return false;<br>  &#125;<br>  ToastAndroid.show(&#x27;再按一次退出应用&#x27;, ToastAndroid.SHORT);<br>  lastBackPressed = Date.now();<br>  return true;<br>&#125;;<br><br>class AppRouter extends Component &#123;<br><br>  render() &#123;<br>      return &lt;Router backAndroidHandler=&#123;onExitApp&#125;&gt;<br>      	&lt;Scene key=&#x27;home&#x27; ...&gt;<br>      	&#123;/* other code */&#125;<br>      &lt;/Router&gt;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，这里定义了一个 <code>onExitApp</code> 方法并且设置到了 <code>backAndroidHandler</code> 属性上，该属性会根据返回值来决定是否退出应用（<strong>false 时退出应用</strong>）。</p>
+<p>在 <code>onExitApp</code> 中，我们首先判断当前应用是否处于根页面（可以通过 react-native-router-flux 中的 <code>Actions.currentScene</code> 获取当前 Scene），如果不是根页面则作为普通的返回键处理（弹出一页），否则判断是否在指定时间内连续点击，连续点击才退出应用，否则弹出 Toast 提醒。</p>
+<ol start="2">
+<li><h5 id="在-Android-上点击返回键时使-WebView-后退一页"><a href="#在-Android-上点击返回键时使-WebView-后退一页" class="headerlink" title="在 Android 上点击返回键时使 WebView 后退一页"></a>在 Android 上点击返回键时使 WebView 后退一页</h5></li>
+</ol>
+<p>假如有这样一个需求，某个页面下有一个 WebView 组件，我们需要控制当在该页面按下返回键时后退一页（相当于从网页的历史记录中后退），而如果没有历史记录时则直接退出。这个要怎么实现呢？</p>
+<p>注意到，WebView 中有一个 <code>onNavigationStateChange</code> 方法，当新的页面加载或退出时该方法会被调用。因此一种可行的方法是，在该方法中监听页面变化并读取页面加载后的数据。以下是该方法中的部分数据：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">canGoBack:</span> <span class="hljs-literal">true</span><br><span class="hljs-symbol">canGoForward:</span> <span class="hljs-literal">true</span><br><span class="hljs-symbol">loading:</span> <span class="hljs-literal">false</span><br><span class="hljs-symbol">navigationType:</span> <span class="hljs-string">&quot;other&quot;</span><br><span class="hljs-symbol">target:</span> <span class="hljs-number">187</span><br><span class="hljs-symbol">title:</span> <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-symbol">url:</span> <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>因此，可以通过事件中传回的 <code>canGoBack</code> 值判断此时 WebView 是否可以返回，如果可以则使用 WebView 的 ref 去调用 <code>goBack()</code> 返回上一页，否则使用 <code>Actions.pop()</code> 退出当前页面。</p>
+<p>基本代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs react">goBack = () =&gt; &#123;<br>  if (this.state.canGoBack) &#123;<br>    this.refs.webView.goBack();<br>  &#125; else &#123;<br>    Actions.pop();<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p>当然由于返回按钮可能不在当前组件下，如果你使用的是 <code>react-native-router-flux</code> 和 <code>react-redux</code>，则可以定义一个返回按钮的组件，该组件通过全局 state 树接收点击事件的 function，然后设置到 <code>Scene</code> 的 <code>renderLeftButton</code> 属性中，最后，在需要处理 WebView 的地方设置返回事件到返回按钮中即可（注意：<code>react-redux</code> 是可以接收 <code>function</code> 作为属性的，不然就没法设置事件了）。</p>
+<h4 id="react-native-amap3d"><a href="#react-native-amap3d" class="headerlink" title="react-native-amap3d"></a><a target="_blank" rel="noopener" href="https://github.com/qiuxiang/react-native-amap3d">react-native-amap3d</a></h4><p>这是一个高德 3D 地图库。</p>
+<ol>
+<li><h5 id="安装失败以及冲突"><a href="#安装失败以及冲突" class="headerlink" title="安装失败以及冲突"></a>安装失败以及冲突</h5></li>
+</ol>
+<p>该库 iOS 部分只能使用 CocoaPods 安装，花了很多时间在安装 <a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">Specs</a> 依赖上，只要一 <code>pod install</code> 就会卡在 <code>cloning into /Users/xxx/.cocoapods/repo/master</code>。</p>
+<p>尝试了很多国内镜像，发现大多数都已经不能用了，然后也尝试了国内镜像 clone <a target="_blank" rel="noopener" href="https://github.com/CocoaPods/Specs.git">Specs</a> 到 <code>~/.cocoapods/repos/master</code> 里，发现也没啥用，因为 install 的时候还是会识别不了（因为太久没更新）。</p>
+<p>后来发现原来这东西的确只能从官方的 Github 上 clone，只不过由于体积比较大（几个G，被限速了），只要耐心等待它 clone 完毕就行了。反正每台电脑只要操作一次就够了，后面的更新基本都很快的。</p>
+<p>花了一晚上 clone 完，然后 install，结果编译还是不通过，老是报依赖找不到（ld: library not found for -lDoubleConversion）。尝试各种方案无果，后来看到一个 stackoverflow 上的<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50423169/xcode-not-build-my-project">回答</a>才明白，原来使用 cocoapods 的项目要通过 <code>.xcworkspace</code>  打开项目而不是 <code>.xcodeproj</code>。发现真相的我差点眼泪掉下来。</p>
+<p>然后重新打开项目跑了之后，依旧继续报错（duplicate symbol _aes_encrypt_key128 in ios/Pods/AMap3DMap/MAMapKit.framework/MAMapKit）。</p>
+<p>清理了缓存（npm cache clear –force ; watchman watch-del-all ; rm -rf $TMPDIR/react-* ; rm -rf ~/.rncache）重新安装依赖（rm -rf node_modules &amp;&amp; npm install）后，问题依旧存在。</p>
+<p>你以为我要崩溃了吗？不，作为一个程序员怎么能这么容易就崩溃？当然是去玩几把 FIFA 然后回来继续解决问题啊。</p>
+<p>仔细看了下报错信息，发现是 react-native-amap3d 和 react-native-update 中的 libRCTHotUpdate 存在重复 symbol 所以一直编译不过。</p>
+<p>确定问题后解决起来就简单了，搜到了这篇<a target="_blank" rel="noopener" href="https://www.meiwen.com.cn/subject/dezqyttx.html">文章</a>。原理很简单，把 react-native-amap3d 中会造成 symbol 重复的内容去掉就可以了（因为只是 x86_64 这一个平台中的重复 symbol，所以影响不大，如果是其他平台，操作也类似），具体步骤如下：</p>
+<ul>
+<li><p>  首先定位到 MAMapKit.framework，<code>project_name/ios/pods/AMap3DMap/MAMapKit.framework</code>，将其中的 <code>MAMapKit</code> 复制出来</p>
+</li>
+<li><p>  将 MAMapKit 中 x86_64 平台的部分提取出来并命名为 MAMapKit.x86_64：</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">lipo -thin x86_64 MAMapKit -output MAMapKit.x86_64<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  将其中包含重复 symbols 的部分查找出来并保存的 symbols 文件中：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">nm -j MAMapKit.x86_64  | grep aes &gt; symbols<br><br><span class="hljs-comment"># symbols 文件内容如下</span><br>_aes_decrypt<br>_aes_decrypt_key128<br>_aes_encrypt<br>_aes_encrypt_key128<br>_dsasozkdgmaesfsvzyll<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  解压 MAMapKit.x86_64：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh">ar -x MAMapKit.x86_64<br><br><span class="hljs-comment"># 解压后获得三个新文件：</span><br>MAMapKit-x86_64-master.o <span class="hljs-comment"># 存在重复 symbols 的文件</span><br>Pods-MAMapKit-dummy.o<br>__.SYMDEF SORTED <span class="hljs-comment"># ar 命令生成的文件索引</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  将 symbols 文件中的符号列表从 MAMapKit-x86_64-master.o 文件中全部删除掉，并生成一个新的文件 MAMapKit-x86_64-master.o.strip</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ld -x -r -unexported_symbols_list symbols MAMapKit-x86_64-master.o -o MAMapKit-x86_64-master.o.strip<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  将去除了重复 symbols 的文件重新打包并命名为 MAMapKit.x86_64_solved：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ar -r MAMapKit.x86_64_solved MAMapKit-x86_64-master.o.strip Pods-MAMapKit-dummy.o<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  使用无重复的 x86_64 平台包替换旧的，然后合成新的 MAMapKit：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">lipo MAMapKit -replace x86_64 MAMapKit.x86_64_solved -output MAMapKitNew<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>  复制 MAMapKitNew 到 MAMapKit.framework 中，删除原来的 MAMapKit 然后重命名 MAMapKitNew 为 MAMapKit，大功告成！</p>
+</li>
+<li><p>  Xcode 重新编译，编译通过，项目成功运行！</p>
+</li>
+</ul>
+<ol start="2">
+<li><h5 id="在安卓上存在无法获取地图定位的问题。"><a href="#在安卓上存在无法获取地图定位的问题。" class="headerlink" title="在安卓上存在无法获取地图定位的问题。"></a>在安卓上存在无法获取地图定位的问题。</h5></li>
+</ol>
+<p>尤其是当处于室内的时候，这种情况出现得比较频繁（定位后的回调中数据均为 0）。该库作者目前也没有较好的解决方案，所以最后决定在安卓上自己来定时刷新定位，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs react">&lt;MapView<br>  coordinate=&#123;Platform.select(&#123;<br>    android: this.state.userLocation, // 使用手动定位到的位置作为地图中心点<br>    ios: this.state.centerLocation // 使用地图定位到的位置作为地图中心点<br>  &#125;)&#125;<br>  locationEnabled=&#123;Platform.OS === &#x27;ios&#x27;&#125; // 只有 iOS 上才用地图自带的定位<br>  onLocation=&#123;(&#123;nativeEvent&#125;) =&gt; &#123;<br>    if (Platform.OS === &#x27;ios&#x27;) &#123;<br>      this.setState(&#123;<br>        centerLocation: &#123;<br>          latitude: nativeEvent.latitude,<br>          longitude: nativeEvent.longitude<br>        &#125;<br>      &#125;);<br>    &#125;<br>  &#125;&#125;&gt;<br><br>  &#123;<br>    // 安卓上使用 marker 作为用户位置的标记<br>    Platform.OS === &#x27;android&#x27; ?<br>      &lt;MapView.Marker<br>        draggable=&#123;false&#125;<br>        title=&#x27;您的位置&#x27;<br>        icon=&#123;() =&gt; (<br>          &lt;View style=&#123;styles.customMarker&#125;&gt;<br>            &lt;Image style=&#123;styles.markerImage&#125; resizeMode=&#123;&#x27;contain&#x27;&#125;<br>                   source=&#123;require(&#x27;../../../assets/icon/ic_location_dot.png&#x27;)&#125;/&gt;<br>          &lt;/View&gt;<br>        )&#125;<br>        coordinate=&#123;&#123;<br>          latitude: this.state.userLocation.latitude,<br>          longitude: this.state.userLocation.longitude,<br>        &#125;&#125;<br>      /&gt; : null<br>  &#125;<br>&lt;/MapView&gt;<br></code></pre></td></tr></table></figure>
+
+<p>我们只在 iOS 上使用地图自带的定位功能，而在安卓上添加一个 marker 作为用户位置，并且自己控制定位频率：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs react">componentDidMount() &#123;<br>  // 进入地图后刷新定位<br>  this.getLocation();<br>  <br>  // 安卓上定时刷新定位<br>  if (Platform.OS === &#x27;android&#x27;) &#123;<br>    this.refershInterval = setInterval(() =&gt; this.getLocation(), 60 * 1000);<br>  &#125;<br>&#125;<br><br>getLocation(refresh) &#123;<br>  Platform.select(&#123;<br>    android: async () =&gt; &#123;<br>      let hasAccess = await PermissionsAndroid.check(<br>          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);<br>      if (hasAccess) &#123;<br>        if (refresh) &#123;<br>          ToastAndroid.show(&#x27;刷新定位...&#x27;, ToastAndroid.SHORT);<br>        &#125;<br>        navigator.geolocation.getCurrentPosition(<br>            (position) =&gt; this.geo_success(position), <br>            (e) =&gt; this.geo_error(e), &#123;timeout: 5000&#125;);<br>      &#125; else &#123;<br>        this.requestLocationPermission();<br>      &#125;<br>    &#125;<br>  &#125;)();<br>&#125;<br><br>geo_success(position) &#123;<br>  // 将 GPS 坐标转换为国测局坐标<br>  let gcj02Location = wgs84togcj02(position.coords.longitude, position.coords.latitude);<br><br>  this.setState(&#123;<br>    userLocation: &#123;<br>      latitude: gcj02Location[1],<br>      longitude: gcj02Location[0]<br>    &#125;<br>  &#125;)<br>&#125;<br><br>geo_error() &#123;<br>  ToastAndroid.show(&#x27;获取定位失败，请稍候再试！&#x27;, ToastAndroid.SHORT);<br>&#125;<br><br>async requestLocationPermission() &#123;<br>  const granted = await PermissionsAndroid.request(<br>    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,<br>  );<br><br>  if (granted === PermissionsAndroid.RESULTS.GRANTED) &#123;<br>    this.getLocation();<br>  &#125; else &#123;<br>    ToastAndroid.show(&#x27;未获得授权，无法显示您的位置！&#x27;, ToastAndroid.SHORT);<br>  &#125;<br>&#125;<br><br>componentWillUnmount() &#123;<br>  // 清除定时器<br>  this.refershInterval &amp;&amp; clearInterval(this.refershInterval);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这种方式唯一的不足就是定位的图标不是动态的了，比如精度范围和方向都无法显示出来。但是为了获取到定位，这也算是一种 trade off 了吧。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h4><ol>
+<li><h5 id="一个花括号-引发的惨案。"><a href="#一个花括号-引发的惨案。" class="headerlink" title="一个花括号 {} 引发的惨案。"></a>一个花括号 <code>&#123;&#125;</code> 引发的惨案。</h5></li>
+</ol>
+<p>你有没有在测试安卓的时候，遇到过这个报错：Cannot add a child that doesn’t have a YogaNode to a parent without a measure function! (Trying to add a ‘RCTRawText [text: }]’ to a ‘RCTView’)</p>
+<img src="https://i.loli.net/2019/07/22/5d35cef0424f839098.png" width="30%" />
+
+<p>这么一点点信息，完全让人摸不着头脑对不对？最后折腾半天，发现原来是因为某个角落里躺着一个 <code>&#123;</code> 或者 <code>&#125;</code>，砸电脑的心都有了。</p>
+<p>所以，一定要注意代码规范啊， 不要在代码里乱嵌套代码或者乱写三目运算来判断某个 View 的显示或隐藏等等。</p>
+<h4 id="iOS-相关"><a href="#iOS-相关" class="headerlink" title="iOS 相关"></a>iOS 相关</h4><h5 id="模拟器调试"><a href="#模拟器调试" class="headerlink" title="模拟器调试"></a>模拟器调试</h5><p>大部分情况下，如果在模拟器上跑不起来，只要关掉 Metro Bundler，然后使用 Xcode  Clean 再重新运行就可以解决，有时候在执行了 Clean 之后可能会遇到 React 相关的 Target 构建报错，一般是依赖树没有构建完整，只要多执行几次 Run 等待依赖全部加载完毕就能解决。</p>
+<p>如果还不行可以尝试卸载模拟器上的应用然后重新构建，也能解决很多奇怪的运行不起来的问题。</p>
+<p>实在不行再尝试『全清』大法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 清除依赖，重新安装</span><br>rm -rf node_modules &amp;&amp; npm install<br><br><span class="hljs-comment"># 清除缓存</span><br>react-native start --reset-cache<br><br><span class="hljs-comment"># 清除 npm 和 watchman 缓存</span><br>npm cache clear --force &amp;&amp; watchman watch-del-all<br></code></pre></td></tr></table></figure>
+
+<p>相关 issue：<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/1924">issues/1924</a>，<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/4968">issues/4968</a></p>
+<h5 id="真机调试"><a href="#真机调试" class="headerlink" title="真机调试"></a>真机调试</h5><p>大部分问题由于项目依赖的运行环境不一样，所以也没有什么统一的解决方案，只能靠自己谷歌慢慢摸索解决，使用上面模拟器中同样的方式有时候也能解决绝大部分问题。</p>
+<p>但是有些问题比较特殊，而且出现次数较多，比如：RN 中 <code>third-party</code> 相关的问题。所以这里顺便记录下。</p>
+<ol>
+<li> <code>Build input file double-conversion cannot be found</code></li>
+</ol>
+<p>出现这个错误一般是没有安装 double-conversion 依赖，只要运行下面的命令就能解决：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> node_modules/react-native/scripts &amp;&amp; ./ios-install-third-party.sh &amp;&amp; <span class="hljs-built_in">cd</span> ../../../<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li> <code>ios-configure-glog.sh: line 15: ./configure: No such file or directory</code></li>
+</ol>
+<p>和 1 类似，也是比较常见的错误，解决方案：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> ./node_modules/react-native/third-party/glog-0.3.4 &amp;&amp; ../../scripts/ios-install-third-party.sh &amp;&amp; <span class="hljs-built_in">cd</span> ../../../../<br></code></pre></td></tr></table></figure>
+
+<p>这里出现报错的是 glog-0.3.4，如果你是其他 third-party 依赖或者其他版本也都可以用这种方法解决。</p>
+<ol start="3">
+<li> <code>&#39;config.h&#39; file not found</code></li>
+</ol>
+<p>一般出现在 1 之后，手动运行一下 configure 脚本就能解决：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> node_modules/react-native/third-party/glog-0.3.4/; ./configure<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li> <code>No member named &#39;__rip&#39; in &#39;__darwin_arm_thread_state64</code></li>
+</ol>
+<p>这个问题一般比较少见，但是我遇到过多次，只出现升级到 Xcode 10 之后而且使用的 RN 版本低于 0.57 的情况下。</p>
+<p>造成这种错误一个可能的原因是，由于手动构建 glog，在真机上因为缺乏 arm 平台的相关配置导致出现错误。</p>
+<p>我目前参考的是<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/19839#issuecomment-422390104">这个</a>已经被关闭的 issue 中的 workaround 来解决这个问题的：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">// 在 node_modules/react-native/third-party/glog-0.3.4/src/config.h 下搜索：<br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__rip</span><br>// 替换为：<br><span class="hljs-comment">#if defined(__arm__) || defined(__arm64__)</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__pc</span><br><span class="hljs-comment">#else</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__rip</span><br><span class="hljs-comment">#endif</span><br></code></pre></td></tr></table></figure>
+
+<p>如作者所说，RN 0.57 之后的 glog-0.3.5 脚本已经兼容了 Xcode 10（不能在 RN&lt;0.57 中直接使用这个脚本），这个问题也就不存在了，所以推荐升级来解决，如果不想升级也可以用他提供的方法来解决。相关的 issue：<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/20774">issues/20774</a></p>
+<p>另外，如果是 <code>No member named &#39;__rip&#39; in &#39;__darwin_i386_thread_state64</code>，则可以添加</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">#elif defined(__i386__)</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__eip</span><br></code></pre></td></tr></table></figure>
+
+<p>修改后的内容为：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">/* How to access the PC from a struct ucontext */<br><span class="hljs-comment">#if defined(__arm__) || defined(__arm64__)</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__pc</span><br><span class="hljs-comment">#elif defined(__i386__)</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__eip</span><br><span class="hljs-comment">#else</span><br><span class="hljs-comment">#define PC_FROM_UCONTEXT uc_mcontext-&gt;__ss.__rip</span><br><span class="hljs-comment">#endif</span><br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li> <code>Unknown argument type &#39;**attribute**&#39; in method -[RCTAppState getCurrentappState:error:]</code></li>
+</ol>
+<p>同样只有 rn 0.55.4 或更老的版本才会出现这个问题，相关 issue 见 <a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/25138">issues/25138</a>，解决方案在<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/pull/25146/files">这里</a>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs objective-c">// open at: node_modules/react-native/React/Base/RCTModuleMethod.mm<br>static BOOL RCTParseUnused(const char **input)<br>&#123;<br>  return RCTReadString(input, &quot;__unused&quot;) ||<br>         RCTReadString(input, &quot;__attribute__((__unused__))&quot;) || // add this line<br>         RCTReadString(input, &quot;__attribute__((unused))&quot;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li> <code>Undefined symbols for architecture x86_6: _OBJC_CLASS_xxxxx</code></li>
+</ol>
+<p>这个问题一般是由 CocoaPods 缓存引起的，解决方法：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 清除 Xcode 缓存</span><br>rm -rf ~/Library/Developer/Xcode/DerivedData<br><span class="hljs-comment"># 删除依赖</span><br><span class="hljs-built_in">cd</span> ios<br>pod deintegrate &amp;&amp; pod cache clean --all<br><span class="hljs-comment"># 重新安装依赖</span><br>pod update &amp;&amp; pod install<br></code></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://github.com/invertase/react-native-firebase/issues/321#issuecomment-321232473">相关 issue</a></p>
+<h4 id="Android-相关"><a href="#Android-相关" class="headerlink" title="Android 相关"></a>Android 相关</h4><p><del>Android 不推荐使用真机调试，原因是 hot reload 常常失效（RN 0.60 以上版本似乎体验改善很多了）。</del></p>
+<p>真机上会遇到的问题和 iOS 差不多，这里就记录一些比较常用的命令吧。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 推荐添加 ~/Library/Android/sdk/emulator/emulator 到 PATH 中</span><br><span class="hljs-meta">#</span><span class="bash"> 查看所有可用的安卓模拟器</span><br>emulator -list-avds<br><span class="hljs-meta">#</span><span class="bash"> 启动对应的模拟器</span><br>emulator -avd &#x27;avd_name&#x27;<br><span class="hljs-meta">#</span><span class="bash"> 在指定设备上运行</span><br>react-native run-android --deviceId=DEVICE_ID<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 运行并配置端口号（默认为8081，避免占</span><br>react-native run-android --port=8088<br><span class="hljs-meta">#</span><span class="bash"> 运行 release 版本，必须配置 signingConfigs</span><br>react-native run-android --variant=release<br><span class="hljs-meta">#</span><span class="bash"> 唤醒开发者菜单，或者在 Metro 窗口中按 d</span><br>adb shell input keyevent KEYCODE_MENU<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 查看 RN 相关的日志</span><br>adb shell logcat *:S ReactNative:V ReactNativeJS:V<br></code></pre></td></tr></table></figure>
+
+<p>另外提供 iOS 相关的常用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 查看已安装的 iOS 模拟器列表</span><br>xcrun simctl list --json devices<br><span class="hljs-meta">#</span><span class="bash"> 启动指定的模拟器</span><br>xcrun instruments -w &#x27;iPhone 8 Plus&#x27;<br><span class="hljs-meta">#</span><span class="bash"> 在指定的模拟器上运行</span><br>react-native run-ios --simulator=&quot;iPhone 8 Plus&quot;<br><span class="hljs-meta">#</span><span class="bash"> iOS 模拟器录屏，保存位置为当前路径</span><br>xcrun simctl io booted recordVideo video.mov<br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"> 删除所有的 Provisioning Profile</span><br>rm ~/Library/MobileDevice/Provisioning\ Profiles/*<br><span class="hljs-meta">#</span><span class="bash"> 删除 DerivedData，有时候可以解决一些奇怪的问题</span><br>rm -rf ~/Library/Developer/Xcode/DerivedData<br></code></pre></td></tr></table></figure>
+
+<h5 id="其它问题"><a href="#其它问题" class="headerlink" title="其它问题"></a>其它问题</h5><ol>
+<li> 无法连接到 packager server，相关 issue：<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/15388">issue-15388</a>，<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/23380#issuecomment-473871592">issue-23380</a></li>
+</ol>
+<p>通常是由于在 <code>MainApplication</code> 中导入了 <code>BuildConfig</code> 造成的，删除即可，见：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/46595790/cant-open-developer-menu-on-react-native-debug-build">Can’t open developer menu on react-native debug build</a></p>
+<ol start="2">
+<li>Attempt to invoke virtual method ‘android.graphics.drawable.Drawable android.graphics.drawable.Drawable$ConstantState.newDrawable(android.content.res.Resources)’ on a null object reference</li>
+</ol>
+<p>算是 Android 上比较令人头疼的一个问题了，目前除了重启 packager 没有更好的解决办法了，相关 issue 见 <a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/17530">issue-17530</a>，该 issue 目前仍然处于 open 状态中。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#RN-%E7%BB%84%E4%BB%B6%E7%9B%B8%E5%85%B3"><span class="toc-number">1.</span> <span class="toc-text">RN 组件相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#TextInput"><span class="toc-number">1.1.</span> <span class="toc-text">TextInput</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-%E6%96%87%E5%AD%97%E5%AF%B9%E9%BD%90%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.1.</span> <span class="toc-text">Android 文字对齐问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Android-%E4%B8%8A-TextInput-%E6%8E%A5%E6%94%B6%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E4%B9%8B%E5%90%8E%E9%94%AE%E7%9B%98%E6%97%A0%E6%B3%95%E8%87%AA%E5%8A%A8%E6%94%B6%E8%B5%B7"><span class="toc-number">1.1.2.</span> <span class="toc-text">Android 上 TextInput 接收获得焦点之后键盘无法自动收起</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iOS-%E4%B8%8A%E6%97%A0%E6%B3%95%E6%B8%85%E9%99%A4%E6%96%87%E5%AD%97"><span class="toc-number">1.1.3.</span> <span class="toc-text">iOS 上无法清除文字</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KeyboardAvoidingView"><span class="toc-number">1.2.</span> <span class="toc-text">KeyboardAvoidingView</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#behavior-%E7%9B%B8%E5%85%B3"><span class="toc-number">1.2.1.</span> <span class="toc-text">behavior 相关</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ImageBackground"><span class="toc-number">1.3.</span> <span class="toc-text">ImageBackground</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#imageStyle-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">imageStyle 属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#FlatList-SectionList"><span class="toc-number">1.4.</span> <span class="toc-text">FlatList&#x2F;SectionList</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#contentContainerStyle-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.4.1.</span> <span class="toc-text">contentContainerStyle 属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%97%B6%E7%9A%84%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.2.</span> <span class="toc-text">加载时的性能问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PanResponder"><span class="toc-number">1.5.</span> <span class="toc-text">PanResponder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UIManager"><span class="toc-number">1.6.</span> <span class="toc-text">UIManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96-Tips"><span class="toc-number">1.7.</span> <span class="toc-text">其他 Tips</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%96%B9%E5%BA%93%E7%9B%B8%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">三方库相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.</span> <span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ant-design-react-native"><span class="toc-number">2.2.</span> <span class="toc-text">@ant-design&#x2F;react-native</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-redux"><span class="toc-number">2.3.</span> <span class="toc-text">react-redux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-scrollable-tab-view"><span class="toc-number">2.4.</span> <span class="toc-text">react-native-scrollable-tab-view</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-puti-pay"><span class="toc-number">2.5.</span> <span class="toc-text">react-native-puti-pay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-debugger"><span class="toc-number">2.6.</span> <span class="toc-text">react-native-debugger</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-router-flux"><span class="toc-number">2.7.</span> <span class="toc-text">react-native-router-flux</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-Android-%E4%B8%8A%E8%BF%9E%E7%BB%AD%E7%82%B9%E5%87%BB%E4%B8%A4%E6%AC%A1%E8%BF%94%E5%9B%9E%E9%94%AE%E9%80%80%E5%87%BA"><span class="toc-number">2.7.1.</span> <span class="toc-text">实现 Android 上连续点击两次返回键退出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8-Android-%E4%B8%8A%E7%82%B9%E5%87%BB%E8%BF%94%E5%9B%9E%E9%94%AE%E6%97%B6%E4%BD%BF-WebView-%E5%90%8E%E9%80%80%E4%B8%80%E9%A1%B5"><span class="toc-number">2.7.2.</span> <span class="toc-text">在 Android 上点击返回键时使 WebView 后退一页</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#react-native-amap3d"><span class="toc-number">2.8.</span> <span class="toc-text">react-native-amap3d</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E4%BB%A5%E5%8F%8A%E5%86%B2%E7%AA%81"><span class="toc-number">2.8.1.</span> <span class="toc-text">安装失败以及冲突</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E5%AD%98%E5%9C%A8%E6%97%A0%E6%B3%95%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9B%BE%E5%AE%9A%E4%BD%8D%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%82"><span class="toc-number">2.8.2.</span> <span class="toc-text">在安卓上存在无法获取地图定位的问题。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">3.1.</span> <span class="toc-text">代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E8%8A%B1%E6%8B%AC%E5%8F%B7-%E5%BC%95%E5%8F%91%E7%9A%84%E6%83%A8%E6%A1%88%E3%80%82"><span class="toc-number">3.1.1.</span> <span class="toc-text">一个花括号 {} 引发的惨案。</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iOS-%E7%9B%B8%E5%85%B3"><span class="toc-number">3.2.</span> <span class="toc-text">iOS 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%B0%83%E8%AF%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">模拟器调试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9C%9F%E6%9C%BA%E8%B0%83%E8%AF%95"><span class="toc-number">3.2.2.</span> <span class="toc-text">真机调试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Android-%E7%9B%B8%E5%85%B3"><span class="toc-number">3.3.</span> <span class="toc-text">Android 相关</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98"><span class="toc-number">3.3.1.</span> <span class="toc-text">其它问题</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/react-native-dev-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/react-native-dev-notes/&text=React Native - 踩坑纪录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/react-native-dev-notes/&is_video=false&description=React Native - 踩坑纪录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - 踩坑纪录&body=Check out this article: https://ajiew.me/react-native-dev-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/react-native-dev-notes/&title=React Native - 踩坑纪录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/react-native-dev-notes/&name=React Native - 踩坑纪录&description=&lt;blockquote&gt;
+&lt;p&gt;记录下自己在 RN 开发中遇到的一些问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;RN-组件相关&#34;&gt;&lt;a href=&#34;#RN-组件相关&#34; class=&#34;headerlink&#34; title=&#34;RN 组件相关&#34;&gt;&lt;/a&gt;RN 组件相关&lt;/h3&gt;&lt;h4 id=&#34;TextInput&#34;&gt;&lt;a href=&#34;#TextInput&#34; class=&#34;headerlink&#34; title=&#34;TextInput&#34;&gt;&lt;/a&gt;TextInput&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;h5 id=&#34;Android-文字对齐问题&#34;&gt;&lt;a href=&#34;#Android-文字对齐问题&#34; class=&#34;headerlink&#34; title=&#34;Android 文字对齐问题&#34;&gt;&lt;/a&gt;Android 文字对齐问题&lt;/h5&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当 TextInput 高度超过一行文本时，发现文字显示在 iOS 上是顶端对齐，而在 Android 上则是垂直居中，如下图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35cef054aa433553.png&#34; alt=&#34;text_input_differ&#34;&gt;&lt;/p&gt;
+&lt;p&gt;解决方法是通过为 TextInput 设置 &lt;code&gt;textAlignVertical: &amp;quot;top&amp;quot;&lt;/code&gt; 属性，相关 issue 见：&lt;a href=&#34;https://github.com/facebook/react-native/issues/13897&#34;&gt;Render Multiline Text at start instead of center&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/react-native-dev-notes/&t=React Native - 踩坑纪录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

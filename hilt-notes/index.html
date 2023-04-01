@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这篇记录下 Hilt 最基本的使用方法。  Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="依赖注入框架 Hilt 的使用">
+<meta property="og:url" content="https://ajiew.me/hilt-notes/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="这篇记录下 Hilt 最基本的使用方法。  Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png">
+<meta property="article:published_time" content="2021-12-12T12:30:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.737Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>依赖注入框架 Hilt 的使用</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/shapefile-to-wms/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021-11/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/hilt-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.me/hilt-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇记录下 Hilt 最基本的使用方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞生了许多基于 Kotlin 依赖注入框架，比如 &lt;a href=&#34;https://github.com/InsertKoinIO/koin&#34;&gt;Koin&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/Kodein-Framework/Kodein-DI&#34;&gt;Kodein&lt;/a&gt;。谷歌当然也注意到了这一点，所以也基于 Dagger 推出了更简单易上手的 Hilt，它的主要优势是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于 Android 简化了 Dagger 相关的基础架构；&lt;/li&gt;
+&lt;li&gt;提供了一组标准的 Component 和 Scope 以简化使用、提升可读性以及便于代码共享；&lt;/li&gt;
+&lt;li&gt;简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hilt-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">Hilt 的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">模块和组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82"><span class="toc-number">2.1.</span> <span class="toc-text">组件的使用细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%BB%86%E8%8A%82"><span class="toc-number">3.</span> <span class="toc-text">其它细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        依赖注入框架 Hilt 的使用
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-12T12:30:00.000Z" itemprop="datePublished">2021-12-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png"></p>
+<blockquote>
+<p>这篇记录下 Hilt 最基本的使用方法。</p>
+</blockquote>
+<p>Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞生了许多基于 Kotlin 依赖注入框架，比如 <a target="_blank" rel="noopener" href="https://github.com/InsertKoinIO/koin">Koin</a> 和 <a target="_blank" rel="noopener" href="https://github.com/Kodein-Framework/Kodein-DI">Kodein</a>。谷歌当然也注意到了这一点，所以也基于 Dagger 推出了更简单易上手的 Hilt，它的主要优势是：</p>
+<ul>
+<li>基于 Android 简化了 Dagger 相关的基础架构；</li>
+<li>提供了一组标准的 Component 和 Scope 以简化使用、提升可读性以及便于代码共享；</li>
+<li>简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。</li>
+</ul>
+<p>之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。</p>
+<span id="more"></span>
+
+<h3 id="Hilt-的基本使用"><a href="#Hilt-的基本使用" class="headerlink" title="Hilt 的基本使用"></a>Hilt 的基本使用</h3><p>使用方式上，Hilt 和 Dagger 相比最明显的区别是，不再需要定义 Component，对于每一个 Android 基础类，Hilt 会自动为它生成对应的 Component，并且会根据安卓组件的生命周期来创建和销毁。如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Hilt 组件</th>
+<th align="left">注入器面向的对象</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ApplicationComponent</code></td>
+<td align="left"><code>Application</code></td>
+</tr>
+<tr>
+<td align="left"><code>ActivityRetainedComponent</code></td>
+<td align="left"><code>ViewModel</code></td>
+</tr>
+<tr>
+<td align="left"><code>ActivityComponent</code></td>
+<td align="left"><code>Activity</code></td>
+</tr>
+<tr>
+<td align="left"><code>FragmentComponent</code></td>
+<td align="left"><code>Fragment</code></td>
+</tr>
+<tr>
+<td align="left"><code>ViewComponent</code></td>
+<td align="left"><code>View</code></td>
+</tr>
+<tr>
+<td align="left"><code>ViewWithFragmentComponent</code></td>
+<td align="left">带有 <code>@WithFragmentBindings</code> 注释的 <code>View</code></td>
+</tr>
+<tr>
+<td align="left"><code>ServiceComponent</code></td>
+<td align="left"><code>Service</code></td>
+</tr>
+</tbody></table>
+<p>因此，对于一个最简单的 MVVM 项目而言，使用 Hilt 做依赖注入一般需要按照以下的步骤：</p>
+<ul>
+<li>添加 Hilt 插件和依赖，对于每个 module 都要单独添加</li>
+<li>使用 <code>@HiltAndroidApp</code> 标注你自定义的 <code>Application</code></li>
+<li>使用 <code>@AndroidEntryPoint</code> 标注你的 <code>Fragment</code> 或者 <code>Activity</code></li>
+<li>使用 <code>@HiltViewModel</code> 标注你的 ViewModel 类，以及用 <code>@Inject</code> 标注构造器</li>
+<li>使用 <code>@Inject</code> 标注需要注入的依赖，比如 Repository 等</li>
+<li>定义 Hilt 模块，用于<strong>提供无法直接注入的依赖</strong>，比如接口类和外部的依赖类等<ul>
+<li>使用 <code>@InstallIn</code> 标注该模块的作用范围</li>
+<li>使用 <code>@Provides</code> 标注提供每个依赖的方法</li>
+<li>使用 <code>@Binds </code> 标注需要注入依赖的接口和具体实现（通过抽象类和抽象方法）</li>
+</ul>
+</li>
+</ul>
+<p>具体例子可以参考我的开源小项目：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/Jithub">Jithub</a></p>
+<h3 id="模块和组件"><a href="#模块和组件" class="headerlink" title="模块和组件"></a>模块和组件</h3><p>虽然 Hilt 大大简化了依赖注入的使用，但是使用方式上和 Dagger 并没有太大区别，最基础的组成部分依旧是模块和组件。对于某个 Hilt 模块，如果我们想要注入多个相同类型的依赖，同样需要通过定义限定符来实现。</p>
+<p>使用注解定义限定符（例子来自<a target="_blank" rel="noopener" href="https://developer.android.com/training/dependency-injection/hilt-android">官方文档</a>）：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthInterceptorOkHttpClient</span></span><br><br><span class="hljs-meta">@Qualifier</span><br><span class="hljs-meta">@Retention(AnnotationRetention.BINARY)</span><br><span class="hljs-keyword">annotation</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OtherInterceptorOkHttpClient</span></span><br></code></pre></td></tr></table></figure>
+
+<p>除此之外，我们还可以使用 Hilt 自带的限定符，比如 <code>@ActivityContext</code> 和 <code>@ApplicationContext</code> 等。</p>
+<h4 id="组件的使用细节"><a href="#组件的使用细节" class="headerlink" title="组件的使用细节"></a>组件的使用细节</h4><p>之前提到过对于不同的 Android 类，Hilt 会为之生成对应的组件，我们在模块中通过 <code>@InstalledIn</code> 引用组件，然后 Hilt 会将模块安装到对应的组件中，最后再把依赖注入到组件中。</p>
+<p>除此之外，每个组件都有自己的<a target="_blank" rel="noopener" href="https://developer.android.com/training/dependency-injection/hilt-android#component-lifetimes">生命周期</a>，而且我们还可以为组件限定作用域。不同的组件作用域内可使用的依赖也不同，比如 <code>@FragmentScoped</code> 作用域内的依赖可以在 <code>@ActivityScoped</code> 的组件中使用，但是无法在 <code>@ViewScoped</code> 的组件中使用。</p>
+<table>
+<thead>
+<tr>
+<th align="left">Android 类</th>
+<th align="left">生成的组件</th>
+<th align="left">作用域</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Application</code></td>
+<td align="left"><code>ApplicationComponent</code></td>
+<td align="left"><code>@Singleton</code></td>
+</tr>
+<tr>
+<td align="left"><code>View Model</code></td>
+<td align="left"><code>ActivityRetainedComponent</code></td>
+<td align="left"><code>@ActivityRetainedScope</code></td>
+</tr>
+<tr>
+<td align="left"><code>Activity</code></td>
+<td align="left"><code>ActivityComponent</code></td>
+<td align="left"><code>@ActivityScoped</code></td>
+</tr>
+<tr>
+<td align="left"><code>Fragment</code></td>
+<td align="left"><code>FragmentComponent</code></td>
+<td align="left"><code>@FragmentScoped</code></td>
+</tr>
+<tr>
+<td align="left"><code>View</code></td>
+<td align="left"><code>ViewComponent</code></td>
+<td align="left"><code>@ViewScoped</code></td>
+</tr>
+<tr>
+<td align="left">带有 <code>@WithFragmentBindings</code> 注释的 <code>View</code></td>
+<td align="left"><code>ViewWithFragmentComponent</code></td>
+<td align="left"><code>@ViewScoped</code></td>
+</tr>
+<tr>
+<td align="left"><code>Service</code></td>
+<td align="left"><code>ServiceComponent</code></td>
+<td align="left"><code>@ServiceScoped</code></td>
+</tr>
+</tbody></table>
+<h3 id="其它细节"><a href="#其它细节" class="headerlink" title="其它细节"></a>其它细节</h3><p>如果需要在 Hilt 不支持的类中注入依赖，比如 <code>ContentProvider</code>，我们可以通过创建 <code>EntryPoint</code> 来访问这些依赖。</p>
+<p>通过 <code>@EntryPoint</code> 创建依赖入口（通常是一个接口），然后在其中定义方法提供所需要的依赖，再通过 <code>@InstalledIn</code> 来定义安装到哪个组件。另外，访问 <code>EntryPoint</code> 依赖也和普通的依赖不同，我们需要通过之前定义好的 <code>EntryPoint</code> 接口来访问依赖项。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> entryPointInterface = EntryPointAccessors.fromXxx(Application/Activity/Fragment/Context, EntryPointInterface::<span class="hljs-keyword">class</span>.java)<br></code></pre></td></tr></table></figure>
+
+<p><code>EntryPointAccessors</code> 中包含不同的创建方法，对应于创建不同的组件，比如 <code>EntryPointAccessors.fromApplication()</code> 对应于 <code>SingletonComponent</code>，<code>fromActivity() </code> 对应于 <code>ActivityComponent</code> 等。创建 <code>EntryPoint</code> 接口对象之后，我们就可以通过它来访问依赖了。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>可以看到，Hilt 大大简化了传统依赖注入框架的使用方式，但是核心功能基本和 Dagger 保持一致，因此，开发人员可以将更多的注意力放在开发上，从而提升开发效率。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hilt-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">Hilt 的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">模块和组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82"><span class="toc-number">2.1.</span> <span class="toc-text">组件的使用细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E7%BB%86%E8%8A%82"><span class="toc-number">3.</span> <span class="toc-text">其它细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/hilt-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.me/hilt-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇记录下 Hilt 最基本的使用方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞生了许多基于 Kotlin 依赖注入框架，比如 &lt;a href=&#34;https://github.com/InsertKoinIO/koin&#34;&gt;Koin&lt;/a&gt; 和 &lt;a href=&#34;https://github.com/Kodein-Framework/Kodein-DI&#34;&gt;Kodein&lt;/a&gt;。谷歌当然也注意到了这一点，所以也基于 Dagger 推出了更简单易上手的 Hilt，它的主要优势是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基于 Android 简化了 Dagger 相关的基础架构；&lt;/li&gt;
+&lt;li&gt;提供了一组标准的 Component 和 Scope 以简化使用、提升可读性以及便于代码共享；&lt;/li&gt;
+&lt;li&gt;简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

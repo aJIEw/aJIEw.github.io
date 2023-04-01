@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 6、7、12 章：Drawable、动画、Bitmap 相关。  DrawableDrawable 是一种抽象的概念，表示一种可以在屏幕上进行绘制 (Draw) 的图像，常见的颜色和图片都可以是 Drawable。 Drawable 一般没有大小的概念，当作为 View 的 background 的时候，它会被拉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（四）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-4/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 6、7、12 章：Drawable、动画、Bitmap 相关。  DrawableDrawable 是一种抽象的概念，表示一种可以在屏幕上进行绘制 (Draw) 的图像，常见的颜色和图片都可以是 Drawable。 Drawable 一般没有大小的概念，当作为 View 的 background 的时候，它会被拉">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-27/android-logo.jpg">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-27/tween-animation.png">
+<meta property="article:published_time" content="2019-12-27T14:12:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.728Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-12-27/android-logo.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 开发艺术探索学习笔记（四）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/notes-on-android-art-part-3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-4/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-4/&text=Android 开发艺术探索学习笔记（四）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-4/&is_video=false&description=Android 开发艺术探索学习笔记（四）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（四）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-4/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-4/&name=Android 开发艺术探索学习笔记（四）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-27/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 6、7、12 章：&lt;strong&gt;Drawable&lt;/strong&gt;、&lt;strong&gt;动画&lt;/strong&gt;、&lt;strong&gt;Bitmap&lt;/strong&gt; 相关。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;Drawable&#34;&gt;&lt;a href=&#34;#Drawable&#34; class=&#34;headerlink&#34; title=&#34;Drawable&#34;&gt;&lt;/a&gt;Drawable&lt;/h2&gt;&lt;p&gt;Drawable 是一种抽象的概念，表示一种可以在屏幕上进行绘制 (Draw) 的图像，常见的颜色和图片都可以是 Drawable。&lt;/p&gt;
+&lt;p&gt;Drawable 一般没有大小的概念，当作为 View 的 background 的时候，它会被拉伸至 View 同等大小。不过它有两个参数，&lt;code&gt;getIntrinsicWidth&lt;/code&gt; 和 &lt;code&gt;getIntrinsicHeight&lt;/code&gt; 表示内在的宽高，可以理解为默认宽高，比如显示一张图片时，这个值所对应的宽高就是当前图片的宽高，当作为 ColorDrawable 的时候该值则为 -1。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-4/&t=Android 开发艺术探索学习笔记（四）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Drawable"><span class="toc-number">1.</span> <span class="toc-text">Drawable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Drawable-%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">Drawable 的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Drawable"><span class="toc-number">1.2.</span> <span class="toc-text">自定义 Drawable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">1.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Animation"><span class="toc-number">2.</span> <span class="toc-text">Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E5%8A%A8%E7%94%BB"><span class="toc-number">2.1.</span> <span class="toc-text">View 动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tween-animation"><span class="toc-number">2.1.1.</span> <span class="toc-text">Tween animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frame-Animation"><span class="toc-number">2.1.2.</span> <span class="toc-text">Frame Animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84-Tween-Animation"><span class="toc-number">2.1.3.</span> <span class="toc-text">特殊的 Tween Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LayoutAnimation"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">LayoutAnimation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Activity-%E5%88%87%E6%8D%A2%E6%95%88%E6%9E%9C"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">Activity 切换效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB"><span class="toc-number">2.2.</span> <span class="toc-text">属性动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">属性动画的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%80%BC%E5%99%A8%E5%92%8C%E4%BC%B0%E5%80%BC%E5%99%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">插值器和估值器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-number">2.2.3.</span> <span class="toc-text">属性动画的监听器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">属性动画的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-1"><span class="toc-number">2.2.5.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bitmap-%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BC%93%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text">Bitmap 的加载和缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmap-%E7%9A%84%E9%AB%98%E6%95%88%E5%8A%A0%E8%BD%BD"><span class="toc-number">3.1.</span> <span class="toc-text">Bitmap 的高效加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-2"><span class="toc-number">3.1.1.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98%E5%92%8C%E7%A3%81%E7%9B%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.</span> <span class="toc-text">内存缓存和磁盘缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.1.</span> <span class="toc-text">内存缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.2.</span> <span class="toc-text">磁盘缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-3"><span class="toc-number">3.2.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageLoader-%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">ImageLoader 的实现与使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ImageLoader-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.3.1.</span> <span class="toc-text">ImageLoader 的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%85%A7%E7%89%87%E5%A2%99%E6%95%88%E6%9E%9C"><span class="toc-number">3.3.2.</span> <span class="toc-text">照片墙效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%88%97%E8%A1%A8%E5%8D%A1%E9%A1%BF"><span class="toc-number">3.3.3.</span> <span class="toc-text">优化列表卡顿</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 开发艺术探索学习笔记（四）
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-27T14:12:00.000Z" itemprop="datePublished">2019-12-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2019-12-27/android-logo.jpg"></p>
+<blockquote>
+<p>结合 <a target="_blank" rel="noopener" href="https://developer.android.com/guide">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 6、7、12 章：<strong>Drawable</strong>、<strong>动画</strong>、<strong>Bitmap</strong> 相关。</p>
+</blockquote>
+<h2 id="Drawable"><a href="#Drawable" class="headerlink" title="Drawable"></a>Drawable</h2><p>Drawable 是一种抽象的概念，表示一种可以在屏幕上进行绘制 (Draw) 的图像，常见的颜色和图片都可以是 Drawable。</p>
+<p>Drawable 一般没有大小的概念，当作为 View 的 background 的时候，它会被拉伸至 View 同等大小。不过它有两个参数，<code>getIntrinsicWidth</code> 和 <code>getIntrinsicHeight</code> 表示内在的宽高，可以理解为默认宽高，比如显示一张图片时，这个值所对应的宽高就是当前图片的宽高，当作为 ColorDrawable 的时候该值则为 -1。</p>
+<span id="more"></span>
+
+<h3 id="Drawable-的分类"><a href="#Drawable-的分类" class="headerlink" title="Drawable 的分类"></a>Drawable 的分类</h3><p><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource">Drawable</a> 类型比较多，而且也没必要记住所有属性，需要时查文档就可以了：</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Bitmap">BitmapDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#NinePatch">NinePatchDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Shape">ShapeDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#LayerList">LayerDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#StateList">StateListDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#LevelList">LevelListDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Transition">TransitionDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Inset">InsetDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Clip">ClipDrawable</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/drawable-resource#Scale">ScaleDrawable</a></li>
+</ul>
+<h3 id="自定义-Drawable"><a href="#自定义-Drawable" class="headerlink" title="自定义 Drawable"></a>自定义 Drawable</h3><p>只要重写 draw() 方法就可以了，例子见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/blob/master/Chapter_6/src/com/ryg/chapter_6/ui/CustomDrawable.java">android-art-res / Chapter_6</a></p>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/drawables">Drawables</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/vector-drawable-resources">Vector drawables</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/color-list-resource">Color state list</a></li>
+</ul>
+<h2 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h2><p><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/animation-resource">动画</a>可以分为属性动画 (Property Animation) 和 View 动画。View 动画通过对图像做各种变换（平移、旋转、缩放、透明度）从而产生动画效果，而属性动画则通过动态修改对象的属性来达到动画效果。推荐优先使用属性动画。</p>
+<h3 id="View-动画"><a href="#View-动画" class="headerlink" title="View 动画"></a>View 动画</h3><h4 id="Tween-animation"><a href="#Tween-animation" class="headerlink" title="Tween animation"></a>Tween animation</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/animation-resource#Tween">补间动画</a>分为平移动画、缩放动画、旋转动画和透明度动画，它们既可以通过 XML 定义也可以通过代码动态创建。xml 文件一般放在 res/anim 目录下。</p>
+<img src="../assets/2019-12-27/tween-animation.png" width=100%/>
+
+<h4 id="Frame-Animation"><a href="#Frame-Animation" class="headerlink" title="Frame Animation"></a>Frame Animation</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/animation-resource#Frame">帧动画</a>其实就是一组预先定义好的图片，然后逐帧显示。使用帧动画如果图片过大，可能会导致 OOM，所以需要注意图片尺寸的问题。xml 文件一般放在 res/drawable 目录下。</p>
+<h4 id="特殊的-Tween-Animation"><a href="#特殊的-Tween-Animation" class="headerlink" title="特殊的 Tween Animation"></a>特殊的 Tween Animation</h4><h5 id="LayoutAnimation"><a href="#LayoutAnimation" class="headerlink" title="LayoutAnimation"></a>LayoutAnimation</h5><p>主要用于 ViewGroup，使用后子元素出场时会显示该动画，比如用于 ListView 或者 RecyclerView，为 item 设置进入时的从左往右进入，或者先变大然后恢复的动效。</p>
+<p>扩展阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/training/animation/layout">Auto animate layout updates</a></p>
+<h5 id="Activity-切换效果"><a href="#Activity-切换效果" class="headerlink" title="Activity 切换效果"></a>Activity 切换效果</h5><p>我们可以通过在 activity 启动以及结束前使用 <code>overridePendingTransition(enterAnimId, exitAnimId)</code> 或者 <code>ActivityOptions.makeCustomAnimation(context, enterAnimId, exitAnimId)</code> 来指定 Activity 的切换效果。</p>
+<p>另外，Android 5.0 之后还支持共享元素的过渡效果，具体请阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/training/transitions/start-activity">Start an activity using an animation</a></p>
+<h3 id="属性动画"><a href="#属性动画" class="headerlink" title="属性动画"></a>属性动画</h3><p><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/animation-resource#Property">属性动画</a>与 View 动画不同，它对作用对象进行了扩展，因此可以对任何对象做动画，甚至可以没有对象，而且实现的效果也更加丰富多样。</p>
+<h4 id="属性动画的使用"><a href="#属性动画的使用" class="headerlink" title="属性动画的使用"></a>属性动画的使用</h4><p>常用的类有 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/animation/ValueAnimator.html"><code>ValueAnimator</code></a>，<code>ObjectAnimator</code> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/animation/ObjectAnimator.html"><code>AnimatorSet</code></a>。其中 <code>ObjectAnimator</code> 继承自 <code>ValueAnimator</code>，<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/animation/AnimatorSet.html"><code>AnimatorSet</code></a> 是一组动画集合。对应的 xml 标签分别是 &lt;objectAnimator&gt; &lt;animator&gt; &lt;set&gt;，xml 文件一般放在 res/animator 目录下。</p>
+<p>不过属性动画使用<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/prop-animation#object-animator">代码</a>进行操作更为简便，比如垂直平移一个 View 只要这样：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">ObjectAnimator.ofFloat(view, <span class="hljs-string">&quot;translationY&quot;</span>, <span class="hljs-number">100f</span>).start()<br></code></pre></td></tr></table></figure>
+
+<h4 id="插值器和估值器"><a href="#插值器和估值器" class="headerlink" title="插值器和估值器"></a>插值器和估值器</h4><p>插值器我理解为动画的变化方式（速率等），而估值器表示某一个时间节点下的变化的值。系统自带的插值器有：<code>TimeInterpolator</code> / <code>LinearInterpolator</code> / <code>AccelerateDecelerateInterpolator</code> 等，如果我们想要自定义动画效果，一般需要实现 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/prop-animation#interpolators">Interpolator</a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/prop-animation#type-evaluator">TypeEvaluator</a>。</p>
+<h4 id="属性动画的监听器"><a href="#属性动画的监听器" class="headerlink" title="属性动画的监听器"></a>属性动画的监听器</h4><p>我们可以实现对动画播放过程的<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/prop-animation#listeners">监听</a>，主要通过 <code>Animator.AnimatorListener</code>，可以监听动画的开始、结束、取消、重新播放。 <code>ValueAnimator.AnimatorUpdateListener</code>，可以监听动画的更新，通过 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/animation/ValueAnimator.html#getAnimatedValue()">ValueAnimator.getAnimatedValue()</a> 获取变化值，我们还可以利用这个方法自定义出一些特殊效果。</p>
+<h4 id="属性动画的工作原理"><a href="#属性动画的工作原理" class="headerlink" title="属性动画的工作原理"></a>属性动画的工作原理</h4><p>通过获取 View 上的该属性的初始值（如果没有提供初始值则调用属性的 get 方法）和最终值（即我们 set 进去的值，xml 中的 <code>toValue</code>），然后以动画的效果，多次调用其 set 方法，直到达到最终值。源码解析就不贴了。</p>
+<p>对于某些属性，即使提供了 set get 方法，但是对其做属性动画依旧没效果，原因是该属性不会带来 UI 显示上的变化，自然看上去就像没有效果了，比如 TextView 的 setWidth 和 getWidth，这个方法指定的是最大宽度，而不是实际显示的宽度，所以对它做属性动画不会有效果。</p>
+<p>我们可以通过两种方式来改变这种状况，一种是通过包装原始对象，并为其提供 set 和 get 方法。另一种是通过上面提到的 <code>ValueAnimator.AnimtorUpdateListener</code> 加上估值器，手动修改对应的属性来实现效果。例子见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/blob/master/Chapter_7/src/com/ryg/chapter_7/DemoActivity_1.java">android-art-res / Chapter_7</a>。推荐使用第一种，因为更容易复用。</p>
+<h4 id="扩展阅读-1"><a href="#扩展阅读-1" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/training/animation">Animations and transitions</a></li>
+</ul>
+<h2 id="Bitmap-的加载和缓存"><a href="#Bitmap-的加载和缓存" class="headerlink" title="Bitmap 的加载和缓存"></a>Bitmap 的加载和缓存</h2><h3 id="Bitmap-的高效加载"><a href="#Bitmap-的高效加载" class="headerlink" title="Bitmap 的高效加载"></a>Bitmap 的高效加载</h3><p>我们通过 Bitmap 加载图片的时候，一般都需要考虑图片大小的问题，图片越大占用的内存也就越多，一不小心还有可能造成 OOM，所以对于大图来说一般会做缩放后再显示。</p>
+<p>核心思想是，首先通过为 <code>BitmapFactory.Options</code> 的 <code>inJustDecodeBounds</code> 设置 true，对图片进行采样获取到宽高（不会为图片像素点分配内存，因此不会消耗太大），然后再根据实际需要显示的宽高，计算出合理的缩放倍数，然后再对图片进行真正的加载。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">calculateInSampleSize</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">            BitmapFactory.Options options, <span class="hljs-keyword">int</span> reqWidth, <span class="hljs-keyword">int</span> reqHeight)</span> </span>&#123;<br>    <span class="hljs-comment">// Raw height and width of image</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> height = options.outHeight;<br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> width = options.outWidth;<br>    <span class="hljs-keyword">int</span> inSampleSize = <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">if</span> (height &gt; reqHeight || width &gt; reqWidth) &#123;<br><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> halfHeight = height / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> halfWidth = width / <span class="hljs-number">2</span>;<br><br>        <span class="hljs-comment">// Calculate the largest inSampleSize value that is a power of 2 and keeps both</span><br>        <span class="hljs-comment">// height and width larger than the requested height and width.</span><br>        <span class="hljs-keyword">while</span> ((halfHeight / inSampleSize) &gt;= reqHeight<br>                &amp;&amp; (halfWidth / inSampleSize) &gt;= reqWidth) &#123;<br>            inSampleSize *= <span class="hljs-number">2</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> inSampleSize;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Bitmap <span class="hljs-title">decodeSampledBitmapFromResource</span><span class="hljs-params">(Resources res, <span class="hljs-keyword">int</span> resId,</span></span><br><span class="hljs-params"><span class="hljs-function">        <span class="hljs-keyword">int</span> reqWidth, <span class="hljs-keyword">int</span> reqHeight)</span> </span>&#123;<br><br>    <span class="hljs-comment">// First decode with inJustDecodeBounds=true to check dimensions</span><br>    <span class="hljs-keyword">final</span> BitmapFactory.Options options = <span class="hljs-keyword">new</span> BitmapFactory.Options();<br>    options.inJustDecodeBounds = <span class="hljs-keyword">true</span>;<br>    BitmapFactory.decodeResource(res, resId, options);<br><br>    <span class="hljs-comment">// Calculate inSampleSize</span><br>    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);<br><br>    <span class="hljs-comment">// Decode bitmap with inSampleSize set</span><br>    options.inJustDecodeBounds = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">return</span> BitmapFactory.decodeResource(res, resId, options);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>BitmapFactory</code> 除了 <code>decodeResource()</code> 这一从资源中读取 Bitmap 的方式外，还可以使用 <code>decodeFile()</code>、<code>decodeStream()</code>、<code>decodeByteArray()</code> 这几种方式，分别表示从文件、字节流、Byte 数组中读取并加载 Bitmap，这些方法最终调用的都是 native 方法，由 Android 底层实现。</p>
+<h4 id="扩展阅读-2"><a href="#扩展阅读-2" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/graphics/load-bitmap">Loading Large Bitmaps Efficiently</a></li>
+</ul>
+<h3 id="内存缓存和磁盘缓存"><a href="#内存缓存和磁盘缓存" class="headerlink" title="内存缓存和磁盘缓存"></a>内存缓存和磁盘缓存</h3><p>在 RecyclerView 或者 ViewPager 中加载大量图片时，如果不做特殊处理，由于 View 的复用以及垃圾回收机制的存在，屏幕之外的图片很快会被回收掉，所以为了让页面保持流畅（不出现白屏也不会因为重复加载图片导致卡顿），我们就需要使用缓存来加速图片的恢复加载。</p>
+<h4 id="内存缓存"><a href="#内存缓存" class="headerlink" title="内存缓存"></a>内存缓存</h4><p>通过内存缓存（<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/util/LruCache.html">LruCache</a>），我们可以将 Bitmap 缓存在应用内存中来提升加载速度。<code>LruCache</code> 中使用一个 <code>LinkedHashMap</code> 保存最近引用过的对象，当引用数量超出容量限制的时候就会将<strong>最近最少使用</strong>的对象移除。</p>
+<p>使用 <code>LruCache</code> 缓存图片的时候需要考虑以下问题：</p>
+<ul>
+<li>  图片大小多少，占用多少内存？</li>
+<li>  一屏加载多少图片？有多少是需要预加载的？</li>
+<li>  你的 activity 除了图片之外，其他部分耗内存吗？</li>
+<li>  有哪些图片是频繁访问的？如果有特定图片是频繁访问的，可以选择常驻到内存缓存中。另外，如果有确定的访问频率不一致的图片组，可以考虑使用多个 <code>LruCache</code>。</li>
+<li>  如果是特别大的图片，可以考虑使用多种清晰度的图片，先加载低清晰度图片，然后再使用后台任务加载高清度的图片。</li>
+<li>  如果是本地图片，需要考虑在不同屏幕大小和屏幕密度上设备是否表现一致。</li>
+</ul>
+<p>使用 LruCache 加载 Bitmap 的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> LruCache&lt;String, Bitmap&gt; memoryCache;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>    ...<br>    <span class="hljs-comment">// Get max available VM memory, exceeding this amount will throw an</span><br>    <span class="hljs-comment">// OutOfMemory exception. Stored in kilobytes as LruCache takes an</span><br>    <span class="hljs-comment">// int in its constructor.</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> maxMemory = (<span class="hljs-keyword">int</span>) (Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span>);<br><br>    <span class="hljs-comment">// Use 1/8th of the available memory for this memory cache.</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> cacheSize = maxMemory / <span class="hljs-number">8</span>;<br><br>    memoryCache = <span class="hljs-keyword">new</span> LruCache&lt;String, Bitmap&gt;(cacheSize) &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> <span class="hljs-title">sizeOf</span><span class="hljs-params">(String key, Bitmap bitmap)</span> </span>&#123;<br>            <span class="hljs-comment">// The cache size will be measured in kilobytes rather than</span><br>            <span class="hljs-comment">// number of items.</span><br>            <span class="hljs-keyword">return</span> bitmap.getByteCount() / <span class="hljs-number">1024</span>;<br>        &#125;<br>    &#125;;<br>    ...<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addBitmapToMemoryCache</span><span class="hljs-params">(String key, Bitmap bitmap)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (getBitmapFromMemCache(key) == <span class="hljs-keyword">null</span>) &#123;<br>        memoryCache.put(key, bitmap);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> Bitmap <span class="hljs-title">getBitmapFromMemCache</span><span class="hljs-params">(String key)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> memoryCache.get(key);<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BitmapWorkerTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">Integer</span>, <span class="hljs-title">Void</span>, <span class="hljs-title">Bitmap</span>&gt; </span>&#123;<br>    ...<br>    <span class="hljs-comment">// Decode image in background.</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Bitmap <span class="hljs-title">doInBackground</span><span class="hljs-params">(Integer... params)</span> </span>&#123;<br>        <span class="hljs-keyword">final</span> Bitmap bitmap = decodeSampledBitmapFromResource(<br>                getResources(), params[<span class="hljs-number">0</span>], <span class="hljs-number">100</span>, <span class="hljs-number">100</span>));<br>        addBitmapToMemoryCache(String.valueOf(params[<span class="hljs-number">0</span>]), bitmap);<br>        <span class="hljs-keyword">return</span> bitmap;<br>    &#125;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>加载 Bitmap 前先判断是否有缓存：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">loadBitmap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> resId, ImageView imageView)</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> String imageKey = String.valueOf(resId);<br><br>    <span class="hljs-keyword">final</span> Bitmap bitmap = getBitmapFromMemCache(imageKey);<br>    <span class="hljs-keyword">if</span> (bitmap != <span class="hljs-keyword">null</span>) &#123;<br>        mImageView.setImageBitmap(bitmap);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        mImageView.setImageResource(R.drawable.image_placeholder);<br>        BitmapWorkerTask task = <span class="hljs-keyword">new</span> BitmapWorkerTask(mImageView);<br>        task.execute(resId);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="磁盘缓存"><a href="#磁盘缓存" class="headerlink" title="磁盘缓存"></a>磁盘缓存</h4><p>内存缓存虽然速度快，但是我们也不能完全只依赖它，因为用户手机可能内存很小，应用随时可能被杀死（用户离开一段时间或者有更高优先级的任务占用了内存等等），当用户重新打开你的页面的时候，又要重新加载图片。</p>
+<p><code>DiskLruCache</code> 可以帮我们把加载过的 Bitmap 持久化到存储空间中从而减少用户重新加载的等待时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> DiskLruCache diskLruCache;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Object diskCacheLock = <span class="hljs-keyword">new</span> Object();<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> diskCacheStarting = <span class="hljs-keyword">true</span>;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DISK_CACHE_SIZE = <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">10</span>; <span class="hljs-comment">// 10MB</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String DISK_CACHE_SUBDIR = <span class="hljs-string">&quot;thumbnails&quot;</span>;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> APP_VERSION = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> VALUE_COUNT = <span class="hljs-number">1</span>;<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> </span>&#123;<br>    ...<br>    <span class="hljs-comment">// Initialize memory cache</span><br>    ...<br>    <span class="hljs-comment">// Initialize disk cache on background thread</span><br>    File cacheDir = getDiskCacheDir(<span class="hljs-keyword">this</span>, DISK_CACHE_SUBDIR);<br>    <span class="hljs-keyword">new</span> InitDiskCacheTask().execute(cacheDir);<br>    ...<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InitDiskCacheTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">File</span>, <span class="hljs-title">Void</span>, <span class="hljs-title">Void</span>&gt; </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Void <span class="hljs-title">doInBackground</span><span class="hljs-params">(File... params)</span> </span>&#123;<br>        <span class="hljs-keyword">synchronized</span> (diskCacheLock) &#123;<br>            File cacheDir = params[<span class="hljs-number">0</span>];<br>            diskLruCache = DiskLruCache.open(<br>              cacheDir, APP_VERSION, VALUE_COUNT, DISK_CACHE_SIZE);<br>            diskCacheStarting = <span class="hljs-keyword">false</span>; <span class="hljs-comment">// Finished initialization</span><br>            diskCacheLock.notifyAll(); <span class="hljs-comment">// Wake any waiting threads</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BitmapWorkerTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AsyncTask</span>&lt;<span class="hljs-title">Integer</span>, <span class="hljs-title">Void</span>, <span class="hljs-title">Bitmap</span>&gt; </span>&#123;<br>    ...<br>    <span class="hljs-comment">// Decode image in background.</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> Bitmap <span class="hljs-title">doInBackground</span><span class="hljs-params">(Integer... params)</span> </span>&#123;<br>        <span class="hljs-keyword">final</span> String imageKey = String.valueOf(params[<span class="hljs-number">0</span>]);<br><br>        <span class="hljs-comment">// Check disk cache in background thread</span><br>        Bitmap bitmap = getBitmapFromDiskCache(imageKey);<br><br>        <span class="hljs-keyword">if</span> (bitmap == <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// Not found in disk cache</span><br>            <span class="hljs-comment">// Process as normal</span><br>            <span class="hljs-keyword">final</span> Bitmap bitmap = decodeSampledBitmapFromResource(<br>                    getResources(), params[<span class="hljs-number">0</span>], <span class="hljs-number">100</span>, <span class="hljs-number">100</span>));<br>        &#125;<br><br>        <span class="hljs-comment">// Add final bitmap to caches</span><br>        addBitmapToCache(imageKey, bitmap);<br><br>        <span class="hljs-keyword">return</span> bitmap;<br>    &#125;<br>    ...<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addBitmapToCache</span><span class="hljs-params">(String key, Bitmap bitmap)</span> </span>&#123;<br>    <span class="hljs-comment">// Add to memory cache as before</span><br>    <span class="hljs-keyword">if</span> (getBitmapFromMemCache(key) == <span class="hljs-keyword">null</span>) &#123;<br>        memoryCache.put(key, bitmap);<br>    &#125;<br><br>    <span class="hljs-comment">// Also add to disk cache</span><br>    <span class="hljs-keyword">synchronized</span> (diskCacheLock) &#123;<br>        <span class="hljs-keyword">if</span> (diskLruCache != <span class="hljs-keyword">null</span> &amp;&amp; diskLruCache.get(key) == <span class="hljs-keyword">null</span>) &#123;<br>            diskLruCache.put(key, bitmap);<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> Bitmap <span class="hljs-title">getBitmapFromDiskCache</span><span class="hljs-params">(String key)</span> </span>&#123;<br>    <span class="hljs-keyword">synchronized</span> (diskCacheLock) &#123;<br>        <span class="hljs-comment">// Wait while disk cache is started from background thread</span><br>        <span class="hljs-keyword">while</span> (diskCacheStarting) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                diskCacheLock.wait();<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;&#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (diskLruCache != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> diskLruCache.get(key);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>&#125;<br><br><span class="hljs-comment">// Creates a unique subdirectory of the designated app cache directory. Tries to use external</span><br><span class="hljs-comment">// but if not mounted, falls back on internal storage.</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> File <span class="hljs-title">getDiskCacheDir</span><span class="hljs-params">(Context context, String uniqueName)</span> </span>&#123;<br>    <span class="hljs-comment">// Check if media is mounted or storage is built-in, if so, try and use external cache dir</span><br>    <span class="hljs-comment">// otherwise use internal cache dir</span><br>    <span class="hljs-keyword">final</span> String cachePath =<br>            Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||<br>                    !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :<br>                            context.getCacheDir().getPath();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> File(cachePath + File.separator + uniqueName);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>因为涉及到文件读写，所以速度肯定要慢一点。而且可以看到，上面 <code>DiskLruCache</code> 是在子线程中创建的，所以当添加或者读取的时候，我们需要使用同步锁。</p>
+<h4 id="扩展阅读-3"><a href="#扩展阅读-3" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/graphics/cache-bitmap">Caching Bitmaps</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/graphics/manage-memory">Managing Bitmap Memory</a></li>
+</ul>
+<h3 id="ImageLoader-的实现与使用"><a href="#ImageLoader-的实现与使用" class="headerlink" title="ImageLoader 的实现与使用"></a><code>ImageLoader</code> 的实现与使用</h3><h4 id="ImageLoader-的实现"><a href="#ImageLoader-的实现" class="headerlink" title="ImageLoader 的实现"></a><code>ImageLoader</code> 的实现</h4><p>一个图片加载框架一般需要考虑：</p>
+<ul>
+<li>  图片的压缩</li>
+<li>  内存缓存与磁盘缓存</li>
+<li>  同步加载、异步加载</li>
+<li>  通过网络加载</li>
+</ul>
+<p>具体实现见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/blob/master/Chapter_12/src/com/ryg/chapter_12/loader/ImageLoader.java">android-art-res / Chapter_12</a></p>
+<h4 id="照片墙效果"><a href="#照片墙效果" class="headerlink" title="照片墙效果"></a>照片墙效果</h4><p><a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/blob/master/Chapter_12/src/com/ryg/chapter_12/MainActivity.java">MainActivity.java</a></p>
+<h4 id="优化列表卡顿"><a href="#优化列表卡顿" class="headerlink" title="优化列表卡顿"></a>优化列表卡顿</h4><ol>
+<li><p> 不要在 <code>getView()</code> 方法中做耗时操作。比如加载图片是耗时操作，如果在 <code>getView()</code> 中进行加载，那么一定会导致卡顿，所以一般需要异步加载。</p>
+</li>
+<li><p> 控制异步任务的执行频率。当用户快速滑动列表时会产生大量异步任务，随后通知主线程进行大量的 UI 更新操作，此时很容易造成卡顿。所以我们可以为列表设置 <code>OnScrollListener.onScrollStateChanged</code>，并在其中判断是否滑动，禁止在滑动时加载图片。</p>
+</li>
+<li><p> 开启硬件加速。为 activity 设置 <code>android:hardwareAccelerated=&quot;true&quot;</code>，很多莫名的卡顿问题可能都是因为硬件加速没开。</p>
+</li>
+</ol>
+<hr>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-1/">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-2/">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-3/">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-4/">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-5/">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-6/">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Drawable"><span class="toc-number">1.</span> <span class="toc-text">Drawable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Drawable-%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">Drawable 的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Drawable"><span class="toc-number">1.2.</span> <span class="toc-text">自定义 Drawable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">1.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Animation"><span class="toc-number">2.</span> <span class="toc-text">Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E5%8A%A8%E7%94%BB"><span class="toc-number">2.1.</span> <span class="toc-text">View 动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tween-animation"><span class="toc-number">2.1.1.</span> <span class="toc-text">Tween animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Frame-Animation"><span class="toc-number">2.1.2.</span> <span class="toc-text">Frame Animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84-Tween-Animation"><span class="toc-number">2.1.3.</span> <span class="toc-text">特殊的 Tween Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LayoutAnimation"><span class="toc-number">2.1.3.1.</span> <span class="toc-text">LayoutAnimation</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Activity-%E5%88%87%E6%8D%A2%E6%95%88%E6%9E%9C"><span class="toc-number">2.1.3.2.</span> <span class="toc-text">Activity 切换效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB"><span class="toc-number">2.2.</span> <span class="toc-text">属性动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">属性动画的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%80%BC%E5%99%A8%E5%92%8C%E4%BC%B0%E5%80%BC%E5%99%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">插值器和估值器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-number">2.2.3.</span> <span class="toc-text">属性动画的监听器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8A%A8%E7%94%BB%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.4.</span> <span class="toc-text">属性动画的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-1"><span class="toc-number">2.2.5.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bitmap-%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E7%BC%93%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text">Bitmap 的加载和缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmap-%E7%9A%84%E9%AB%98%E6%95%88%E5%8A%A0%E8%BD%BD"><span class="toc-number">3.1.</span> <span class="toc-text">Bitmap 的高效加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-2"><span class="toc-number">3.1.1.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98%E5%92%8C%E7%A3%81%E7%9B%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.</span> <span class="toc-text">内存缓存和磁盘缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.1.</span> <span class="toc-text">内存缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E7%BC%93%E5%AD%98"><span class="toc-number">3.2.2.</span> <span class="toc-text">磁盘缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-3"><span class="toc-number">3.2.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageLoader-%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">ImageLoader 的实现与使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ImageLoader-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.3.1.</span> <span class="toc-text">ImageLoader 的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%85%A7%E7%89%87%E5%A2%99%E6%95%88%E6%9E%9C"><span class="toc-number">3.3.2.</span> <span class="toc-text">照片墙效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%88%97%E8%A1%A8%E5%8D%A1%E9%A1%BF"><span class="toc-number">3.3.3.</span> <span class="toc-text">优化列表卡顿</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-4/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-4/&text=Android 开发艺术探索学习笔记（四）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-4/&is_video=false&description=Android 开发艺术探索学习笔记（四）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（四）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-4/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-4/&title=Android 开发艺术探索学习笔记（四）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-4/&name=Android 开发艺术探索学习笔记（四）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-27/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 6、7、12 章：&lt;strong&gt;Drawable&lt;/strong&gt;、&lt;strong&gt;动画&lt;/strong&gt;、&lt;strong&gt;Bitmap&lt;/strong&gt; 相关。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;Drawable&#34;&gt;&lt;a href=&#34;#Drawable&#34; class=&#34;headerlink&#34; title=&#34;Drawable&#34;&gt;&lt;/a&gt;Drawable&lt;/h2&gt;&lt;p&gt;Drawable 是一种抽象的概念，表示一种可以在屏幕上进行绘制 (Draw) 的图像，常见的颜色和图片都可以是 Drawable。&lt;/p&gt;
+&lt;p&gt;Drawable 一般没有大小的概念，当作为 View 的 background 的时候，它会被拉伸至 View 同等大小。不过它有两个参数，&lt;code&gt;getIntrinsicWidth&lt;/code&gt; 和 &lt;code&gt;getIntrinsicHeight&lt;/code&gt; 表示内在的宽高，可以理解为默认宽高，比如显示一张图片时，这个值所对应的宽高就是当前图片的宽高，当作为 ColorDrawable 的时候该值则为 -1。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-4/&t=Android 开发艺术探索学习笔记（四）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

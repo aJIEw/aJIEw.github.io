@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="之前一直使用 TWRP 和 SuperSu 来 root 手机。但是最近发现 SuperSu 貌似已经不维护了，所以寻找了一个替代方案：Magisk，其实 root 方式和之前没啥大的变化，但是还是觉得应该记录下，供自己以后以及他人参考。 2020&#x2F;12 月更新：本文提及的 root 方法已经过时，推荐根据官网教程安装 Magisk 即可，大多数新手机都可以直接通过 Patching Imag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Root 教程">
+<meta property="og:url" content="https://ajiew.me/android-root-tips/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="之前一直使用 TWRP 和 SuperSu 来 root 手机。但是最近发现 SuperSu 貌似已经不维护了，所以寻找了一个替代方案：Magisk，其实 root 方式和之前没啥大的变化，但是还是觉得应该记录下，供自己以后以及他人参考。 2020&#x2F;12 月更新：本文提及的 root 方法已经过时，推荐根据官网教程安装 Magisk 即可，大多数新手机都可以直接通过 Patching Imag">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c714cac3529832.png">
+<meta property="og:image" content="https://ajiew.me/assets/2018-09-30/pixel-reinstall-magisk.png">
+<meta property="article:published_time" content="2018-09-30T06:30:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Tricks">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c714cac3529832.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android Root 教程</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/android-push-notification/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/rn-redux-introduction/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-root-tips/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-root-tips/&text=Android Root 教程"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-root-tips/&is_video=false&description=Android Root 教程"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android Root 教程&body=Check out this article: https://ajiew.me/android-root-tips/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-root-tips/&name=Android Root 教程&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c714cac3529832.png&#34; alt=&#34;Magisk&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;之前一直使用 &lt;a href=&#34;https://twrp.me/&#34;&gt;TWRP&lt;/a&gt; 和 &lt;a href=&#34;http://www.supersu.com/&#34;&gt;SuperSu&lt;/a&gt; 来 root 手机。但是最近发现 SuperSu 貌似已经不维护了，所以寻找了一个替代方案：&lt;a href=&#34;https://github.com/topjohnwu/Magisk&#34;&gt;Magisk&lt;/a&gt;，其实 root 方式和之前没啥大的变化，但是还是觉得应该记录下，供自己以后以及他人参考。&lt;/p&gt;
+&lt;p&gt;2020/12 月更新：本文提及的 root 方法已经过时，推荐根据&lt;a href=&#34;https://topjohnwu.github.io/Magisk/install.html&#34;&gt;官网教程&lt;/a&gt;安装 Magisk 即可，大多数新手机都可以直接通过 &lt;a href=&#34;https://topjohnwu.github.io/Magisk/install.html#patching-images&#34;&gt;Patching Images&lt;/a&gt; 的方式来安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;Root-介绍&#34;&gt;&lt;a href=&#34;#Root-介绍&#34; class=&#34;headerlink&#34; title=&#34;Root 介绍&#34;&gt;&lt;/a&gt;Root 介绍&lt;/h3&gt;&lt;p&gt;所谓 &lt;code&gt;Root&lt;/code&gt; 也就是使手机可以获得超级管理员的权限，Andoird 系统是基于 Linux 内核的，但是出于安全角度的考虑，默认并不提供超级管理员的权限，所以获取 &lt;code&gt;su&lt;/code&gt; 的权限的过程就变成了人们常说的 &lt;code&gt;Root&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Root&lt;/code&gt; 方式有很多种，主要分为两大类：使用第三方 App 或者通过进入 Recovery 模式刷写 root 包。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-root-tips/&t=Android Root 教程"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Root 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">Root 步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%B7%E5%85%A5-TWRP-%E5%92%8C-Magisk"><span class="toc-number">2.2.</span> <span class="toc-text">刷入 TWRP 和 Magisk</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E4%B9%8B%E5%90%8E%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">Root 之后如何更新系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text">注意事项</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android Root 教程
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-09-30T06:30:00.000Z" itemprop="datePublished">2018-09-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Tricks/" rel="tag">Tricks</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c714cac3529832.png" alt="Magisk"></p>
+<blockquote>
+<p>之前一直使用 <a target="_blank" rel="noopener" href="https://twrp.me/">TWRP</a> 和 <a target="_blank" rel="noopener" href="http://www.supersu.com/">SuperSu</a> 来 root 手机。但是最近发现 SuperSu 貌似已经不维护了，所以寻找了一个替代方案：<a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk">Magisk</a>，其实 root 方式和之前没啥大的变化，但是还是觉得应该记录下，供自己以后以及他人参考。</p>
+<p>2020/12 月更新：本文提及的 root 方法已经过时，推荐根据<a target="_blank" rel="noopener" href="https://topjohnwu.github.io/Magisk/install.html">官网教程</a>安装 Magisk 即可，大多数新手机都可以直接通过 <a target="_blank" rel="noopener" href="https://topjohnwu.github.io/Magisk/install.html#patching-images">Patching Images</a> 的方式来安装。</p>
+</blockquote>
+<h3 id="Root-介绍"><a href="#Root-介绍" class="headerlink" title="Root 介绍"></a>Root 介绍</h3><p>所谓 <code>Root</code> 也就是使手机可以获得超级管理员的权限，Andoird 系统是基于 Linux 内核的，但是出于安全角度的考虑，默认并不提供超级管理员的权限，所以获取 <code>su</code> 的权限的过程就变成了人们常说的 <code>Root</code>。</p>
+<p><code>Root</code> 方式有很多种，主要分为两大类：使用第三方 App 或者通过进入 Recovery 模式刷写 root 包。</p>
+<span id="more"></span>
+
+<p>这两种方式各有各的优势。第一种方式的优点是方便简单，只需要安装一个 app 然后按照 app 中的提示进行操作即可完成 root，但是缺点是成功率不高，而且需要自己去寻找适用于自己手机的 app。而第二种方式的优点是成功率高，但是操作相对比较复杂。</p>
+<p>本文介绍的 root 方式就是基于第二种方式的。</p>
+<p>我们首先需要刷入 <a target="_blank" rel="noopener" href="https://github.com/omnirom/android_bootable_recovery/">TWRP</a>，它是一个定制的 recovery，有了它之后我们就可以修改我们的系统了，比如 root 手机或者刷入第三方定制 ROM，总之有了它之后我们的手机就可以干很多之前干不了的事了。</p>
+<p>其次，我们需要通过 TWRP 刷入 Magisk 来获取 Root 权限。<a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/blob/master/docs/README.MD#introduction">Magisk</a> 是一个开源的工具，提供了针对 Android 手机的 root、boot 脚本、SELinux 补丁包等许多强大的功能。它是 <a target="_blank" rel="noopener" href="http://www.supersu.com/">SuperSU</a> 的完美替代解决方案，不过仅针对 Android 5.0 以上的系统。</p>
+<h3 id="Root-步骤"><a href="#Root-步骤" class="headerlink" title="Root 步骤"></a>Root 步骤</h3><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>首先，我们需要安装下载好对应你手机版本的 TWRP。进入 <a target="_blank" rel="noopener" href="https://twrp.me/Devices/">TWRP 下载页</a>，找到对应你的手机品牌的制造商，然后选择型号。</p>
+<p>以 Pixel XL 为例，首先找到 <strong>Google</strong>，然后选择 **Google Pixel XL (marlin)**，最后根据你手机的版本选择美版 Primary (Americas) 或欧版 Primary (Europe)。</p>
+<blockquote>
+<p> <strong>Q：如何查看 Pixel 的版本？</strong><br> <strong>A：</strong>打开 Settings 搜索 <code>label</code> 或 <code>标签</code>，找到 <code>Regulartory labels</code> 或 <code>监管标签</code>，点开后不管你的 MODEL 是什么，如果有看到 European Union 则代表你使用的是国际版，则直接下载欧版的 TWRP，否则如果看到 United States of America 则是美版。</p>
+</blockquote>
+<p>下载完 TWRP 之后，我们还需要到 <a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/releases">Magisk release</a> 下载最新版本的 Magisk。</p>
+<p>最后，请确保你已经下载了 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/releases/platform-tools">Android Platform Tools</a>，其中包含了 <code>adb</code>、<code>fastboot</code> 等我们接下来需要用到的命令行工具。</p>
+<h4 id="刷入-TWRP-和-Magisk"><a href="#刷入-TWRP-和-Magisk" class="headerlink" title="刷入 TWRP 和 Magisk"></a>刷入 TWRP 和 Magisk</h4><p>首先确保你的手机已经解锁，解锁方式请参考：<a target="_blank" rel="noopener" href="https://developers.google.com/android/images">Factory Images</a></p>
+<ol>
+<li><p>重启手机进入 bootloader:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb reboot bootloader<br></code></pre></td></tr></table></figure></li>
+<li><p>刷入 TWRP，不同手机的刷入方式不同，具体请参考你的 <a target="_blank" rel="noopener" href="https://twrp.me/google/googlepixelxl.html">TWRP 下载页</a>。</p>
+</li>
+<li><p>刷入 Magisk，首先把 Magisk 的 .zip 包放到 sd 卡中，然后重启进入 recovery:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb reboot recovery<br></code></pre></td></tr></table></figure></li>
+<li><p>进入 TWRP 后，选择 Install，选择 Install zip，找到 Magisk.zip 包的位置，选中后右滑确认刷入。你也可以参考这个 <a target="_blank" rel="noopener" href="https://www.didgeridoohan.com/magisk/HomePage">Guide</a> 进行安装。</p>
+</li>
+<li><p>等待刷入完毕，成功后重启手机。</p>
+</li>
+<li><p>安装 <a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk/tree/master/app">Magisk Manager</a>，用于管理哪些 app 可以拥有 root 权限，也可用来刷入一些基于 Magisk 开发的 module。不过注意谨慎尝试，有的 module 兼容性不佳，可能导致手机无法重启，发生这种情况就只能重刷系统了。如果重刷保留数据的话，那么记得先使用 Magisk-uninstaller 把 Magisk 卸载掉，不然再次安装 Magisk 会导致机子无法启动。</p>
+</li>
+</ol>
+<h3 id="Root-之后如何更新系统"><a href="#Root-之后如何更新系统" class="headerlink" title="Root 之后如何更新系统"></a>Root 之后如何更新系统</h3><p>Root 之后我们就无法通过 OAT 直接更新系统了，一般需要绕过系统的检测，比如 Pixel 系统更新时会检测系统完整性，如果检测到你已经 root 过了会提醒你需要先恢复到 factory image 才能继续更新，这个时候我们需要作如下操作：</p>
+<ul>
+<li>  在 Magisk Manager 中点击 Uninstall，选择 RESTORE IMAGES</li>
+<li>  在系统更新里下载并安装更新，安装完成后先不要点击重启</li>
+<li>  回到 Magsik Manager 中，在 Magisk 一栏点击 Install - Install Magsik - Install to inactive slot，之后会下载并安装最新版本的 Magisk。</li>
+<li>  最后点击重启整个更新就完成了。</li>
+</ul>
+<img src='../assets/2018-09-30/pixel-reinstall-magisk.png' width=40%/>
+
+<p>其它机型操作方式也大同小异，请自行搜索。比如一加氧 OS 就不需要先卸载，OTA 更新后直接 Install to inactive slot 就可以了。</p>
+<p>另外，TWRP 暂时<a target="_blank" rel="noopener" href="https://twrp.me/site/update/2019/10/23/twrp-and-android-10.html">不支持</a> Android 10 以上的设备，所以如果是 Pixel 4 及以上的设备就没法刷 TWRP 了，只能先等等了。至于其它设备，如果存在 Android 10 之前的系统可以刷，那就先刷回老版本，再刷 TWRP 和 Magisk，然后再通过 Magsik Manager 进行 OTA 升级就好啦。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>总得来说，这种使用 Recovery 的方式来 root 手机还是挺方便的，成功率非常高。当然，root 前最好还是先备份数据，万一手机变砖了，至少还能通过刷机恢复过来。如果遇到一些小问题，记得多看看 <a target="_blank" rel="noopener" href="https://www.didgeridoohan.com/magisk/Magisk">Troubleshoting</a>，我遇到的大多数问题基本上都在那里找到了答案。</p>
+<p>祝大家国庆快乐，哈哈，又可以回家愉快得玩耍一礼拜了！开森~୧(﹒︠ᴗ﹒︡)୨</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Root 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">Root 步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%B7%E5%85%A5-TWRP-%E5%92%8C-Magisk"><span class="toc-number">2.2.</span> <span class="toc-text">刷入 TWRP 和 Magisk</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Root-%E4%B9%8B%E5%90%8E%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">Root 之后如何更新系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text">注意事项</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-root-tips/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-root-tips/&text=Android Root 教程"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-root-tips/&is_video=false&description=Android Root 教程"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android Root 教程&body=Check out this article: https://ajiew.me/android-root-tips/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-root-tips/&title=Android Root 教程"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-root-tips/&name=Android Root 教程&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c714cac3529832.png&#34; alt=&#34;Magisk&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;之前一直使用 &lt;a href=&#34;https://twrp.me/&#34;&gt;TWRP&lt;/a&gt; 和 &lt;a href=&#34;http://www.supersu.com/&#34;&gt;SuperSu&lt;/a&gt; 来 root 手机。但是最近发现 SuperSu 貌似已经不维护了，所以寻找了一个替代方案：&lt;a href=&#34;https://github.com/topjohnwu/Magisk&#34;&gt;Magisk&lt;/a&gt;，其实 root 方式和之前没啥大的变化，但是还是觉得应该记录下，供自己以后以及他人参考。&lt;/p&gt;
+&lt;p&gt;2020/12 月更新：本文提及的 root 方法已经过时，推荐根据&lt;a href=&#34;https://topjohnwu.github.io/Magisk/install.html&#34;&gt;官网教程&lt;/a&gt;安装 Magisk 即可，大多数新手机都可以直接通过 &lt;a href=&#34;https://topjohnwu.github.io/Magisk/install.html#patching-images&#34;&gt;Patching Images&lt;/a&gt; 的方式来安装。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;Root-介绍&#34;&gt;&lt;a href=&#34;#Root-介绍&#34; class=&#34;headerlink&#34; title=&#34;Root 介绍&#34;&gt;&lt;/a&gt;Root 介绍&lt;/h3&gt;&lt;p&gt;所谓 &lt;code&gt;Root&lt;/code&gt; 也就是使手机可以获得超级管理员的权限，Andoird 系统是基于 Linux 内核的，但是出于安全角度的考虑，默认并不提供超级管理员的权限，所以获取 &lt;code&gt;su&lt;/code&gt; 的权限的过程就变成了人们常说的 &lt;code&gt;Root&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Root&lt;/code&gt; 方式有很多种，主要分为两大类：使用第三方 App 或者通过进入 Recovery 模式刷写 root 包。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-root-tips/&t=Android Root 教程"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

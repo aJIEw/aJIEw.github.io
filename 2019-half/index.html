@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="去年写了一次年中小结，觉得写总结这件事，其实并没有多大意义，更多的是一种仪式感吧，用来敦促、提醒自己：时间过得很快，与其白白浪费掉不如抓紧点做点事情出来。 看了下自己这半年来的 git 提交日志，没啥亮点，基本都是一些琐碎的东西： 物流：    添加一些小功能、优化 UI、修改 Bug  非业务方面：    通知与权限适配   启动优化、App 瘦身等   多个 WebSocket 连接的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019 年中盘点">
+<meta property="og:url" content="https://ajiew.me/2019-half/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="去年写了一次年中小结，觉得写总结这件事，其实并没有多大意义，更多的是一种仪式感吧，用来敦促、提醒自己：时间过得很快，与其白白浪费掉不如抓紧点做点事情出来。 看了下自己这半年来的 git 提交日志，没啥亮点，基本都是一些琐碎的东西： 物流：    添加一些小功能、优化 UI、修改 Bug  非业务方面：    通知与权限适配   启动优化、App 瘦身等   多个 WebSocket 连接的问题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/08/25/j3KWUuV4tNMTzvy.jpg">
+<meta property="article:published_time" content="2019-07-01T01:05:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.726Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Reviews">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/25/j3KWUuV4tNMTzvy.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>2019 年中盘点</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/enable-daydream-on-oneplus-7-pro/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/apple-developer-account-transfer/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/2019-half/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/2019-half/&text=2019 年中盘点"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/2019-half/&is_video=false&description=2019 年中盘点"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=2019 年中盘点&body=Check out this article: https://ajiew.me/2019-half/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/2019-half/&name=2019 年中盘点&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/2019-half/&t=2019 年中盘点"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        2019 年中盘点
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-01T01:05:00.000Z" itemprop="datePublished">2019-07-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Reviews/" rel="tag">Reviews</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/08/25/j3KWUuV4tNMTzvy.jpg" alt="IMG_20190701_183502.jpg"></p>
+<p>去年写了一次<a target="_blank" rel="noopener" href="https://ajiew.github.io/2018-half/">年中小结</a>，觉得写总结这件事，其实并没有多大意义，更多的是一种仪式感吧，用来敦促、提醒自己：时间过得很快，与其白白浪费掉不如抓紧点做点事情出来。</p>
+<p>看了下自己这半年来的 git 提交日志，没啥亮点，基本都是一些琐碎的东西：</p>
+<p><strong>物流：</strong></p>
+<ul>
+<li>  添加一些小功能、优化 UI、修改 Bug</li>
+</ul>
+<p><em>非业务方面：</em></p>
+<ul>
+<li>  通知与权限适配</li>
+<li>  启动优化、App 瘦身等</li>
+<li>  多个 WebSocket 连接的问题</li>
+<li>  通话录音 (AAC)</li>
+<li>  添加埋点统计</li>
+</ul>
+<p><strong>收银机：</strong></p>
+<ul>
+<li>  添加一些小功能、优化 UI、修改 Bug</li>
+</ul>
+<p><em>非业务方面：</em></p>
+<ul>
+<li>  Fragment 中数据、状态的保存与恢复</li>
+<li>  性能优化（解决内存泄露，Presentation 加载的问题）</li>
+</ul>
+<p><strong>C 端 App：</strong></p>
+<ul>
+<li>  添加一些小功能、优化 UI、修改 Bug</li>
+</ul>
+<p>真的非常平淡无奇，但是相比去年，我觉得现在的自己最大的变化是变得更加自信了吧，两个 Android 项目基本上所有的细节都修改过一遍了，优化了 80% 以上的代码。至于 C 端 React-Native 项目，目前正着手修改做 4.0 版本，相信最终也会修改至少 80% 以上的代码。</p>
+<p>另外，现在的自己，无论是做功能还是修改 bug 都比较得心应手了，因为项目功能和大部分细节都已多次修改，相关的一些比较 tricky 的点心里也都有数了，哪怕是比较难解决的问题，多花点时间基本也都可以搞定。</p>
+<p>所以，此刻的自己又开始不安分起来：下一步是不是该考虑换个平台了呢？也许吧，但是未来半年大概率还是会继续做下去，把各个功能细节完善优化好，然后继续提升自己的技术<strong>深度</strong>和广度。</p>
+<p>毕竟自己还是很清楚自己的劣势在哪里的，技术深度不够，基础也不怎么好，像算法和网络基础都不是很好，只是空有一些肤浅的项目经验应该很快就会进入技术瓶颈期。况且自己目前的确也没有什么能拿的出手的、值得引以为自豪的项目出来，所以还是得先积累一段时间吧。</p>
+<p>认清现实，理清逻辑，然后好好努力，剩下的只要交给时间就可以了。</p>
+<hr>
+<p>回过头去看了看年初写的新年计划，很多都还没真正开始实施，已经在执行的计划也随着时间的推移，慢慢变得松懈下来了，主要还是自己期望太高而执行的能力又太弱吧。</p>
+<p>接下来半年会继续按之前确定的方向前进，希望自己少偷懒，多回顾，强化身上的优点，补足缺点。</p>
+<p>不期望自己年底的时候能完成多少目标，只求能变得更加自律、强大，不至于被那时的自己看扁吧。共勉！</p>
+<p>　</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/2019-half/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/2019-half/&text=2019 年中盘点"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/2019-half/&is_video=false&description=2019 年中盘点"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=2019 年中盘点&body=Check out this article: https://ajiew.me/2019-half/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/2019-half/&title=2019 年中盘点"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/2019-half/&name=2019 年中盘点&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/2019-half/&t=2019 年中盘点"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

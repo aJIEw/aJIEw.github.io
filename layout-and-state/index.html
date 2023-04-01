@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="跟随官方文档学习 Compose 的第二篇。第一篇：Thinking in Compose。  Layout in ComposeThemingAndroid 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material De">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Layout and State">
+<meta property="og:url" content="https://ajiew.me/layout-and-state/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="跟随官方文档学习 Compose 的第二篇。第一篇：Thinking in Compose。  Layout in ComposeThemingAndroid 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material De">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png">
+<meta property="og:image" content="https://ajiew.me/assets/2021-03-19/constraint_layout_example.png">
+<meta property="og:image" content="https://ajiew.me/assets/2021-03-19/unidirectional_data_flow.png">
+<meta property="article:published_time" content="2021-03-19T12:30:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.733Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Compose">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Layout and State</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021-3/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/thinking-in-compose/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/layout-and-state/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/layout-and-state/&text=Layout and State"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/layout-and-state/&is_video=false&description=Layout and State"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Layout and State&body=Check out this article: https://ajiew.me/layout-and-state/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/layout-and-state/&name=Layout and State&description=&lt;img src=&#39;https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png&#39; width=80%/&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;跟随&lt;a href=&#34;https://developer.android.com/courses/pathways/compose&#34;&gt;官方文档&lt;/a&gt;学习 Compose 的第二篇。第一篇：&lt;a href=&#34;https://ajiew.github.io/thinking-in-compose&#34;&gt;Thinking in Compose&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;Layout-in-Compose&#34;&gt;&lt;a href=&#34;#Layout-in-Compose&#34; class=&#34;headerlink&#34; title=&#34;Layout in Compose&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/jetpack/compose/layouts&#34;&gt;Layout&lt;/a&gt; in Compose&lt;/h2&gt;&lt;h3 id=&#34;Theming&#34;&gt;&lt;a href=&#34;#Theming&#34; class=&#34;headerlink&#34; title=&#34;Theming&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/jetpack/compose/themes&#34;&gt;Theming&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Android 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material Design 主题或者自定义主题变得前所未有地简单和高效。&lt;/p&gt;
+&lt;p&gt;Compose 框架内置了 Material Design 主题，所有的组件都构建在该主题之上，与此同时，也非常易于自定义。&lt;code&gt;MaterialTheme&lt;/code&gt; 由 &lt;code&gt;color&lt;/code&gt;、&lt;code&gt;typography&lt;/code&gt; 和 &lt;code&gt;shape&lt;/code&gt; 三部分组成，所有的主题都是以树型的方式自顶向下应用到组件之上的，多个主题可以嵌套使用，因此，我们可以非常灵活地应用、修改、重用主题。又因为 Compose 中自定义组件非常常见，所以我们可以修改、应用主题到单个组件的级别。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/layout-and-state/&t=Layout and State"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout-in-Compose"><span class="toc-number">1.</span> <span class="toc-text">Layout in Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theming"><span class="toc-number">1.1.</span> <span class="toc-text">Theming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modifier"><span class="toc-number">1.2.</span> <span class="toc-text">Modifier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Slots-APIs"><span class="toc-number">1.3.</span> <span class="toc-text">Slots APIs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Container-Layout"><span class="toc-number">1.4.</span> <span class="toc-text">Container Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Custom-Layout"><span class="toc-number">1.5.</span> <span class="toc-text">Custom Layout</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Compose-%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80%E5%8E%9F%E5%88%99"><span class="toc-number">1.5.1.</span> <span class="toc-text">Compose 中的布局原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-LayoutModifier"><span class="toc-number">1.5.2.</span> <span class="toc-text">自定义 LayoutModifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Layout"><span class="toc-number">1.5.3.</span> <span class="toc-text">自定义 Layout</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constraint-Layout"><span class="toc-number">1.6.</span> <span class="toc-text">Constraint Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intrinsic"><span class="toc-number">1.7.</span> <span class="toc-text">Intrinsic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-state-in-Compose"><span class="toc-number">2.</span> <span class="toc-text">[State][state] in Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-State"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-State"><span class="toc-number">2.2.</span> <span class="toc-text">创建 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E4%BD%8F-State"><span class="toc-number">2.3.</span> <span class="toc-text">记住 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">2.4.</span> <span class="toc-text">单向数据流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88-ViewModel-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">结合 ViewModel 的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%8F%90%E5%8D%87"><span class="toc-number">2.6.</span> <span class="toc-text">状态提升</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Layout and State
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-19T12:30:00.000Z" itemprop="datePublished">2021-03-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Compose/" rel="tag">Compose</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <img src='https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png' width=80%/>
+
+
+<blockquote>
+<p>跟随<a target="_blank" rel="noopener" href="https://developer.android.com/courses/pathways/compose">官方文档</a>学习 Compose 的第二篇。第一篇：<a target="_blank" rel="noopener" href="https://ajiew.github.io/thinking-in-compose">Thinking in Compose</a>。</p>
+</blockquote>
+<h2 id="Layout-in-Compose"><a href="#Layout-in-Compose" class="headerlink" title="Layout in Compose"></a><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/layouts">Layout</a> in Compose</h2><h3 id="Theming"><a href="#Theming" class="headerlink" title="Theming"></a><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/themes">Theming</a></h3><p>Android 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material Design 主题或者自定义主题变得前所未有地简单和高效。</p>
+<p>Compose 框架内置了 Material Design 主题，所有的组件都构建在该主题之上，与此同时，也非常易于自定义。<code>MaterialTheme</code> 由 <code>color</code>、<code>typography</code> 和 <code>shape</code> 三部分组成，所有的主题都是以树型的方式自顶向下应用到组件之上的，多个主题可以嵌套使用，因此，我们可以非常灵活地应用、修改、重用主题。又因为 Compose 中自定义组件非常常见，所以我们可以修改、应用主题到单个组件的级别。</p>
+<span id="more"></span>
+
+<h3 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h3><p>Modifier 有点像 React-Native 中的 StyleSheet，你可以使用它修改 composable 组件的外观、行为，添加额外信息等。Modifier 和普通的 Kotlin 对象没什么区别，可以作为变量使用，也可以和其它 Modifier 组合起来使用。</p>
+<p>相比传统的 View 的属性，Modifier 还有一个额外的优势，那就是可以根据当前上下文推断出那些属性可用，防止你用错。另外，Modifer 属性应用的顺序也会直接影响到组件的外观。比如，<code>Modifier.padding(8.dp).clickable&#123;&#125;</code> 和 <code>Modifier.clickable&#123;&#125;.padding(8.dp)</code> 的可点击区域的大小是不同的，前者可点击区域在 padding 之内，后者可点击区域包括了 padding。</p>
+<h3 id="Slots-APIs"><a href="#Slots-APIs" class="headerlink" title="Slots APIs"></a>Slots APIs</h3><p>Compose 中绝大多数内置组件的最后一个参数都是 <code>content: @Composable () -&gt; Unit</code>，结合 Koltin 的 <a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/lambdas.html#passing-a-lambda-to-the-last-parameter"><strong>trailing lambda</strong></a> 的语法，我们就可以很方便地写出相互嵌套的组件：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">Button &#123;<br>    Row &#123;<br>        MyImage()<br>        Spacer(<span class="hljs-number">4.</span>dp)<br>        Text(<span class="hljs-string">&quot;Button&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Container-Layout"><a href="#Container-Layout" class="headerlink" title="Container Layout"></a><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/layouts/basics">Container Layout</a></h3><p>Compose 从一开始就借鉴了很多 Flutter 元素，对于基础的布局而言尤其如此。如果你熟悉 Flutter，你一定对不会 Container 感到陌生，它是最基本的容器，所谓的「容器」指的是用于包含其它子元素的布局。在 XML 中，我们有线性布局、相对布局、FrameLayout 等容器布局，在 Compose 中，最基础的容器布局是：<code>Row</code>, <code>Column</code>, <code>Box</code>。</p>
+<h3 id="Custom-Layout"><a href="#Custom-Layout" class="headerlink" title="Custom Layout"></a>Custom Layout</h3><p>Compose 中最基础的组件是 <code>Column</code>、<code>Row</code> 和 <code>Box</code>，通过它们我们可以组合出复杂的布局。但是，我们有时候可能也会用到一些更复杂的布局，这个时候就需要通过自定义 <a target="_blank" rel="noopener" href="https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main-release:compose/ui/ui/src/commonMain/kotlin/androidx/compose/ui/layout/Layout.kt"><code>Layout</code></a> 组件了。</p>
+<h4 id="Compose-中的布局原则"><a href="#Compose-中的布局原则" class="headerlink" title="Compose 中的布局原则"></a>Compose 中的布局原则</h4><p>每个 composable 函数在执行之后都会释放出 UI 组件并被添加到视图树中，每个元素都有一个父元素以及多个（可能的）子元素，而且该元素有一个相对父元素的坐标 (x,y) 和大小 (width &amp; height)。每个元素在被添加到视图树之前，都需要被测量一次，并且需要满足父元素的限制条件，比如最小和最大的宽高。如果元素具有子元素，那么还需要测量其所有的子元素决定其自身的大小之后再被绘制出来。</p>
+<p><strong>Compose 不允许元素多次测量</strong>，也就是说所有的元素<strong>只能测量一次</strong>，这么做的原因当然是为了性能考虑。因为 recomposition 的存在，如果同一个元素多次被测量会造成极大的性能浪费，尤其是在 UI 树嵌套很深的情况下，如果所有元素都测量多次以上，那么整个视图树 recomposition 的性能消耗将是巨大的。</p>
+<h4 id="自定义-LayoutModifier"><a href="#自定义-LayoutModifier" class="headerlink" title="自定义 LayoutModifier"></a>自定义 LayoutModifier</h4><p>我们可以通过实现（扩展函数）Modifler 的 <code>layout()</code> 函数来修改如何显示一个元素。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> Modifier.<span class="hljs-title">customLayoutModifier</span><span class="hljs-params">(...)</span></span> = Modifier.layout &#123; measurable, constraints -&gt;<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>实现 LayoutModifier 需要用到两个参数：</p>
+<ul>
+<li><code>measurable</code>：代表需要被测量和放置的元素</li>
+<li><code>constraints</code>：元素最小和最大的宽和高等</li>
+</ul>
+<p>除此之外，我们通过调用 <code>layout()</code> 返回一个 <code>MeasureResult</code> 供 LayoutModifer 确定测量结果（大小、对齐方式、位置等）：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-function"><span class="hljs-keyword">fun</span> Modifier.<span class="hljs-title">customLayoutModifier</span><span class="hljs-params">(...)</span></span> = Modifier.layout &#123; measurable, constraints -&gt;<br>    <span class="hljs-comment">// measure UI</span><br>    <span class="hljs-keyword">val</span> placeable = measurable.measure(constraints)<br><br>    <span class="hljs-comment">// do other things</span><br><br>    layout(placeable.width, height) &#123;<br>        <span class="hljs-comment">// place it</span><br>        placeable.placeRelative(<span class="hljs-number">0</span>, paddingY)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意在 <code>layout()</code> 函数中，必须调用 <code>placeXXX()</code> 函数，否则元素将不可见。</p>
+<h4 id="自定义-Layout"><a href="#自定义-Layout" class="headerlink" title="自定义 Layout"></a><a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/layouts/custom">自定义 Layout</a></h4><p>除了自定义如何排列元素之外，我们还可以自定义 Layout。与自定义 LayoutModifier 类似，首先需要测量所有子元素的位置，然后根据 constraints 放置到合适的位置。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">CustomLayout</span><span class="hljs-params">(</span></span><br><span class="hljs-params"><span class="hljs-function">    modifier: <span class="hljs-type">Modifier</span> = Modifier,</span></span><br><span class="hljs-params"><span class="hljs-function">    <span class="hljs-comment">// custom layout attributes goes here</span></span></span><br><span class="hljs-params"><span class="hljs-function">    content: @<span class="hljs-type">Composable</span> () -&gt; <span class="hljs-type">Unit</span></span></span><br><span class="hljs-params"><span class="hljs-function">)</span></span> &#123;<br>    Layout(<br>        modifier = modifier,<br>        content = content<br>    ) &#123; measurables, constraints -&gt;<br>        <br>        <span class="hljs-comment">// Measure each child</span><br>        <span class="hljs-keyword">val</span> placeables = measurables.map &#123; measurable -&gt;<br>            measurable.measure(constraints)<br>        &#125;<br>        <br>        <span class="hljs-comment">// Set the size</span><br>        layout(constraints.maxWidth, constraints.maxHeight) &#123;<br>            placeables.forEach &#123; placeable -&gt;<br>                <span class="hljs-comment">// Position each item</span><br>                placeable.placeRelative(x = <span class="hljs-number">0</span>, y = calculated)<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Constraint-Layout"><a href="#Constraint-Layout" class="headerlink" title="Constraint Layout"></a>Constraint Layout</h3><p>尽管在 Compose 框架中，布局嵌套的深度对性能的影响并不是太大，但是我们依旧可以在一些布局复杂的场景中使用 Constraint Layout 来简化布局的实现。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TestConstraintLayout</span><span class="hljs-params">()</span></span> &#123;<br>    ConstraintLayout(modifier = Modifier.fillMaxHeight()) &#123;<br>        <span class="hljs-keyword">val</span> (button1, button2, button3, button4, text) = createRefs()<br><br>        Button(onClick = &#123; <span class="hljs-comment">/*TODO*/</span> &#125;,<br>            modifier = Modifier.constrainAs(button1) &#123;<br>                start.linkTo(parent.start, <span class="hljs-number">16.</span>dp)<br>                top.linkTo(parent.top, <span class="hljs-number">16.</span>dp)<br>            &#125;) &#123;<br>            Text(text = <span class="hljs-string">&quot;Button1&quot;</span>)<br>        &#125;<br><br>        Button(onClick = &#123; <span class="hljs-comment">/*TODO*/</span> &#125;,<br>            modifier = Modifier.constrainAs(button2) &#123;<br>                top.linkTo(button1.top)<br>                end.linkTo(parent.end, <span class="hljs-number">16.</span>dp)<br>            &#125;) &#123;<br>            Text(text = <span class="hljs-string">&quot;Button2&quot;</span>)<br>        &#125;<br><br>        Button(onClick = &#123; <span class="hljs-comment">/*TODO*/</span> &#125;,<br>            modifier = Modifier.constrainAs(button3) &#123;<br>                start.linkTo(button1.start)<br>                bottom.linkTo(parent.bottom, <span class="hljs-number">16.</span>dp)<br>            &#125;) &#123;<br>            Text(text = <span class="hljs-string">&quot;Button3&quot;</span>)<br>        &#125;<br><br>        Button(onClick = &#123; <span class="hljs-comment">/*TODO*/</span> &#125;,<br>            modifier = Modifier.constrainAs(button4) &#123;<br>                top.linkTo(button3.top)<br>                end.linkTo(button2.end)<br>            &#125;) &#123;<br>            Text(text = <span class="hljs-string">&quot;Button4&quot;</span>)<br>        &#125;<br><br>        Text(text = <span class="hljs-string">&quot;Center&quot;</span>, modifier = Modifier.constrainAs(text) &#123;<br>            top.linkTo(parent.top)<br>            bottom.linkTo(parent.bottom)<br>            start.linkTo(parent.start)<br>            end.linkTo(parent.end)<br>        &#125;)<br><br>        Button(onClick = &#123; <span class="hljs-comment">/*TODO*/</span> &#125;,<br>            modifier = Modifier.constrainAs(createRef()) &#123;<br>                centerHorizontallyTo(parent)<br>                top.linkTo(text.bottom, <span class="hljs-number">24.</span>dp)<br>            &#125;) &#123;<br>            Text(text = <span class="hljs-string">&quot;Button5&quot;</span>)<br>        &#125;<br><br>        <span class="hljs-keyword">val</span> barrier = createEndBarrier(button1, text)<br>        Text(<br>            text = <span class="hljs-string">&quot;To Be or Not To Be, that&#x27;s a question&quot;</span>,<br>            modifier = Modifier.constrainAs(createRef()) &#123;<br>                top.linkTo(text.top)<br>                start.linkTo(barrier, <span class="hljs-number">8.</span>dp)<br>                end.linkTo(parent.end)<br><br>                <span class="hljs-comment">// wrap content according to the constraints</span><br>                width = Dimension.preferredWrapContent<br>            &#125;)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<img src='../assets/2021-03-19/constraint_layout_example.png' width=30%/>
+
+<p>Compose 中的 Constraint Layout 的用法和 View 系统中的 <a target="_blank" rel="noopener" href="https://developer.android.com/training/constraint-layout">ConstraintLayout</a> 的用法差不多，主要包括以下几个部分：</p>
+<ul>
+<li>使用 <code>createRef()</code> 或者 <code>createRefs()</code> 来创建引用，其中 <code>parent</code> 是默认会被创建的引用</li>
+<li>使用 <code>Modifier.constrainAs(referenceName)</code> 来创建约束内容</li>
+<li>使用 <code>linkTo</code>、<code>centerHorizontallyTo</code> 等方法约束布局，还可以使用 <code>width</code> 等自定义 <code>Dimension</code></li>
+<li>使用 <code>createXxxBarrier</code>、<code>createGuidelineFromXxx</code>、<code>createHorizontalChain</code> 等方法创建帮助约束</li>
+</ul>
+<p>除此之外，我们还可以使用动态约束，比如下面这个例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">DecoupledConstraintLayout</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-comment">// 根据不同的屏幕方向使用不同的 Constraint sets</span><br>    BoxWithConstraints &#123;<br>        <span class="hljs-keyword">val</span> constraints = <span class="hljs-keyword">if</span> (maxWidth &lt; maxHeight) &#123;<br>            decoupledConstraints(margin = <span class="hljs-number">16.</span>dp) <span class="hljs-comment">// Portrait constraints</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            decoupledConstraints(margin = <span class="hljs-number">32.</span>dp) <span class="hljs-comment">// Landscape constraints</span><br>        &#125;<br><br>        ConstraintLayout(constraints) &#123;<br>            Button(<br>                onClick = &#123; <span class="hljs-comment">/* Do something */</span> &#125;,<br>                modifier = Modifier.layoutId(<span class="hljs-string">&quot;button&quot;</span>)<br>            ) &#123;<br>                Text(<span class="hljs-string">&quot;Button&quot;</span>)<br>            &#125;<br><br>            Text(<span class="hljs-string">&quot;Text&quot;</span>, Modifier.layoutId(<span class="hljs-string">&quot;text&quot;</span>))<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Create your own constraint sets</span><br><span class="hljs-comment"> * */</span><br><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">decoupledConstraints</span><span class="hljs-params">(margin: <span class="hljs-type">Dp</span>)</span></span>: ConstraintSet &#123;<br>    <span class="hljs-keyword">return</span> ConstraintSet &#123;<br>        <span class="hljs-keyword">val</span> button = createRefFor(<span class="hljs-string">&quot;button&quot;</span>)<br>        <span class="hljs-keyword">val</span> text = createRefFor(<span class="hljs-string">&quot;text&quot;</span>)<br><br>        constrain(button) &#123;<br>            top.linkTo(parent.top, margin = margin)<br>        &#125;<br>        constrain(text) &#123;<br>            top.linkTo(button.bottom, margin)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Intrinsic"><a href="#Intrinsic" class="headerlink" title="Intrinsic"></a>Intrinsic</h3><p>之前说过自定义布局的时候，Compose 只允许我们测量一次，否则会报错，但是，当我们需要在 measure 之前就知道布局的宽高信息的时候，该怎么办呢？这个时候就需要用到 Intrinsic 信息了，包括：</p>
+<ul>
+<li><code>(min|max)IntrinsicWidth</code>：在当前高度下，最小或最大的可用布局宽度</li>
+<li><code>(min|max)IntrinsicHeight</code>：在当前宽度下，最小或最大的可用布局高度</li>
+</ul>
+<p>使用例子：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">TwoText</span><span class="hljs-params">(modifier: <span class="hljs-type">Modifier</span> = Modifier, text1: <span class="hljs-type">String</span>, text2: <span class="hljs-type">String</span>)</span></span> &#123;<br>    Row(modifier = modifier.height(IntrinsicSize.Min)) &#123;<br>        Text(text = text1,<br>            modifier = Modifier.weight(<span class="hljs-number">1f</span>).wrapContentWidth(Alignment.CenterHorizontally))<br><br>        Divider(color = Color.Black,<br>            modifier = Modifier<br>            .fillMaxHeight()<br>            .width(<span class="hljs-number">1.</span>dp))<br><br>        Text(text = text2,<br>            modifier = Modifier.weight(<span class="hljs-number">1f</span>).wrapContentWidth(Alignment.CenterHorizontally))<br>    &#125;    <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>此时，Row 的高度是由子元素中高度最高的元素决定的，而 Divider 因为使用了 <code>fillMaxHeight()</code> 所以其高度会填充此最小高度。</p>
+<h2 id="State-state-in-Compose"><a href="#State-state-in-Compose" class="headerlink" title="[State][state] in Compose"></a>[State][state] in Compose</h2><h3 id="什么是-State"><a href="#什么是-State" class="headerlink" title="什么是 State"></a>什么是 State</h3><blockquote>
+<p><strong>State</strong> in an application is <strong>any value that can change</strong> over time.</p>
+<p>For example it may be a value stored in a Room database, a variable on a class, or even the current value read from an accelerometer.</p>
+</blockquote>
+<p>官方的解释是，应用中任何会随时间发生变化的值都可以被称作 State，比如网络状态，应用数据，UI 动画等等。</p>
+<h3 id="创建-State"><a href="#创建-State" class="headerlink" title="创建 State"></a>创建 State</h3><p>我们可以通过使用 <code>mutableStateOf()</code> 给 composable 函数添加内部状态，当状态改变的时候，依赖该状态的 composable 函数会自动再次执行。创建 State 主要有以下几种方法：</p>
+<ul>
+<li><code>val state = remember &#123; mutableStateOf(default) &#125;</code>，直接取得 <code>MutableState</code></li>
+<li><code>var value by remember &#123; mutableStateOf(default) &#125;</code>，通过关键字 <code>by</code>，以委托的方式初始化，需要导入 <code>androidx.compose.runtime.getValue</code> 和 <code>androidx.compose.runtime.setValue</code></li>
+<li><code>val (value, setValue) = remember &#123; mutableStateOf(default) &#125;</code>，通过解构 <code>MutableState</code> 获得 setter 和 getter 函数</li>
+</ul>
+<h3 id="记住-State"><a href="#记住-State" class="headerlink" title="记住 State"></a>记住 State</h3><p>注意到上面创建 State 的方法中，全都使用了 <code>remember()</code> 函数，该函数用于记住该状态，如果不记住状态，那么该状态每次都会在 recomposation 的过程中被重新初始化。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">val</span> color = remember(key = todo.id, calculation = &#123; randomTint() &#125;)<br></code></pre></td></tr></table></figure>
+
+<p><code>remember()</code> 函数接受 key 和 calculation 函数，如果不传 key 则只有在 composition 才调用 calculation，否则会先比较 key 是否发生变化，然后再决定是否调用。</p>
+<p>在使用 <code>remember()</code> 之前，需要问自己的一件事是：该状态是否有可能需要暴露给外界？如果是，那么就把它定义为 composable 函数的参数；否则，才使用局部变量。</p>
+<p>另外，还需要注意到，当 Compose 组件被移除的时候，其「记住」的状态也会被移除，这在 LazyColumn 等组件中尤其需要注意，当列表长度很长并在可见区域之外时，组件可能会被移除掉并在回到原位置后重新渲染组件，因此记住的状态也会丢失。所以 <code>remember()</code> 只适用于记住一些暂时的状态。</p>
+<h3 id="单向数据流"><a href="#单向数据流" class="headerlink" title="单向数据流"></a>单向数据流</h3><p><strong>Unidirectional data flow</strong>，即事件向上流动（事件输入），状态向下流动（更新状态）。比如 ViewModel 中通过方法调用传送事件，最后通过 LiveData 将状态更新通知给 UI。</p>
+<img src='../assets/2021-03-19/unidirectional_data_flow.png' alt='unidirectional data flow' width=30%>
+
+<p>Compose 中所有的内置组件都被设计成是单向数据流的，也即都是 Stateless 的。</p>
+<h3 id="结合-ViewModel-的使用"><a href="#结合-ViewModel-的使用" class="headerlink" title="结合 ViewModel 的使用"></a>结合 ViewModel 的使用</h3><p>为了实现单向数据流和达到解耦的目的，我们可以将事件处理放到 ViewModel 中，再通过 LiveData 实现对状态更新的监听：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CounterViewModel</span> : <span class="hljs-type">ViewModel</span></span>() &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> _count = MutableLiveData(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">val</span> count: LiveData&lt;<span class="hljs-built_in">Int</span>&gt; = _count<br><br>    <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">updateCount</span><span class="hljs-params">(count: <span class="hljs-type">Int</span>)</span></span> &#123;<br>        _count.value = count<br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CounterActivity</span> : <span class="hljs-type">AppCompatActivity</span></span>() &#123;<br>    <span class="hljs-keyword">val</span> viewModel <span class="hljs-keyword">by</span> viewModels&lt;CounterViewModel&gt;()<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState)<br>        setContent &#123;<br>            Surface &#123;<br>                Counter(count = viewModel.count.observeAsState().value!!,<br>                    updateCount = &#123; viewModel.updateCount(it) &#125;)<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，这里关键的一步是对 <code>count</code> 值的监听，使用 <code>observeAsState()</code> 将 ViewModel 中的 LiveData 转换为可触发 recomposition 的 State。</p>
+<h3 id="状态提升"><a href="#状态提升" class="headerlink" title="状态提升"></a>状态提升</h3><p>有时候，composable 函数可能需要将状态暴露给调用方，比如调用方需要通过获取状态进行一些操作或者为了方便测试，这种做法称为状态提升（state hoisting）。状态提升可以避免重复状态的出现以及引入 bug，因为如果在一个 composable 函数中使用了过多状态，通常会增加代码复杂度从而使得代码难以维护和容易产生 bug。</p>
+<p>我们可以通过在 composable 函数中添加状态值（Value）和状态改变器（onValueChange: (T) -&gt; Unit）来实现状态提升：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Counter</span><span class="hljs-params">(count: <span class="hljs-type">Int</span>, updateCount: (<span class="hljs-type">Int</span>) -&gt; <span class="hljs-type">Unit</span>)</span></span> &#123;<br>    Button(onClick = &#123; updateCount(count + <span class="hljs-number">1</span>) &#125;) &#123;<br>        Text(<span class="hljs-string">&quot;I&#x27;ve been clicked <span class="hljs-variable">$count</span> times&quot;</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用状态提升的好处是<strong>只有创建该 composable 函数的地方，才能修改其状态</strong>。我们可以通过状态提升将一个 Stateful 组件转换成一个 Stateless 组件，而 Stateless 组件的优势是可以更方便地组合重用。</p>
+<p>另外，在使用状态提升时，第一步需要考虑组件的<strong>状态树</strong>，尤其是在组件是由多个子组件嵌套形成的时候，需要考虑该组件的使用场景，以及应该将该状态提升到哪一级。</p>
+<p>[state]: <a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/state">https://developer.android.com/jetpack/compose/state</a> </p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout-in-Compose"><span class="toc-number">1.</span> <span class="toc-text">Layout in Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theming"><span class="toc-number">1.1.</span> <span class="toc-text">Theming</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modifier"><span class="toc-number">1.2.</span> <span class="toc-text">Modifier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Slots-APIs"><span class="toc-number">1.3.</span> <span class="toc-text">Slots APIs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Container-Layout"><span class="toc-number">1.4.</span> <span class="toc-text">Container Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Custom-Layout"><span class="toc-number">1.5.</span> <span class="toc-text">Custom Layout</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Compose-%E4%B8%AD%E7%9A%84%E5%B8%83%E5%B1%80%E5%8E%9F%E5%88%99"><span class="toc-number">1.5.1.</span> <span class="toc-text">Compose 中的布局原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-LayoutModifier"><span class="toc-number">1.5.2.</span> <span class="toc-text">自定义 LayoutModifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Layout"><span class="toc-number">1.5.3.</span> <span class="toc-text">自定义 Layout</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Constraint-Layout"><span class="toc-number">1.6.</span> <span class="toc-text">Constraint Layout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intrinsic"><span class="toc-number">1.7.</span> <span class="toc-text">Intrinsic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-state-in-Compose"><span class="toc-number">2.</span> <span class="toc-text">[State][state] in Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-State"><span class="toc-number">2.1.</span> <span class="toc-text">什么是 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-State"><span class="toc-number">2.2.</span> <span class="toc-text">创建 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E4%BD%8F-State"><span class="toc-number">2.3.</span> <span class="toc-text">记住 State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">2.4.</span> <span class="toc-text">单向数据流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88-ViewModel-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.5.</span> <span class="toc-text">结合 ViewModel 的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%8F%90%E5%8D%87"><span class="toc-number">2.6.</span> <span class="toc-text">状态提升</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/layout-and-state/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/layout-and-state/&text=Layout and State"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/layout-and-state/&is_video=false&description=Layout and State"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Layout and State&body=Check out this article: https://ajiew.me/layout-and-state/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/layout-and-state/&title=Layout and State"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/layout-and-state/&name=Layout and State&description=&lt;img src=&#39;https://4.bp.blogspot.com/-NnAkV5vpYuw/XNMYF4RtLvI/AAAAAAAAI70/kdgLm3cnTO4FB4rUC0v9smscN3zHJPlLgCLcBGAs/s1600/Jetpack_logo%2B%25282%2529.png&#39; width=80%/&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;跟随&lt;a href=&#34;https://developer.android.com/courses/pathways/compose&#34;&gt;官方文档&lt;/a&gt;学习 Compose 的第二篇。第一篇：&lt;a href=&#34;https://ajiew.github.io/thinking-in-compose&#34;&gt;Thinking in Compose&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;Layout-in-Compose&#34;&gt;&lt;a href=&#34;#Layout-in-Compose&#34; class=&#34;headerlink&#34; title=&#34;Layout in Compose&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/jetpack/compose/layouts&#34;&gt;Layout&lt;/a&gt; in Compose&lt;/h2&gt;&lt;h3 id=&#34;Theming&#34;&gt;&lt;a href=&#34;#Theming&#34; class=&#34;headerlink&#34; title=&#34;Theming&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/jetpack/compose/themes&#34;&gt;Theming&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Android 之前的主题系统非常复杂，而且也很难用，我相信这是大多数开发者的共识。Android 开发团队当然也注意到了这一点，在设计 Compose 时，抛弃了（但也兼容）旧的系统。因此，在使用 Compose 时，应用 Material Design 主题或者自定义主题变得前所未有地简单和高效。&lt;/p&gt;
+&lt;p&gt;Compose 框架内置了 Material Design 主题，所有的组件都构建在该主题之上，与此同时，也非常易于自定义。&lt;code&gt;MaterialTheme&lt;/code&gt; 由 &lt;code&gt;color&lt;/code&gt;、&lt;code&gt;typography&lt;/code&gt; 和 &lt;code&gt;shape&lt;/code&gt; 三部分组成，所有的主题都是以树型的方式自顶向下应用到组件之上的，多个主题可以嵌套使用，因此，我们可以非常灵活地应用、修改、重用主题。又因为 Compose 中自定义组件非常常见，所以我们可以修改、应用主题到单个组件的级别。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/layout-and-state/&t=Layout and State"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

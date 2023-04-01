@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinking in Compose">
+<meta property="og:url" content="https://ajiew.me/thinking-in-compose/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png">
+<meta property="article:published_time" content="2021-03-09T12:30:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.733Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Compose">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Thinking in Compose</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/layout-and-state/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021-2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/thinking-in-compose/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.me/thinking-in-compose/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
+
+&lt;p&gt;Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了&lt;a href=&#34;https://developer.android.com/jetpack/compose/mental-model&#34;&gt;官方文档&lt;/a&gt;后做的笔记，关于 Compose 的开发模式以及需要注意的地方。&lt;/p&gt;
+&lt;h2 id=&#34;什么是-Compose&#34;&gt;&lt;a href=&#34;#什么是-Compose&#34; class=&#34;headerlink&#34; title=&#34;什么是 Compose&#34;&gt;&lt;/a&gt;什么是 Compose&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Jetpack Compose is a modern &lt;strong&gt;declarative UI&lt;/strong&gt; Toolkit for Android. Compose makes it easier to write and maintain your app UI by providing a &lt;em&gt;declarative API&lt;/em&gt; that allows you to render your app UI without imperatively mutating frontend views.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;和 React-Native、Flutter、SwiftUI 一样，Compose 是一种声明式编程的 UI 框架。简单来说，就是让你可以直接使用 Kotlin 代码编写视图，而不需要每次从视图树中获取视图并进行修改。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Compose"><span class="toc-number">1.</span> <span class="toc-text">什么是 Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">声明式编程范式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">传统方式的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Declarative-UI-model"><span class="toc-number">2.2.</span> <span class="toc-text">Declarative UI model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">Composable 函数的组成部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recomposition"><span class="toc-number">4.</span> <span class="toc-text">Recomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%BC%9A%E6%8C%89%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.1.</span> <span class="toc-text">Composable 函数不一定会按顺序执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E5%8F%AF%E8%83%BD%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.2.</span> <span class="toc-text">Composable 函数可能同步执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recomposition-%E4%BC%9A%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%A4%9A%E5%9C%B0%E8%A2%AB%E8%B7%B3%E8%BF%87"><span class="toc-number">4.0.3.</span> <span class="toc-text">Recomposition 会尽可能多地被跳过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recomposition-%E6%98%AF%E4%B9%90%E8%A7%82%E7%9A%84%E5%B9%B6%E4%B8%94%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%8F%96%E6%B6%88%E5%B9%B6%E9%87%8D%E6%96%B0%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.4.</span> <span class="toc-text">Recomposition 是乐观的并且可能会取消并重新执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E5%8F%AF%E8%83%BD%E8%A2%AB%E9%A2%91%E7%B9%81%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.5.</span> <span class="toc-text">Composable 函数可能被频繁执行</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Thinking in Compose
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2021-03-09T12:30:00.000Z" itemprop="datePublished">2021-03-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Compose/" rel="tag">Compose</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <img src='https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png' width=90%/>
+
+<p>Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了<a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/mental-model">官方文档</a>后做的笔记，关于 Compose 的开发模式以及需要注意的地方。</p>
+<h2 id="什么是-Compose"><a href="#什么是-Compose" class="headerlink" title="什么是 Compose"></a>什么是 Compose</h2><blockquote>
+<p>Jetpack Compose is a modern <strong>declarative UI</strong> Toolkit for Android. Compose makes it easier to write and maintain your app UI by providing a <em>declarative API</em> that allows you to render your app UI without imperatively mutating frontend views.</p>
+</blockquote>
+<p>和 React-Native、Flutter、SwiftUI 一样，Compose 是一种声明式编程的 UI 框架。简单来说，就是让你可以直接使用 Kotlin 代码编写视图，而不需要每次从视图树中获取视图并进行修改。</p>
+<span id="more"></span>
+
+<h2 id="声明式编程范式"><a href="#声明式编程范式" class="headerlink" title="声明式编程范式"></a>声明式编程范式</h2><h3 id="传统方式的缺点"><a href="#传统方式的缺点" class="headerlink" title="传统方式的缺点"></a>传统方式的缺点</h3><p>视图树中的每个组件都在内部维护着自己的状态（State）。在修改组件之前需要先找到该组件，然后调用相应的方法去修改状态（命令式）。这种方式不旦繁琐，而且容易产生 bug，比如修改视图状态时造成冲突。</p>
+<h3 id="Declarative-UI-model"><a href="#Declarative-UI-model" class="headerlink" title="Declarative UI model"></a>Declarative UI model</h3><p>只需声明组件，当状态发生变化时，重新生成并更新视图，在 Compose 框架中此过程叫做 <a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/mental-model#recomposition">Recomposition</a>。不过，在实际情况下，为了减少性能损耗，Compose 框架会判断哪些组件需要更新，从而只更新需要更新的部分。</p>
+<p><strong>优点1：</strong>将可变的状态暴露成方法参数，从而可以和架构模式中一些组件（比如 ViewModel）结合起来使用：Compose 接受初始数据，当用户输入数据时将事件通知给 ViewModel 去处理，然后 ViewModel 再通知 Compose 重新对视图进行渲染。</p>
+<p><strong>优点2：</strong>动态性。可以充分发挥 Kotlin 语言的优势，只需要很少的代码就可以轻松写出灵活多变的视图结构。</p>
+<h2 id="Composable-函数的组成部分"><a href="#Composable-函数的组成部分" class="headerlink" title="Composable 函数的组成部分"></a>Composable 函数的组成部分</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-meta">@Composable</span><br><span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">Greeting</span><span class="hljs-params">(name: <span class="hljs-type">String</span>)</span></span> &#123;<br>    Text(<span class="hljs-string">&quot;Hello, <span class="hljs-variable">$name</span>!&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>Composable 函数必须使用 <code>@Composable</code> 注解。使用该注解告诉 Compose 编译器可以将该方法转换成 UI。</li>
+<li>Composable 函数接收参数。</li>
+<li>Composable 函数没有返回值。</li>
+<li>Composable 函数运行具有等幂性（idempotent）、无副作用（side-effect free）、运行快的特点。<ul>
+<li>等幂性即使用相同参数调用一次和调用多次的结果相同，不依赖全局变量或者随机结果函数。</li>
+<li>只修改 UI 而不产生任何 side-effects，即不造成除 composeable 函数以外的任何变化，比如修改成员属性或者全局变量的值、读写数据库、更改 ViewModel 的状态等等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Recomposition"><a href="#Recomposition" class="headerlink" title="Recomposition"></a>Recomposition</h2><p>传统开发方式中，当我们需要修改视图的时候，会先找到该视图然后进行修改，但是在 Compose 框架中，我们通过重新调用 composable 函数（传入新数据），然后由 Compose 框架对视图进行修改，此过程就叫做 <em><strong>recomposition</strong></em>。</p>
+<p>之前说过，重新生成整个视图树代价高昂，所以出于性能考虑，Compose 框架只会对发生变化的部分进行修改，此过程也被叫做 <em>intelligent recomposition</em>。</p>
+<p>正因如此，在 recomposition 的过程中，一些函数、lambda 表达式有可能会被跳过，也是因为这个原因，我们才不能依赖任何 side-effects，比如：</p>
+<ul>
+<li>对一个共享对象的属性值进行修改</li>
+<li>更新 ViewModel 中的 Observable</li>
+<li>更新 SharedPreference</li>
+</ul>
+<p>另外，composable 函数可能被多次执行，甚至每一帧执行一次（比如执行动画的时候），所以如果你的 composable 函数中包含一些耗时操作（比如读写 SharedPreference），最好放到子线程中进行，比如使用 <a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/coroutines-overview.html">Coroutine</a> 并将结果作为参数传递到 composable 函数中。</p>
+<p>除此之外，在使用 Compose 的过程中还需要注意以下这些问题。</p>
+<h4 id="Composable-函数不一定会按顺序执行"><a href="#Composable-函数不一定会按顺序执行" class="headerlink" title="Composable 函数不一定会按顺序执行"></a>Composable 函数不一定会按顺序执行</h4><p>通常情况下，composable 函数的确会按顺序执行，但是当一个 composable 函数中包含其它 composable 函数时，就不一定是按顺序执行的了。Compose 框架会识别出具有更高优先级的 UI 组件，并对它们优先进行渲染。所以，当嵌套使用 composable 函数的时候，要记得每个 composable 函数必须是独立的，不能依赖其它 composable 函数的执行状态。</p>
+<h4 id="Composable-函数可能同步执行"><a href="#Composable-函数可能同步执行" class="headerlink" title="Composable 函数可能同步执行"></a>Composable 函数可能同步执行</h4><p>在 recomposition 过程中，为了加快运行速度，多个 composable 函数可能会同时被执行。另外，这也意味着某些 composable 函数会被放到后台子线程中执行。比如，当 composable 函数参数中包含 ViewModel 中的方法，那么该方法有可能在多个线程中被执行了多次。所以，我们不能在 composable 中引入 side-effects。</p>
+<h4 id="Recomposition-会尽可能多地被跳过"><a href="#Recomposition-会尽可能多地被跳过" class="headerlink" title="Recomposition 会尽可能多地被跳过"></a>Recomposition 会尽可能多地被跳过</h4><p>正如之前所说，Compose 只会更新需要更新的部分，剩下的部分会被跳过。</p>
+<h4 id="Recomposition-是乐观的并且可能会取消并重新执行"><a href="#Recomposition-是乐观的并且可能会取消并重新执行" class="headerlink" title="Recomposition 是乐观的并且可能会取消并重新执行"></a>Recomposition 是乐观的并且可能会取消并重新执行</h4><p>每当参数发生变化的时候，recomposition 就会发生。乐观的意思是 Compose 通常会认为在接收到新的参数变化之前，已经完成了上一次的 recomposition，所以，当参数发生变化时，如果上一次 recomposition 还没完成，Compose 会优先取消掉它并使用新的参数重新执行 recomposition。</p>
+<p>同样的，如果你在 composable 函数中包含 side-effects，比如修改了某个全局参数，那么该参数有可能在 recompositon 取消并重新执行的过程中被修改了多次。所以，再次提醒，一定要保持 composable 函数的等幂性 idempotent 和无 side-effects。</p>
+<h4 id="Composable-函数可能被频繁执行"><a href="#Composable-函数可能被频繁执行" class="headerlink" title="Composable 函数可能被频繁执行"></a>Composable 函数可能被频繁执行</h4><p>在某些情况下，composable 函数可能每帧都被执行一次，比如使用动画的时候。所以，记住不要在 composable 函数中执行诸如 IO 等耗时的操作。一般的做法是将数据定义在 composable 函数的参数中，如果获取数据比较耗时则应该放在子线程中，然后使用 MutableState 或者 LiveData 对数据进行接收。</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://developer.android.com/jetpack/compose/mental-model">Thinking in Compose</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Compose"><span class="toc-number">1.</span> <span class="toc-text">什么是 Compose</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">声明式编程范式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">传统方式的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Declarative-UI-model"><span class="toc-number">2.2.</span> <span class="toc-text">Declarative UI model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">Composable 函数的组成部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Recomposition"><span class="toc-number">4.</span> <span class="toc-text">Recomposition</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E4%B8%8D%E4%B8%80%E5%AE%9A%E4%BC%9A%E6%8C%89%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.1.</span> <span class="toc-text">Composable 函数不一定会按顺序执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E5%8F%AF%E8%83%BD%E5%90%8C%E6%AD%A5%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.2.</span> <span class="toc-text">Composable 函数可能同步执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recomposition-%E4%BC%9A%E5%B0%BD%E5%8F%AF%E8%83%BD%E5%A4%9A%E5%9C%B0%E8%A2%AB%E8%B7%B3%E8%BF%87"><span class="toc-number">4.0.3.</span> <span class="toc-text">Recomposition 会尽可能多地被跳过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Recomposition-%E6%98%AF%E4%B9%90%E8%A7%82%E7%9A%84%E5%B9%B6%E4%B8%94%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%8F%96%E6%B6%88%E5%B9%B6%E9%87%8D%E6%96%B0%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.4.</span> <span class="toc-text">Recomposition 是乐观的并且可能会取消并重新执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Composable-%E5%87%BD%E6%95%B0%E5%8F%AF%E8%83%BD%E8%A2%AB%E9%A2%91%E7%B9%81%E6%89%A7%E8%A1%8C"><span class="toc-number">4.0.5.</span> <span class="toc-text">Composable 函数可能被频繁执行</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/thinking-in-compose/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.me/thinking-in-compose/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
+
+&lt;p&gt;Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了&lt;a href=&#34;https://developer.android.com/jetpack/compose/mental-model&#34;&gt;官方文档&lt;/a&gt;后做的笔记，关于 Compose 的开发模式以及需要注意的地方。&lt;/p&gt;
+&lt;h2 id=&#34;什么是-Compose&#34;&gt;&lt;a href=&#34;#什么是-Compose&#34; class=&#34;headerlink&#34; title=&#34;什么是 Compose&#34;&gt;&lt;/a&gt;什么是 Compose&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Jetpack Compose is a modern &lt;strong&gt;declarative UI&lt;/strong&gt; Toolkit for Android. Compose makes it easier to write and maintain your app UI by providing a &lt;em&gt;declarative API&lt;/em&gt; that allows you to render your app UI without imperatively mutating frontend views.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;和 React-Native、Flutter、SwiftUI 一样，Compose 是一种声明式编程的 UI 框架。简单来说，就是让你可以直接使用 Kotlin 代码编写视图，而不需要每次从视图树中获取视图并进行修改。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

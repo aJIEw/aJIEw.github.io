@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。  起因最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。 我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fragment 数据懒加载及原理">
+<meta property="og:url" content="https://ajiew.me/fragment-lazy-load/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。  起因最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。 我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png">
+<meta property="og:image" content="https://i.loli.net/2019/09/09/GoTrE7uSw6ZJICj.gif">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cdfce7f2152354.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb257ca6954004.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb256a36494392.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb252b52141814.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb254eed164238.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb255caec88812.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb2589c6023546.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb259764165004.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25759f172652.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25af55128015.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25a20ad73908.png">
+<meta property="og:image" content="https://ajiew.me/assets/2018-12-27/nested_viewpager.png">
+<meta property="article:published_time" content="2018-12-27T12:35:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.726Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Fragment 数据懒加载及原理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/dive-into-rn-redux/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/fragment-lazy-load/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.me/fragment-lazy-load/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c962c25ad56668.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;起因&#34;&gt;&lt;a href=&#34;#起因&#34; class=&#34;headerlink&#34; title=&#34;起因&#34;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。&lt;/p&gt;
+&lt;p&gt;我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之后嵌套使用了 ViewPager，业务未完全开放的那个 fragment 里嵌套了一个 ViewPager，里面有多个 fragment，这样每次打开首页都会去加载该 page，然后是一连串的 fragment 初始化以及网络请求，所以为了解决该问题就不得不使用懒加载。&lt;/p&gt;
+&lt;p&gt;最终想要实现的效果是：1) 当 fragment 不可见的时候不加载数据；2) 当数据已经加载过之后，除非手动刷新否则不重新请求数据。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD%E4%B8%8E-setUserVisibleHint"><span class="toc-number">2.</span> <span class="toc-text">预加载与 setUserVisibleHint()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%EF%BC%88Koltin-%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">如何实现及其原理（Koltin 实现）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E6%83%B3%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">验证想法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A6%96%E6%AC%A1%E6%89%93%E5%BC%80"><span class="toc-number">4.1.</span> <span class="toc-text">1. 首次打开</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%A7%BB%E5%8A%A8%E5%88%B0-SecondFragment"><span class="toc-number">4.2.</span> <span class="toc-text">2. 移动到 SecondFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%A7%BB%E5%8A%A8%E5%88%B0-ThirdFragment"><span class="toc-number">4.3.</span> <span class="toc-text">3. 移动到 ThirdFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%9B%9E%E5%88%B0-SecondFragment"><span class="toc-number">4.4.</span> <span class="toc-text">4. 回到 SecondFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9B%9E%E5%88%B0-FirstFragment"><span class="toc-number">4.5.</span> <span class="toc-text">5. 回到 FirstFragment</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Fragment 数据懒加载及原理
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-12-27T12:35:00.000Z" itemprop="datePublished">2018-12-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png" alt="Blow, Blow Thou Winter Wind - John Everett Millais"></p>
+<blockquote>
+<p>Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。</p>
+</blockquote>
+<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。</p>
+<p>我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之后嵌套使用了 ViewPager，业务未完全开放的那个 fragment 里嵌套了一个 ViewPager，里面有多个 fragment，这样每次打开首页都会去加载该 page，然后是一连串的 fragment 初始化以及网络请求，所以为了解决该问题就不得不使用懒加载。</p>
+<p>最终想要实现的效果是：1) 当 fragment 不可见的时候不加载数据；2) 当数据已经加载过之后，除非手动刷新否则不重新请求数据。</p>
+<span id="more"></span>
+
+<h3 id="预加载与-setUserVisibleHint"><a href="#预加载与-setUserVisibleHint" class="headerlink" title="预加载与 setUserVisibleHint()"></a>预加载与 setUserVisibleHint()</h3><p>首先，默认情况下，由于 ViewPager 会预加载左右两边相邻的<strong>至少 1 个</strong> fragment，通过 <code>setOffscreenPageLimit()</code> 设置预加载 page 数为 0 并不会起作用，这点从 ViewPager 的源码中可以看到：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> static <span class="hljs-keyword">final</span> int DEFAULT_OFFSCREEN_PAGES = <span class="hljs-number">1</span>;<br><span class="hljs-comment">// ...</span><br><span class="hljs-keyword">public</span> void setOffscreenPageLimit(int limit) &#123;<br>    <span class="hljs-keyword">if</span> (limit &lt; DEFAULT_OFFSCREEN_PAGES) &#123; <span class="hljs-comment">// &lt;0? 对不起，不可以！</span><br>        Log.w(TAG, <span class="hljs-string">&quot;Requested offscreen page limit &quot;</span> + limit + <span class="hljs-string">&quot; too small; defaulting to &quot;</span><br>                + DEFAULT_OFFSCREEN_PAGES);<br>        limit = DEFAULT_OFFSCREEN_PAGES;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (limit != mOffscreenPageLimit) &#123;<br>        mOffscreenPageLimit = limit;<br>        populate();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>从以上源码可以看出相邻 fragment 的加载是必然的，但是我们如果可以得知 fragment 可见性，那么就可以在 fragment 可见时才去加载数据。这样虽然不是完全的懒加载，只是数据懒加载，但是同样也可以满足我们的需求了。</p>
+<p>那么 fragment 中有没有可以获取当前 fragment 是否可见的方法呢，当然是有的，它就是 **<code>setUserVisibleHint(boolean isVisibleToUser)</code>**。</p>
+<p>无论你使用的是 FragmentPagerAdapter 还是 FragmentStatePagerAdapter，当它们初始化 fragment 的时候，该方法都会被调用两次。</p>
+<p>一次是在实例化的时候，也就是在 instantioateItem() 方法中：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">public</span> Object instantiateItem(ViewGroup container, int position) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>一次是在用户滑动到当前 fragment 的时候，在 setPrimaryItem() 方法中：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">public</span> void setPrimaryItem(ViewGroup container, int position, Object <span class="hljs-keyword">object</span>) &#123;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另外，当用户从当前 fragment 滑出的时候，setPrimaryItem() 方法也会被调用。</p>
+<p>来看下 <code>setUserVisibleHint()</code> 的注释：</p>
+<blockquote>
+<p>Set a hint to the system about whether this fragment’s UI is currently visible to the user. This hint defaults to true and is persistent across fragment instance state save and restore.<br>An app may set this to false to indicate that the fragment’s UI is scrolled out of visibility or is otherwise not directly visible to the user. This may be used by the system to prioritize operations such as fragment lifecycle updates or loader ordering behavior.</p>
+</blockquote>
+<p>系统正是通过该方法来判断当前 fragment 的 UI 是否对用户可见，而该方法被暴露出来的主要目的也是让我们可以提醒系统当前 fragment 已经不可见了，是时候重新更新 fragment 的生命周期了。</p>
+<p>不过如果只是实现数据懒加载，我们不需要直接去调用该方法，只要覆写它并实现控制数据加载的逻辑就可以了。</p>
+<p>这里我参考了一种比较简便的做法，原文来自 <a target="_blank" rel="noopener" href="https://www.jianshu.com/u/bd3befbe51d0">尹star</a> 的 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5d29a0c3f4c">ViewPager+Fragment LazyLoad 最优解</a>。</p>
+<p>实现效果：</p>
+<img src="https://i.loli.net/2019/09/09/GoTrE7uSw6ZJICj.gif" width="40%"/>
+
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/DemoUI/tree/7360c2bc21eed4bb63645fcb2eba46997025b543/app/src/main/java/com/ajiew/demoui/ui/lazyloadfragment">aJIEw/DemoUI-LazyLoadFragment</a></p>
+<p>可以看到只有第一次进入 fragment 的时候才会加载数据，而且也不会主动加载相邻的 fragment 或者已经加载过的数据了。</p>
+<h3 id="如何实现及其原理（Koltin-实现）"><a href="#如何实现及其原理（Koltin-实现）" class="headerlink" title="如何实现及其原理（Koltin 实现）"></a>如何实现及其原理（Koltin 实现）</h3><p>首先，由于 <strong><code>setUserVisibleHint()</code></strong> 会在 fragment 实例化时就先被调用 (在 onAttach() 之前)，所以我们最好在 view 创建完毕之后加载数据，因此需要设置一个 view 是否初始化完毕的标志位。另外，当然也需要一个 view 是否可见的标志位，只有等到 view 可见才允许加载。然后还可以选择保存数据的初始化状态，这样可以控制在 fragment 生命周期中的合适时机重新加载数据。所以，我们需要以下 3 个标志位：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * View 的初始化状态，只有初始化完毕才加载数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isViewInitiated: <span class="hljs-built_in">Boolean</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * View 是否可见，只有可见时才去加载数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isVisibleToUser: <span class="hljs-built_in">Boolean</span> = <span class="hljs-literal">false</span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 数据是否已经初始化，避免重复请求数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> isDataInitiated: <span class="hljs-built_in">Boolean</span> = <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
+
+<p>然后接下来分为两种情况，一种是 view 初始化完毕但是此时还不可见的情况。很显然，我们只要判断 <code>setUserVisibleHint()</code> 中参数的值就可以了：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">setUserVisibleHint</span><span class="hljs-params">(isVisibleToUser: <span class="hljs-type">Boolean</span>)</span></span> &#123;<br>    <span class="hljs-keyword">super</span>.setUserVisibleHint(isVisibleToUser)<br>    <span class="hljs-keyword">this</span>.isVisibleToUser = isVisibleToUser<br>    prepareFetchData()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>还有一种情况是，如果当前 fragment 是整个 ViewPager 的第一个 fragment，那么 <code>setUserVisibleHint(true)</code> 会在 view 初始化之前就在 <code>setPrimaryItem()</code>中被调用，此时 view 已经可见了，但是我们要等到 view 初始化才加载数据，所以我们要在某个地方判断 view 是否已经初始化并且去加载数据。</p>
+<p>最好的地方是在 onActivityCreated() 中。根据 fragment 生命周期我们知道，onActivityCreated() 会在 onCreateView() 之后调用，此时 view 已经初始化完毕，我们可以在这里将 <code>isViewInitiated</code> 标记为 true，同时在这里为第一个显示的 fragment 加载数据：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onActivityCreated</span><span class="hljs-params">(savedInstanceState: <span class="hljs-type">Bundle</span>?)</span></span> &#123;<br>    <span class="hljs-keyword">super</span>.onActivityCreated(savedInstanceState)<br>    isViewInitiated = <span class="hljs-literal">true</span><br>    prepareFetchData()<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后，我们还需要判断下数据是否已经加载过，避免重复加载。</p>
+<p>我们将以上所有判断逻辑写在 prepareFetchData() 中，判断条件为 view 已经初始化、可见且数据未加载：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">prepareFetchData</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">if</span> (isViewInitiated &amp;&amp; isVisibleToUser &amp;&amp; !isDataInitiated) &#123;<br>        isDataInitiated = <span class="hljs-literal">true</span><br>        fetchData()<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最后再定义一个抽象方法 fetchData()，让子类去实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 在该方法中发起网络请求获取数据</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">abstract</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">fetchData</span><span class="hljs-params">()</span></span><br></code></pre></td></tr></table></figure>
+
+<p>这样一个完整的数据懒加载就实现完毕了。</p>
+<h3 id="验证想法"><a href="#验证想法" class="headerlink" title="验证想法"></a>验证想法</h3><p>我们可以看下以上操作的日志来验证下我们的想法。</p>
+<h4 id="1-首次打开"><a href="#1-首次打开" class="headerlink" title="1. 首次打开"></a>1. 首次打开</h4><p>第一次打开，FirstFragment 作为第一个可见的 fragment 立马被初始化：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cdfce7f2152354.png" alt="1.1-FirstFragment_creation.png"></p>
+<p>此时 isVisibleToUser 会在 isViewInitiated 之前设为 true，所以 FirstFragment 会在 onActivityCreated() 中真正开始获取数据。</p>
+<p>另外，由于预加载的存在，SecondFragment 也会被创建，但是此时还不可见：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb257ca6954004.png" alt="1.2-SecondFragment_creation.png"></p>
+<h4 id="2-移动到-SecondFragment"><a href="#2-移动到-SecondFragment" class="headerlink" title="2. 移动到 SecondFragment"></a>2. 移动到 SecondFragment</h4><p>当滑动到 SecondFragment 的时候，SecondFragment 状态变为可见，setUserVisibleHint(true) 被调用，所以开始获取数据：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb256a36494392.png" alt="2.1-SecondFragment_visible.png"></p>
+<p>而此时 FirstFragment 由可见变为不可见：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb252b52141814.png" alt="2.2-FirstFragment_not_visible.png"></p>
+<p>ThirdFragment 则开始第一次被创建，同样此时并不可见：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb254eed164238.png" alt="2.3-ThirdFragment_creation.png"></p>
+<h4 id="3-移动到-ThirdFragment"><a href="#3-移动到-ThirdFragment" class="headerlink" title="3. 移动到 ThirdFragment"></a>3. 移动到 ThirdFragment</h4><p>当滑动到 ThirdFragment 的时候，状态变为可见，所以也就开始获取数据：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb255caec88812.png" alt="3.1-ThirdFragment_visible.png"></p>
+<p>此时 SecondFragment 由可见变为不可见： </p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb2589c6023546.png" alt="3.2-SecondFragment_not_visible.png"></p>
+<p>而 FirstFragment 由于超出了 ViewPager 可以保存的 Fragment 的数量，所以被销毁：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb259764165004.png" alt="3.3-FirstFragment_destroyed.png"></p>
+<h4 id="4-回到-SecondFragment"><a href="#4-回到-SecondFragment" class="headerlink" title="4. 回到 SecondFragment"></a>4. 回到 SecondFragment</h4><p>此时 SecondFragment 重新变得可见：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb25759f172652.png" alt="4.1-SecondFragment_visible_again.png"></p>
+<p>而 FirstFragment 也开始重新被创建：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb25af55128015.png" alt="4.2-FirstFragment_recreation.png"></p>
+<h4 id="5-回到-FirstFragment"><a href="#5-回到-FirstFragment" class="headerlink" title="5. 回到 FirstFragment"></a>5. 回到 FirstFragment</h4><p>此时 FirstFragment 重新变得可见，虽然 FirstFragment 之前被销毁了，但是由于之前获取的数据会被恢复，所以现在不会重新去获取数据：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35cb25a20ad73908.png" alt="5.1-FirstFragment_visible_again.png"></p>
+<p>当然我们也可以选择在 onDestroy() 中将 isDataInitiated 置为 false，这样每次 fragment 重新创建都会重新获取数据。当然前提是你使用的是 <code>FragmentStatePagerAdapter</code>，因为如果使用 <code>FragmentPagerAdapter</code>，不会每次都调用 onDestroy()，fragment 实例会被保存。而 SecondFragment 再次变得不可见，ThirdFragment 被销毁，过程与 3 中移动到 ThirdFragment 类似，这里就不截图了。</p>
+<p>通过以上日志，验证了我们的想法是对的。</p>
+<p>另外，如果是 ViewPager 嵌套 ViewPager 其实效果也是一样的，如果不做特殊处理，相邻的 fragment 的会被加载，导致该 fragment 中的 ViewPager 会去加载其中的 fragment。</p>
+<img src='../assets/2018-12-27/nested_viewpager.png' width=80%/>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD%E4%B8%8E-setUserVisibleHint"><span class="toc-number">2.</span> <span class="toc-text">预加载与 setUserVisibleHint()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%EF%BC%88Koltin-%E5%AE%9E%E7%8E%B0%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">如何实现及其原理（Koltin 实现）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E6%83%B3%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">验证想法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A6%96%E6%AC%A1%E6%89%93%E5%BC%80"><span class="toc-number">4.1.</span> <span class="toc-text">1. 首次打开</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%A7%BB%E5%8A%A8%E5%88%B0-SecondFragment"><span class="toc-number">4.2.</span> <span class="toc-text">2. 移动到 SecondFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%A7%BB%E5%8A%A8%E5%88%B0-ThirdFragment"><span class="toc-number">4.3.</span> <span class="toc-text">3. 移动到 ThirdFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%9B%9E%E5%88%B0-SecondFragment"><span class="toc-number">4.4.</span> <span class="toc-text">4. 回到 SecondFragment</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9B%9E%E5%88%B0-FirstFragment"><span class="toc-number">4.5.</span> <span class="toc-text">5. 回到 FirstFragment</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/fragment-lazy-load/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.me/fragment-lazy-load/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c962c25ad56668.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;起因&#34;&gt;&lt;a href=&#34;#起因&#34; class=&#34;headerlink&#34; title=&#34;起因&#34;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。&lt;/p&gt;
+&lt;p&gt;我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之后嵌套使用了 ViewPager，业务未完全开放的那个 fragment 里嵌套了一个 ViewPager，里面有多个 fragment，这样每次打开首页都会去加载该 page，然后是一连串的 fragment 初始化以及网络请求，所以为了解决该问题就不得不使用懒加载。&lt;/p&gt;
+&lt;p&gt;最终想要实现的效果是：1) 当 fragment 不可见的时候不加载数据；2) 当数据已经加载过之后，除非手动刷新否则不重新请求数据。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

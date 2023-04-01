@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。  Activity 生命周期   新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。   onRestoreInstanceState 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（一）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-1/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。  Activity 生命周期   新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。   onRestoreInstanceState 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-04/android-logo.jpg">
+<meta property="article:published_time" content="2019-12-04T13:41:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.728Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-12-04/android-logo.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 开发艺术探索学习笔记（一）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/notes-on-android-art-part-2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/philippines/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-1/&text=Android 开发艺术探索学习笔记（一）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-1/&is_video=false&description=Android 开发艺术探索学习笔记（一）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（一）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-1/&name=Android 开发艺术探索学习笔记（一）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-04/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;Activity-生命周期&#34;&gt;&lt;a href=&#34;#Activity-生命周期&#34; class=&#34;headerlink&#34; title=&#34;Activity 生命周期&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/guide/components/activities/activity-lifecycle&#34;&gt;Activity 生命周期&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;  新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。&lt;/li&gt;
+&lt;li&gt;  &lt;a href=&#34;https://developer.android.com/reference/android/app/Activity#onRestoreInstanceState(android.os.Bundle)&#34;&gt;onRestoreInstanceState&lt;/a&gt; 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部分 View 都会帮我们做一些基本的状态恢复，但是必须为 View 提供 ID，可以查看对应的 View 中的 onRestoreInstanceState 方法了解具体恢复了哪些内容。&lt;/li&gt;
+&lt;li&gt;  &lt;a href=&#34;https://developer.android.com/reference/android/app/Activity#onSaveInstanceState(android.os.Bundle)&#34;&gt;onSaveInstanceState&lt;/a&gt; 方法会在 onStop 之后被调用（targetSdkVersion &amp;gt;= 28），可以在这里保存一些轻量的数据。它可以作为生命周期方法的补充，但是有些时候并不会被调用，比如从 A 中启动 B 的时候，如果 A 未被回收那么系统就不会调用 onSaveInstanceState。&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-1/&t=Android 开发艺术探索学习笔记（一）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">Activity 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity-%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">Activity 的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">四种启动模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-taskAffinity"><span class="toc-number">2.2.</span> <span class="toc-text">关于 taskAffinity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-allowTaskReparenting"><span class="toc-number">2.3.</span> <span class="toc-text">关于 allowTaskReparenting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Intent-Flags"><span class="toc-number">2.4.</span> <span class="toc-text">关于 Intent Flags</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#singleTask-%E5%92%8C-singleInstance-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.5.</span> <span class="toc-text">singleTask 和 singleInstance 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IntentFilter-%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="toc-number">3.</span> <span class="toc-text">IntentFilter 的匹配规则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-IntentFilter-%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">关于 IntentFilter 的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-%E9%80%9A%E8%BF%87%E5%8C%B9%E9%85%8D%E6%B5%8B%E8%AF%95"><span class="toc-number">3.2.</span> <span class="toc-text">关于 通过匹配测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Intent-%E5%8C%B9%E9%85%8D"><span class="toc-number">3.3.</span> <span class="toc-text">关于 Intent 匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 开发艺术探索学习笔记（一）
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-04T13:41:00.000Z" itemprop="datePublished">2019-12-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2019-12-04/android-logo.jpg"></p>
+<blockquote>
+<p>  结合 <a target="_blank" rel="noopener" href="https://developer.android.com/guide">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。</p>
+</blockquote>
+<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a><a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/activities/activity-lifecycle">Activity 生命周期</a></h3><ul>
+<li>  新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。</li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/Activity#onRestoreInstanceState(android.os.Bundle)">onRestoreInstanceState</a> 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部分 View 都会帮我们做一些基本的状态恢复，但是必须为 View 提供 ID，可以查看对应的 View 中的 onRestoreInstanceState 方法了解具体恢复了哪些内容。</li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/Activity#onSaveInstanceState(android.os.Bundle)">onSaveInstanceState</a> 方法会在 onStop 之后被调用（targetSdkVersion &gt;= 28），可以在这里保存一些轻量的数据。它可以作为生命周期方法的补充，但是有些时候并不会被调用，比如从 A 中启动 B 的时候，如果 A 未被回收那么系统就不会调用 onSaveInstanceState。</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="Activity-的启动模式"><a href="#Activity-的启动模式" class="headerlink" title="Activity 的启动模式"></a>Activity 的启动模式</h3><h4 id="四种启动模式"><a href="#四种启动模式" class="headerlink" title="四种启动模式"></a><a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#ManifestForTasks">四种启动模式</a></h4><ul>
+<li>  standard：每次都会在<strong>当前任务栈</strong>中启动一个新的 Activity 实例。使用场景：默认配置，商品详情页。</li>
+<li>  singleTop：栈顶复用，再次启动时会调用 <strong>onNewIntent()</strong> 而不是 onCreate()。使用场景：登录页、通知推送页。</li>
+<li>  singleTask：栈内复用，一般与 <strong>taskAffinity</strong> 结合使用，与 singleTop 类似，如果在请求的目标栈中已有实例存在，则会调用 onNewIntent()。另外，singleTask 启动模式还有 <strong><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP">CLEAR_TOP</a></strong> 的效果，比如 A、B 两个 activity 位于同一个任务栈，如果 A 是 singleTask，而且被另一个任务栈的 activity 再次启动，则 B 会出栈。使用场景：App 主页面、WebView 页面、只能出现单一页面的场景。</li>
+<li>  singleInstance：加强的 singleTask，只能单独位于一个任务栈中。使用场景：系统 Launcher、锁屏键、来电显示等系统应用。</li>
+</ul>
+<h4 id="关于-taskAffinity"><a href="#关于-taskAffinity" class="headerlink" title="关于 taskAffinity"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#Affinities"><code>taskAffinity</code></a></h4><ul>
+<li>指定 Activity 在哪个栈中运行，默认使用 applicationId。</li>
+<li>具有相同 taskAffinity 的 activity 会被放入同一个栈中。</li>
+<li>一般需要配合 singleTask 启动模式来使用。</li>
+</ul>
+<h4 id="关于-allowTaskReparenting"><a href="#关于-allowTaskReparenting" class="headerlink" title="关于 allowTaskReparenting"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/manifest/application-element.html#reparent"><code>allowTaskReparenting</code></a></h4><ul>
+<li>当启动该 activity 的时候，如果该 activity 存在相同的 taskAffinity 的栈，则会被移动到那个栈里。比如一个浏览器应用 App A 中的 activity A 指定了 allowTaskReparenting，同时与主 activity 位于同一个任务栈中。那么当你在别的应用 App B 中，点击了一个链接打开了 A，然后再返回桌面打开浏览器应用，会直接打开 activity A 而不是主 activity，而当我们返回 App B 的时候，会发现这个 activity A 已经不在了（被移动到了 App A 的任务栈中）。</li>
+<li>我们一般结合 singleTask 并指定单独的栈来使用 allowTaskReparenting。</li>
+</ul>
+<h4 id="关于-Intent-Flags"><a href="#关于-Intent-Flags" class="headerlink" title="关于 Intent Flags"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/activities/tasks-and-back-stack#IntentFlagsForTasks">Intent Flags</a></h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_NEW_TASK">FLAG_ACTIVITY_NEW_TASK</a> 对应启动模式中的 singleTask。</li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</a> 对应启动模式中的 singleTop。</li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP">FLAG_ACTIVITY_CLEAR_TOP</a> 具有清除栈中它上面所有 activity 的效果，一般结合 singleTask 使用，可以使得对应任务栈中的 activity 重新响应 intent 以及新传入的数据。</li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS">FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</a>，不显示在最近活动中</li>
+</ul>
+<h4 id="singleTask-和-singleInstance-的区别"><a href="#singleTask-和-singleInstance-的区别" class="headerlink" title="singleTask 和 singleInstance 的区别"></a>singleTask 和 singleInstance 的区别</h4><ul>
+<li><p>singleTask 启动模式下，当栈和 activity 都不存在的时候，系统会创建一个新的 activity 放入新的栈内，如果栈存在则直接将 activity 入栈，而且除了相同 taskAffinity 的 activity 之外，还<strong>允许</strong>其他 activity (i.e. standard  和 singleTop 的 activity) 入栈。</p>
+</li>
+<li><p>singleInstance 启动模式下的 activity <strong>不允许其他 activity 入栈</strong>，也就是说栈内永远只有这一个 activity。</p>
+</li>
+</ul>
+<h3 id="IntentFilter-的匹配规则"><a href="#IntentFilter-的匹配规则" class="headerlink" title="IntentFilter 的匹配规则"></a>IntentFilter 的匹配规则</h3><h4 id="关于-IntentFilter-的组成"><a href="#关于-IntentFilter-的组成" class="headerlink" title="关于 IntentFilter 的组成"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/intents-filters#Receiving">IntentFilter 的组成</a></h4><ul>
+<li>  一组 IntentFilter 可以由多个 <code>action</code> <code> category</code> <code>data</code> 组成，必须同时匹配 <code>action</code> <code> category</code> <code>data</code> 才能成功启动对应的组件。</li>
+<li>  如果该组件只能处理特定某几种的 <code>action</code> <code> category</code> <code>data</code> 组合，那么你就必须创建多个对应的 IntentFilter 而不是把他们全都放一起。</li>
+</ul>
+<h4 id="关于-通过匹配测试"><a href="#关于-通过匹配测试" class="headerlink" title="关于 通过匹配测试"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/intents-filters#Resolution">通过匹配测试</a></h4><ul>
+<li>action：指定接收动作类型，用 <code>android:name</code> 指定，可以有 0 个或者多个。一个 Intent 想要匹配成功，则必须至少匹配上一个 <code>action</code>，intent-filter 中可以指定比 Intent 中更多的 <code>action</code>。另外，<ul>
+<li>  如果 intent-filter 没有指定 action，则所有 Intent 都无法匹配成功；</li>
+<li>  如果 Intent 没有指定 action，那么这个 Intent 会通过所有指定了 action 的 intent-filter。</li>
+</ul>
+</li>
+<li>cateogry：指定接收分类。如果 Intent 中指定了多个 <code>category</code>，那么必须全都匹配上才能匹配成功。其他与 <code>action</code> 相同。<ul>
+<li>  使用隐式 Intent 的时候，系统默认添加上一个 CATEGORY_DEFAULT，所以如果你想要匹配成功就必须添加 <strong>android.intent.category.DEFAULT</strong></li>
+</ul>
+</li>
+<li>data：指定 URI 和 MIME type<ul>
+<li>URI 包括以下属性：<code>scheme</code>, <code>host</code>, <code>port</code>, <code>path</code>，host 有时也称为 authority。<ul>
+<li>  完整格式：<code>&lt;scheme&gt;://&lt;host&gt;:&lt;port&gt;/&lt;path&gt;</code></li>
+<li>  例子：<code>content://com.example.project:200/folder/subfolder/etc</code></li>
+<li>  每个属性都是可选的，但是有先后依赖关系，比如如果没有指定 <code>scheme</code>，那么即使指定了 <code>host</code> 或者 <code>port</code> 或者 <code>path</code> 也是无效的。</li>
+<li>  URI 支持部分匹配。</li>
+</ul>
+</li>
+<li>  完整 MIME type 列表可参考 <a target="_blank" rel="noopener" href="http://www.iana.org/assignments/media-types/index.htm">IANA MIME Media Types</a>，不同机型支持的 MIME type 有所不同。</li>
+<li>URI 和 MIME type 匹配有如下规则：<ul>
+<li>  完全匹配，比如如果 Intent 只指定了 MIME type，那么所有只指定了 MIME type 都会通过匹配。</li>
+<li>  如果 intent-filter 指定了 MIME type，那么默认支持 <code>content:</code> or <code>file:</code> URI，即如果 Intent 指定了该 MIME type 同时又指定了 scheme 为 <code>content</code> 或者 <code>file</code> 则可以匹配成功。</li>
+</ul>
+</li>
+<li>  如果要为 Intent 设置完整的 data 和 type，必须调用 setDataAndType，因为 setData 和 setType 会相互消除。</li>
+</ul>
+</li>
+</ul>
+<h4 id="关于-Intent-匹配"><a href="#关于-Intent-匹配" class="headerlink" title="关于 Intent 匹配"></a>关于 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/intents-filters#imatch">Intent 匹配</a></h4><ul>
+<li>我们可以使用 <code>PackageManager</code> 的 <code>resove...</code> 以及 <code>query...</code> 方法，来确定是否存在可以调用的组件，前者会返回匹配到的最佳组件，后者返回所有匹配到的组件。</li>
+<li>记得使用 MATCH_DEFAULT_ONLY flag 来过滤掉没有声明 android.intent.category.DEFAULT 的组件。</li>
+</ul>
+<hr>
+<h3 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-1/">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-2/">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-3/">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-4/">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-5/">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-6/">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.</span> <span class="toc-text">Activity 生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity-%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">Activity 的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text">四种启动模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-taskAffinity"><span class="toc-number">2.2.</span> <span class="toc-text">关于 taskAffinity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-allowTaskReparenting"><span class="toc-number">2.3.</span> <span class="toc-text">关于 allowTaskReparenting</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Intent-Flags"><span class="toc-number">2.4.</span> <span class="toc-text">关于 Intent Flags</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#singleTask-%E5%92%8C-singleInstance-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.5.</span> <span class="toc-text">singleTask 和 singleInstance 的区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IntentFilter-%E7%9A%84%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99"><span class="toc-number">3.</span> <span class="toc-text">IntentFilter 的匹配规则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-IntentFilter-%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">关于 IntentFilter 的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-%E9%80%9A%E8%BF%87%E5%8C%B9%E9%85%8D%E6%B5%8B%E8%AF%95"><span class="toc-number">3.2.</span> <span class="toc-text">关于 通过匹配测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Intent-%E5%8C%B9%E9%85%8D"><span class="toc-number">3.3.</span> <span class="toc-text">关于 Intent 匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-1/&text=Android 开发艺术探索学习笔记（一）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-1/&is_video=false&description=Android 开发艺术探索学习笔记（一）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（一）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-1/&title=Android 开发艺术探索学习笔记（一）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-1/&name=Android 开发艺术探索学习笔记（一）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-04/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第一章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;Activity-生命周期&#34;&gt;&lt;a href=&#34;#Activity-生命周期&#34; class=&#34;headerlink&#34; title=&#34;Activity 生命周期&#34;&gt;&lt;/a&gt;&lt;a href=&#34;https://developer.android.com/guide/components/activities/activity-lifecycle&#34;&gt;Activity 生命周期&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;  新 Activity 启动之前，原栈顶 Activity 的 onPause 会先被调用，所以不要在 onPause 中做耗时操作。&lt;/li&gt;
+&lt;li&gt;  &lt;a href=&#34;https://developer.android.com/reference/android/app/Activity#onRestoreInstanceState(android.os.Bundle)&#34;&gt;onRestoreInstanceState&lt;/a&gt; 方法会在 onStart 之后被调用，推荐在这里而不是 onCreate 方法中恢复数据。大部分 View 都会帮我们做一些基本的状态恢复，但是必须为 View 提供 ID，可以查看对应的 View 中的 onRestoreInstanceState 方法了解具体恢复了哪些内容。&lt;/li&gt;
+&lt;li&gt;  &lt;a href=&#34;https://developer.android.com/reference/android/app/Activity#onSaveInstanceState(android.os.Bundle)&#34;&gt;onSaveInstanceState&lt;/a&gt; 方法会在 onStop 之后被调用（targetSdkVersion &amp;gt;= 28），可以在这里保存一些轻量的数据。它可以作为生命周期方法的补充，但是有些时候并不会被调用，比如从 A 中启动 B 的时候，如果 A 未被回收那么系统就不会调用 onSaveInstanceState。&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-1/&t=Android 开发艺术探索学习笔记（一）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

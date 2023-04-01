@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="每天上下班使用钉钉拍照打卡是个很烦人的事情，因为我经常会忘记打卡。而且每天要打开手机操作两次，这么机械化的事情，作为一个安卓开发工程师，难道就没有什么办法可以把它给自动化吗？答案当然是 Yes, we can!  00 实现方式的探讨首先上网搜索了一番，果然我不是第一个觉得打卡这件事很麻烦的人。发现钉钉打卡其实还分很多种，比如公司 WIFI 打卡，如果你们使用的是这种打卡方式，那么钉钉其实是有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="钉钉自动拍照打卡 App 的实现">
+<meta property="og:url" content="https://ajiew.me/ding-ding-auto-punch-app/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="每天上下班使用钉钉拍照打卡是个很烦人的事情，因为我经常会忘记打卡。而且每天要打开手机操作两次，这么机械化的事情，作为一个安卓开发工程师，难道就没有什么办法可以把它给自动化吗？答案当然是 Yes, we can!  00 实现方式的探讨首先上网搜索了一番，果然我不是第一个觉得打卡这件事很麻烦的人。发现钉钉打卡其实还分很多种，比如公司 WIFI 打卡，如果你们使用的是这种打卡方式，那么钉钉其实是有">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c53a7de3a39662.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c55ea86ad81295.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c58c38af732270.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c5be95fac24261.png">
+<meta property="article:published_time" content="2018-09-09T08:48:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c53a7de3a39662.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>钉钉自动拍照打卡 App 的实现</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/pixel-upgrade/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/talk-about-change/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/ding-ding-auto-punch-app/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/ding-ding-auto-punch-app/&text=钉钉自动拍照打卡 App 的实现"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/ding-ding-auto-punch-app/&is_video=false&description=钉钉自动拍照打卡 App 的实现"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=钉钉自动拍照打卡 App 的实现&body=Check out this article: https://ajiew.me/ding-ding-auto-punch-app/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/ding-ding-auto-punch-app/&name=钉钉自动拍照打卡 App 的实现&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c53a7de3a39662.jpg&#34; alt=&#34;Autumn from Bascom Hill in Madison, Wisconsin&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每天上下班使用钉钉拍照打卡是个很烦人的事情，因为我经常会忘记打卡。而且每天要打开手机操作两次，这么机械化的事情，作为一个安卓开发工程师，难道就没有什么办法可以把它给自动化吗？答案当然是 Yes, we can!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;00-实现方式的探讨&#34;&gt;&lt;a href=&#34;#00-实现方式的探讨&#34; class=&#34;headerlink&#34; title=&#34;00 实现方式的探讨&#34;&gt;&lt;/a&gt;00 实现方式的探讨&lt;/h3&gt;&lt;p&gt;首先上网搜索了一番，果然我不是第一个觉得打卡这件事很麻烦的人。发现钉钉打卡其实还分很多种，比如公司 WIFI 打卡，如果你们使用的是这种打卡方式，那么钉钉其实是有一个快速打卡（相当于自动打卡）的功能，只要管理员开启这个功能就可以了，我们也就不需要折腾了。但是，很显然我们拍照打卡是不可能使用这种方案来解决的，于是又看了几篇拍照打卡的文章，发现实现方案大致分为两种：1）使用钉钉打卡的接口；2）模拟屏幕点击完成打卡。&lt;/p&gt;
+&lt;p&gt;第一种方案需要抓包获取到钉钉的打卡请求的接口，然后我们只要到点按时发起请求就完成打卡了，这种方案感觉难度比较高，而且请求接口也有可能发生变化，所以果断 PASS 了。第二种方案模拟屏幕点击，想了想感觉还是比较靠谱的，也比较符合我们的需求，我们只要把拍照打卡这一系列的点击屏幕的操作规划好就行了。于是乎，撸起袖子开干！&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/ding-ding-auto-punch-app/&t=钉钉自动拍照打卡 App 的实现"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E7%9A%84%E6%8E%A2%E8%AE%A8"><span class="toc-number">1.</span> <span class="toc-text">00 实现方式的探讨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E5%88%9D%E6%AD%A5%E5%B0%9D%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">01 初步尝试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5"><span class="toc-number">3.</span> <span class="toc-text">02 实现策略</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        钉钉自动拍照打卡 App 的实现
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-09-09T08:48:00.000Z" itemprop="datePublished">2018-09-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c53a7de3a39662.jpg" alt="Autumn from Bascom Hill in Madison, Wisconsin"></p>
+<blockquote>
+<p>每天上下班使用钉钉拍照打卡是个很烦人的事情，因为我经常会忘记打卡。而且每天要打开手机操作两次，这么机械化的事情，作为一个安卓开发工程师，难道就没有什么办法可以把它给自动化吗？答案当然是 Yes, we can!</p>
+</blockquote>
+<h3 id="00-实现方式的探讨"><a href="#00-实现方式的探讨" class="headerlink" title="00 实现方式的探讨"></a>00 实现方式的探讨</h3><p>首先上网搜索了一番，果然我不是第一个觉得打卡这件事很麻烦的人。发现钉钉打卡其实还分很多种，比如公司 WIFI 打卡，如果你们使用的是这种打卡方式，那么钉钉其实是有一个快速打卡（相当于自动打卡）的功能，只要管理员开启这个功能就可以了，我们也就不需要折腾了。但是，很显然我们拍照打卡是不可能使用这种方案来解决的，于是又看了几篇拍照打卡的文章，发现实现方案大致分为两种：1）使用钉钉打卡的接口；2）模拟屏幕点击完成打卡。</p>
+<p>第一种方案需要抓包获取到钉钉的打卡请求的接口，然后我们只要到点按时发起请求就完成打卡了，这种方案感觉难度比较高，而且请求接口也有可能发生变化，所以果断 PASS 了。第二种方案模拟屏幕点击，想了想感觉还是比较靠谱的，也比较符合我们的需求，我们只要把拍照打卡这一系列的点击屏幕的操作规划好就行了。于是乎，撸起袖子开干！</p>
+<span id="more"></span>
+
+<h3 id="01-初步尝试"><a href="#01-初步尝试" class="headerlink" title="01 初步尝试"></a>01 初步尝试</h3><p>一开始，我参考了这位博主的<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2b416ad0b949">方案</a>：</p>
+<blockquote>
+<p>监听闹钟广播，闹钟响起的时候，解锁，并打开钉钉 App，然后模拟屏幕点击，滑动等操作，最后关闭钉钉。</p>
+</blockquote>
+<p>看似很完美的方案对不对，但是也有问题，那就是在我的 Nexus 6P (Android 8.0) 上，根本就没办法监听到闹钟广播好吗！查了下发现，8.0 以后隐式广播被禁止了，真是非常抱歉呢！</p>
+<img src="https://i.loli.net/2019/07/22/5d35c55ea86ad81295.png" style="zoom:80%"/>
+
+<p>不过也有一些例外，看这里：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/broadcast-exceptions">Implicit Broadcast Exceptions</a>，只有这些列出的隐式广播还是可以继续在 manifest 里注册的。看吧，谷歌爸爸也不是那么霸道呢~</p>
+<p>既然闹钟广播监听不到，那就监听可以监听到的呗，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">IntentFilter filter = <span class="hljs-keyword">new</span> IntentFilter();<br>filter.addAction(Intent.ACTION_TIME_TICK);<br>registerReceiver(<span class="hljs-keyword">new</span> AutoStartReceiver(), filter);<br></code></pre></td></tr></table></figure>
+
+<p><code>Intent.ACTION_TIME_TICK</code> 是由系统发出的<strong>时间变化</strong>的广播（闹钟响起的时候同时也会触发），触发后每分钟发送一次。所以我们可以监听这个广播然后判断当前时间是否是打卡时间，是则执行打卡，否则就忽略。</p>
+<p>这种方案经过我的初步尝试后的确可行，但是设置闹钟难免有点麻烦。后来想了想，既然只是自己用，那么干脆就用比较暴力的手段实现：保持 Service 运行，时间一到就执行打卡，嗯~(•̀ᴗ•́)و ̑̑</p>
+<h3 id="02-实现策略"><a href="#02-实现策略" class="headerlink" title="02 实现策略"></a>02 实现策略</h3><p>首先说明下，我的实现方案肯定不是最好的，而且一些编码的方式也不推荐在实际的项目中使用。</p>
+<img src="https://i.loli.net/2019/07/22/5d35c58c38af732270.png" style="zoom:50%"/>
+
+<p>我们使用一个 <code>KeepRunningService</code> 来保证应用始终能够在后台运行，最好把应用加入到 Greenify 的白名单中。Service 中只做一件事，注册监听 <code>Intent.ACTION_TIME_TICK</code> 的广播，然后把这个 Service 设置成前台 Service 并每 5 分钟运行一次来达到保持后台运行的目的。</p>
+<p>通过 <code>PunchReceiver</code> 来运行 <code>PunchService</code>，<code>PunchService</code> 就是实际进行打卡操作的地方，我们使用 <code>IntentService</code> 来实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PunchService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IntentService</span> </span>&#123;<br>    <br>    <span class="hljs-comment">// ...</span><br>   <br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 处理打卡，利用 adb 命令点击屏幕完成打卡</span><br><span class="hljs-comment">     * 不同屏幕坐标位置不同，可以在开发者选项中开启查看屏幕坐标：Developer options -&gt; Input -&gt; Pointer location</span><br><span class="hljs-comment">     */</span><br>	<span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onHandleIntent</span><span class="hljs-params">(<span class="hljs-meta">@Nullable</span> Intent intent)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!timeForPunch()) &#123;<br>            stopSelf();<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        Log.d(<span class="hljs-keyword">this</span>.getClass().getSimpleName(), <span class="hljs-string">&quot;onHandleIntent: start punching...&quot;</span>);<br><br>        <span class="hljs-comment">// 唤醒屏幕</span><br>        wakeUp();<br>        <span class="hljs-comment">// 上滑解锁</span><br>        swipe(<span class="hljs-string">&quot;720&quot;</span>, <span class="hljs-string">&quot;2320&quot;</span>, <span class="hljs-string">&quot;720&quot;</span>, <span class="hljs-string">&quot;1320&quot;</span>);<br>        SystemClock.sleep(<span class="hljs-number">1000</span>);<br><br>        <span class="hljs-comment">// 输入 PIN 码解锁</span><br>        inputPinIfNeeded();<br>        SystemClock.sleep(<span class="hljs-number">3000</span>);<br><br>        showToast(<span class="hljs-string">&quot;打开钉钉&quot;</span>);<br>        startAppLauncher(DD_PACKAGE_NAME);<br>        SystemClock.sleep(<span class="hljs-number">10000</span>);<br><br>        showToast(<span class="hljs-string">&quot;点击中间菜单&quot;</span>);<br>        clickXY(<span class="hljs-string">&quot;700&quot;</span>, <span class="hljs-string">&quot;2325&quot;</span>);<br>        SystemClock.sleep(<span class="hljs-number">5000</span>);<br><br>        showToast(<span class="hljs-string">&quot;点击考勤打卡&quot;</span>);<br>        clickXY(<span class="hljs-string">&quot;540&quot;</span>, <span class="hljs-string">&quot;1800&quot;</span>);<br>        SystemClock.sleep(<span class="hljs-number">10000</span>);<br><br>        showToast(<span class="hljs-string">&quot;点击打卡&quot;</span>);<br>        clickXY(<span class="hljs-string">&quot;700&quot;</span>, punchPositionY);<br>        SystemClock.sleep(<span class="hljs-number">5000</span>);<br><br>        showToast(<span class="hljs-string">&quot;点击拍照&quot;</span>);<br>        clickXY(<span class="hljs-string">&quot;710&quot;</span>, <span class="hljs-string">&quot;2280&quot;</span>);<br>        SystemClock.sleep(<span class="hljs-number">8000</span>);<br><br>        showToast(<span class="hljs-string">&quot;点击 OK&quot;</span>);<br>        clickXY(<span class="hljs-string">&quot;710&quot;</span>, <span class="hljs-string">&quot;2281&quot;</span>);<br>        SystemClock.sleep(<span class="hljs-number">5000</span>);<br><br>        showToast(<span class="hljs-string">&quot;退出钉钉&quot;</span>);<br>        stopApp(DD_PACKAGE_NAME);<br><br>        startAppLauncher(getPackageName());<br>        SystemClock.sleep(<span class="hljs-number">3000</span>);<br><br>        <span class="hljs-comment">// 更新 UI</span><br>        String currentTime = <span class="hljs-keyword">new</span> SimpleDateFormat(<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, Locale.CHINA).format(<span class="hljs-keyword">new</span> Date());<br>        EventBus.getDefault().post(<span class="hljs-keyword">new</span> PunchFinishedEvent(punchType, currentTime));<br>        Log.d(<span class="hljs-keyword">this</span>.getClass().getSimpleName(), <span class="hljs-string">&quot;onHandleIntent: punch finished&quot;</span>);<br><br>        close();<br><br>        stopSelf();<br>    &#125;        <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>以上是核心代码，点击以及滑动操作都是通过 adb 命令完成的（需要 root 权限）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 滑动屏幕</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swipe</span><span class="hljs-params">(String x1, String y1, String x2, String y2)</span> </span>&#123;<br>      String cmd = String.format(<span class="hljs-string">&quot;input swipe %s %s %s %s \n&quot;</span>, x1, y1, x2, y2);<br>      exec(cmd);<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 点击</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clickXY</span><span class="hljs-params">(String x, String y)</span> </span>&#123;<br>      Log.d(AppUtil.class.getSimpleName(), <span class="hljs-string">&quot;clickXY: &quot;</span> + x + <span class="hljs-string">&quot;, &quot;</span> + y);<br>      String cmd = String.format(<span class="hljs-string">&quot;input tap %s %s \n&quot;</span>, x, y);<br>      exec(cmd);<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 执行 ADB 命令</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exec</span><span class="hljs-params">(String cmd)</span> </span>&#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>          <span class="hljs-keyword">if</span> (os == <span class="hljs-keyword">null</span>) &#123;<br>              os = Runtime.getRuntime().exec(<span class="hljs-string">&quot;su&quot;</span>).getOutputStream();<br>          &#125;<br>          os.write(cmd.getBytes());<br>          os.flush();<br>      &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>          e.printStackTrace();<br>      &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>打卡完成后会提示，而且主页面提供手动打卡的方式，基本上和自动打卡操作是一样的，点击后会直接打开钉钉进行打卡，以防如果自动打卡不起作用（服务被杀死）的情况。</p>
+<img src="https://i.loli.net/2019/07/22/5d35c5be95fac24261.png" style="zoom:20%"/>
+
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/AutoPunchDing">aJIEw/AutoPunchDing</a></p>
+<p>当然这个实现方式还是很原始的，如果想要使用的话还是得自己改代码，比如点击位置以及打卡时间。另外，闹钟其实可以不设置，因为只要应用不被杀死就可以自动打卡，但是最好还是设置一下，因为根据我一个礼拜下来的使用体验来看，偶尔还是会不能自动打卡的。最理想的方式是快到打卡时间的时候把应用打开一下，但是要是能记得就不需要这个 app 了，所以还是设闹钟吧(•̀ᴗ•́)و ̑̑</p>
+<hr>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2b416ad0b949">钉钉自动打卡的一种实现</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%E7%9A%84%E6%8E%A2%E8%AE%A8"><span class="toc-number">1.</span> <span class="toc-text">00 实现方式的探讨</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E5%88%9D%E6%AD%A5%E5%B0%9D%E8%AF%95"><span class="toc-number">2.</span> <span class="toc-text">01 初步尝试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E5%AE%9E%E7%8E%B0%E7%AD%96%E7%95%A5"><span class="toc-number">3.</span> <span class="toc-text">02 实现策略</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/ding-ding-auto-punch-app/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/ding-ding-auto-punch-app/&text=钉钉自动拍照打卡 App 的实现"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/ding-ding-auto-punch-app/&is_video=false&description=钉钉自动拍照打卡 App 的实现"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=钉钉自动拍照打卡 App 的实现&body=Check out this article: https://ajiew.me/ding-ding-auto-punch-app/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/ding-ding-auto-punch-app/&title=钉钉自动拍照打卡 App 的实现"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/ding-ding-auto-punch-app/&name=钉钉自动拍照打卡 App 的实现&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c53a7de3a39662.jpg&#34; alt=&#34;Autumn from Bascom Hill in Madison, Wisconsin&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;每天上下班使用钉钉拍照打卡是个很烦人的事情，因为我经常会忘记打卡。而且每天要打开手机操作两次，这么机械化的事情，作为一个安卓开发工程师，难道就没有什么办法可以把它给自动化吗？答案当然是 Yes, we can!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;00-实现方式的探讨&#34;&gt;&lt;a href=&#34;#00-实现方式的探讨&#34; class=&#34;headerlink&#34; title=&#34;00 实现方式的探讨&#34;&gt;&lt;/a&gt;00 实现方式的探讨&lt;/h3&gt;&lt;p&gt;首先上网搜索了一番，果然我不是第一个觉得打卡这件事很麻烦的人。发现钉钉打卡其实还分很多种，比如公司 WIFI 打卡，如果你们使用的是这种打卡方式，那么钉钉其实是有一个快速打卡（相当于自动打卡）的功能，只要管理员开启这个功能就可以了，我们也就不需要折腾了。但是，很显然我们拍照打卡是不可能使用这种方案来解决的，于是又看了几篇拍照打卡的文章，发现实现方案大致分为两种：1）使用钉钉打卡的接口；2）模拟屏幕点击完成打卡。&lt;/p&gt;
+&lt;p&gt;第一种方案需要抓包获取到钉钉的打卡请求的接口，然后我们只要到点按时发起请求就完成打卡了，这种方案感觉难度比较高，而且请求接口也有可能发生变化，所以果断 PASS 了。第二种方案模拟屏幕点击，想了想感觉还是比较靠谱的，也比较符合我们的需求，我们只要把拍照打卡这一系列的点击屏幕的操作规划好就行了。于是乎，撸起袖子开干！&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/ding-ding-auto-punch-app/&t=钉钉自动拍照打卡 App 的实现"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

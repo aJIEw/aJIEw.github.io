@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。  （长文预警：本文最佳阅读方式是先把 Redux 文档 以及 React Redux API 文档 在另一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native - Redux 入门">
+<meta property="og:url" content="https://ajiew.me/rn-redux-introduction/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。  （长文预警：本文最佳阅读方式是先把 Redux 文档 以及 React Redux API 文档 在另一个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c63419cc231618.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c65aca52827258.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/09/09/gQ3Vn4bSArMwsUp.gif">
+<meta property="og:image" content="https://ajiew.me/assets/2018-09-24/redux_flow_full.gif">
+<meta property="article:published_time" content="2018-09-24T14:28:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="React Native">
+<meta property="article:tag" content="Redux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c63419cc231618.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>React Native - Redux 入门</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/android-root-tips/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/pixel-upgrade/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/rn-redux-introduction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.me/rn-redux-introduction/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c63419cc231618.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（长文预警：本文最佳阅读方式是先把 &lt;a href=&#34;https://redux.js.org/&#34;&gt;Redux 文档&lt;/a&gt; 以及 &lt;a href=&#34;https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api&#34;&gt;React Redux API 文档 &lt;/a&gt;在另一个浏览器中打开，随时对比参考，然后把 &lt;a href=&#34;https://github.com/aJIEw/HeadFirstRN/tree/master/src/redux&#34;&gt;Demo 项目&lt;/a&gt;打开，看到有疑惑的地方，随时停下来动手写一写、改一改代码，debug 下，然后再接着看）&lt;/p&gt;
+&lt;h3 id=&#34;00-What’s-Redux&#34;&gt;&lt;a href=&#34;#00-What’s-Redux&#34; class=&#34;headerlink&#34; title=&#34;00 What’s Redux?&#34;&gt;&lt;/a&gt;00 What’s Redux?&lt;/h3&gt;&lt;p&gt;首先看下官方文档的解释『Redux is a predictable state container for JavaScript apps』，大致可以翻译为 Redux 是一个专为 JavaScript 应用设计的可预测的&lt;strong&gt;状态&lt;/strong&gt;容器。&lt;/p&gt;
+&lt;p&gt;我的理解：如果把我们的 app 比做销售柜台的话，Redux 其实就像一个自动售货机，它可以帮助我们&lt;strong&gt;管理&lt;/strong&gt;商品（&lt;strong&gt;组件&lt;/strong&gt;）的各种&lt;strong&gt;状态&lt;/strong&gt;。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-What%E2%80%99s-Redux"><span class="toc-number">1.</span> <span class="toc-text">00 What’s Redux?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-Core-Concept"><span class="toc-number">2.</span> <span class="toc-text">01 Core Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">2.1.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-Basic-Usage"><span class="toc-number">3.</span> <span class="toc-text">02 Basic Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Store"><span class="toc-number">3.1.</span> <span class="toc-text">Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#combineReducers-reducers"><span class="toc-number">3.2.</span> <span class="toc-text">combineReducers(reducers)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createStore-reducer-preloadedState-enhancer"><span class="toc-number">3.3.</span> <span class="toc-text">createStore(reducer, [preloadedState], [enhancer])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others%E2%80%A6"><span class="toc-number">3.4.</span> <span class="toc-text">Others…</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Combine-with-React-Redux"><span class="toc-number">4.</span> <span class="toc-text">03 Combine with React-Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-Provider-gt"><span class="toc-number">4.1.</span> <span class="toc-text">&lt;Provider&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#connect"><span class="toc-number">4.2.</span> <span class="toc-text">connect()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mapStateToProps-state-ownProps"><span class="toc-number">4.2.1.</span> <span class="toc-text">mapStateToProps(state, [ownProps])</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mapDispatchToProps-dispatch-ownProps-or-Action-Creators"><span class="toc-number">4.2.2.</span> <span class="toc-text">mapDispatchToProps(dispatch, [ownProps]) or Action Creators</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A-1"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A-1"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mergeProps-stateProps-dispatchProps-ownProps"><span class="toc-number">4.2.3.</span> <span class="toc-text">mergeProps(stateProps, dispatchProps, ownProps)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A-2"><span class="toc-number">4.2.3.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A-2"><span class="toc-number">4.2.3.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#options"><span class="toc-number">4.2.4.</span> <span class="toc-text">options</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">4.3.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-Show-Me-The-Code"><span class="toc-number">5.</span> <span class="toc-text">04 Show Me The Code</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Components-amp-Containers"><span class="toc-number">5.1.</span> <span class="toc-text">Components &amp; Containers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Demo"><span class="toc-number">5.2.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ChangeableText"><span class="toc-number">5.2.1.</span> <span class="toc-text">ChangeableText</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Main"><span class="toc-number">5.2.2.</span> <span class="toc-text">Main</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-Creators"><span class="toc-number">5.2.3.</span> <span class="toc-text">Action Creators</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reducers"><span class="toc-number">5.2.4.</span> <span class="toc-text">reducers</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#store-js"><span class="toc-number">5.2.5.</span> <span class="toc-text">store.js</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Root"><span class="toc-number">5.2.6.</span> <span class="toc-text">Root</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-Sum-Up"><span class="toc-number">6.</span> <span class="toc-text">05 Sum Up</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        React Native - Redux 入门
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-09-24T14:28:00.000Z" itemprop="datePublished">2018-09-24</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/React-Native/" rel="tag">React Native</a>, <a class="tag-link-link" href="/tags/Redux/" rel="tag">Redux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c63419cc231618.png" alt="React Redux API Overview"></p>
+<blockquote>
+<p>从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。</p>
+</blockquote>
+<p>（长文预警：本文最佳阅读方式是先把 <a target="_blank" rel="noopener" href="https://redux.js.org/">Redux 文档</a> 以及 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api">React Redux API 文档 </a>在另一个浏览器中打开，随时对比参考，然后把 <a target="_blank" rel="noopener" href="https://github.com/aJIEw/HeadFirstRN/tree/master/src/redux">Demo 项目</a>打开，看到有疑惑的地方，随时停下来动手写一写、改一改代码，debug 下，然后再接着看）</p>
+<h3 id="00-What’s-Redux"><a href="#00-What’s-Redux" class="headerlink" title="00 What’s Redux?"></a>00 What’s Redux?</h3><p>首先看下官方文档的解释『Redux is a predictable state container for JavaScript apps』，大致可以翻译为 Redux 是一个专为 JavaScript 应用设计的可预测的<strong>状态</strong>容器。</p>
+<p>我的理解：如果把我们的 app 比做销售柜台的话，Redux 其实就像一个自动售货机，它可以帮助我们<strong>管理</strong>商品（<strong>组件</strong>）的各种<strong>状态</strong>。</p>
+<span id="more"></span>
+
+<p>我们知道在一个 RN 项目中，一般会定义许许多多的组件，每个组件都有自己的 <code>State</code>，通常情况下会通过 <code>setState</code> 去更改组件状态或者响应用户的在 UI 上的输入，但是随着一个 App 的内容的增加以及逻辑复杂度的上升，组件的的状态会变得越来越臃肿，继而变得难以维护（维护困难也是 RN 最大的痛点）。所以，这个时候就该 Redux 出场了，我们通过引入它来帮助我们<strong>管理组件的状态</strong>。</p>
+<p>简单来说，有了 Redux 之后，我们基本上就不需要自己去 <code>setState</code> 了，因为几乎所有的 State 的变化都可以交给 Redux 来管理。</p>
+<h3 id="01-Core-Concept"><a href="#01-Core-Concept" class="headerlink" title="01 Core Concept"></a>01 Core Concept</h3><p>Redux 中有四个核心的概念是需要我们掌握的，分别是 <code>Actions</code>, <code>Reducers</code>, <code>Store</code> 以及 <code>Data Flow</code>（强烈推荐看一遍 <a target="_blank" rel="noopener" href="https://redux.js.org/introduction/core-concepts">Redux 文档</a> 里对这几个概念的介绍）。</p>
+<p>看过文档后差不多就可以知道，我们通过在需要改变 state 的地方发送(dispatch) action，然后在 reducer 中根据 action 的 type 进行处理（返回增删改后的 state），而 state 则是根据 reducer 的组合结构保存在 store 的 state 树中的。</p>
+<p>文字太枯燥，来看下面这张图辅助理解：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35c65aca52827258.jpg" alt="Redux Data Flow (simple)"></p>
+<p>我简单分析下这张图吧：</p>
+<ol>
+<li>首先 React 组件绑定了 Redux 之后（主要借助 React-Redux，下面会说到），就可以使用 <code>store.dispatch()</code> 去发送事件了，比如在按钮的点击事件中发送 action；</li>
+<li>store 接收到 action 之后，会把之前的 state 连同发送的 action 一起传递给 reducer，然后 reducer 会根据我们定义好的处理方式去处理 action （增删改 state），然后返回新的 state 让 store 去更新全局 state 树；</li>
+<li>最终 store 会把新的 state 返回给发送 action 的地方好让 React 组件更新 UI。</li>
+</ol>
+<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h4><p>这里再总结一些 Redux 新手会比较疑惑的点：</p>
+<p><strong>问：</strong>什么是 <code>Action Creator</code> ?</p>
+<p><strong>答：</strong>顾名思义，<code>Action Creator</code> 就是生成 action 的函数，我们知道 action 是一个对象，其中携带了一些用于更新 state 的数据。想象一下，如果我们每次发送事件的时候都自己定义一个 action 对象，那么无疑是非常容易出错的。而使用 <code>Action Creator</code> 后，管理 action 就容易多了，而且也不用担心在 action 中用错属性了，因为只要在 <code>Action Creator</code> 中定义好参数后，我们就可以在发送该 action 的地方确定需要携带哪些数据了。比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">changeText</span>(<span class="hljs-params">text, color</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: CHANGE_TEXT,<br>    text,<br>    color,<br>  &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>问：</strong>reducer 当中是如何更改 state 的？可以在 reducer 中发请求吗？</p>
+<p><strong>答：</strong>不可以！注意，reducer 只是通过接收 action 去处理 state 的变化，我们不可以在 reducer 中引入变化。引用文档上的话：</p>
+<blockquote>
+<p>Remember that the reducer must be pure. <strong>Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.</strong></p>
+</blockquote>
+<p>也就是说 reducer 必须是<a target="_blank" rel="noopener" href="https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/ch3.html"><em><strong>纯函数</strong></em></a>，接收输入，返回输出，只是纯粹的计算。举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textReducer</span>(<span class="hljs-params">state = &#123;&#125;, action</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> text = action.text;<br>  <span class="hljs-keyword">let</span> color = action.color;<br>  <span class="hljs-comment">// 判断 action 类型</span><br>  <span class="hljs-keyword">switch</span> (action.type) &#123;<br>    <span class="hljs-keyword">case</span> CHANGE_TEXT:<br>      <span class="hljs-comment">// 返回新状态</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(&#123;&#125;, state, &#123;<br>        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;新文字：&#x27;</span> + text,<br>        <span class="hljs-attr">color</span>: color<br>      &#125;);<br>    <span class="hljs-keyword">default</span>:<br>      <span class="hljs-keyword">return</span> state;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>需要注意的是，我们不可以改变原来的 state，也就是要保持 <code>Object.assign()</code> 中的第一个参数为空，当然也可以使用扩展运算符 <code>&#123;...state, &#123;newState&#125;&#125;</code> 来达到同样的目的。</p>
+<p><strong>问：</strong>React 组件是如何更新的？</p>
+<p><strong>答：</strong>哈哈，这个其实就是真正体现出 Redux 优势的地方。之前说过有了 Redux 之后我们就不需要自己去管理 state，这是怎么做到的呢？其实当我们把所有的 state 都交给 Redux 之后，Redux 在 store 中就保存了我们应用所有的 state (state tree)，这意味着我们可以在任意位置获取到这些 state。而在 RN 中，我们通过 React-Redux 来连接 Redux 和 RN 组件，然后在组件中通过将 state 映射成 props 来使用，而且我们还可以将 dispatch 也映射成 props 来使用。也就是说，我们只需要使用 <code>this.props.xxx</code> 就可以完成数据的展示、响应用户输入以及 UI 变化了，是不是非常神奇？后面 03 段会详细说我们是怎么通过 React-Redux 来做到这一点的。</p>
+<h3 id="02-Basic-Usage"><a href="#02-Basic-Usage" class="headerlink" title="02 Basic Usage"></a>02 Basic Usage</h3><p>了解了 Redux 基本概念之后就可以来学习一下如何使用了。这一节主要介绍 API 的使用。</p>
+<h4 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h4><p>之前举了个 Action Creator 和 reducer 的例子，也知道了我们需要通过 store 来将这两者绑定在一起，但是 store 究竟还有哪些作用呢？store 主要有以下职责：</p>
+<ul>
+<li>保存应用状态（state）</li>
+<li>提供对 state 的访问：<a target="_blank" rel="noopener" href="https://redux.js.org/api/store#getState">getState()</a></li>
+<li>提供对状态进行更新的方法： <a target="_blank" rel="noopener" href="https://redux.js.org/api/store#dispatch">dispatch(action)</a></li>
+<li>注册监听器： <a target="_blank" rel="noopener" href="https://redux.js.org/api/store#subscribe">subscribe(listener)</a></li>
+<li>通过  <a target="_blank" rel="noopener" href="https://redux.js.org/api/store#subscribe">subscribe(listener)</a> 返回的方法处理解注册监听器</li>
+</ul>
+<p>可以看出 store 就像<strong>母体</strong>一样，即保存了状态又连接了 Action Creator 和 reducer。但是究竟是怎么连接的呢？</p>
+<p>首先，之前说过我们的 reducer 可以定义 store 保存的 state 树结构，为什么呢？因为 reducer 是可以层层组合的。通常一个组件会有很多层级以及类型（比如 UI 和数据）的 state，我们不可能全都把他们定义在一个 reducer 里，这样代码会变得又长又难以维护。正确的做法是我们应该把一个 reducer <a target="_blank" rel="noopener" href="https://redux.js.org/basics/reducers#splitting-reducers">拆分成多个 reducer</a> 后再通过某种方式将它们组合起来。</p>
+<h4 id="combineReducers-reducers"><a href="#combineReducers-reducers" class="headerlink" title="combineReducers(reducers)"></a>combineReducers(reducers)</h4><p>最常见的就是使用 <a target="_blank" rel="noopener" href="https://redux.js.org/api/combinereducers">combineReducers()</a> 方法来组合 reducer，它可以把多个 reducer 合并成一个 reducer 对象，而合并后的 reducer 的层级结构就是我们访问 state 时的层级结构。接收的参数是一个 reducer 对象，我们可以自己指定 key，也可以直接组合，比如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> allReducers = combineReducers(&#123;textReducer, imageReducer, <span class="hljs-attr">videoRed</span>: videoReducer&#125;);<br></code></pre></td></tr></table></figure>
+
+<h4 id="createStore-reducer-preloadedState-enhancer"><a href="#createStore-reducer-preloadedState-enhancer" class="headerlink" title="createStore(reducer, [preloadedState], [enhancer])"></a>createStore(reducer, [preloadedState], [enhancer])</h4><p>当把多个 reducer 合并成一个之后，我们就可以通过 <a target="_blank" rel="noopener" href="https://redux.js.org/api/createstore">createStore</a> 来创建 store 了，它唯一必须的参数是 reducer，也就是我们 <code>combineReducer(reducers)</code> 返回的 reducer。</p>
+<p>第二个参数是可选的初始状态 <code>preloadedState</code>。我们可以从服务器读取初始状态，或者在 app 启动时从本地数据读取初始状态。如果使用了 <code>combineReducer()</code> 后的 reducer 作为第一个参数，那么 <code>preloadedState</code> 就必须是结构和 reducer 中的结构保持一致。</p>
+<p>第三个参数也是可选的 <code>enhancer</code>，接收的是一个函数，可以是你想要提供的第三方的功能，比如 Redux 自带的 <a target="_blank" rel="noopener" href="https://redux.js.org/api/applymiddleware">applyMiddleware()</a>，这个属于高阶的内容，以后有时间会写写。举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> allReducers = combineReducers(&#123;textReducer&#125;);<br><br><span class="hljs-keyword">let</span> store = createStore(allReducers, applyMiddleware(thunkMiddleware));<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;<br></code></pre></td></tr></table></figure>
+
+<p><code>createStore()</code> 返回的 store 就是保存了应用全局 state 的对象了，这个时候我们就可以使用 <a target="_blank" rel="noopener" href="https://redux.js.org/api/store#getState"><code>getState()</code></a> 并且根据 reducer 的层级来访问保存在其中的 state 了！</p>
+<h4 id="Others…"><a href="#Others…" class="headerlink" title="Others…"></a>Others…</h4><p>其实核心的 API 就是以上这些，但是下面这些也是比较常见的，这里贴个链接自己看吧(๑^ں^๑)</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/api/applymiddleware">applyMiddleware(…middleware)</a></li>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/api/bindactioncreators">bindActionCreators(actionCreators, dispatch)</a></li>
+<li><a target="_blank" rel="noopener" href="https://redux.js.org/api/compose">compose(functions)</a></li>
+</ul>
+<h3 id="03-Combine-with-React-Redux"><a href="#03-Combine-with-React-Redux" class="headerlink" title="03 Combine with React-Redux"></a>03 Combine with React-Redux</h3><p>理解了 Redux 的核心概念以及基本 API 之后，我们就可以开始尝试学习如何在 RN 中使用 Redux 了。在 RN 中，我们一般会结合 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux">React-Redux</a> 来使用 Redux，通过它我们可以很方便地把 Redux 和 RN 组件绑定在一起。React-Redux 也是 Redux 官方推荐的用来和 <a target="_blank" rel="noopener" href="https://redux.js.org/basics/usagewithreact">React 绑定</a> 的框架，其实我也有点奇怪为什么不直接把 React-Redux 加入到 Redux 中去？(・_・ヾ</p>
+<p>同样的，在介绍 React-Redux 具体用法之前，建议先把 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api">API 文档</a> 打开放边上供随时参考。</p>
+<h4 id="lt-Provider-gt"><a href="#lt-Provider-gt" class="headerlink" title="&lt;Provider&gt;"></a><a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#provider-store">&lt;Provider&gt;</a></h4><p>从文档上可以发现，React-Redux 的 API 分为两部分，分别是 <code>&lt;Provider store&gt;</code> 以及<code>connect()</code> 方法。<code>connect()</code> 方法用于连接单个的 RN 组件和 <code>Redux Store</code>，而 <code>Provider</code> 则作为根布局用于包装所有的 RN 组件，使得其中使用了 <code>connect()</code>  后的组件可以自由访问 <code>Redux Store</code>。</p>
+<p>比如假设你的根部组件是 <code>&lt;Main/&gt;</code> （如果你使用 <a target="_blank" rel="noopener" href="https://gist.github.com/aksonov/e2d7454421e44b1c4c72214d14053410">react-native-router-flux</a> 作为 navigation 的话，那么根布局就是 <code>&lt;Router&gt;</code>），用 <code>&lt;Provider&gt;</code> 包装后就是这样的： </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">&#123;store&#125;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Main</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>而在你的容器（Container，下面会说到）中，需要使用 <code>connect()</code> 方法来连接 RN 组件和 store，像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(mapStateToProps, &#123;changeText, changeBack&#125;)(Main);<br></code></pre></td></tr></table></figure>
+
+<h4 id="connect"><a href="#connect" class="headerlink" title="connect()"></a><a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options">connect()</a></h4><p>React-Redux 的核心就是 <code>connect()</code> 方法了，所以下面详细介绍下 <code>connect()</code> 方法的各个参数。</p>
+<p>调用 <code>connect()</code>  方法不会修改组件，但是会返回一个已经和 store 建立连接后的新组件，它使用了装饰器模式，装饰的是 <code>connectAdcanced()</code>，这个方法返回一个接收需要连接的组件的方法（比如上面的 <code>Main</code>）。</p>
+<p>它的参数如下（建议参照文档看，我的翻译也许有误）：</p>
+<h5 id="mapStateToProps-state-ownProps"><a href="#mapStateToProps-state-ownProps" class="headerlink" title="mapStateToProps(state, [ownProps])"></a>mapStateToProps(state, [ownProps])</h5><p>这是一个 <code>function</code> 类型的参数。</p>
+<p>如果指定了这个参数，那么返回的新组件就会接收到 store 的更新。也就是说每次 store 发生更新时这个方法都会被调用。使用方式如下：</p>
+<h6 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h6><ul>
+<li><code>state</code>: 即 state 发生更新后接收到的新 state</li>
+<li><code>ownProps</code>: 可选，新组件接收到的 props，如果指定了该值，那么这个方法也会被调用</li>
+</ul>
+<h6 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h6><ul>
+<li>必须是对象 <code>object</code>，并且该对象会被合并到组件的 props 中去。我们一般将接收到的 state 里面关于该组件有用到的部分取出，映射成对应的 props 就可以了，其实这个方法就是一个选择器（<strong>selector</strong>）</li>
+</ul>
+<p>Tips: 如果不想接收到 state 的更新，可以传 <code>null</code> 或 <code>undifined</code></p>
+<h5 id="mapDispatchToProps-dispatch-ownProps-or-Action-Creators"><a href="#mapDispatchToProps-dispatch-ownProps-or-Action-Creators" class="headerlink" title="mapDispatchToProps(dispatch, [ownProps]) or Action Creators"></a>mapDispatchToProps(dispatch, [ownProps]) or Action Creators</h5><p>这是一个 <code>function</code> 或 <code>object</code> 类型的参数。</p>
+<p>如果指定的是 <code>object</code>，那么其中的每个属性必须是都是 Action Creator，每个 Action Creator 都会被包装到 <code>dispatch()</code> 中，并且合并到组件的 props 中去。</p>
+<p>如果指定的是 <code>function</code>，使用如下：</p>
+<h6 id="参数：-1"><a href="#参数：-1" class="headerlink" title="参数："></a>参数：</h6><ul>
+<li><code>dispatch</code>:  store 的 <code>dispatch()</code> 方法，你可以自己决定如何使用 <code>dispatch</code> 去发送事件（当然也是通过 Action Creator），比如使用 <a target="_blank" rel="noopener" href="https://redux.js.org/api-reference/bindactioncreators">bindActionCreators()</a></li>
+<li><code>ownProps</code>: 可选，和 <code>mapStateToProps</code> 一样也是新组件接收到的 props</li>
+</ul>
+<h6 id="返回值：-1"><a href="#返回值：-1" class="headerlink" title="返回值："></a>返回值：</h6><ul>
+<li>同样是一个对象 <code>object</code>，会被合并到 props 中作为发送事件的方法来使用</li>
+</ul>
+<p>Tips: 如果不指定该参数（mapDispatchToProps or Action Creator）那么 React- Redux 默认会把 <code>dispatch</code> 方法注入到组件中，方便你自己手动去调用 Action Creator。</p>
+<h5 id="mergeProps-stateProps-dispatchProps-ownProps"><a href="#mergeProps-stateProps-dispatchProps-ownProps" class="headerlink" title="mergeProps(stateProps, dispatchProps, ownProps)"></a>mergeProps(stateProps, dispatchProps, ownProps)</h5><p>这是一个 <code>function</code> 类型的参数。</p>
+<p>该方法用于将前面两个参数返回的对象以及组件自己的 props 进行重新组合或者过滤，一般如果 props 较多的话，我们可以指定这个方法来对 props 进行筛选，然后再合并到组件中。使用方法如下：</p>
+<h6 id="参数：-2"><a href="#参数：-2" class="headerlink" title="参数："></a>参数：</h6><ul>
+<li><p><code>stateProps</code>: 表示 <code>mapStateToProps()</code> 返回的对象</p>
+</li>
+<li><p><code>dispatchProps</code>: 表示 <code>mapDispatchToProps()</code> 返回的对象</p>
+</li>
+<li><p><code>ownProps</code>: 组件自己的 props</p>
+</li>
+</ul>
+<h6 id="返回值：-2"><a href="#返回值：-2" class="headerlink" title="返回值："></a>返回值：</h6><ul>
+<li>筛选后的对象，将会被合并到组件的 props 中去</li>
+</ul>
+<p>Tips: 如果不指定该方法，默认将调用 <code>Object.assign(&#123;&#125;, ownProps, stateProps, dispatchProps)</code> 来合并所有的 props。</p>
+<h5 id="options"><a href="#options" class="headerlink" title="options"></a>options</h5><p>这是一个 <code>object</code> 类型的参数。</p>
+<p>该方法用于定制连接器的行为，具体可使用的参数有：</p>
+<ul>
+<li><p>[<code>pure</code>] <em>(Boolean)</em>: 如果为 true 则当 state/props 值没有发生变化的时候则不重新渲染（rerender）或者调用 <code>mapStateToProps()</code> or  <code>mapDispatchToProps()</code> or <code>ownProps</code>，前提是组件必须是*”纯”*的（PureComponent？），不依赖组件内部的 state 而只依赖 props 和 Redux store。</p>
+</li>
+<li><p>[<code>areStatesEqual</code>] <em>(Function)</em>: 当是<em>纯</em>组件时，比较接收到的新 state 和之前的值，默认值 <code>strictEqual (===)</code></p>
+</li>
+<li><p>[<code>areOwnPropsEqual</code>] <em>(Function)</em>: 当是<em>纯</em>组件时，比较接收到的新 props 和之前的值，默认值 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/src/utils/shallowEqual.js">shallowEqual</a></p>
+</li>
+<li><p>[<code>areStatePropsEqual</code>] <em>(Function)</em>: 当是<em>纯</em>组件时，比较 <code>mapStateToProps()</code> 接收到的新 state 和之前的值，默认值 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/src/utils/shallowEqual.js">shallowEqual</a></p>
+</li>
+<li><p>[<code>areMergedPropsEqual</code>] <em>(Function)</em>: 当是<em>纯</em>组件时，比较 <code>mergeProps()</code> 接收到的新 props 和之前的值，默认值 <a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/src/utils/shallowEqual.js">shallowEqual</a></p>
+</li>
+<li><p>[<code>storeKey</code>] <em>(String)</em>: 从当前上下文中读取 store 的 key，当你有多个 store 的时候才会使用这个参数，不推荐使用多个 store，默认值 <code>store</code></p>
+</li>
+</ul>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><p>当然，以上是核心 API，下面两个方法不是很常用，所以不多介绍了，自己看去吧~´･ᴗ･`</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#connectadvancedselectorfactory-connectoptions">connectAdvanced(selectorFactory, [connectOptions])</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/reduxjs/react-redux/blob/master/docs/api.md#createproviderstorekey">createProvider([storeKey])</a></li>
+</ul>
+<h3 id="04-Show-Me-The-Code"><a href="#04-Show-Me-The-Code" class="headerlink" title="04 Show Me The Code"></a>04 Show Me The Code</h3><p>能看到这里说明你真的很好学啊，既然这样那就一起来撸一下代码吧(๑•͈ᴗ•͈)。Demo 地址：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/HeadFirstRN/tree/master/app/redux">aJIEw/Redux</a></p>
+<p>首先说明下，以下的项目分包是推荐的做法，你不一定需要完全遵守：</p>
+<ul>
+<li>components <em>[folder]</em></li>
+<li>containers <em>[folder]</em></li>
+<li>redux <em>[folder]</em><ul>
+<li>actions <em>[folder]</em></li>
+<li>reducers <em>[folder]</em></li>
+<li>store.js <em>[file]</em></li>
+</ul>
+</li>
+</ul>
+<h4 id="Components-amp-Containers"><a href="#Components-amp-Containers" class="headerlink" title="Components &amp; Containers"></a>Components &amp; Containers</h4><p>Components 和 Containers 下面放的是两种不同的组件。这里的 Component 和 React 中的 <code>Component</code> 是有区别的，专指那些<strong>只是</strong>用来展示数据的、<strong>无状态</strong>的<em><strong>纯</strong></em>组件。Components 的特点是：1）通过 props 来接收数据；2）可在多处复用。由于是单纯用于展示的组件，我们一般不会在 Components 中发起网络请求、进行本地存储等操作。</p>
+<p>而 Containers 指的是一个小的模块，用来连接数据并且可以修改数据的组件。Containers 一般会通过组合 Components 来使用，我们会在其中处理用户输入、状态变化，也可以发起网络请求等操作。Components 和 Containers 的最简单的区分方法是：有没有使用 React-Redux 的 <code>connect()</code> 连接组件。</p>
+<p>而 redux 包下存放的当然就是和 Redux 相关的内容啦，actions 下存放 Action Creator，reducers 下存放 reducer，最外面的 store.js 则是创建 store 的地方了。</p>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>看代码之前先看下我们的 demo 实现的效果吧：</p>
+<img src="https://i.loli.net/2019/09/09/gQ3Vn4bSArMwsUp.gif" width="40%"/>
+
+<p>根据最近学到的 <a target="_blank" rel="noopener" href="http://sscce.org/">SSCCE</a> 原则，我尽可能把这个 demo 写的足够简单，目的是帮助理解 React Redux 的使用。</p>
+<h5 id="ChangeableText"><a href="#ChangeableText" class="headerlink" title="ChangeableText"></a>ChangeableText</h5><p>这个 Component 的作用很简单——显示文字，不过文字和颜色是可以改变的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs react">export default class ChangeableText extends Component &#123;<br>  render() &#123;<br>    return (<br>      &lt;Text style=&#123;&#123;color: this.props.color, borderWidth: 2, padding: 8&#125;&#125;&gt;&#123;this.props.text&#125;&lt;/Text&gt;<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h5><p>而作为 Container 的 <code>Main</code> 则组合了 <code>ChangeableText </code> 组件并且有两个可点击的按钮用于改变文字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs react">class Main extends Component &#123;<br>  render() &#123;<br>    return (<br>      &lt;View style=&#123;styles.container&#125;&gt;<br>        &#123;/* 将从 state 映射而来的 props 传入 Component 中，state 发生变化则 props 的值也会相应地发生改变 */&#125;<br>        &lt;ChangeableText &#123;...this.props&#125;/&gt;<br><br>        &#123;/* 此时直接调用 props 上的 dispatcher */&#125;<br>        &lt;TouchableOpacity style=&#123;styles.changeText&#125; onPress=&#123;() =&gt; this.props.actions.changeText(&#x27;Hello&#x27;, &#x27;red&#x27;)&#125;&gt;<br>          &lt;Text&gt;改变文字&lt;/Text&gt;<br>        &lt;/TouchableOpacity&gt;<br><br>        &lt;TouchableOpacity onPress=&#123;() =&gt; this.props.actions.changeBack()&#125;&gt;<br>          &lt;Text&gt;恢复&lt;/Text&gt;<br>        &lt;/TouchableOpacity&gt;<br>      &lt;/View&gt;<br>    );<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最重要的部分就是 <code>connect()</code> 方法啦，这里我使用了 <code>bindActionCreators()</code> 来创建 dispacher：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs react">// 将 state 映射成 props，这里我们可以自由组合需要使用到的 state，只要是 store 树中存在的 state 都可以直接拿来使用<br>function mapStateToProps(state) &#123;<br>  return &#123;<br>    text: state.textReducer.text,<br>    color: state.textReducer.color,<br>  &#125;<br>&#125;<br><br>function mapDispatchToProps(dispatch) &#123;<br>  return &#123;<br>    actions: bindActionCreators(TextChanger, dispatch)<br>  &#125;<br>&#125;<br><br>// 第二个参数如果是 Action Creator，则会被自动映射成组件上的 props 作为 dispatcher 使用<br>export default connect(mapStateToProps, mapDispatchToProps)(Main);<br></code></pre></td></tr></table></figure>
+
+<h5 id="Action-Creators"><a href="#Action-Creators" class="headerlink" title="Action Creators"></a>Action Creators</h5><p>没啥好说的，注意 <code>type</code> 是必须要有的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CHANGE_TEXT = <span class="hljs-string">&#x27;CHANGE_TEXT&#x27;</span>;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CHANGE_BACK = <span class="hljs-string">&#x27;CHANGE_BACK&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">changeText</span>(<span class="hljs-params">text, color</span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: CHANGE_TEXT,<br>    text,<br>    color,<br>  &#125;;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">changeBack</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">type</span>: CHANGE_BACK,<br>    <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;Hi&#x27;</span>,<br>    <span class="hljs-attr">color</span>: <span class="hljs-string">&#x27;black&#x27;</span>,<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="reducers"><a href="#reducers" class="headerlink" title="reducers"></a>reducers</h5><p>如何组织 reducer 是门艺术，尤其是当 app 变得复杂之后，不过我们现在不用考虑这个问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">textReducer</span>(<span class="hljs-params">state = &#123;text: <span class="hljs-string">&#x27;Hi&#x27;</span>, color: <span class="hljs-string">&#x27;black&#x27;</span>&#125;, action</span>) </span>&#123;<br>  <span class="hljs-keyword">let</span> text = action.text;<br>  <span class="hljs-keyword">let</span> color = action.color;<br>  <br>  <span class="hljs-comment">// 判断 action 类型</span><br>  <span class="hljs-keyword">switch</span> (action.type) &#123;<br>    <span class="hljs-keyword">case</span> CHANGE_TEXT:<br>      <span class="hljs-comment">// 返回新状态</span><br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(&#123;&#125;, state, &#123;<br>        <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;新文字：&#x27;</span> + text,<br>        <span class="hljs-attr">color</span>: color<br>      &#125;);<br>    <span class="hljs-keyword">case</span> CHANGE_BACK:<br>      <span class="hljs-keyword">return</span> &#123;<br>        ...state,<br>        text,<br>        color<br>      &#125;;<br>    <span class="hljs-keyword">default</span>:<br>      <span class="hljs-keyword">return</span> state;<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> textReducer;<br></code></pre></td></tr></table></figure>
+
+<h5 id="store-js"><a href="#store-js" class="headerlink" title="store.js"></a>store.js</h5><p>最后就是创建 store 了：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> allReducers = combineReducers(&#123;textReducer&#125;);<br><br><span class="hljs-keyword">let</span> store = createStore(allReducers);<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;<br></code></pre></td></tr></table></figure>
+
+<h5 id="Root"><a href="#Root" class="headerlink" title="Root"></a>Root</h5><p>最最后，记得要把根组件用 <code>&lt;Provider&gt;</code> 包装起来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs react">export default class Root extends Component &#123;<br>  render() &#123;<br>    return (<br>      // 连接组件和 store<br>      &lt;Provider store=&#123;store&#125;&gt;<br>        &lt;Main /&gt;<br>      &lt;/Provider&gt;<br>    )<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>OK，大致就这么简单，接下来就是运行，debug，看看 state 是怎么在组件中被传递的。</p>
+<h3 id="05-Sum-Up"><a href="#05-Sum-Up" class="headerlink" title="05 Sum Up"></a>05 Sum Up</h3><p>通过上面的介绍，配合官方文档和 Demo，如果你有完整看完的话，相信对于如何使用 Redux 应该基本没问题了，所以这个时候就可以祭出这张图了： </p>
+<p><img src="../assets/2018-09-24/redux_flow_full.gif" alt="redux_flow_full"></p>
+<p>这张图可以说非常完美地展现了 Redux 的工作原理，值得细看。其中 <a target="_blank" rel="noopener" href="https://redux.js.org/advanced/middleware">middleware</a> 属于高级内容没有仔细讲，下次有时间的话会再续更。</p>
+<p>Redux 可以说是管理 state 的神器，能把我们从混乱和无序中解救出来。希望这篇文章可以帮助想要学习 Redux 的同学尽早入门~(◍•ᴗ•◍)❤~~</p>
+<p>祝大家中秋快乐！</p>
+<hr>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2a327a235f2d">React-Native 之 redux 与 react-redux</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-What%E2%80%99s-Redux"><span class="toc-number">1.</span> <span class="toc-text">00 What’s Redux?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-Core-Concept"><span class="toc-number">2.</span> <span class="toc-text">01 Core Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">2.1.</span> <span class="toc-text">Q &amp; A</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-Basic-Usage"><span class="toc-number">3.</span> <span class="toc-text">02 Basic Usage</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Store"><span class="toc-number">3.1.</span> <span class="toc-text">Store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#combineReducers-reducers"><span class="toc-number">3.2.</span> <span class="toc-text">combineReducers(reducers)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#createStore-reducer-preloadedState-enhancer"><span class="toc-number">3.3.</span> <span class="toc-text">createStore(reducer, [preloadedState], [enhancer])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others%E2%80%A6"><span class="toc-number">3.4.</span> <span class="toc-text">Others…</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Combine-with-React-Redux"><span class="toc-number">4.</span> <span class="toc-text">03 Combine with React-Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-Provider-gt"><span class="toc-number">4.1.</span> <span class="toc-text">&lt;Provider&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#connect"><span class="toc-number">4.2.</span> <span class="toc-text">connect()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#mapStateToProps-state-ownProps"><span class="toc-number">4.2.1.</span> <span class="toc-text">mapStateToProps(state, [ownProps])</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-number">4.2.1.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-number">4.2.1.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mapDispatchToProps-dispatch-ownProps-or-Action-Creators"><span class="toc-number">4.2.2.</span> <span class="toc-text">mapDispatchToProps(dispatch, [ownProps]) or Action Creators</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A-1"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A-1"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mergeProps-stateProps-dispatchProps-ownProps"><span class="toc-number">4.2.3.</span> <span class="toc-text">mergeProps(stateProps, dispatchProps, ownProps)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%EF%BC%9A-2"><span class="toc-number">4.2.3.1.</span> <span class="toc-text">参数：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A-2"><span class="toc-number">4.2.3.2.</span> <span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#options"><span class="toc-number">4.2.4.</span> <span class="toc-text">options</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">4.3.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-Show-Me-The-Code"><span class="toc-number">5.</span> <span class="toc-text">04 Show Me The Code</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Components-amp-Containers"><span class="toc-number">5.1.</span> <span class="toc-text">Components &amp; Containers</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Demo"><span class="toc-number">5.2.</span> <span class="toc-text">Demo</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ChangeableText"><span class="toc-number">5.2.1.</span> <span class="toc-text">ChangeableText</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Main"><span class="toc-number">5.2.2.</span> <span class="toc-text">Main</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Action-Creators"><span class="toc-number">5.2.3.</span> <span class="toc-text">Action Creators</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#reducers"><span class="toc-number">5.2.4.</span> <span class="toc-text">reducers</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#store-js"><span class="toc-number">5.2.5.</span> <span class="toc-text">store.js</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Root"><span class="toc-number">5.2.6.</span> <span class="toc-text">Root</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-Sum-Up"><span class="toc-number">6.</span> <span class="toc-text">05 Sum Up</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/rn-redux-introduction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.me/rn-redux-introduction/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c63419cc231618.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;（长文预警：本文最佳阅读方式是先把 &lt;a href=&#34;https://redux.js.org/&#34;&gt;Redux 文档&lt;/a&gt; 以及 &lt;a href=&#34;https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api&#34;&gt;React Redux API 文档 &lt;/a&gt;在另一个浏览器中打开，随时对比参考，然后把 &lt;a href=&#34;https://github.com/aJIEw/HeadFirstRN/tree/master/src/redux&#34;&gt;Demo 项目&lt;/a&gt;打开，看到有疑惑的地方，随时停下来动手写一写、改一改代码，debug 下，然后再接着看）&lt;/p&gt;
+&lt;h3 id=&#34;00-What’s-Redux&#34;&gt;&lt;a href=&#34;#00-What’s-Redux&#34; class=&#34;headerlink&#34; title=&#34;00 What’s Redux?&#34;&gt;&lt;/a&gt;00 What’s Redux?&lt;/h3&gt;&lt;p&gt;首先看下官方文档的解释『Redux is a predictable state container for JavaScript apps』，大致可以翻译为 Redux 是一个专为 JavaScript 应用设计的可预测的&lt;strong&gt;状态&lt;/strong&gt;容器。&lt;/p&gt;
+&lt;p&gt;我的理解：如果把我们的 app 比做销售柜台的话，Redux 其实就像一个自动售货机，它可以帮助我们&lt;strong&gt;管理&lt;/strong&gt;商品（&lt;strong&gt;组件&lt;/strong&gt;）的各种&lt;strong&gt;状态&lt;/strong&gt;。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

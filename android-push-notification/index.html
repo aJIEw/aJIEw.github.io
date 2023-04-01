@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。  首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。 而安卓上的推送，由于国内无法使用 FCM (谷歌服务被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 推送调研">
+<meta property="og:url" content="https://ajiew.me/android-push-notification/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。  首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。 而安卓上的推送，由于国内无法使用 FCM (谷歌服务被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png">
+<meta property="article:published_time" content="2018-10-08T08:51:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="推送">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 推送调研</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/provisioning-profile/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/android-root-tips/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-push-notification/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.me/android-push-notification/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c75e88a6368765.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。&lt;/p&gt;
+&lt;p&gt;而安卓上的推送，由于国内无法使用 &lt;a href=&#34;https://firebase.google.com/docs/cloud-messaging/&#34;&gt;FCM&lt;/a&gt; (&lt;a href=&#34;https://developers.google.com/android/guides/overview&#34;&gt;谷歌服务&lt;/a&gt;被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于非自家系统，推送效果非常不理想，所以最好的做法是同时接入各个厂商的推送。&lt;/p&gt;
+&lt;p&gt;常见的手机厂商推送有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://dev.mi.com/console/appservice/push.html&#34;&gt;小米 MIUI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.huawei.com/consumer/cn/service/hms/pushservice.html&#34;&gt;华为 EMUI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://open.oppomobile.com/service/openservice#id=1&#34;&gt;OPPO ColorOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dev.vivo.com.cn/openAbility/pushNews&#34;&gt;vivo FuntouchOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://open.flyme.cn/open-web/views/push.html&#34;&gt;魅族 Flyme&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 推送调研
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-10-08T08:51:00.000Z" itemprop="datePublished">2018-10-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/%E6%8E%A8%E9%80%81/" rel="tag">推送</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png" alt="Android Push  Notification"></p>
+<blockquote>
+<p>最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。</p>
+</blockquote>
+<p>首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。</p>
+<p>而安卓上的推送，由于国内无法使用 <a target="_blank" rel="noopener" href="https://firebase.google.com/docs/cloud-messaging/">FCM</a> (<a target="_blank" rel="noopener" href="https://developers.google.com/android/guides/overview">谷歌服务</a>被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于非自家系统，推送效果非常不理想，所以最好的做法是同时接入各个厂商的推送。</p>
+<p>常见的手机厂商推送有：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://dev.mi.com/console/appservice/push.html">小米 MIUI</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.huawei.com/consumer/cn/service/hms/pushservice.html">华为 EMUI</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.oppomobile.com/service/openservice#id=1">OPPO ColorOS</a></li>
+<li><a target="_blank" rel="noopener" href="https://dev.vivo.com.cn/openAbility/pushNews">vivo FuntouchOS</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.flyme.cn/open-web/views/push.html">魅族 Flyme</a></li>
+</ol>
+<span id="more"></span>
+
+<p>另一种是专业第三方平台的推送服务，主流的有<a target="_blank" rel="noopener" href="https://www.umeng.com/push">友盟推送</a>，<a target="_blank" rel="noopener" href="https://www.getui.com/cn/getui.html">个推</a>，<a target="_blank" rel="noopener" href="https://www.jiguang.cn/push">极光推送</a>等。其次还有各个巨头自己的推送服务，比如阿里的<a target="_blank" rel="noopener" href="https://www.aliyun.com/product/cps">移动推送</a>，腾讯的<a target="_blank" rel="noopener" href="http://xg.qq.com/">信鸽</a>，<a target="_blank" rel="noopener" href="http://push.baidu.com/">百度云推送</a>。</p>
+<p>第三方推送一般使用长连接和应用间互相唤醒的方式来保证推送的到达率，但是此种方式用户体验很差，存在内存大量占用以及电量消耗加快等负面影响。而且 Andoird 5.0 之后，后台进程以及定时任务的限制，保持长连接正在变得越来越困难，所以即使是极光、友盟等这样专业的推送平台，达到率也不会有他们宣称的那么高，一般估计在 50%~70%，甚至更低。不过，可以考虑通过商务合作手段让手机厂家给应用开白名单。</p>
+<p>第三方平台的推送服务的优点是通道聚合，接入成本低。缺点除了上面提到的到达率不如系统级推送，另外还有用户数或设备数的限制，也就是说在量大的情况下部分推送平台需要收费。</p>
+<p>以下是我个人针对第三方推送平台以及普通应用常见的推送需求整理出的一些对比：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>收费</th>
+<th>厂商通道支持</th>
+<th>到达率</th>
+<th>集成难度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>友盟</td>
+<td>否</td>
+<td>支持</td>
+<td>高</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>极光</td>
+<td>用户数 &gt;= 500万收费（<a target="_blank" rel="noopener" href="https://www.jiguang.cn/push-price">定价方案</a>）</td>
+<td>支持 (仅 VIP)</td>
+<td>高</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>个推</td>
+<td>否，高峰期有瓶颈限制，有 <a target="_blank" rel="noopener" href="https://www.getui.com/cn/getui.html">VIP 套餐</a></td>
+<td>不支持</td>
+<td>高</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>阿里移动推送 (ACMP)</td>
+<td>设备数 &gt;= 5万收费（<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/35315.html?spm=5176.56143.210096..38232ba9ebgAaI">收费方式</a>）</td>
+<td>支持</td>
+<td>一般</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>信鸽</td>
+<td>否</td>
+<td>支持</td>
+<td>一般</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>百度云推送</td>
+<td>否</td>
+<td>不支持</td>
+<td>高</td>
+<td>一般</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：1. 到达率指标主要根据知乎等网站的网友评论，属于个人主观判断，未必准确。同时也参考了以下两篇文章：<a target="_blank" rel="noopener" href="https://juejin.im/entry/5783410fa633bd005b24e079">国内 Top 500 Android 应用分析报告</a> 和 <a target="_blank" rel="noopener" href="https://juejin.im/post/5add2c5c6fb9a07ab110c438">Android 推送平台试用总结报告</a>。</p>
+<ol start="2">
+<li>集成难度判断主要根据文档编写质量，Demo 质量，以及个人主观判断。</li>
+</ol>
+</blockquote>
+<p>综上，优先推荐使用友盟，同时后期可考虑接入小米、华为等厂商通道。</p>
+<hr>
+<p>参考文章：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://sspai.com/post/42573">关于 Android 通知推送，你需要知道这些事</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://juejin.im/entry/5783410fa633bd005b24e079">国内 Top 500 Android 应用分析报告</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://juejin.im/post/5add2c5c6fb9a07ab110c438">Android 推送平台试用总结报告</a></p>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-push-notification/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.me/android-push-notification/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c75e88a6368765.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。&lt;/p&gt;
+&lt;p&gt;而安卓上的推送，由于国内无法使用 &lt;a href=&#34;https://firebase.google.com/docs/cloud-messaging/&#34;&gt;FCM&lt;/a&gt; (&lt;a href=&#34;https://developers.google.com/android/guides/overview&#34;&gt;谷歌服务&lt;/a&gt;被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于非自家系统，推送效果非常不理想，所以最好的做法是同时接入各个厂商的推送。&lt;/p&gt;
+&lt;p&gt;常见的手机厂商推送有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://dev.mi.com/console/appservice/push.html&#34;&gt;小米 MIUI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.huawei.com/consumer/cn/service/hms/pushservice.html&#34;&gt;华为 EMUI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://open.oppomobile.com/service/openservice#id=1&#34;&gt;OPPO ColorOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://dev.vivo.com.cn/openAbility/pushNews&#34;&gt;vivo FuntouchOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://open.flyme.cn/open-web/views/push.html&#34;&gt;魅族 Flyme&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

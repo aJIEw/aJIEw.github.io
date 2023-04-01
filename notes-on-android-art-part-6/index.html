@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 13~15 章。  综合技术使用 UncaughtExceptionHandler 收集崩溃信息当应用崩溃的时候会弹出一个『App has stopped』的弹窗，同时我们的应用也会被杀死。我们可以通过替代系统默认的 UncaughtExceptionHandler 来改变这种行为，也可以对崩溃信息进行收集。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（六）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-6/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 13~15 章。  综合技术使用 UncaughtExceptionHandler 收集崩溃信息当应用崩溃的时候会弹出一个『App has stopped』的弹窗，同时我们的应用也会被杀死。我们可以通过替代系统默认的 UncaughtExceptionHandler 来改变这种行为，也可以对崩溃信息进行收集。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2020-01-07/android-logo.jpg">
+<meta property="article:published_time" content="2020-01-07T14:15:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.728Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2020-01-07/android-logo.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 开发艺术探索学习笔记（六）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/software-list/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/notes-on-android-art-part-5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-6/&text=Android 开发艺术探索学习笔记（六）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-6/&is_video=false&description=Android 开发艺术探索学习笔记（六）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（六）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-6/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-6/&name=Android 开发艺术探索学习笔记（六）&description=&lt;p&gt;&lt;img src=&#34;/assets/2020-01-07/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 13~15 章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;综合技术&#34;&gt;&lt;a href=&#34;#综合技术&#34; class=&#34;headerlink&#34; title=&#34;综合技术&#34;&gt;&lt;/a&gt;综合技术&lt;/h2&gt;&lt;h3 id=&#34;使用-UncaughtExceptionHandler-收集崩溃信息&#34;&gt;&lt;a href=&#34;#使用-UncaughtExceptionHandler-收集崩溃信息&#34; class=&#34;headerlink&#34; title=&#34;使用 UncaughtExceptionHandler 收集崩溃信息&#34;&gt;&lt;/a&gt;使用 UncaughtExceptionHandler 收集崩溃信息&lt;/h3&gt;&lt;p&gt;当应用崩溃的时候会弹出一个『App has stopped』的弹窗，同时我们的应用也会被杀死。我们可以通过替代系统默认的 UncaughtExceptionHandler 来改变这种行为，也可以对崩溃信息进行收集。&lt;/p&gt;
+&lt;p&gt;UncaughtExceptionHandler 是 Thread 中的一个静态接口，当抛出未被捕获的异常时会回调这个接口中的方法，我们只要实现其中的 &lt;code&gt;uncaughtException(Thread t, Throwable e)&lt;/code&gt; 方法，然后再用它替代默认的 handler 就可以了。如下：&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-6/&t=Android 开发艺术探索学习笔记（六）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">综合技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-UncaughtExceptionHandler-%E6%94%B6%E9%9B%86%E5%B4%A9%E6%BA%83%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">使用 UncaughtExceptionHandler 收集崩溃信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-multidex-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E6%95%B0%E8%B6%8A%E7%95%8C"><span class="toc-number">1.2.</span> <span class="toc-text">使用 multidex 解决方法数越界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E7%9A%84%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%8A%80%E6%9C%AF"><span class="toc-number">1.3.</span> <span class="toc-text">Android 的动态加载技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%85%A5%E9%97%A8"><span class="toc-number">1.4.</span> <span class="toc-text">反编译入门</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JNI-%E5%92%8C-NDK-%E7%BC%96%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">JNI 和 NDK 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">JNI 开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-number">2.1.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NDK-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">NDK 开发流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">2.3.</span> <span class="toc-text">JNI 的数据类型和描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JNI-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E-Java-%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="toc-number">2.3.1.</span> <span class="toc-text">JNI 基本数据类型与 Java 对应关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JNI-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.2.</span> <span class="toc-text">JNI 引用类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D"><span class="toc-number">2.3.3.</span> <span class="toc-text">类型签名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E8%B0%83%E7%94%A8-Java-%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">2.4.</span> <span class="toc-text">JNI 调用 Java 方法的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">Android 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">Android 性能优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.1.</span> <span class="toc-text">布局优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9AImproving-Layout-Performance"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">推荐阅读：Improving Layout Performance</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.2.</span> <span class="toc-text">绘制优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9ASlow-rendering"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">推荐阅读：Slow rendering</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.3.</span> <span class="toc-text">内存泄露优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">内存泄露的场景</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-2"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96%E5%92%8C-ANR-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="toc-number">3.1.4.</span> <span class="toc-text">响应速度优化和 ANR 日志分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9AANRs"><span class="toc-number">3.1.4.1.</span> <span class="toc-text">推荐阅读：ANRs</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.5.</span> <span class="toc-text">线程优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-3"><span class="toc-number">3.1.5.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">3.1.6.</span> <span class="toc-text">其它性能优化建议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9APerformance-tips"><span class="toc-number">3.1.6.1.</span> <span class="toc-text">推荐阅读：Performance tips</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E8%A7%86%E9%A2%91%EF%BC%9AAndroid-Performance-Patterns"><span class="toc-number">3.1.6.2.</span> <span class="toc-text">推荐视频：Android Performance Patterns</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.</span> <span class="toc-text">内存泄露分析工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text">提高程序的可维护性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">系列小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.1.</span> <span class="toc-text">系列文章</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 开发艺术探索学习笔记（六）
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-07T14:15:00.000Z" itemprop="datePublished">2020-01-07</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2020-01-07/android-logo.jpg"></p>
+<blockquote>
+<p>  结合 <a target="_blank" rel="noopener" href="https://developer.android.com/guide">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 13~15 章。</p>
+</blockquote>
+<h2 id="综合技术"><a href="#综合技术" class="headerlink" title="综合技术"></a>综合技术</h2><h3 id="使用-UncaughtExceptionHandler-收集崩溃信息"><a href="#使用-UncaughtExceptionHandler-收集崩溃信息" class="headerlink" title="使用 UncaughtExceptionHandler 收集崩溃信息"></a>使用 UncaughtExceptionHandler 收集崩溃信息</h3><p>当应用崩溃的时候会弹出一个『App has stopped』的弹窗，同时我们的应用也会被杀死。我们可以通过替代系统默认的 UncaughtExceptionHandler 来改变这种行为，也可以对崩溃信息进行收集。</p>
+<p>UncaughtExceptionHandler 是 Thread 中的一个静态接口，当抛出未被捕获的异常时会回调这个接口中的方法，我们只要实现其中的 <code>uncaughtException(Thread t, Throwable e)</code> 方法，然后再用它替代默认的 handler 就可以了。如下：</p>
+<span id="more"></span>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CrashHandler</span></span>(<span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> context: Context) : Thread.UncaughtExceptionHandler &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> debug = <span class="hljs-literal">false</span><br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">val</span> mDefaultCrashHandler: Thread.UncaughtExceptionHandler<br>            = Thread.getDefaultUncaughtExceptionHandler()<br><br>    <span class="hljs-keyword">init</span> &#123;<br>        Thread.setDefaultUncaughtExceptionHandler(<span class="hljs-keyword">this</span>)<br>    &#125;<br><br>    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">uncaughtException</span><span class="hljs-params">(t: <span class="hljs-type">Thread</span>?, ex: <span class="hljs-type">Throwable</span>?)</span></span> &#123;<br>        <span class="hljs-keyword">if</span> (!handleException(ex)) &#123;<br>            <span class="hljs-comment">// 由系统处理</span><br>            mDefaultCrashHandler.uncaughtException(t, ex)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br><br>            <span class="hljs-keyword">try</span> &#123;<br>                Thread.sleep(<span class="hljs-number">2000</span>)<br>            &#125; <span class="hljs-keyword">catch</span> (e: InterruptedException) &#123;<br>                e.printStackTrace()<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (!debug) &#123;<br><span class="hljs-comment">//                val intent = Intent(context, MainActivity::class.java)</span><br><span class="hljs-comment">//                val mgr = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager</span><br><span class="hljs-comment">//                val pendingIntent = PendingIntent.getActivity(context,</span><br><span class="hljs-comment">//                        0, intent, PendingIntent.FLAG_ONE_SHOT)</span><br><span class="hljs-comment">//                mgr[AlarmManager.RTC, System.currentTimeMillis() + 100] = pendingIntent</span><br><br>                <span class="hljs-comment">// 使用 killProcess() 在某些情况下会使应用重启</span><br>                Process.killProcess(Process.myPid())<br><span class="hljs-comment">//                exitProcess(1) // 效果与上面相同</span><br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">handleException</span><span class="hljs-params">(ex: <span class="hljs-type">Throwable</span>?)</span></span>: <span class="hljs-built_in">Boolean</span> &#123;<br>        <span class="hljs-keyword">if</span> (ex == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span><br>        &#125;<br><br>        <span class="hljs-comment">// 展示 Toast 提醒</span><br>        <span class="hljs-keyword">object</span> : HandlerThread(<span class="hljs-string">&quot;ShowToast&quot;</span>) &#123;<br>            <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onLooperPrepared</span><span class="hljs-params">()</span></span> &#123;<br>                Toast.makeText(context,<br>                        <span class="hljs-string">&quot;很抱歉，程序出现异常，即将退出。&quot;</span>,<br>                        Toast.LENGTH_LONG).show()<br>            &#125;<br>        &#125;.start()<br><br>        <span class="hljs-comment">/* 保存出错日志、用户机型、操作记录等信息 */</span><br>        dumpExceptionToSDCard(ex)<br><br>        <span class="hljs-comment">/* 上传服务器 */</span><br>        uploadExceptionToServer()<br><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">dumpExceptionToSDCard</span><span class="hljs-params">(ex: <span class="hljs-type">Throwable</span>?)</span></span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">uploadExceptionToServer</span><span class="hljs-params">()</span></span> &#123;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>除此之外，我们也可以利用它自定义发生崩溃时的 UI 显示。比如这个三方库：<a target="_blank" rel="noopener" href="https://github.com/Ereza/CustomActivityOnCrash">CustomActivityOnCrash</a>，可以看到该库在 <a target="_blank" rel="noopener" href="https://github.com/Ereza/CustomActivityOnCrash/blob/master/library/src/main/java/cat/ereza/customactivityoncrash/CustomActivityOnCrash.java#L106">install()</a> 方法中创建了一个 Thread.UncaughtExceptionHandler，并在其中启动默认的或者开发者自定义的 crash activity。</p>
+<h3 id="使用-multidex-解决方法数越界"><a href="#使用-multidex-解决方法数越界" class="headerlink" title="使用 multidex 解决方法数越界"></a>使用 multidex 解决方法数越界</h3><p>65536 应该是每个 Android 开发都熟悉的数字，因为单个 dex 文件所能包含的最大方法数为 65536。官方的解决方案是：添加 multidex 支持。</p>
+<p>关于如何配置见：<a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/multidex#mdex-gradle">Configure your app for multidex</a></p>
+<p>关于 multidex 的缺点见：<a target="_blank" rel="noopener" href="https://developer.android.com/studio/build/multidex#limitations">Limitations of the multidex support library</a></p>
+<p>好消息是 Android 5.0 以上默认就开启了 multidex，所以随着时间的推移，也许以后就不需要担心这个问题了。</p>
+<h3 id="Android-的动态加载技术"><a href="#Android-的动态加载技术" class="headerlink" title="Android 的动态加载技术"></a>Android 的动态加载技术</h3><p>随着项目越来越庞大，动态加载技术（插件化技术）也越来越频繁地出现在我们的视线中，比如 <a target="_blank" rel="noopener" href="https://github.com/didi/VirtualAPK">VirtualAPK</a> 和 <a target="_blank" rel="noopener" href="https://github.com/alibaba/atlas">atlas</a> 等库，插件化技术的使用也越来越简便，我们可以通过插件化减少内存和 CPU 的占用，另外，它的热插拔效果在某些业务场景下也算是比较实用。尽管目前来看，插件化不再像过去两年那么受到追捧了，但是其中的技术依旧值得我们研究。</p>
+<p>插件化 App 分为宿主 App 和插件，一般将插件打包处理成 apk（也可以是 dex）。另外还需要用到一个代理 Activity，用于启动插件中的 Activity。一个插件化方案的实现至少要解决三个问题：资源访问、Activity 生命周期的管理、插件 ClassLoader 的管理。</p>
+<ol>
+<li> 资源访问</li>
+</ol>
+<p>主要利用 AssetManager 中的 addAssetPath 方法，加载指定位置的 apk 即我们的插件。这是一个 hidden 方法，所以我们需要通过反射来调用。</p>
+<p>具体见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/dynamic-load-apk/blob/bbd3bfa84c3a26cc89615a7539aef3ac4e9491e5/DynamicLoadApk/lib/src/com/ryg/dynamicload/internal/DLPluginManager.java#L171">DLPluginManager#createAssetManager</a></p>
+<ol start="2">
+<li> Activity 生命周期的管理</li>
+</ol>
+<p>一般通过将 Activity 的生命周期方法提取出来作为接口，然后再在代理 Activity 方法中调用对应的周期方法。相比使用反射，这种方法较为简单，节省性能开销。</p>
+<p>具体见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/dynamic-load-apk/blob/master/DynamicLoadApk/lib/src/com/ryg/dynamicload/DLProxyActivity.java">DLProxyActivity.java</a></p>
+<ol start="3">
+<li> 插件 ClassLoader 的管理</li>
+</ol>
+<p>我们需要对插件的 DexClassLoader 进行管理，从而避免多个 ClassLoader 加载同一个类发生类型转换错误。比如，我们可以将多个 ClassLoader 用 HashMap 保存并管理。</p>
+<p>具体见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/dynamic-load-apk/blob/master/DynamicLoadApk/lib/src/com/ryg/dynamicload/internal/DLPluginManager.java">DLPluginManager.java</a></p>
+<h3 id="反编译入门"><a href="#反编译入门" class="headerlink" title="反编译入门"></a>反编译入门</h3><p>这里部分主要是介绍工具，而工具很容易过时 (<a target="_blank" rel="noopener" href="https://github.com/iBotPeaches/Apktool">Apktool</a>, <a target="_blank" rel="noopener" href="https://github.com/pxb1988/dex2jar">dex2jar</a>, <a target="_blank" rel="noopener" href="http://java-decompiler.github.io/">JD-GUI</a>)，关于这些旧工具的使用方法推荐看看郭霖的文章：</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://blog.csdn.net/guolin_blog/article/details/49738023">Android 安全攻防战，反编译与混淆技术完全解析（上）</a></li>
+<li>  <a target="_blank" rel="noopener" href="http://blog.csdn.net/guolin_blog/article/details/50451259">Android 安全攻防战，反编译与混淆技术完全解析（下）</a></li>
+</ul>
+<p>下面介绍下目前我觉得更好用的反编译工具吧。</p>
+<ol>
+<li> <strong><a target="_blank" rel="noopener" href="https://github.com/skylot/jadx">jadx</a></strong></li>
+</ol>
+<p>支持命令行和 GUI 的 dex 和 apk 反编译工具。</p>
+<p>使用介绍可以看这篇文章：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012180752">Android 反编译利器，jadx 的高级技巧</a></p>
+<ol start="2">
+<li> <strong><a target="_blank" rel="noopener" href="https://www.pnfsoftware.com/">JEB Decompiler</a></strong></li>
+</ol>
+<p>功能强大的支持查看 Smali 代码的 Dalvik 反编译工具，逆向必备。</p>
+<p>使用介绍：<a target="_blank" rel="noopener" href="http://www.droidsec.cn/tag/jeb/">Android 反编绎工具JEB简介及下载</a></p>
+<ol start="3">
+<li> <strong><a target="_blank" rel="noopener" href="https://github.com/vaibhavpandeyvpz/apkstudio">apkstudio</a></strong></li>
+</ol>
+<p>基于 QT 的反编译工具，功能和 jadx 差不多。</p>
+<h2 id="JNI-和-NDK-编程"><a href="#JNI-和-NDK-编程" class="headerlink" title="JNI 和 NDK 编程"></a>JNI 和 NDK 编程</h2><p>JNI 即 Java Native Interface，提供了一种直接和 native 代码（C、C++）进行交互的方式。NDK 是 Android SDK 的一部分，它是提供了一系列工具帮助我们管理 native 代码，以及访问系统底层的能力。我们可以利用 NDK 把 native 代码编译成本地 so 库，然后再通过 JNI 去调用它们。</p>
+<h3 id="JNI-开发流程"><a href="#JNI-开发流程" class="headerlink" title="JNI 开发流程"></a>JNI 开发流程</h3><ol>
+<li> 在 Java 类中声明 native 方法</li>
+</ol>
+<p>除了声明方法之外，一般在静态代码块中使用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/lang/System.html#loadLibrary(java.lang.String)"><code>System.loadLibrary</code></a> 加载 so 库，也可以使用 <a target="_blank" rel="noopener" href="https://github.com/KeepSafe/ReLinker">ReLinker</a>。</p>
+<p>详情见：<a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/perf-jni#native-libraries">Native libraries</a></p>
+<ol start="2">
+<li> 编译 Java 文件类，再将 class 文件导出 JNI 头文件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">javac java/file/path/JniClass.java<br>javah java.file.path.JniClass<br></code></pre></td></tr></table></figure>
+
+<p>之后生成一个头文件 java_file_path_JniClass.h，其中包含我们定义的 native 方法声明，其方法名遵循格式如 Java_PackageName_ClassName_MethodName。</p>
+<ol start="3">
+<li> 实现 JNI 方法</li>
+</ol>
+<p>我们需要将头文件复制到 jni 目录下，然后创建 .cpp 和 .c 文件并在其中实现 JNI 方法。</p>
+<ol start="4">
+<li> 编译 so 库并在 Java 中使用</li>
+</ol>
+<p>我们可以使用 gcc 进行编译生成 so 库，然后再使用 java 命令进行调用。</p>
+<h4 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/jniTOC.html">Java Native Interface Specification</a></li>
+</ul>
+<h3 id="NDK-开发流程"><a href="#NDK-开发流程" class="headerlink" title="NDK 开发流程"></a>NDK 开发流程</h3><p>使用 NDK 具有以下好处：</p>
+<ul>
+<li>  提高代码安全性，因为 so 库反编译更困难。</li>
+<li>  可以使用已有的 C/C++ 开源库，比如 FFmpeg。</li>
+<li>  便于平台间的移植，比如 Dropbox 移动应用早期就是主要使用 C/C++ 来实现平台间代码共享的，不过由于维护成本较高后来被放弃了。其博客文章：<a target="_blank" rel="noopener" href="https://blogs.dropbox.com/tech/2019/08/the-not-so-hidden-cost-of-sharing-code-between-ios-and-android/">The (not so) hidden cost of sharing code between iOS and Android</a></li>
+<li>  提高应用程序在某些场景下的执行效率，常见的比如 3D 图形、音视频等。</li>
+</ul>
+<p>使用 NDK 所需的工具有：</p>
+<ul>
+<li>  NDK：基本工具集</li>
+<li>  CMake：配合 gradle 使用，用于构建 native 代码库，一些老项目可能还在使用 ndk-build (.mk)</li>
+<li>  LLDB：用于 debug native 代码</li>
+</ul>
+<p>关于使用方式的介绍：<a target="_blank" rel="noopener" href="https://developer.android.com/ndk/guides/concepts#hiw">How it Works?</a>，这里的例子还是使用 ndk-build 的，推荐使用 <a target="_blank" rel="noopener" href="https://developer.android.com/ndk/guides/cmake">CMake</a> 进行构建。</p>
+<p>Sample 见：<a target="_blank" rel="noopener" href="https://github.com/android/ndk-samples">ndk-sample</a></p>
+<h3 id="JNI-的数据类型和描述符"><a href="#JNI-的数据类型和描述符" class="headerlink" title="JNI 的数据类型和描述符"></a>JNI 的数据类型和描述符</h3><h4 id="JNI-基本数据类型与-Java-对应关系"><a href="#JNI-基本数据类型与-Java-对应关系" class="headerlink" title="JNI 基本数据类型与 Java 对应关系"></a>JNI 基本数据类型与 Java 对应关系</h4><table>
+<thead>
+<tr>
+<th>Java Type</th>
+<th>Native Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>jboolean</td>
+<td>unsigned 8 bits</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>jbyte</td>
+<td>signed 8 bits</td>
+</tr>
+<tr>
+<td>char</td>
+<td>jchar</td>
+<td>unsigned 16 bits</td>
+</tr>
+<tr>
+<td>short</td>
+<td>jshort</td>
+<td>signed 16 bits</td>
+</tr>
+<tr>
+<td>int</td>
+<td>jint</td>
+<td>signed 32 bits</td>
+</tr>
+<tr>
+<td>long</td>
+<td>jlong</td>
+<td>signed 64 bits</td>
+</tr>
+<tr>
+<td>float</td>
+<td>jfloat</td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td>double</td>
+<td>jdouble</td>
+<td>64 bits</td>
+</tr>
+<tr>
+<td>void</td>
+<td>void</td>
+<td>N/A</td>
+</tr>
+</tbody></table>
+<h4 id="JNI-引用类型"><a href="#JNI-引用类型" class="headerlink" title="JNI 引用类型"></a>JNI 引用类型</h4><ul>
+<li>jobject<ul>
+<li>  <code>jclass</code> (<code>java.lang.Class</code> objects)</li>
+<li>  <code>jstring</code> (<code>java.lang.String</code> objects)</li>
+<li><code>jarray</code> (arrays)<ul>
+<li><code>jobjectArray</code> (object arrays)</li>
+<li><code>jbooleanArray</code> (<code>boolean</code> arrays)</li>
+<li><code>jbyteArray</code> (<code>byte</code> arrays)</li>
+<li><code>jcharArray</code> (<code>char</code> arrays)</li>
+<li><code>jshortArray</code> (<code>short</code> arrays)</li>
+<li><code>jintArray</code> (<code>int</code> arrays)</li>
+<li><code>jlongArray</code> (<code>long</code> arrays)</li>
+<li><code>jfloatArray</code> (<code>float</code> arrays)</li>
+<li><code>jdoubleArray</code> (<code>double</code> arrays)</li>
+</ul>
+</li>
+<li>  <code>jthrowable</code> (<code>java.lang.Throwable</code> objects)</li>
+</ul>
+</li>
+</ul>
+<h4 id="类型签名"><a href="#类型签名" class="headerlink" title="类型签名"></a>类型签名</h4><table>
+<thead>
+<tr>
+<th>Type Signature</th>
+<th>Java Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Z</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>B</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>C</td>
+<td>char</td>
+</tr>
+<tr>
+<td>S</td>
+<td>short</td>
+</tr>
+<tr>
+<td>I</td>
+<td>int</td>
+</tr>
+<tr>
+<td>J</td>
+<td>long</td>
+</tr>
+<tr>
+<td>F</td>
+<td>float</td>
+</tr>
+<tr>
+<td>D</td>
+<td>double</td>
+</tr>
+<tr>
+<td>L fully-qualified-class ; (注意『;』是必需的)</td>
+<td>fully-qualified-class</td>
+</tr>
+<tr>
+<td>[ type</td>
+<td>type[]</td>
+</tr>
+<tr>
+<td>( arg-types ) return-type</td>
+<td>method type</td>
+</tr>
+</tbody></table>
+<p>比如一个 Java 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-title">f</span> <span class="hljs-params">(<span class="hljs-keyword">int</span> n, String s, <span class="hljs-keyword">int</span>[] arr)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<p>其类型签名为：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">(ILjava<span class="hljs-regexp">/lang/</span>String;[I)J<br></code></pre></td></tr></table></figure>
+
+<p>参见：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html">JNI Types and Data Structures</a></p>
+<h3 id="JNI-调用-Java-方法的流程"><a href="#JNI-调用-Java-方法的流程" class="headerlink" title="JNI 调用 Java 方法的流程"></a>JNI 调用 Java 方法的流程</h3><p>简单来说，对于静态方法，首先通过类名找到类 (<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html#FindClass">FindClass</a>)，然后再通过方法名找到方法 ID (<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html#GetStaticMethodID">GetStaticMethodID</a>)，最后构建参数并对方法进行调用。如果是非静态方法，则需要先创建对象，然后再通过对象获取方法 ID (<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/functions.html#GetMethodID">GetMethodID</a>)，两者流程类似。</p>
+<h4 id="推荐阅读-1"><a href="#推荐阅读-1" class="headerlink" title="推荐阅读"></a>推荐阅读</h4><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html">JNI Functions</a>（JNI 和 NDK 接触不多，以后使用到再慢慢研究）</p>
+<h2 id="Android-性能优化"><a href="#Android-性能优化" class="headerlink" title="Android 性能优化"></a>Android 性能优化</h2><h3 id="Android-性能优化方法"><a href="#Android-性能优化方法" class="headerlink" title="Android 性能优化方法"></a>Android 性能优化方法</h3><h4 id="布局优化"><a href="#布局优化" class="headerlink" title="布局优化"></a>布局优化</h4><p>布局的层级越复杂，Android 所需要的绘制时间就越长。优化布局首先我们要删除布局中无用的控件和嵌套，一般 lint 都会有提醒，但是某些情况下可能 lint 识别不了，就需要我们在开发过程中注意了。可以使用 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/profile/hierarchy-viewer.html">Hierarchy Viewer</a> 来对布局进行<a target="_blank" rel="noopener" href="https://developer.android.com/training/improving-layouts/optimizing-layout">检测和优化</a>。另外，善用 <a target="_blank" rel="noopener" href="https://developer.android.com/training/improving-layouts/reusing-layouts">include, merge</a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/training/improving-layouts/loading-ondemand">ViewStub</a>，让布局尽量清晰和易于管理。</p>
+<p>对于简单布局尽量用 FrameLayout 和 LinearLayout，对于需要嵌套的布局，尽量使用单个 RelativeLayout 替代，而对于某些复杂的布局，需要嵌套很多层的那种，考虑是否可以通过使用 <a target="_blank" rel="noopener" href="https://developer.android.com/training/constraint-layout">ContraintLayout</a> 来减少嵌套层数。</p>
+<h5 id="推荐阅读：Improving-Layout-Performance"><a href="#推荐阅读：Improving-Layout-Performance" class="headerlink" title="推荐阅读：Improving Layout Performance"></a>推荐阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/training/improving-layouts">Improving Layout Performance</a></h5><h4 id="绘制优化"><a href="#绘制优化" class="headerlink" title="绘制优化"></a>绘制优化</h4><p>避免在 <code>onDraw()</code> 方法中执行大量操作，主要表现在两个方面：</p>
+<ol>
+<li> 避免创建局部对象</li>
+</ol>
+<p>因为 <code>onDraw()</code> 可能被频繁调用，意味着临时会创建出大量的局部对象，此时如果内存不足，有可能引发 GC 从而造成界面卡顿。</p>
+<ol start="2">
+<li> 避免做耗时操作</li>
+</ol>
+<p>同样因为 <code>onDraw()</code> 会被多次调用，如果有耗时操作，则绘制流程变慢从而造成卡顿。View 的绘制帧率应该保持在 60 FPS，意味着每帧耗时要不超过 1000/60=16 毫秒。</p>
+<h5 id="推荐阅读：Slow-rendering"><a href="#推荐阅读：Slow-rendering" class="headerlink" title="推荐阅读：Slow rendering"></a>推荐阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/vitals/render">Slow rendering</a></h5><h4 id="内存泄露优化"><a href="#内存泄露优化" class="headerlink" title="内存泄露优化"></a>内存泄露优化</h4><h5 id="内存泄露的场景"><a href="#内存泄露的场景" class="headerlink" title="内存泄露的场景"></a>内存泄露的场景</h5><ol>
+<li> <strong>静态变量导致的内存泄露</strong></li>
+</ol>
+<p>比如静态的 Context 或者 View/Drawable 的引用被其他对象持有，导致 GC 始终无法回收 Activity 或者 Fragment。</p>
+<p><em>解决方案：</em>避免使用静态 Context 或者 View/Drawable 等。</p>
+<ol start="2">
+<li> <strong>非静态内部类持有 Activity 的引用</strong></li>
+</ol>
+<p><em>解决方案：</em></p>
+<ul>
+<li>  不使用内部类或者使用静态内部类</li>
+<li>  如果必须引用 Context 或者 View，使用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/lang/ref/WeakReference">WeakReference</a>，这样垃圾回收器就可以在其不再使用时将其回收</li>
+</ul>
+<ol start="3">
+<li> <strong>内部类广播创建并注册后没有在 onStop() 中解注册</strong></li>
+</ol>
+<p><em>解决方案：</em>记得在 onStop() 解注册广播。</p>
+<ol start="4">
+<li> <strong>单例类持有 Activity 后没有及时销毁，导致 Activity 无法被回收</strong></li>
+</ol>
+<p><em>解决方案：</em></p>
+<ul>
+<li>记得在 activity 销毁后同时也销毁单例类中的引用</li>
+<li>不使用 Activity 的 Context 而是使用 ApplicationContext</li>
+</ul>
+<ol start="5">
+<li> <strong>无限循环的属性动画没有及时停止</strong></li>
+</ol>
+<p><em>解决方案：</em>在 onDestroy() 中及时 cancel 动画。</p>
+<ol start="6">
+<li> <strong>AsyncTask 的错误使用</strong></li>
+</ol>
+<p>比如直接在 Activity 中使用内部类实现 AsyncTask；在 Activity 销毁后没有及时 cancel AsyncTask；在 AsyncTask 中直接访问持有了 View 的引用。</p>
+<p><em>解决方案：</em></p>
+<ul>
+<li>  使用静态内部类</li>
+<li>  在 onDestroy() 中及时<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/AsyncTask#cancelling-a-task">取消 AsyncTask</a></li>
+<li>  使用 WeakReference 来访问 View 的引用</li>
+</ul>
+<ol start="7">
+<li> <strong>Handler 的错误使用</strong></li>
+</ol>
+<p>与 AsyncTask 类似，我们不能直接创建 handler 然后利用其 postXXX 方法（创建匿名内部类 Runnable），因为 Message 或者 runnable 会持有 handler 的引用。</p>
+<p><em>解决方案：</em>使用静态内部类并且使用 WeakReference</p>
+<ol start="8">
+<li> <strong>Thread 的错误使用</strong></li>
+</ol>
+<p><em>解决方案：</em>使用静态内部类和弱引用，以及在 onDestroy() 中调用 <code>interrupt()</code> 中止线程。</p>
+<ol start="9">
+<li> <strong>TimerTask 的错误使用</strong></li>
+</ol>
+<p><em>解决方案：</em>和上面类似，使用静态内部类和弱引用并在 onDestroy() 中 <code>cancel()</code>。</p>
+<h5 id="推荐阅读-2"><a href="#推荐阅读-2" class="headerlink" title="推荐阅读"></a>推荐阅读</h5><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/memory">Manage your app’s memory</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/studio/profile/memory-profiler">View the Java heap and memory allocations with Memory Profiler</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://android.jlelse.eu/9-ways-to-avoid-memory-leaks-in-android-b6d81648e35e">9 ways to avoid memory leaks in Android</a></li>
+</ul>
+<h4 id="响应速度优化和-ANR-日志分析"><a href="#响应速度优化和-ANR-日志分析" class="headerlink" title="响应速度优化和 ANR 日志分析"></a>响应速度优化和 ANR 日志分析</h4><p>我们应该避免在主线程中做耗时操作，Android 系统如果检测到 Activity 超过 5 秒钟没有响应屏幕触摸事件或者键盘输入，就会报 ANR，另外 BroadcastReceiver 如果 10 秒钟之内还没执行完操作也会报 ANR。</p>
+<p>发生 ANR 后，我们可以从 /data/anr/ 目录导出日志文件：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">adb root<br>adb shell ls <span class="hljs-regexp">/data/</span>anr<br>adb pull <span class="hljs-regexp">/data/</span>anr/&lt;filename&gt;<br></code></pre></td></tr></table></figure>
+
+<p>老系统用的文件名可能是 /data/anr/traces.txt，新系统 (8.0 以上) 可能用的多个 /data/anr/anr_{date_time_id} 文件。</p>
+<p>我们可以根据时间找到需要的文件，打开搜索 main，找到发生 ANR 的方法调用信息，然后利用这些信息分析造成 ANR 的原因。</p>
+<h5 id="推荐阅读：ANRs"><a href="#推荐阅读：ANRs" class="headerlink" title="推荐阅读：ANRs"></a>推荐阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/vitals/anr">ANRs</a></h5><h4 id="线程优化"><a href="#线程优化" class="headerlink" title="线程优化"></a>线程优化</h4><p>采用线程池代替直接创建线程，从而更好地重用线程以及减少线程频繁创建和销毁带来的性能开销，根据不同场景使用合适的线程池从而避免出现线程阻塞的出现。</p>
+<h5 id="推荐阅读-3"><a href="#推荐阅读-3" class="headerlink" title="推荐阅读"></a>推荐阅读</h5><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/processes-and-threads">Processes and threads overview</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/topic/performance/threads">Better performance through threading</a></li>
+</ul>
+<h4 id="其它性能优化建议"><a href="#其它性能优化建议" class="headerlink" title="其它性能优化建议"></a>其它性能优化建议</h4><ul>
+<li>  避免在 Activity 或者 Fragment 中创建过多的对象</li>
+<li>  使用 Android 提供的一些数据结构，比如 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/util/SparseArray">SparseArray</a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/util/Pair">Pair</a> 等，它们拥有更好的性能</li>
+<li>  适当采用<a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/lang/ref/SoftReference">软引用</a>和<a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/lang/ref/WeakReference">弱引用</a></li>
+<li>  如果必须使用内部类，尽量使用静态内部类，可以避免我们犯错而导致的内存泄露</li>
+<li>  使用内存缓存和磁盘缓存</li>
+<li>  不要过多使用枚举类，因为它比 int 类更占内存</li>
+</ul>
+<h5 id="推荐阅读：Performance-tips"><a href="#推荐阅读：Performance-tips" class="headerlink" title="推荐阅读：Performance tips"></a>推荐阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/perf-tips">Performance tips</a></h5><h5 id="推荐视频：Android-Performance-Patterns"><a href="#推荐视频：Android-Performance-Patterns" class="headerlink" title="推荐视频：Android Performance Patterns"></a>推荐视频：<a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE">Android Performance Patterns</a></h5><h3 id="内存泄露分析工具"><a href="#内存泄露分析工具" class="headerlink" title="内存泄露分析工具"></a>内存泄露分析工具</h3><p>这部分是工具推荐，同样会因为时间推移而有更好的工具出现，所以就跳过不看了。目前我们有更好的工具可以使用，比如 <a target="_blank" rel="noopener" href="https://github.com/square/leakcanary">LeakCanary</a> 和 <a target="_blank" rel="noopener" href="https://developer.android.com/studio/profile/memory-profiler">Memory Profiler</a>。</p>
+<h3 id="提高程序的可维护性"><a href="#提高程序的可维护性" class="headerlink" title="提高程序的可维护性"></a>提高程序的可维护性</h3><p>我们在软件开发过程中，功能开发可能只占很小一部分，大部分的时间都花在了维护上，所以代码的可维护性就显得特别重要了。可维护性体现在两个方面：可读性和可扩展性。想要让代码可读性好就需要我们遵循良好的代码风格以及养成良好的编码习惯。</p>
+<ul>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/Blankj/AndroidStandardDevelop">Android 开发规范</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/ribot/android-guidelines/blob/master/project_and_code_guidelines.md">Android Guidelines</a></li>
+</ul>
+<p>除此之外，要注意一些细节，比如：</p>
+<ul>
+<li>  命名简单易懂，不要用复杂的单词</li>
+<li>  注意一行代码的长度，以及代码的排列和对齐方式</li>
+<li>  适当使用 region 合并代码组</li>
+<li>  规范注释，不写无用的注释</li>
+<li>  减少复制粘贴，如果复制两次以上，就可以考虑提取成公共的函数（重构的时候）</li>
+</ul>
+<p>能否写出可扩展性强的代码与开发者的经验有关，一般来说，需要灵活使用<a target="_blank" rel="noopener" href="https://github.com/youlookwhat/DesignPattern">设计模式</a>，懂得<a target="_blank" rel="noopener" href="https://book.douban.com/subject/4262627/">重构</a>，另外还需要对业务有较好的理解，从而能够预判各种可能的变化。这是一个长期积累的过程。</p>
+<hr>
+<h2 id="系列小结"><a href="#系列小结" class="headerlink" title="系列小结"></a>系列小结</h2><p>都说《Android 开发艺术探索》是迈向中高级开发的第一步，此刻看完这本书，心里觉得，其实要学的东西还有很多呐。尤其是对照着本书看官方文档的时候，现在的 Android 官方文档比之前做的好多了，归类更合理，但是内容似乎也变多了（原来的 Training 和 Guide 被合并到了一起），所以以后还是想花点时间把文档完整地看一遍。</p>
+<p>另外，我跳过了第 9 章，四大组件的工作过程，因为这章太重要了，涉及到的知识也太多了，需要你融汇贯通本书中的所有核心知识才能阅读，而且这章大部分内容都是源码解析，最佳的阅读方式是自己对照源码结合本书然后再借助搜索引擎来阅读。以后我会慢慢把自己的阅读过程以及心得总结成博客发在这里。</p>
+<h3 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h3><ul>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-1/">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-2/">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-3/">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-4/">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-5/">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-6/">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%BC%E5%90%88%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">综合技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-UncaughtExceptionHandler-%E6%94%B6%E9%9B%86%E5%B4%A9%E6%BA%83%E4%BF%A1%E6%81%AF"><span class="toc-number">1.1.</span> <span class="toc-text">使用 UncaughtExceptionHandler 收集崩溃信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-multidex-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E6%95%B0%E8%B6%8A%E7%95%8C"><span class="toc-number">1.2.</span> <span class="toc-text">使用 multidex 解决方法数越界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E7%9A%84%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%8A%80%E6%9C%AF"><span class="toc-number">1.3.</span> <span class="toc-text">Android 的动态加载技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E7%BC%96%E8%AF%91%E5%85%A5%E9%97%A8"><span class="toc-number">1.4.</span> <span class="toc-text">反编译入门</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JNI-%E5%92%8C-NDK-%E7%BC%96%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">JNI 和 NDK 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">JNI 开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB"><span class="toc-number">2.1.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NDK-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">NDK 开发流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">2.3.</span> <span class="toc-text">JNI 的数据类型和描述符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JNI-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E-Java-%E5%AF%B9%E5%BA%94%E5%85%B3%E7%B3%BB"><span class="toc-number">2.3.1.</span> <span class="toc-text">JNI 基本数据类型与 Java 对应关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JNI-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.2.</span> <span class="toc-text">JNI 引用类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E7%AD%BE%E5%90%8D"><span class="toc-number">2.3.3.</span> <span class="toc-text">类型签名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JNI-%E8%B0%83%E7%94%A8-Java-%E6%96%B9%E6%B3%95%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="toc-number">2.4.</span> <span class="toc-text">JNI 调用 Java 方法的流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">Android 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">Android 性能优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.1.</span> <span class="toc-text">布局优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9AImproving-Layout-Performance"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">推荐阅读：Improving Layout Performance</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.2.</span> <span class="toc-text">绘制优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9ASlow-rendering"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">推荐阅读：Slow rendering</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.3.</span> <span class="toc-text">内存泄露优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">内存泄露的场景</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-2"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E9%80%9F%E5%BA%A6%E4%BC%98%E5%8C%96%E5%92%8C-ANR-%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90"><span class="toc-number">3.1.4.</span> <span class="toc-text">响应速度优化和 ANR 日志分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9AANRs"><span class="toc-number">3.1.4.1.</span> <span class="toc-text">推荐阅读：ANRs</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.5.</span> <span class="toc-text">线程优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB-3"><span class="toc-number">3.1.5.1.</span> <span class="toc-text">推荐阅读</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">3.1.6.</span> <span class="toc-text">其它性能优化建议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%EF%BC%9APerformance-tips"><span class="toc-number">3.1.6.1.</span> <span class="toc-text">推荐阅读：Performance tips</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E8%A7%86%E9%A2%91%EF%BC%9AAndroid-Performance-Patterns"><span class="toc-number">3.1.6.2.</span> <span class="toc-text">推荐视频：Android Performance Patterns</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.</span> <span class="toc-text">内存泄露分析工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E9%AB%98%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text">提高程序的可维护性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">系列小结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.1.</span> <span class="toc-text">系列文章</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-6/&text=Android 开发艺术探索学习笔记（六）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-6/&is_video=false&description=Android 开发艺术探索学习笔记（六）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（六）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-6/&title=Android 开发艺术探索学习笔记（六）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-6/&name=Android 开发艺术探索学习笔记（六）&description=&lt;p&gt;&lt;img src=&#34;/assets/2020-01-07/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 13~15 章。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;综合技术&#34;&gt;&lt;a href=&#34;#综合技术&#34; class=&#34;headerlink&#34; title=&#34;综合技术&#34;&gt;&lt;/a&gt;综合技术&lt;/h2&gt;&lt;h3 id=&#34;使用-UncaughtExceptionHandler-收集崩溃信息&#34;&gt;&lt;a href=&#34;#使用-UncaughtExceptionHandler-收集崩溃信息&#34; class=&#34;headerlink&#34; title=&#34;使用 UncaughtExceptionHandler 收集崩溃信息&#34;&gt;&lt;/a&gt;使用 UncaughtExceptionHandler 收集崩溃信息&lt;/h3&gt;&lt;p&gt;当应用崩溃的时候会弹出一个『App has stopped』的弹窗，同时我们的应用也会被杀死。我们可以通过替代系统默认的 UncaughtExceptionHandler 来改变这种行为，也可以对崩溃信息进行收集。&lt;/p&gt;
+&lt;p&gt;UncaughtExceptionHandler 是 Thread 中的一个静态接口，当抛出未被捕获的异常时会回调这个接口中的方法，我们只要实现其中的 &lt;code&gt;uncaughtException(Thread t, Throwable e)&lt;/code&gt; 方法，然后再用它替代默认的 handler 就可以了。如下：&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-6/&t=Android 开发艺术探索学习笔记（六）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

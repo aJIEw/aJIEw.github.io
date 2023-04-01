@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：software-list。  前言作为一个开发者，第一个需要面对的问题是开发机器的选择。虽然目前看来，越来越多的开发者已经开始向 Linux 甚至向 PC 迁移，但是，我依旧认为 Mac 是最适合普通开发人员的开发设备，原因是它拥有最佳的用户体验和完备的软件和开发者生态。 系统所有的 Mac 电脑所使用的操">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS 配置指南">
+<meta property="og:url" content="https://ajiew.me/macos-config/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：software-list。  前言作为一个开发者，第一个需要面对的问题是开发机器的选择。虽然目前看来，越来越多的开发者已经开始向 Linux 甚至向 PC 迁移，但是，我依旧认为 Mac 是最适合普通开发人员的开发设备，原因是它拥有最佳的用户体验和完备的软件和开发者生态。 系统所有的 Mac 电脑所使用的操">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-05T11:15:00.000Z">
+<meta property="article:modified_time" content="2023-03-14T11:12:50.542Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Tools">
+<meta property="article:tag" content="Productivity">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>macOS 配置指南</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021-2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021-1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/macos-config/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/macos-config/&text=macOS 配置指南"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/macos-config/&is_video=false&description=macOS 配置指南"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=macOS 配置指南&body=Check out this article: https://ajiew.me/macos-config/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/macos-config/&name=macOS 配置指南&description=&lt;blockquote&gt;
+&lt;p&gt;记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：&lt;a href=&#34;https://ajiew.github.io/software-list/&#34;&gt;software-list&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;作为一个开发者，第一个需要面对的问题是开发机器的选择。虽然目前看来，越来越多的开发者已经开始向 Linux 甚至向 PC 迁移，但是，我依旧认为 Mac 是最适合普通开发人员的开发设备，原因是它拥有最佳的用户体验和完备的软件和开发者生态。&lt;/p&gt;
+&lt;h3 id=&#34;系统&#34;&gt;&lt;a href=&#34;#系统&#34; class=&#34;headerlink&#34; title=&#34;系统&#34;&gt;&lt;/a&gt;系统&lt;/h3&gt;&lt;p&gt;所有的 Mac 电脑所使用的操作系统都称为 &lt;a href=&#34;https://en.wikipedia.org/wiki/MacOS&#34;&gt;macOS&lt;/a&gt;（过去叫 OS X，更早的时候叫 Mac OS X），macOS 最早是基于一个类 Unix 系统 &lt;a href=&#34;https://en.wikipedia.org/wiki/NeXTSTEP&#34;&gt;NeXTSTEP&lt;/a&gt; 开发而来的，所以相比基于 Windows 操作系统的 PC，macOS 其实更接近 Linux，而相比基于 Linux 内核的操作系统，它的 UI/UX 又得到了非常大的提升。总体而言，macOS 兼顾了效率和使用体验，这也是目前它依旧受主流市场欢迎的原因。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/macos-config/&t=macOS 配置指南"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">基础设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">最佳屏幕显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%8C%87%E6%8B%96%E5%8A%A8"><span class="toc-number">2.2.</span> <span class="toc-text">三指拖动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84"><span class="toc-number">2.3.</span> <span class="toc-text">键盘映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%88%87%E6%8D%A2%E6%A1%8C%E9%9D%A2"><span class="toc-number">2.4.</span> <span class="toc-text">拖动窗口切换桌面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hot-Corners"><span class="toc-number">2.5.</span> <span class="toc-text">Hot Corners</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Look-Plugins"><span class="toc-number">2.6.</span> <span class="toc-text">Quick Look Plugins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD-Spotlight"><span class="toc-number">2.7.</span> <span class="toc-text">关闭 Spotlight</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">应用设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Finder"><span class="toc-number">3.1.</span> <span class="toc-text">Finder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">显示文件路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.1.2.</span> <span class="toc-text">显示隐藏文件和文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%B0%8F-tips"><span class="toc-number">3.1.3.</span> <span class="toc-text">其它小 tips</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iTerm-2"><span class="toc-number">3.2.</span> <span class="toc-text">iTerm 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="toc-number">3.2.1.</span> <span class="toc-text">1、安装 oh-my-zsh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-Dracula-%E4%B8%BB%E9%A2%98%E4%BB%A5%E5%8F%8A%E4%BF%AE%E6%94%B9-icon"><span class="toc-number">3.2.2.</span> <span class="toc-text">2、配置 Dracula 主题以及修改 icon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AE%E6%8C%89%E9%94%AE"><span class="toc-number">3.2.3.</span> <span class="toc-text">3、配置按键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BetterAndBetter"><span class="toc-number">3.3.</span> <span class="toc-text">BetterAndBetter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E6%9D%BF"><span class="toc-number">3.3.1.</span> <span class="toc-text">触摸板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%AE%E7%9B%98"><span class="toc-number">3.3.2.</span> <span class="toc-text">键盘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chrome"><span class="toc-number">3.4.</span> <span class="toc-text">Chrome</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89-F5-%E5%88%B7%E6%96%B0"><span class="toc-number">3.4.1.</span> <span class="toc-text">按 F5 刷新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automator"><span class="toc-number">3.5.</span> <span class="toc-text">Automator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-With-Chrome"><span class="toc-number">3.5.1.</span> <span class="toc-text">Search With Chrome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#V2rayU-%E6%B7%BB%E5%8A%A0%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-number">3.5.2.</span> <span class="toc-text">V2rayU 添加白名单</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Raycast"><span class="toc-number">3.6.</span> <span class="toc-text">Raycast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shortcuts"><span class="toc-number">3.7.</span> <span class="toc-text">Shortcuts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%BA%A6%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">3.8.</span> <span class="toc-text">百度输入法</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        macOS 配置指南
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2021-02-05T11:15:00.000Z" itemprop="datePublished">2021-02-05</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>, <a class="tag-link-link" href="/tags/Productivity/" rel="tag">Productivity</a>, <a class="tag-link-link" href="/tags/Tools/" rel="tag">Tools</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：<a target="_blank" rel="noopener" href="https://ajiew.github.io/software-list/">software-list</a>。</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>作为一个开发者，第一个需要面对的问题是开发机器的选择。虽然目前看来，越来越多的开发者已经开始向 Linux 甚至向 PC 迁移，但是，我依旧认为 Mac 是最适合普通开发人员的开发设备，原因是它拥有最佳的用户体验和完备的软件和开发者生态。</p>
+<h3 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h3><p>所有的 Mac 电脑所使用的操作系统都称为 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MacOS">macOS</a>（过去叫 OS X，更早的时候叫 Mac OS X），macOS 最早是基于一个类 Unix 系统 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/NeXTSTEP">NeXTSTEP</a> 开发而来的，所以相比基于 Windows 操作系统的 PC，macOS 其实更接近 Linux，而相比基于 Linux 内核的操作系统，它的 UI/UX 又得到了非常大的提升。总体而言，macOS 兼顾了效率和使用体验，这也是目前它依旧受主流市场欢迎的原因。</p>
+<span id="more"></span>
+
+<p>正是因为 macOS 是基于类 Unix 系统开发而来，所以它对命令行操作的支持也更加友好，这是它的另外一大优势。无论你是哪个平台的开发者，一般都会建议你学习使用 Linux，而 macOS 对于学习 Linux 而言也非常友好，因为大多数 Linux 上的命令都可以直接在 macOS 中使用。</p>
+<p>使用命令行进入系统根目录可以看到，macOS 的系统目录结构和 Linux 系统非常相似：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sh">/ ls -al<br>total 9<br>drwxr-xr-x  20 root  wheel   640 Dec  8 07:39 .<br>drwxr-xr-x  20 root  wheel   640 Dec  8 07:39 ..<br>drwxrwxr-x  60 root  admin  1920 Jan 25 18:06 Applications<br>drwxr-xr-x  68 root  wheel  2176 Dec 14 12:35 Library<br>drwxr-xr-x@  9 root  wheel   288 Dec  8 07:39 System<br>drwxr-xr-x   6 root  admin   192 Dec  8 07:39 Users<br>drwxr-xr-x   3 root  wheel    96 Jan 25 21:02 Volumes<br>drwxr-xr-x@ 38 root  wheel  1216 Dec  8 07:39 bin<br>drwxr-xr-x   2 root  wheel    64 Jun  6  2020 cores<br>dr-xr-xr-x   3 root  wheel  4574 Dec 26 22:58 dev<br>lrwxr-xr-x@  1 root  wheel    11 Dec  8 07:39 etc -&gt; private/etc<br>lrwxr-xr-x   1 root  wheel    25 Dec 26 22:59 home -&gt; /System/Volumes/Data/home<br>drwxr-xr-x   2 root  wheel    64 Jun  6  2020 opt<br>drwxr-xr-x   6 root  wheel   192 Dec  8 07:39 private<br>drwxr-xr-x@ 65 root  wheel  2080 Dec  8 07:39 sbin<br>lrwxr-xr-x@  1 root  wheel    11 Dec  8 07:39 tmp -&gt; private/tmp<br>drwxr-xr-x@ 11 root  wheel   352 Dec  8 07:39 usr<br>lrwxr-xr-x@  1 root  wheel    11 Dec  8 07:39 var -&gt; private/var<br></code></pre></td></tr></table></figure>
+
+<p><code>bin</code> 是保存系统基础命令的目录，<code>dev</code> 设备目录，<code>etc</code> 系统配置，<code>usr</code> 用户安装软件及配置，<code>var</code> 其它目录（如日志和缓存）。唯一的不同之处是多了一些大写开头的文件夹，这些是 macOS 独有的，比如：<code>Applications</code> 应用文件夹，系统和第三方应用都会被安装到这里；<code>Library</code> 第三方库文件夹；<code>System</code> 保存系统文件；<code>Users</code> 用户文件夹；<code>Volumes</code> 磁盘。</p>
+<h2 id="基础设置"><a href="#基础设置" class="headerlink" title="基础设置"></a>基础设置</h2><h3 id="最佳屏幕显示"><a href="#最佳屏幕显示" class="headerlink" title="最佳屏幕显示"></a>最佳屏幕显示</h3><p>为了让 Retina 屏幕发挥出最大的作用，让文字显示达到最佳效果，我们需要关闭 font smoothing。</p>
+<p>设置方法：Big Sur 之后的系统，需要通过在命令行中输入 <code>defaults -currentHost write -g AppleFontSmoothing -int 0</code> 并重启。</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://tonsky.me/blog/monitors/">Time to upgrade your monitor</a> by <a target="_blank" rel="noopener" href="https://twitter.com/nikitonsky">@Nikita</a>。</p>
+<h3 id="三指拖动"><a href="#三指拖动" class="headerlink" title="三指拖动"></a>三指拖动</h3><p>之前拖动窗口都是使用点住并拖动的方式，后来才发现使用三指拖动的方式比点按拖动优雅不少。</p>
+<p>设置方法：打开系统设置中的 <strong>Accessibility &gt; Pointer Control</strong>，选择 <strong>Trackpad Options &gt; Dragging Style &gt; Three Finger Drag</strong>。参考：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/HT204609">开启适用于 Force Touch 触控板的“三指拖移”</a>。</p>
+<p>这样设置之后，切换桌面以及 Mission Control 都会自动变成四指。</p>
+<p>我们还可以在拖动窗口时切换桌面从而快速将一个应用切换到另一个桌面，做法是首先在 <strong>Keyboard &gt; Shortcuts &gt; Mission Control</strong> 中开启使用 <kbd>control</kbd> + <kbd>1</kbd> Switch to Desktop 1 和 <kbd>control</kbd> + <kbd>2</kbd> Switch to Desktop 2，之后只要轻微拖动窗口的同时使用快捷键切换桌面，就可以将该窗口带到相应的桌面了。</p>
+<h3 id="键盘映射"><a href="#键盘映射" class="headerlink" title="键盘映射"></a>键盘映射</h3><p>通过将键盘映射可以让常用的按键使用更加方便快捷，比如将 Esc 映射为 Caps Lock，<strong>Keyboard &gt; Keyboard Shortcuts &gt; Modifier Keys</strong>，选择 <strong>Caps Lock key</strong> 的执行动作为 <strong>Escape</strong>。</p>
+<p>对于更复杂的键盘映射可以使用 Karabiner-Elements 等软件来实现。</p>
+<h3 id="拖动窗口切换桌面"><a href="#拖动窗口切换桌面" class="headerlink" title="拖动窗口切换桌面"></a>拖动窗口切换桌面</h3><p>我们可以通过拖动应用窗口到屏幕边缘然后等待 1 秒来切换桌面，可以使用以下命令设置等待时间：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">defaults write com.apple.dock workspaces-edge-delay -<span class="hljs-built_in">float</span> 0.15;killall Dock<br></code></pre></td></tr></table></figure>
+
+<p>使用下面命令取消设置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">defaults delete com.apple.dock workspaces-edge-delay;killall Dock<br></code></pre></td></tr></table></figure>
+
+<h3 id="Hot-Corners"><a href="#Hot-Corners" class="headerlink" title="Hot Corners"></a>Hot Corners</h3><p><strong>System Preferences Mission Control &gt; Hot Corners</strong>，下面是我的设置：</p>
+<ul>
+<li>  左上角：Start Screen Saver</li>
+<li>  左下角：Desktop</li>
+<li>  右上角：Notification Center</li>
+<li>  右下角：Launchpad</li>
+</ul>
+<p>除此之外，还有一些默认配置：</p>
+<ul>
+<li>滑动到左下角后，两指上下滑动调整屏幕亮度，轻触三指锁屏。</li>
+<li>滑动到右下角后，轻触三指最小化应用。</li>
+</ul>
+<h3 id="Quick-Look-Plugins"><a href="#Quick-Look-Plugins" class="headerlink" title="Quick Look Plugins"></a>Quick Look Plugins</h3><p>为 Quick Look 添加更丰富功能的插件，可以通过 <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a> 安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">brew install qlcolorcode qlmarkdown quicklook-json qlstephen --verbose<br></code></pre></td></tr></table></figure>
+
+<p>详细介绍见：<a target="_blank" rel="noopener" href="https://github.com/sindresorhus/quick-look-plugins">quick-look-plugins</a>。大多数插件在安装之后需要在 <strong>Security &amp; Privacy</strong> 中点击允许运行才可以正常使用。另外有个小 tip，Mission Control 下也是可以按 <kbd>space</kbd> 来使用 Quick Look 的。</p>
+<h3 id="关闭-Spotlight"><a href="#关闭-Spotlight" class="headerlink" title="关闭 Spotlight"></a>关闭 Spotlight</h3><p>对我来说，大多数时候，使用 Raycast 和 uTools 就足够了，所以 Spotlight 反而多余。</p>
+<p>首先，在菜单栏不显示 Spotlight: <strong>Control Center &gt; Menu Bar Only &gt; Spotlight (Don’t show in Menu Bar)</strong></p>
+<p>其次，关闭快捷键: <strong>Keyboard &gt; Keyboard Shortcuts &gt; Spotlight &gt; Uncheck “Show Spotlight search”</strong></p>
+<h2 id="应用设置"><a href="#应用设置" class="headerlink" title="应用设置"></a>应用设置</h2><h3 id="Finder"><a href="#Finder" class="headerlink" title="Finder"></a>Finder</h3><h4 id="显示文件路径"><a href="#显示文件路径" class="headerlink" title="显示文件路径"></a>显示文件路径</h4><p>底部显示/隐藏路径，快捷键 <kbd>command</kbd> + <kbd>option</kbd> + <kbd>P</kbd></p>
+<h4 id="显示隐藏文件和文件夹"><a href="#显示隐藏文件和文件夹" class="headerlink" title="显示隐藏文件和文件夹"></a>显示隐藏文件和文件夹</h4><p>快捷键 <kbd>command</kbd> + <kbd>shift</kbd> + <kbd>.</kbd>，或者在命令行下输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 显示</span><br>defaults write com.apple.finder AppleShowAllFiles TRUE; killall Finder;<br><span class="hljs-meta">#</span><span class="bash"> 隐藏</span><br>defaults write com.apple.finder AppleShowAllFiles FALSE; killall Finder;<br></code></pre></td></tr></table></figure>
+
+<p>另外，隐藏和显示某个单独的文件或文件夹，在命令行下输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">chflags hidden file-path<br>chflags nohidden file-path<br></code></pre></td></tr></table></figure>
+
+<h4 id="其它小-tips"><a href="#其它小-tips" class="headerlink" title="其它小 tips"></a>其它小 tips</h4><ul>
+<li>  修改默认打开文件夹，<strong>Finder Preferences &gt; General &gt; New Finder window show</strong></li>
+<li>  打开右键菜单后，按住 <kbd>option</kbd> 键显示更多操作，比如复制路径</li>
+<li>  在文件属性分割线或者宽度调整按钮上双击，就可以自动调整宽度为当前列文件名字最长的宽度</li>
+<li>  调整窗口宽高时按住 <kbd>shift</kbd> + <kbd>option</kbd> 键，整个窗口大小会随之变大或变小</li>
+<li>  下载 <a target="_blank" rel="noopener" href="https://github.com/Ji4n1ng/OpenInTerminal/releases">OpenInTerminal-Lite</a>，然后按住 <kbd>command</kbd> 并拖动应用 icon 到 Finder 菜单栏，选择打开方式为 iTerm2，然后就可以快速在 iTerm 中打开当前文件夹路径了</li>
+</ul>
+<h3 id="iTerm-2"><a href="#iTerm-2" class="headerlink" title="iTerm 2"></a>iTerm 2</h3><h4 id="1、安装-oh-my-zsh"><a href="#1、安装-oh-my-zsh" class="headerlink" title="1、安装 oh-my-zsh"></a>1、安装 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">oh-my-zsh</a></h4><h4 id="2、配置-Dracula-主题以及修改-icon"><a href="#2、配置-Dracula-主题以及修改-icon" class="headerlink" title="2、配置 Dracula 主题以及修改 icon"></a>2、配置 <a target="_blank" rel="noopener" href="https://draculatheme.com/iterm">Dracula</a> 主题以及修改 <a target="_blank" rel="noopener" href="https://github.com/jasonlong/iterm2-icons">icon</a></h4><h4 id="3、配置按键"><a href="#3、配置按键" class="headerlink" title="3、配置按键"></a>3、配置按键</h4><p>如果你键盘中的 iTerm 按键被其它软件覆盖了，可以通过下面的方式手动设置<em>按字符跳转</em> 功能：<strong>Preferences &gt; Profiles &gt; Keys</strong>，先将 Left Option Key 设置为 Esc+，然后添加 Key Mapping：</p>
+<ul>
+<li>Keyboard Shortcut 设置为 <kbd>option</kbd> + <kbd>←</kbd>，Action 选择 Send Escape Sequence，Esc+ 输入 <kbd>b</kbd></li>
+<li>Keyboard Shortcut 设置为 <kbd>option</kbd> + <kbd>→</kbd>，Action 选择 Send Escape Sequence，Esc+ 输入 <kbd>f</kbd></li>
+<li>Keyboard Shortcut 设置为 <kbd>option</kbd> + <kbd>↑</kbd>，Action 选择 Send Text，内容输入 <kbd>cd ..</kbd></li>
+</ul>
+<h3 id="BetterAndBetter"><a href="#BetterAndBetter" class="headerlink" title="BetterAndBetter"></a><a target="_blank" rel="noopener" href="https://www.better365.cn/bab2.html">BetterAndBetter</a></h3><p>这是一个通过为触摸板和键盘提供丰富的快捷操作、提升 Mac 使用效率的应用。</p>
+<h4 id="触摸板"><a href="#触摸板" class="headerlink" title="触摸板"></a>触摸板</h4><ul>
+<li>  三指点击调整系统音量（3Finger_TipTap_Left/Right/Middle -&gt; Volumn Down/Up/Mute）</li>
+<li>  四指点击调整屏幕亮度（4Finger_TipTap_Left/Right -&gt; Brightness Down/Up）</li>
+<li>  四指双击输入 Mac 密码（4Finger_DoubleTap）</li>
+</ul>
+<h4 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h4><p>BAB 内置了一些调整窗口位置的键盘快捷键，我参考了 <a target="_blank" rel="noopener" href="https://github.com/rxhanson/Rectangle">Rectangle</a> 的快捷键，设置如下：</p>
+<ul>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>←</kbd>，当前窗口占据屏幕左半边</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>→</kbd>，当前窗口占据屏幕右半边</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>↑</kbd>，当前窗口占据屏幕上半边</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>↓</kbd>，当前窗口占据屏幕下半边</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>C</kbd>，当前窗口占据屏幕中心</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>M</kbd>，当前窗口最小化</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>↩︎</kbd>，进入全屏</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>⌫</kbd>，退出全屏</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>R</kbd>，恢复到之前的位置</li>
+</ul>
+<p>其它 BAB 默认绑定的快捷键：</p>
+<ul>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>A</kbd>，打开应用程序文件夹</li>
+<li><kbd>control</kbd> + <kbd>option</kbd> + <kbd>command</kbd> + <kbd>B</kbd>，打开 BAB 设置界面</li>
+</ul>
+<p>另外，BAB 还可以结合 AppleScript 来使用快捷键，比如：</p>
+<ul>
+<li><p><kbd>command</kbd> + <kbd>shift</kbd> + <kbd>control</kbd> + <kbd>P</kbd>，Spotify 播放/暂停</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh">using terms from application <span class="hljs-string">&quot;Spotify&quot;</span><br>	<span class="hljs-keyword">if</span> player state of application <span class="hljs-string">&quot;Spotify&quot;</span> is paused <span class="hljs-keyword">then</span><br>		tell application <span class="hljs-string">&quot;Spotify&quot;</span> to play<br>	<span class="hljs-keyword">else</span><br>		tell application <span class="hljs-string">&quot;Spotify&quot;</span> to pause<br>	end <span class="hljs-keyword">if</span><br>end using terms from<br></code></pre></td></tr></table></figure></li>
+<li><p><kbd>command</kbd> + <kbd>shift</kbd> + <kbd>control</kbd> + <kbd>L</kbd>，Spotify 播放下一首</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">tell application <span class="hljs-string">&quot;Spotify&quot;</span><br>	next track<br>end tell<br></code></pre></td></tr></table></figure></li>
+<li><p><kbd>command</kbd> + <kbd>shift</kbd> + <kbd>control</kbd> + <kbd>H</kbd>，Spotify 播放上一首</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">tell application <span class="hljs-string">&quot;Spotify&quot;</span><br>	previous track<br>end tell<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>音乐的播放/暂停、上/下一首这些功能用 BAB 内置的脚本也能用，但是前提是必须先让你的目标软件获得音频焦点，所以还是用自己的脚本比较好。</p>
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><h4 id="按-F5-刷新"><a href="#按-F5-刷新" class="headerlink" title="按 F5 刷新"></a>按 <kbd>F5</kbd> 刷新</h4><p><strong>System Preferences &gt; Keyboard &gt; Keyboard Shortcuts &gt; App Shortcuts</strong>，点击左下角的 “+” 号，在弹框中的 Application 一栏选择 Google Chrome，Menu Title 填入 “Reload This Page”，然后点击 Keyboard Shortcut 一栏，按 <kbd>F5</kbd>，最后选择 “Add” 添加完成，重启 Chrome 后生效。</p>
+<h3 id="Automator"><a href="#Automator" class="headerlink" title="Automator"></a>Automator</h3><h4 id="Search-With-Chrome"><a href="#Search-With-Chrome" class="headerlink" title="Search With Chrome"></a>Search With Chrome</h4><p>系统内置了 Search with Google，不过是使用 Safari 打开的，我平时用 Chrome 多一点，所以可以用 Automator 添加一个服务来解决：打开 Automator &gt; 选择 Quick Action &gt; 搜索 “Applescript” &gt; 双击添加 “Run Applescript”，复制以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">on run &#123;input, parameters&#125;<br>	tell application &quot;Google Chrome&quot;<br>		open location &quot;https://www.google.com/search?&amp;q=&quot; &amp; input as string<br>	end tell<br>	return input<br>end run<br></code></pre></td></tr></table></figure>
+
+<p>保存并命名为 “Search by Google”（默认会保存到 ~/Library/Services 中），接着就可以在选中文字的时候 <strong>右键 - Service</strong> 选择该服务了。也可以在 <strong>System Preferences &gt; Keyboard &gt; Keyboard Shortcuts &gt; Services &gt; Text</strong> 中添加快捷键，比如我的是 <kbd>command</kbd>+<kbd>option</kbd>+<kbd>g</kbd>。</p>
+<h4 id="V2rayU-添加白名单"><a href="#V2rayU-添加白名单" class="headerlink" title="V2rayU 添加白名单"></a>V2rayU 添加白名单</h4><p>使用 Pac 模式有个缺陷，那就是每次加网址都很麻烦，不过同样可以用 Automator 解决这个问题。在<a target="_blank" rel="noopener" href="https://github.com/yanue/V2rayU/issues/34">这里</a>找到了 V2rayU 的 User Rules 文件的保存位置，然后在 Automator 中创建一个 Quick Action (Service)，使用默认模式并添加一个 Shell Script：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo &quot;||$1&quot; | tee -a /Applications/V2rayU.app/Contents/Resources/pac/user-rule.txt<br></code></pre></td></tr></table></figure>
+
+<p>记得将脚本右上角的 Pass input 修改成 “as argument”，然后保存成 “Add to user-rule” 就好了，推荐最好添加一个快捷键，比如 <kbd>command</kbd>+<kbd>option</kbd>+<kbd>a</kbd>。注意：使用这种方式添加的网址在 V2rayU 的 Pac 面板中是看不到的，而且需要重启 v2ray-core 或者切换代理模式后才能生效。</p>
+<p>另外，记录一下使用 V2rayU 过程中的一些小问题：</p>
+<ul>
+<li>v2ray 配置正确但是依旧无法正确连接的问题。首先检查时间是否设置正确，如果客户端和服务端时间误差超过 2 分钟，就会出现无法连接的<a target="_blank" rel="noopener" href="https://guide.v2fly.org/prep/start.html">问题</a>；其次，如果你服务端配置了 WS+TLS，客户端需要设置 Allow Insecure，一般也能解决连接失败的问题。</li>
+<li>v2ray-core 缺失，出现该现象的原因未知，需要手动下载 <a target="_blank" rel="noopener" href="https://github.com/v2ray/v2ray-core/releases">v2ray-core</a> 并解压好放到 <code>/Applications/V2rayU.app/Contents/Resources/v2ray-core</code> 目录下。（作者已经解决了该问题，相关 issue 见<a target="_blank" rel="noopener" href="https://github.com/yanue/V2rayU/issues/663">issue#663</a>）</li>
+</ul>
+<h3 id="Raycast"><a href="#Raycast" class="headerlink" title="Raycast"></a>Raycast</h3><p><a target="_blank" rel="noopener" href="https://www.raycast.com/">Raycast</a> 是一个非常优秀的启动器，推荐将快捷键设置为 <kbd>option</kbd> + <kbd>space</kbd>。使用它除了可以完成一些文件、应用的搜索之外，我最喜欢的是它提供的各种快捷操作，比如给各种软件绑定快捷键，结合 Shortcuts 可以完成自动化很多常用的操作。</p>
+<h3 id="Shortcuts"><a href="#Shortcuts" class="headerlink" title="Shortcuts"></a>Shortcuts</h3><p>Shortcuts 除了可以操作系统应用之外，也支持导入并运行 AppleScript，不过需要在应用设置中开启 Advanced &gt; Allow Running Scripts，这样的话它的实用性就提升很多了，我们还可以在 Raycast 的 Extensions 设置中，为 Shortcuts 添加快捷键。</p>
+<h3 id="百度输入法"><a href="#百度输入法" class="headerlink" title="百度输入法"></a>百度输入法</h3><p>百度输入法是到目前为止为数不多的我依旧在使用的百度产品。我喜欢它简洁的界面以及丰富的<a target="_blank" rel="noopener" href="https://srf.baidu.com/site/macskin/index.html">皮肤库</a>（Origami Neko），表情库（<kbd>shift</kbd> + <kbd>option</kbd> + <kbd>B</kbd>），QuickTip，自动切换英文（设置 - 高级 - App 清单）。另外，它对小鹤双拼的支持也不错，加上词库同步的功能，基本可以让我在 Mac 和 PC 之间的输入体验保持一致。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">基础设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%B1%8F%E5%B9%95%E6%98%BE%E7%A4%BA"><span class="toc-number">2.1.</span> <span class="toc-text">最佳屏幕显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%8C%87%E6%8B%96%E5%8A%A8"><span class="toc-number">2.2.</span> <span class="toc-text">三指拖动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E7%9B%98%E6%98%A0%E5%B0%84"><span class="toc-number">2.3.</span> <span class="toc-text">键盘映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%96%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%88%87%E6%8D%A2%E6%A1%8C%E9%9D%A2"><span class="toc-number">2.4.</span> <span class="toc-text">拖动窗口切换桌面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hot-Corners"><span class="toc-number">2.5.</span> <span class="toc-text">Hot Corners</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Look-Plugins"><span class="toc-number">2.6.</span> <span class="toc-text">Quick Look Plugins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD-Spotlight"><span class="toc-number">2.7.</span> <span class="toc-text">关闭 Spotlight</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">应用设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Finder"><span class="toc-number">3.1.</span> <span class="toc-text">Finder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">显示文件路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6%E5%92%8C%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">3.1.2.</span> <span class="toc-text">显示隐藏文件和文件夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%B0%8F-tips"><span class="toc-number">3.1.3.</span> <span class="toc-text">其它小 tips</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iTerm-2"><span class="toc-number">3.2.</span> <span class="toc-text">iTerm 2</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="toc-number">3.2.1.</span> <span class="toc-text">1、安装 oh-my-zsh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%85%8D%E7%BD%AE-Dracula-%E4%B8%BB%E9%A2%98%E4%BB%A5%E5%8F%8A%E4%BF%AE%E6%94%B9-icon"><span class="toc-number">3.2.2.</span> <span class="toc-text">2、配置 Dracula 主题以及修改 icon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E9%85%8D%E7%BD%AE%E6%8C%89%E9%94%AE"><span class="toc-number">3.2.3.</span> <span class="toc-text">3、配置按键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BetterAndBetter"><span class="toc-number">3.3.</span> <span class="toc-text">BetterAndBetter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A6%E6%91%B8%E6%9D%BF"><span class="toc-number">3.3.1.</span> <span class="toc-text">触摸板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%AE%E7%9B%98"><span class="toc-number">3.3.2.</span> <span class="toc-text">键盘</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chrome"><span class="toc-number">3.4.</span> <span class="toc-text">Chrome</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89-F5-%E5%88%B7%E6%96%B0"><span class="toc-number">3.4.1.</span> <span class="toc-text">按 F5 刷新</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automator"><span class="toc-number">3.5.</span> <span class="toc-text">Automator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Search-With-Chrome"><span class="toc-number">3.5.1.</span> <span class="toc-text">Search With Chrome</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#V2rayU-%E6%B7%BB%E5%8A%A0%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-number">3.5.2.</span> <span class="toc-text">V2rayU 添加白名单</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Raycast"><span class="toc-number">3.6.</span> <span class="toc-text">Raycast</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shortcuts"><span class="toc-number">3.7.</span> <span class="toc-text">Shortcuts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E5%BA%A6%E8%BE%93%E5%85%A5%E6%B3%95"><span class="toc-number">3.8.</span> <span class="toc-text">百度输入法</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/macos-config/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/macos-config/&text=macOS 配置指南"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/macos-config/&is_video=false&description=macOS 配置指南"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=macOS 配置指南&body=Check out this article: https://ajiew.me/macos-config/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/macos-config/&title=macOS 配置指南"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/macos-config/&name=macOS 配置指南&description=&lt;blockquote&gt;
+&lt;p&gt;记录自己最常用的 macOS 配置，包括系统设置以及部分常用软件的设置。我常用的软件见：&lt;a href=&#34;https://ajiew.github.io/software-list/&#34;&gt;software-list&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;作为一个开发者，第一个需要面对的问题是开发机器的选择。虽然目前看来，越来越多的开发者已经开始向 Linux 甚至向 PC 迁移，但是，我依旧认为 Mac 是最适合普通开发人员的开发设备，原因是它拥有最佳的用户体验和完备的软件和开发者生态。&lt;/p&gt;
+&lt;h3 id=&#34;系统&#34;&gt;&lt;a href=&#34;#系统&#34; class=&#34;headerlink&#34; title=&#34;系统&#34;&gt;&lt;/a&gt;系统&lt;/h3&gt;&lt;p&gt;所有的 Mac 电脑所使用的操作系统都称为 &lt;a href=&#34;https://en.wikipedia.org/wiki/MacOS&#34;&gt;macOS&lt;/a&gt;（过去叫 OS X，更早的时候叫 Mac OS X），macOS 最早是基于一个类 Unix 系统 &lt;a href=&#34;https://en.wikipedia.org/wiki/NeXTSTEP&#34;&gt;NeXTSTEP&lt;/a&gt; 开发而来的，所以相比基于 Windows 操作系统的 PC，macOS 其实更接近 Linux，而相比基于 Linux 内核的操作系统，它的 UI/UX 又得到了非常大的提升。总体而言，macOS 兼顾了效率和使用体验，这也是目前它依旧受主流市场欢迎的原因。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/macos-config/&t=macOS 配置指南"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

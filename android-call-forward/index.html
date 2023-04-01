@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="这篇其实不算技术博客，简单记录下关于来电转移的使用。  00 呼叫转移的类型呼叫转移其实是一个比较常见的功能了，当你在开发一个使用电话场景的业务比较多的 app 的时候，难免会遇到需要使用呼叫转移功能的需求，这样当使用你 app 的用户（公司员工）无法立即接听或者处于忙碌状态的时候，如果有个一键呼叫转移的功能那是不是很方便呢？ 经过一番搜索，不同移动网络对呼叫转移的支持也有区别，大致分为两种，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 来电呼叫转移功能">
+<meta property="og:url" content="https://ajiew.me/android-call-forward/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="这篇其实不算技术博客，简单记录下关于来电转移的使用。  00 呼叫转移的类型呼叫转移其实是一个比较常见的功能了，当你在开发一个使用电话场景的业务比较多的 app 的时候，难免会遇到需要使用呼叫转移功能的需求，这样当使用你 app 的用户（公司员工）无法立即接听或者处于忙碌状态的时候，如果有个一键呼叫转移的功能那是不是很方便呢？ 经过一番搜索，不同移动网络对呼叫转移的支持也有区别，大致分为两种，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c3f9636f534725.png">
+<meta property="article:published_time" content="2018-08-19T02:02:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="小知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c3f9636f534725.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 来电呼叫转移功能</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/talk-about-change/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/android-phone-call-app-and-listen-phone-calls/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-call-forward/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-call-forward/&text=Android 来电呼叫转移功能"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-call-forward/&is_video=false&description=Android 来电呼叫转移功能"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 来电呼叫转移功能&body=Check out this article: https://ajiew.me/android-call-forward/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-call-forward/&name=Android 来电呼叫转移功能&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c3f9636f534725.png&#34; alt=&#34;Google Earth View&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇其实不算技术博客，简单记录下关于来电转移的使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;00-呼叫转移的类型&#34;&gt;&lt;a href=&#34;#00-呼叫转移的类型&#34; class=&#34;headerlink&#34; title=&#34;00 呼叫转移的类型&#34;&gt;&lt;/a&gt;00 呼叫转移的类型&lt;/h3&gt;&lt;p&gt;呼叫转移其实是一个比较常见的功能了，当你在开发一个使用电话场景的业务比较多的 app 的时候，难免会遇到需要使用呼叫转移功能的需求，这样当使用你 app 的用户（公司员工）无法立即接听或者处于忙碌状态的时候，如果有个一键呼叫转移的功能那是不是很方便呢？&lt;/p&gt;
+&lt;p&gt;经过一番搜索，不同移动网络对呼叫转移的支持也有区别，大致分为两种，C 网与 G 网，C 网是指 &lt;a href=&#34;https://en.wikipedia.org/wiki/Code-division_multiple_access&#34;&gt;CDMA&lt;/a&gt; 网，G 网是指 &lt;a href=&#34;https://en.wikipedia.org/wiki/GSM&#34;&gt;GSM&lt;/a&gt; 网。其实就是两种不同的网络通信方式，维基百科的解释看不太懂，后来还是看了这个&lt;a href=&#34;https://zhidao.baidu.com/question/26974139.html&#34;&gt;百度知道&lt;/a&gt;的回答后才稍微明白了一点（好吧，百度知道也不全是垃圾😂）：&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-call-forward/&t=Android 来电呼叫转移功能"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">00 呼叫转移的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-C%E7%BD%91%E5%92%8CG%E7%BD%91%E8%AE%BE%E7%BD%AE%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">01 C网和G网设置呼叫转移的规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E5%8F%91%E8%B5%B7%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB"><span class="toc-number">3.</span> <span class="toc-text">02 发起呼叫转移</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 来电呼叫转移功能
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-08-19T02:02:00.000Z" itemprop="datePublished">2018-08-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/" rel="tag">小知识</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c3f9636f534725.png" alt="Google Earth View"></p>
+<blockquote>
+<p>这篇其实不算技术博客，简单记录下关于来电转移的使用。</p>
+</blockquote>
+<h3 id="00-呼叫转移的类型"><a href="#00-呼叫转移的类型" class="headerlink" title="00 呼叫转移的类型"></a>00 呼叫转移的类型</h3><p>呼叫转移其实是一个比较常见的功能了，当你在开发一个使用电话场景的业务比较多的 app 的时候，难免会遇到需要使用呼叫转移功能的需求，这样当使用你 app 的用户（公司员工）无法立即接听或者处于忙碌状态的时候，如果有个一键呼叫转移的功能那是不是很方便呢？</p>
+<p>经过一番搜索，不同移动网络对呼叫转移的支持也有区别，大致分为两种，C 网与 G 网，C 网是指 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Code-division_multiple_access">CDMA</a> 网，G 网是指 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/GSM">GSM</a> 网。其实就是两种不同的网络通信方式，维基百科的解释看不太懂，后来还是看了这个<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/26974139.html">百度知道</a>的回答后才稍微明白了一点（好吧，百度知道也不全是垃圾😂）：</p>
+<span id="more"></span>
+
+<blockquote>
+<p>C网是CDMA频段：CDMA 1X：CDMA 1X采用扩频速率为SR1，即指前向信道和反向信道均用码片速率 1.2288Mbit/s的单载波直接系列扩频方式。因此它可以方便地与IS-95（A/B）后向兼容，实现平滑 过渡。由于CDMA 1X采用了反向相干解调、快速前向功控、发送分集、Turbo编码等新技术，其容量比 IS-95大为提高。在相同条件下，对普通话音业务而言，容量大致为IS-95系统的两倍。CDMA 1X网络 可以作为话音业务的承载平台，也可以作为无线接入Internet分组数据承载平台，既可以为用户提 供传统的话音业务，也可以为用户提供端对端分组传输模式的数据业务。</p>
+<p>CDMA网络是由联通统一建设和运营，这一独家运营权所能带来的市场空间也是很明显的。有了 CDMA网的支持，联通可以实现许多新的增值数据业务，由此可能会赢得更多CDMA用户。</p>
+</blockquote>
+<blockquote>
+<p>G网是GSM数字网：GSM：GSM(Global System For Mobile Communication)网即全球移动通信系统，又称 “全球通”，很多公司参与了标准的制定工作。GSM数字移动通信系统是由欧洲主要电信运营者和 制造厂家组成的标准化委员会设计出来的，它是在蜂窝系统的基础上发展而成。</p>
+<p>GSM采用的是数字调制技术，其关键技术之一是时分多址(每个用户在某一时隙上选用载频且只能在特 定时间下收信息)，GSM系统有几项重要特点：防盗拷能力佳、网络容量大、号码资源丰富、通话清晰、 稳定性强不易受干扰、信息灵敏、通话死角少、手机耗电量底等。因此其话音清晰，保密容易，能提 供的数据传输服务较多。GSM网能支持的用户数量为模拟网的1.8-2倍。</p>
+</blockquote>
+<p>目前来看，中国电信使用的网络制式中同时包含了C网与G网（大部分是C网），中国移动与中国联通大多使用G网。</p>
+<h3 id="01-C网和G网设置呼叫转移的规则"><a href="#01-C网和G网设置呼叫转移的规则" class="headerlink" title="01 C网和G网设置呼叫转移的规则"></a>01 C网和G网设置呼叫转移的规则</h3><p>经过多番搜索，整理出下面两张表格。</p>
+<p><strong>C网（适用中国电信）</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">启用</th>
+<th align="center">取消</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">无条件呼叫转移</td>
+<td align="center">*72[电话号码]+拨打键</td>
+<td align="center">*720+拨打键</td>
+</tr>
+<tr>
+<td align="center">遇忙呼叫转移</td>
+<td align="center">*90[电话号码]+拨打键</td>
+<td align="center">*900+拨打键</td>
+</tr>
+<tr>
+<td align="center">无信号/关机/无应答呼叫转移</td>
+<td align="center">*92[电话号码]+拨打键</td>
+<td align="center">*920+拨打键</td>
+</tr>
+<tr>
+<td align="center">取消所有呼叫转移</td>
+<td align="center">*730+拨打键</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>参考：<a target="_blank" rel="noopener" href="http://gd.189.cn/esurfing/yewu/2011/11/05/10990.htm">中国电信呼叫转移业务介绍</a></p>
+<p><strong>G网（适用中国移动与中国联通）</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">启用</th>
+<th align="center">取消</th>
+<th align="center">状态查询</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">无条件呼叫转移</td>
+<td align="center">**21*[电话号码]#+拨打键</td>
+<td align="center">##21#+拨打键</td>
+<td align="center">*#21#+拨打键</td>
+</tr>
+<tr>
+<td align="center">遇忙呼叫转移</td>
+<td align="center">**67*[电话号码]#+拨打键</td>
+<td align="center">##67#+拨打键</td>
+<td align="center">*#67#+拨打键</td>
+</tr>
+<tr>
+<td align="center">无信号/关机呼叫转移</td>
+<td align="center">**62*[电话号码]#+拨打键</td>
+<td align="center">##62#+拨打键</td>
+<td align="center">*#62#+拨打键</td>
+</tr>
+<tr>
+<td align="center">无应答呼叫转移</td>
+<td align="center">**61*[电话号码]#+拨打键</td>
+<td align="center">##61#+拨打键</td>
+<td align="center">*#61#+拨打键</td>
+</tr>
+<tr>
+<td align="center">取消所有呼叫转移</td>
+<td align="center"></td>
+<td align="center">##002#+拨打键</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>参考：<a target="_blank" rel="noopener" href="http://gd.10086.cn/commodity/options/detail/SVC_CALLFORWARD.shtml">中国移动呼叫转移设置使用</a> &amp; <a target="_blank" rel="noopener" href="http://www.sendsms.cn/download/cabe6252319447f75888ab17a49c8aa8.pdf">呼叫转移的命令代码</a></p>
+<h3 id="02-发起呼叫转移"><a href="#02-发起呼叫转移" class="headerlink" title="02 发起呼叫转移"></a>02 发起呼叫转移</h3><p>知道上述规则之后，其实发起呼叫转移就很简单了，首先保证你的应用已经声明了打电话的权限，然后只要发起 <code>Intent.ACTION_CALL</code> 的 Intent 就可以了。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">void</span> <span class="hljs-function"><span class="hljs-title">callForward</span>(<span class="hljs-params">Context context, <span class="hljs-built_in">String</span> forwardNumber</span>)</span> &#123;<br>    Intent dialIntent = <span class="hljs-keyword">new</span> Intent(Intent.ACTION_CALL,<br>    		Uri.parse(<span class="hljs-built_in">String</span>.format(<span class="hljs-string">&quot;tel:%s&quot;</span>, forwardNumber)));<br>    dialIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);<br>    context.startActivity(dialIntent);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其实这里可以结合我的上一篇文章做一点优化，对呼出的号码进行过滤，如果包含呼叫转移的前缀则对呼叫转移的类型进行判断并提示信息。具体请看：<a target="_blank" rel="noopener" href="https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls">安卓代替系统默认电话应用(Android 6.0+)与电话状态监听</a></p>
+<p>祝各位周末愉快！</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#00-%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">00 呼叫转移的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#01-C%E7%BD%91%E5%92%8CG%E7%BD%91%E8%AE%BE%E7%BD%AE%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">01 C网和G网设置呼叫转移的规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E5%8F%91%E8%B5%B7%E5%91%BC%E5%8F%AB%E8%BD%AC%E7%A7%BB"><span class="toc-number">3.</span> <span class="toc-text">02 发起呼叫转移</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-call-forward/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-call-forward/&text=Android 来电呼叫转移功能"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-call-forward/&is_video=false&description=Android 来电呼叫转移功能"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 来电呼叫转移功能&body=Check out this article: https://ajiew.me/android-call-forward/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-call-forward/&title=Android 来电呼叫转移功能"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-call-forward/&name=Android 来电呼叫转移功能&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c3f9636f534725.png&#34; alt=&#34;Google Earth View&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这篇其实不算技术博客，简单记录下关于来电转移的使用。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;00-呼叫转移的类型&#34;&gt;&lt;a href=&#34;#00-呼叫转移的类型&#34; class=&#34;headerlink&#34; title=&#34;00 呼叫转移的类型&#34;&gt;&lt;/a&gt;00 呼叫转移的类型&lt;/h3&gt;&lt;p&gt;呼叫转移其实是一个比较常见的功能了，当你在开发一个使用电话场景的业务比较多的 app 的时候，难免会遇到需要使用呼叫转移功能的需求，这样当使用你 app 的用户（公司员工）无法立即接听或者处于忙碌状态的时候，如果有个一键呼叫转移的功能那是不是很方便呢？&lt;/p&gt;
+&lt;p&gt;经过一番搜索，不同移动网络对呼叫转移的支持也有区别，大致分为两种，C 网与 G 网，C 网是指 &lt;a href=&#34;https://en.wikipedia.org/wiki/Code-division_multiple_access&#34;&gt;CDMA&lt;/a&gt; 网，G 网是指 &lt;a href=&#34;https://en.wikipedia.org/wiki/GSM&#34;&gt;GSM&lt;/a&gt; 网。其实就是两种不同的网络通信方式，维基百科的解释看不太懂，后来还是看了这个&lt;a href=&#34;https://zhidao.baidu.com/question/26974139.html&#34;&gt;百度知道&lt;/a&gt;的回答后才稍微明白了一点（好吧，百度知道也不全是垃圾😂）：&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-call-forward/&t=Android 来电呼叫转移功能"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="该 Cheatsheet 是我在通过 vimtutor 学习 Vim 以及日常使用中整理出来的，主要面向初学者。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 新手速查清单">
+<meta property="og:url" content="https://ajiew.me/vim-cheatsheet/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="该 Cheatsheet 是我在通过 vimtutor 学习 Vim 以及日常使用中整理出来的，主要面向初学者。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-21T12:30:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.731Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Vim 新手速查清单</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2020-12/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2020-11/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/vim-cheatsheet/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/vim-cheatsheet/&text=Vim 新手速查清单"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/vim-cheatsheet/&is_video=false&description=Vim 新手速查清单"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Vim 新手速查清单&body=Check out this article: https://ajiew.me/vim-cheatsheet/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/vim-cheatsheet/&name=Vim 新手速查清单&description=&lt;blockquote&gt;
+&lt;p&gt;  该 Cheatsheet 是我在通过 &lt;a href=&#34;http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor&#34;&gt;vimtutor&lt;/a&gt; 学习 Vim 以及日常使用中整理出来的，主要面向初学者。&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/vim-cheatsheet/&t=Vim 新手速查清单"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%AA%97%E5%8F%A3"><span class="toc-number">4.</span> <span class="toc-text">多窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83-Tips"><span class="toc-number">5.</span> <span class="toc-text">其它 Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iTerm-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">5.1.</span> <span class="toc-text">iTerm 快捷键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E6%8F%92%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">Vim 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Core"><span class="toc-number">6.1.</span> <span class="toc-text">Core</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">6.2.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E9%85%8D%E7%BD%AE"><span class="toc-number">7.</span> <span class="toc-text">Vim 配置</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Vim 新手速查清单
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2020-12-21T12:30:00.000Z" itemprop="datePublished">2020-12-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Cheatsheet/" rel="tag">Cheatsheet</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>  该 Cheatsheet 是我在通过 <a target="_blank" rel="noopener" href="http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor">vimtutor</a> 学习 Vim 以及日常使用中整理出来的，主要面向初学者。</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><ul>
+<li>移动到行尾 <kbd>$</kbd>，移动到行首 <kbd>0</kbd>，移动到行首第一个字符处 <kbd>^</kbd></li>
+<li>移动到段首 <kbd>{</kbd>，移动到段尾 <kbd>}</kbd></li>
+<li>移动到下一个词 <kbd>w</kbd>，移动到上一个词 <kbd>b</kbd>，移动到当前单词末尾前一个字符 <kbd>e</kbd></li>
+<li>移动到文档开头 <kbd>gg</kbd>，移动到文档末尾 <kbd>G</kbd></li>
+<li>移动光标到屏幕顶端 <kbd>H</kbd>，移动到屏幕中间<kbd>M</kbd>，移动到底部<kbd>L</kbd></li>
+<li>跳到第 n 行 <kbd>ngg</kbd> 或 <kbd>nG</kbd> 或使用命令 <code>:n</code></li>
+<li>移动到上次编辑文件的位置 双击 <kbd>`</kbd></li>
+<li><kbd>control</kbd> + <kbd>f</kbd> 向下移动一屏，<kbd>control</kbd> + <kbd>b</kbd> 向上移动一屏</li>
+<li><kbd>control</kbd> + <kbd>i</kbd> 从当前位置前进，<kbd>control</kbd> + <kbd>o</kbd> 从当前位置后退</li>
+<li>光标在 <code>(</code> 或 <code>[</code> 或 <code>&#123;</code> 处时，使用 <kbd>%</kbd> 跳转匹配的 <code>)</code> 或 <code>]</code> 或 <code>&#125;</code></li>
+</ul>
+<h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><ul>
+<li>在光标位置插入 <kbd>i</kbd>，行首插入 <kbd>I</kbd></li>
+<li>在光标下一个字符后插入 <kbd>a</kbd>（<kbd>ea</kbd> 在下一个单词末尾插入文字），行尾插入 <kbd>A</kbd></li>
+<li>在下一行插入新的一行 <kbd>o</kbd>，在前一行插入新的一行 <kbd>O</kbd></li>
+<li>替换光标后所在字符 <kbd>r</kbd>，<kbd>R</kbd> 进入替换模式，每一个输入的字符都会被删除并替换原有字符</li>
+<li>删除一个字符 <kbd>x</kbd>，删除一个字符后进入插入模式 <kbd>s</kbd></li>
+<li>删除一个单词 <kbd>dw</kbd>，删除单词到末尾并进入插入模式 <kbd>ce</kbd>，删除整个单词并进入插入模式 <kbd>cw</kbd></li>
+<li>删除到行尾 <kbd>d</kbd><kbd>$</kbd> 或者 <kbd>D</kbd>，删除到行尾后进入插入模式 <kbd>c</kbd><kbd>$</kbd> 或者 <kbd>C</kbd></li>
+<li>删除一行 <kbd>dd</kbd>，删除后进入插入模式 <kbd>cc</kbd> 或 <kbd>S</kbd></li>
+<li>复制 <kbd>y</kbd>，复制一行 <kbd>yy</kbd> 或者 <kbd>Y</kbd></li>
+<li><kbd>p</kbd> 粘贴删除或者复制后的内容到光标下一个字符后，<kbd>P</kbd> 粘贴到光标前</li>
+<li>交换光标后的两个字符 <kbd>xp</kbd>，交换两行 <kbd>ddp</kbd></li>
+<li>撤销 <kbd>u</kbd>，撤销整行 <kbd>U</kbd>，重做 <kbd>control</kbd> + <kbd>r</kbd>（撤销之前的撤销）</li>
+<li><kbd>>></kbd> 缩进所在行，按一次之后继续按 <kbd>.</kbd> 可以继续缩进</li>
+<li><kbd><<</kbd> 反缩进所在行</li>
+<li>合并两行 <kbd>J</kbd></li>
+<li><kbd>.</kbd> 在新的光标位置重复上一条操作</li>
+<li>按下 <kbd>q</kbd> 开始录制模式，选择 <kbd>a</kbd> - <kbd>z</kbd> 为重复操作快捷键，之后开始录制；再次按下 <kbd>q</kbd> 结束录制，然后按下 <kbd>@</kbd> + 之前选择的重复操作快捷键，重复录制的操作</li>
+</ul>
+<h3 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h3><ul>
+<li><code>:h[elp] [command_name]</code> 查看某个命令的帮助文档，比如：<ul>
+<li> <code>:h user-manual</code> 查看帮助文档</li>
+<li> <code>:h keycodes</code> 查看按键名称</li>
+<li> <code>:h insert-index</code> 查看插入模式文档</li>
+<li> <code>:h normal-index</code> 查看普通模式文档</li>
+<li> <code>:h visual-index</code> 查看 visual 模式文档</li>
+<li> <code>:h ex-edit-index</code> 查看命令模式文档</li>
+</ul>
+</li>
+<li> 查看帮助文档时，双击或者使用快捷键 <kbd>control</kbd> + <kbd>]</kbd> 跳转链接，也可以使用前进/后退 (<kbd>control</kbd> + <kbd>i</kbd> / <kbd>o</kbd>) 在文件或者链接间跳转，如果链接是文件则可以使用 <kbd>g</kbd> + <kbd>f</kbd> 快捷键</li>
+<li> 查看帮助文档时，按 <kbd>control</kbd> + <kbd>d</kbd> 获得命令提示，按 <kbd>tab</kbd> 进行命令补全</li>
+<li> 按 <kbd>control</kbd> + <kbd>b</kbd> 跳到命令开头，<kbd>control</kbd> + <kbd>e</kbd> 跳到命令末尾，按 <kbd>control</kbd> + <kbd>w</kbd> 删除光标前一个单词，<kbd>control</kbd> + <kbd>u</kbd> 重新输入命令</li>
+<li> <kbd>/</kbd> 向后匹配搜索，<kbd>?</kbd> 向前匹配搜索，<kbd>n</kbd> 匹配下一个，<kbd>N</kbd> 反向匹配下一个</li>
+<li> <code>:set ic</code> 忽略大小写匹配，<code>:set noic</code> 关闭，仅单次搜索忽略大小写加 <code>\c</code>，比如 <code>/keyword\c</code></li>
+<li> <code>:set hls</code> 搜索结果高亮，<code>:set nohls</code> 关闭，取消高亮直到下次搜索 <code>:noh</code></li>
+<li> <code>:set is</code> 部分结果匹配显示，<code>:set nois</code> 关闭</li>
+<li> <code>:s/old/new/g</code> + 回车，替换光标所在行匹配到的所有字符</li>
+<li> <code>:#,#s/old/new/gc</code> 替换所选行 <code>#,#</code> 中匹配到的字符</li>
+<li> <code>:%s/old/new/g</code> 替换当前文件中所有匹配到的字符，<code>:%s/old/new/gc</code> 每个替换前弹出确认提示</li>
+<li> <code>:!</code> 执行 Shell 命令，比如 <code>:!ls</code></li>
+<li> <code>:w fileName</code> 保存文件；<code>:x</code> 保存并退出，快捷键 <kbd>ZZ</kbd>，<code>:q!</code> 不保存文件直接退出，快捷键 <kbd>ZQ</kbd></li>
+<li> <code>:e</code> 重新加载当前文件；<code>:e!</code> 不保存文件重新打开</li>
+<li> <code>:e fileName</code> 在当前窗口打开（新）文件，使用 <code>:e#</code> 切换到最近的文件，快捷键 <kbd>control</kbd> + <kbd>^</kbd>，切换前必须先保存。</li>
+<li> <code>:r</code>，retrieve 数据并插入到光标所在下一行，数据来源可以是文件或命令结果，比如 <code>:r fileName</code> 或者 <code>:r !ls</code></li>
+<li> <code>:ls</code> 列出所有打开的文件，<code>:b n</code> 切换到指定数字下的文件，<code>:bw</code> 关闭当前文件，<code>:qall</code> 关闭所有文件，<code>:wall</code> 保存所有打开的文件</li>
+<li> <code>:his</code> 查看所有命令历史，<code>:his /</code> 查看所有搜索历史</li>
+<li> <code>:set</code> 更改当前 vim 配置，比如 <code>:set nu</code> 显示行号</li>
+<li> <code>:map key1 key2</code> 映射键盘按键，默认的 <code>&lt;leader&gt;</code> 键为 <code>\</code></li>
+<li> <code>q:</code> 查看最近命令历史，<code>q/</code> 查看最近搜索历史，按两次 <kbd>control</kbd> + <kbd>c</kbd> 退出</li>
+<li> 按 <kbd>v</kbd> 进入 Visual selection 模式，使用方向键进行移动，之后可以对选中的文本进行操作，比如复制 <kbd>y</kbd>，删除 <kbd>d</kbd>，重选 <kbd>gv</kbd>，将选中的行保存为文件 <code>:w fileName</code> 等</li>
+<li> 按 <kbd>V</kbd> 进入 Visual Line selection 模式</li>
+<li> 按 <kbd>control</kbd> + <kbd>v</kbd> 进入 Visual Block selection 模式，可以垂直方向块状选择，使用 <kbd>I</kbd> 插入模式，退出后所有选中的行都会插入相同内容。</li>
+<li> <code>:f</code> 显示文档信息和当前所在位置，或者使用快捷键 <kbd>control</kbd> + <kbd>g</kbd></li>
+</ul>
+<h3 id="多窗口"><a href="#多窗口" class="headerlink" title="多窗口"></a>多窗口</h3><ul>
+<li>  <code>vim -o file1 file2</code>，水平方向多窗口打开多个文件，<code>-O</code> 垂直方向多窗口打开多个文件</li>
+<li>  <code>:split fileName</code> 在打开的文件中打开水平多窗口，快捷键 <kbd>contorl</kbd> + <kbd>w</kbd>, <kbd>s</kbd>，不加 fileName 则默认使用当前文件</li>
+<li>  <code>:vsplit fileName</code> 在打开的文件中打开垂直多窗口，快捷键 <kbd>contorl</kbd> + <kbd>w</kbd>, <kbd>v</kbd>，不加 fileName 则默认使用当前文件</li>
+<li>  <kbd>contorl</kbd> + <kbd>w</kbd>, <kbd>h</kbd> <kbd>j</kbd> <kbd>k</kbd> <kbd>l</kbd> 或方向键，上下左右切换窗口，连按两次 <kbd>contorl</kbd> + <kbd>w</kbd> 切换下一个窗口，也可以使用光标对窗口进行选择</li>
+<li>  <kbd>control</kbd> + <kbd>w</kbd> + <kbd>shift</kbd> + <kbd>-</kbd>，窗口垂直最大化；<kbd>control</kbd> + <kbd>w</kbd> + <kbd>=</kbd>，垂直方向等分显示。</li>
+<li>  <code>:close</code> 关闭当前窗口，快捷键 <kbd>contorl</kbd> + <kbd>w</kbd>, <kbd>c</kbd> 或者  <kbd>shift</kbd> + 双击 <kbd>z</kbd></li>
+<li>  <code>:only</code> 关闭其它窗口，快捷键 <kbd>contorl</kbd> + <kbd>w</kbd>, <kbd>o</kbd></li>
+</ul>
+<h3 id="其它-Tips"><a href="#其它-Tips" class="headerlink" title="其它 Tips"></a>其它 Tips</h3><ul>
+<li>  <code>:set textwidth=&lt;n&gt;</code> 设置字符换行最大长度，之后按 <kbd>gql</kbd> 就可以将使得当前行超出部分自动换行</li>
+<li>  <code>:retab</code> 格式化 Tab 为空格，使得当前文件符合 <code>.vimrc</code> 中的 <code>tabstop</code> 等配置</li>
+</ul>
+<h4 id="iTerm-快捷键"><a href="#iTerm-快捷键" class="headerlink" title="iTerm 快捷键"></a>iTerm 快捷键</h4><ul>
+<li>  <kbd>command</kbd> + <kbd>/</kbd> 高亮当前文件中光标所在的位置</li>
+<li>  <kbd>command</kbd> + <kbd>;</kbd> 获得代码提示</li>
+</ul>
+<h3 id="Vim-插件"><a href="#Vim-插件" class="headerlink" title="Vim 插件"></a>Vim 插件</h3><p>插件管理器：<a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">Vim-Plug</a></p>
+<h4 id="Core"><a href="#Core" class="headerlink" title="Core"></a>Core</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/editorconfig/editorconfig-vim">editorconfig-vim</a>: EditorConfig plugin for Vim. <code>:h editorconfig</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/tpope/vim-commentary">vim-commentary</a>: Comment stuff out. <code>gcc</code>, <code>:h commentary</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/jiangmiao/auto-pairs">auto-pairs</a>: Insert or delete brackets, parens, quotes in pair. <code>:h autopairs</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/tpope/vim-surround">vim-surround</a>: change - <code>cs&#39;&quot;</code> |delete: <code>ds&#39;</code> |add - <code>ysiw&quot;</code>. <code>:h surround</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/mg979/vim-visual-multi">vim-visual-multi</a>: Multiple cursors plugin. <code>&lt;C-Down&gt;</code> / <code>&lt;C-Up&gt;</code>, <code>:h visual-multi</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/scrooloose/nerdtree">nerdtree</a>: A tree explorer plugin for vim. <code>:h nerdtree</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/airblade/vim-gitgutter">vim-gitgutter</a>: A Vim plugin which shows git diff markers in the sign column. <code>:h gitgutter</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/itchyny/lightline.vim">lightline.vim</a>: A light and configurable statusline/tabline plugin for Vim. <code>:h lightline</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/luochen1990/rainbow">rainbow</a>: Rainbow Parentheses. <code>:h rainbow</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/vim-utils/vim-man">vim-man</a>: View man pages in vim. <code>:Man Command</code>, <code>:h man</code></li>
+</ul>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/mileszs/ack.vim">ack.vim</a>: Run <code>ack</code> in Vim. <code>:h ack</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/preservim/nerdcommenter">nerdcommenter</a>: Vim plugin for intensely nerdy commenting powers. <code>\cc</code>, <code>:h nerdcommenter</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf.vim">fzf.vim</a>: Vim plugin for <a target="_blank" rel="noopener" href="https://github.com/junegunn/fzf">fzf</a>. <code>:h fzf-vim</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/altercation/vim-colors-solarized">vim-colors-solarized</a>: Change colorscheme for Vim. <code>:h solarized</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>: Use git in Vim. <code>:h fugitive</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/vimwiki/vimwiki">vimwiki</a>: A personal wiki for Vim. <code>:h vimwiki</code></li>
+<li>  <a target="_blank" rel="noopener" href="https://github.com/ycm-core/YouCompleteMe">YouCompleteMe</a>: A code-completion engine for Vim. <code>:h youcompleteme</code></li>
+</ul>
+<h3 id="Vim-配置"><a href="#Vim-配置" class="headerlink" title="Vim 配置"></a>Vim 配置</h3><p>用户目录下新建文件 <code>.vimrc</code>，然后加入以下配置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs sh">syntax <span class="hljs-built_in">enable</span><br>filetype on<br>filetype plugin on<br>filetype indent on<br><br>imap jk &lt;Esc&gt;<br>vmap jk &lt;Esc&gt;<br>nnoremap &lt;C-L&gt; :<span class="hljs-built_in">set</span> nu<br>nnoremap &lt;C-H&gt; :<span class="hljs-built_in">set</span> nonu<br><br><span class="hljs-built_in">set</span> nocompatible<br><span class="hljs-built_in">set</span> number<br><span class="hljs-built_in">set</span> cursorline<br><span class="hljs-built_in">set</span> ruler<br><span class="hljs-built_in">set</span> mouse=nicr<br><span class="hljs-built_in">set</span> clipboard=unnamed<br><span class="hljs-built_in">set</span> backspace=indent,eol,start<br><span class="hljs-built_in">set</span> ignorecase<br><span class="hljs-built_in">set</span> smartcase<br><span class="hljs-built_in">set</span> hlsearch<br><br><span class="hljs-built_in">set</span> autoindent<br><span class="hljs-built_in">set</span> expandtab<br><span class="hljs-built_in">set</span> shiftwidth=4<br><span class="hljs-built_in">set</span> softtabstop=4<br><span class="hljs-built_in">set</span> tabstop=4<br><br><span class="hljs-built_in">set</span> hidden<br><span class="hljs-built_in">set</span> wildmenu<br><span class="hljs-built_in">set</span> laststatus=2<br><span class="hljs-built_in">set</span> report=0<br><span class="hljs-built_in">set</span> synmaxcol=200<br><span class="hljs-built_in">set</span> updatetime=100<br><span class="hljs-built_in">set</span> dir=~/.cache/vim<br><br><span class="hljs-built_in">set</span> title<br><span class="hljs-built_in">set</span> confirm<br><span class="hljs-built_in">set</span> showmode<br><span class="hljs-built_in">set</span> ttyfast<br><span class="hljs-built_in">set</span> lazyredraw<br><span class="hljs-built_in">set</span> list<br><br><span class="hljs-string">&quot; Colorize Vim</span><br><span class="hljs-string">if !has(&#x27;gui_running&#x27;)</span><br><span class="hljs-string">  set t_Co=256</span><br><span class="hljs-string">endif</span><br></code></pre></td></tr></table></figure>
+
+<p>在 Vim 中查看 vimrc 示例文件 <code>:e $VIMRUNTIME/vimrc_example.vim</code>，更多配置见 <code>:h vimrc-intro</code>。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8"><span class="toc-number">1.</span> <span class="toc-text">移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91"><span class="toc-number">2.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%AA%97%E5%8F%A3"><span class="toc-number">4.</span> <span class="toc-text">多窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83-Tips"><span class="toc-number">5.</span> <span class="toc-text">其它 Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#iTerm-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">5.1.</span> <span class="toc-text">iTerm 快捷键</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E6%8F%92%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">Vim 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Core"><span class="toc-number">6.1.</span> <span class="toc-text">Core</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">6.2.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E9%85%8D%E7%BD%AE"><span class="toc-number">7.</span> <span class="toc-text">Vim 配置</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/vim-cheatsheet/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/vim-cheatsheet/&text=Vim 新手速查清单"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/vim-cheatsheet/&is_video=false&description=Vim 新手速查清单"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Vim 新手速查清单&body=Check out this article: https://ajiew.me/vim-cheatsheet/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/vim-cheatsheet/&title=Vim 新手速查清单"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/vim-cheatsheet/&name=Vim 新手速查清单&description=&lt;blockquote&gt;
+&lt;p&gt;  该 Cheatsheet 是我在通过 &lt;a href=&#34;http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor&#34;&gt;vimtutor&lt;/a&gt; 学习 Vim 以及日常使用中整理出来的，主要面向初学者。&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/vim-cheatsheet/&t=Vim 新手速查清单"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

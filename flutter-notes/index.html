@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="IntroductionFlutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 main() 方法，main() 方法中调用了 runApp() 方法，它接收一个 Widget 作为参数。 1234567891011121314import &amp;#x27;package:flutter&#x2F;material.dart&amp;#x27;;void main() &amp;#123;  runAp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 学习笔记">
+<meta property="og:url" content="https://ajiew.me/flutter-notes/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="IntroductionFlutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 main() 方法，main() 方法中调用了 runApp() 方法，它接收一个 Widget 作为参数。 1234567891011121314import &amp;#x27;package:flutter&#x2F;material.dart&amp;#x27;;void main() &amp;#123;  runAp">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2019-08-23/flutter-and-dart.png">
+<meta property="article:published_time" content="2021-04-23T12:12:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.734Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-08-23/flutter-and-dart.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Flutter 学习笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/flutter-dev-notes/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/effective-dart-notes/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/flutter-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/flutter-notes/&text=Flutter 学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/flutter-notes/&is_video=false&description=Flutter 学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Flutter 学习笔记&body=Check out this article: https://ajiew.me/flutter-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/flutter-notes/&name=Flutter 学习笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-08-23/flutter-and-dart.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Introduction&#34;&gt;&lt;a href=&#34;#Introduction&#34; class=&#34;headerlink&#34; title=&#34;Introduction&#34;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;Flutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 &lt;code&gt;main()&lt;/code&gt; 方法，&lt;code&gt;main()&lt;/code&gt; 方法中调用了 &lt;code&gt;runApp()&lt;/code&gt; 方法，它接收一个 Widget 作为参数。&lt;/p&gt;
+&lt;figure class=&#34;highlight dart&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs dart&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;package:flutter/material.dart&amp;#x27;&lt;/span&gt;;&lt;br&gt;&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;void&lt;/span&gt; main() &amp;#123;&lt;br&gt;  runApp(MaterialApp(&lt;br&gt;    home: Scaffold(&lt;br&gt;      appBar: AppBar(&lt;br&gt;        title: Text(&lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;Demo&amp;#x27;&lt;/span&gt;),&lt;br&gt;      ),&lt;br&gt;      body: Center(&lt;br&gt;        child: Text(&lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;Hello World&amp;#x27;&lt;/span&gt;),&lt;br&gt;      ),&lt;br&gt;    ),&lt;br&gt;  ));&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/flutter-notes/&t=Flutter 学习笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI"><span class="toc-number">2.</span> <span class="toc-text">UI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout-%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">Layout 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Box-%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.1.</span> <span class="toc-text">Box 约束</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%8F%97%E9%99%90%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">不受限的约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Flex-Boxes"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">Flex Boxes</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.</span> <span class="toc-text">理解约束</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">约束的限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%A5%E5%AF%86%E7%BA%A6%E6%9D%9F%E5%92%8C%E5%AE%BD%E6%9D%BE%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">严密约束和宽松约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%8C%E5%8E%BB%E9%99%A4%E3%80%8D%E7%88%B6%E7%BA%A7%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">「去除」父级约束</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B8%83%E5%B1%80%E8%A7%84%E5%88%99"><span class="toc-number">2.1.3.</span> <span class="toc-text">如何学习组件的布局规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-Widget"><span class="toc-number">2.2.1.</span> <span class="toc-text">Basic Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Layout-Widget"><span class="toc-number">2.2.2.</span> <span class="toc-text">Layout Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Animation-Widget"><span class="toc-number">2.2.3.</span> <span class="toc-text">Animation Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">2.2.4.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">自定义组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CustomPaint"><span class="toc-number">2.3.1.</span> <span class="toc-text">CustomPaint</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CustomPainter"><span class="toc-number">2.3.2.</span> <span class="toc-text">CustomPainter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Paint"><span class="toc-number">2.3.3.</span> <span class="toc-text">Paint</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Animation"><span class="toc-number">2.4.</span> <span class="toc-text">Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Animation-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">Animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AnimationController"><span class="toc-number">2.4.2.</span> <span class="toc-text">AnimationController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tween"><span class="toc-number">2.4.3.</span> <span class="toc-text">Tween</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Curve"><span class="toc-number">2.4.4.</span> <span class="toc-text">Curve</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">核心原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Widget-Element-RenderObject"><span class="toc-number">2.5.1.</span> <span class="toc-text">Widget&#x2F;Element&#x2F;RenderObject</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#RenderObejct-RenderBox"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">RenderObejct&#x2F;RenderBox</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BuildContext-%E5%8D%B3-Element"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">BuildContext 即 Element</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flutter-%E5%BA%94%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E7%9A%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">Flutter 应用是如何运行的</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-Management"><span class="toc-number">3.</span> <span class="toc-text">State Management</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Provider"><span class="toc-number">3.1.</span> <span class="toc-text">Provider</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ChangeNotifier"><span class="toc-number">3.1.1.</span> <span class="toc-text">ChangeNotifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ChangeNotifierProvider"><span class="toc-number">3.1.2.</span> <span class="toc-text">ChangeNotifierProvider</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consumer"><span class="toc-number">3.1.3.</span> <span class="toc-text">Consumer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Provider-of-lt-T-gt"><span class="toc-number">3.1.4.</span> <span class="toc-text">Provider.of&lt;T&gt;()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-lt-T-R-gt-R-Function-T-value-selector"><span class="toc-number">3.1.5.</span> <span class="toc-text">select&lt;T, R&gt;(R Function(T value) selector)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BE%8B%E5%AD%90"><span class="toc-number">3.1.6.</span> <span class="toc-text">完整例子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Others-1"><span class="toc-number">4.</span> <span class="toc-text">Others</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-number">4.1.</span> <span class="toc-text">调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="toc-number">4.2.</span> <span class="toc-text">异常捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3"><span class="toc-number">4.3.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Platform-Channel"><span class="toc-number">4.3.1.</span> <span class="toc-text">Platform Channel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-number">4.3.2.</span> <span class="toc-text">安卓插件安装流程</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Flutter 学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-23T12:12:00.000Z" itemprop="datePublished">2021-04-23</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Flutter/" rel="tag">Flutter</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2019-08-23/flutter-and-dart.png"></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Flutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 <code>main()</code> 方法，<code>main()</code> 方法中调用了 <code>runApp()</code> 方法，它接收一个 Widget 作为参数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;package:flutter/material.dart&#x27;</span>;<br><br><span class="hljs-keyword">void</span> main() &#123;<br>  runApp(MaterialApp(<br>    home: Scaffold(<br>      appBar: AppBar(<br>        title: Text(<span class="hljs-string">&#x27;Demo&#x27;</span>),<br>      ),<br>      body: Center(<br>        child: Text(<span class="hljs-string">&#x27;Hello World&#x27;</span>),<br>      ),<br>    ),<br>  ));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h2><p>Flutter 中的组件分为非容器类组件和容器类组件，非容器类组件一般直接或间接继承自 <code>LeafRenderObjectWidget</code>，而容器类组件则继承自 <code>SingleChildRenderObjectWidget</code> 和 <code>MultiChildRenderObjectWidget</code>，所以，所有组件的继承关系为 Widget &gt; RenderObjectWidget &gt; (Leaf/SingleChild/MultiChild)RenderObjectWidget，其中，<code>RenderObjectWidget</code> 类中定义了创建、更新 <code>RenderObject</code> 的方法，所有子类必须实现它。</p>
+<h3 id="Layout-基础"><a href="#Layout-基础" class="headerlink" title="Layout 基础"></a>Layout 基础</h3><p>Flutter 中的 Widget 借鉴了 React 的思想。所有的 UI 都是基于 Widget 的，Widget 定义了视图如何显示（实际对应的是 Element）。如果使用的是 StatefulWidget，当 State 发生变化时 (通过 <code>setState()</code>) 会触发重绘，当然，这种重绘是经过框架计算的，框架会尽量减少重绘的范围。</p>
+<p>Flutter 中布局模型有两种，一种是基于 RenderBox 的模型，其约束被称为 <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/rendering/BoxConstraints-class.html">BoxContraints</a>，另一种是基于 RenderSliver 的可滚动列表模型，其约束来自于 <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/rendering/SliverConstraints-class.html">SliverConstraints</a>。由于开发过程中涉及到的大部分约束相关的问题都来自于 Box 约束，因此这里主要介绍它。</p>
+<h4 id="Box-约束"><a href="#Box-约束" class="headerlink" title="Box 约束"></a>Box 约束</h4><p>在 Flutter 中，组件是基于 <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/rendering/RenderBox-class.html">RenderBox</a> 被渲染出来的，而 RenderBox 的<em>约束 (constraints)</em> 来自于父组件，并且会根据约束来调整自身的*大小 (size)*。<strong>约束</strong>包含最大/最小的宽和高，<strong>大小</strong>则由具体的宽和高组成。</p>
+<p>通常来说，依据组件如何处理它们的约束，Flutter 中可以分为三种 Boxes：</p>
+<ul>
+<li>想要尽可能大的 Box，比如 Center、ListView 和未指定大小的 Container</li>
+<li>和子组件一样大的 Box，比如 Transform 和 Opacity</li>
+<li>固定大小的 Box，比如 Image 和 Text</li>
+</ul>
+<h5 id="不受限的约束"><a href="#不受限的约束" class="headerlink" title="不受限的约束"></a>不受限的约束</h5><p>在某些场景下，Box 的约束可能是不受限制的，也就是 unbounded，它们的宽或高被设置为 double.INIFINITY。</p>
+<p>一个尽可能大的 Box 如果被给予了不受限的约束的话，就会在运行时报错，比如如果你把一个垂直滚动的 ListView 嵌套进一个水平滚动的 ListView，那么，由于 ListView 会在它的交叉方向上寻求最大边界，内部的 ListView 会尝试尽可能填充自己的宽度，而此时宽度又是无限宽，所以会报异常。</p>
+<h5 id="Flex-Boxes"><a href="#Flex-Boxes" class="headerlink" title="Flex Boxes"></a>Flex Boxes</h5><p>Flex boxes (比如 Row 或 Column) 在不同的约束下表现不同。在受限的约束下，Flex box 会在该方向上尽可能的大。在不受限的约束下，它们会将子组件尽可能合适地进行排列，但是前提是子组件不能使用大于 0 的 Flex，也就是说使用了 Flex 的 box 不能相互嵌套。比如对于 Column 来说，它的 width 不能是 unbounded；对于 Row 来说，它的高度也不能是 unbounded。</p>
+<h4 id="理解约束"><a href="#理解约束" class="headerlink" title="理解约束"></a>理解约束</h4><p>Flutter 中有一个基本原则：<strong>约束向下传递，大小向上传递，父布局设置位置</strong>。</p>
+<ul>
+<li>组件的约束 (constraints) 来自父组件，约束由 4 个 double 组成：最小/最大宽度，最小/最大高度。</li>
+<li>组件会依次测量子组件，得到子组件的大小，并且告诉每个子组件它们各自的约束。</li>
+<li>组件会根据子组件的大小和排列方向依次放置子组件。</li>
+<li>最后，组件告诉父组件它自身的大小。</li>
+</ul>
+<h5 id="约束的限制"><a href="#约束的限制" class="headerlink" title="约束的限制"></a>约束的限制</h5><ul>
+<li>组件的大小必须在父组件的约束范围之内，也就是说<strong>子组件并不能拥有任何想要的大小</strong>。</li>
+<li>组件<strong>无法知晓也决定不了自身在屏幕上的位置</strong>，因为它的位置是由父组件决定的。</li>
+<li>因为所有组件都在一个组件树之中，所以<strong>任何组件都无法在脱离组件树的情况下知道自身的大小和尺寸</strong>。</li>
+<li>当子组件需要一个不同的大小并且父组件没有足够的关于如何排列它的信息时，子组件的大小会被忽略。所以，<strong>定义对齐方式时必须足够明确</strong>。</li>
+</ul>
+<h5 id="严密约束和宽松约束"><a href="#严密约束和宽松约束" class="headerlink" title="严密约束和宽松约束"></a>严密约束和宽松约束</h5><p>约束也分为 <em>tight</em> 和 <em>loose</em> 的。宽松约束指组件的最大宽高确定，但是最小宽高为零。严密约束是指确定大小的约束，也可以理解为最大宽高和最小宽高相等。比如下面这个例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 布局 A</span><br>Container(<br>  child: Container(<br>    color: Colors.red,<br>    width: <span class="hljs-number">100</span>,<br>    height: <span class="hljs-number">100</span>,<br>  ),<br>);<br><br><span class="hljs-comment">// 布局 B</span><br>Center(<br>  child: Container(<br>    color: Colors.red,<br>    width: <span class="hljs-number">100</span>,<br>    height: <span class="hljs-number">100</span>,<br>  ),<br>);<br></code></pre></td></tr></table></figure>
+
+<p>同样作为根布局，布局 A 会占满整个屏幕，因为 Container 传递的是 tight 约束，它告诉同样为 Container 的子组件，它的大小是整个屏幕，所以，即使子组件 Container 设置了大小也不会有效果。</p>
+<p>而布局 B 中的 Center 作为根布局，它传递的是 loose 约束，所以只要子组件 Contaienr 的大小不超过屏幕大小就可以了，最小多小并不会有限制，所以它设置的宽高可以传递到父布局并设置生效。</p>
+<p>内部 Container 的约束分别可以表示为：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">// 布局 A</span><br>BoxConstraints.expand(&#123;<br>  width = <span class="hljs-built_in">double</span>.infinity,<br>  height = <span class="hljs-built_in">double</span>.infinity,<br>&#125;)<br><span class="hljs-comment">// 等同于：</span><br>BoxConstraints(<br>  minWidth: <span class="hljs-built_in">double</span>.infinity,<br>  maxWidth: <span class="hljs-built_in">double</span>.infinity,<br>  minHeight: <span class="hljs-built_in">double</span>.infinity,<br>  maxHeight: <span class="hljs-built_in">double</span>.infinity,<br>);<br><br><span class="hljs-comment">// 布局 B</span><br>BoxConstraints.loose(Size(<span class="hljs-number">100</span>, <span class="hljs-number">100</span>))<br><span class="hljs-comment">// 等同于：</span><br>BoxConstraints(<br>  minWidth: <span class="hljs-number">100</span>,<br>  maxWidth: <span class="hljs-built_in">double</span>.infinity,<br>  minHeight: <span class="hljs-number">100</span>,<br>  maxHeight: <span class="hljs-built_in">double</span>.infinity,<br>);<br></code></pre></td></tr></table></figure>
+
+<p>因此，固定大小的组件 (比如 SizedBox) 也是严密约束的，其约束可以表示为：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart">BoxConstraints.tightFor(width: <span class="hljs-number">80.0</span>, height: <span class="hljs-number">80.0</span>)<br><span class="hljs-comment">// 等同于：</span><br>BoxConstraints(minHeight: <span class="hljs-number">80.0</span>, maxHeight: <span class="hljs-number">80.0</span>, minWidth: <span class="hljs-number">80.0</span>, maxWidth: <span class="hljs-number">80.0</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="「去除」父级约束"><a href="#「去除」父级约束" class="headerlink" title="「去除」父级约束"></a>「去除」父级约束</h5><p>既然布局约束是向下传递的，有没有什么办法可以去除掉父布局的约束呢？理论上是不可以的，但是实际使用中，我们可以使用 <code>UnconstraintedBox</code>，它可以使得子布局忽略父布局的约束：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart">ConstrainedBox(<br>  constraints: BoxConstraints(minWidth: <span class="hljs-number">60.0</span>, minHeight: <span class="hljs-number">100.0</span>),    <span class="hljs-comment">// A</span><br>  child: UnconstrainedBox( <span class="hljs-comment">// 「去除」父级约束</span><br>    child: ConstrainedBox(<br>      constraints: BoxConstraints(minWidth: <span class="hljs-number">90.0</span>, minHeight: <span class="hljs-number">20.0</span>), <span class="hljs-comment">// B</span><br>      child: redBox,<br>    ),<br>  )<br>)<br></code></pre></td></tr></table></figure>
+
+<p>上面的例子中，最外层的约束 A 不会传递给 B，最终 redBox 的高度会是 20。但这只是表面现象，其实 <code>UnconstrainedBox</code> 只是阻断了约束的传递，自身还是会受到父级约束的限制，因此最终整体布局的高度还是 100。</p>
+<p>实际使用中，我们可以利用 <code>UncontrainedBox</code> 去除父组件的约束，比如如果使用 <code>SizedBox</code> 时指定了宽度或者高度，子组件就会有相同的宽度或高度，而如果想要去除这种限制，我们就可以使用 <code>UnconstrainedBox</code> 来包裹子组件。</p>
+<h4 id="如何学习组件的布局规则"><a href="#如何学习组件的布局规则" class="headerlink" title="如何学习组件的布局规则"></a>如何学习组件的布局规则</h4><p>Flutter 中组件众多，我们很难一下子记住所有的组件到底是如何布局的，所以最好的做法是阅读<strong>文档</strong>和<strong>源码</strong>。比如，如果你想阅读 <code>Column</code> 组件的源码，首先，我们通过 IDE 跳转到 <code>basic.dart</code> 文件，发现原来 <code>Column</code> 继承的是 <code>Flex</code> 类，在 <code>Flex</code> 的 <code>createRenderObject()</code> 方法中发现返回的是 <code>RenderFlex</code> 对象，最后在 <code>flex.dart</code> 文件中找到 <code>performLayout()</code> 方法，这里才是实际测量并计算子组件位置的地方。</p>
+<h3 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h3><h4 id="Basic-Widget"><a href="#Basic-Widget" class="headerlink" title="Basic Widget"></a>Basic Widget</h4><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/MaterialApp-class.html">MaterialApp</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/Scaffold-class.html">Scaffold</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/AppBar-class.html">AppBar</a> (<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/material-library.html">material library</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/cupertino/CupertinoApp-class.html">CupertinoApp</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html">CupertinoPageScaffold</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html">CupertinoTabScaffold</a> (<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/cupertino/cupertino-library.html">cupertino library</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Builder-class.html">Builder</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/StatefulBuilder-class.html">StatefulBuilder</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Text-class.html">Text</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Icon-class.html">Icon</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Image-class.html">Image</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/TextButton-class.html">TextButton</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/ElevatedButton-class.html">ElevatedButton</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/OutlinedButton-class.html">OutlinedButton</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/IconButton-class.html">IconButton</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/GestureDetector-class.html">GestureDetector</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/InkWell-class.html">InkWell</a>/<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/InkResponse-class.html">InkResponse</a></p>
+<h4 id="Layout-Widget"><a href="#Layout-Widget" class="headerlink" title="Layout Widget"></a>Layout Widget</h4><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Row-class.html">Row</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Column-class.html">Column</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Stack-class.html">Stack</a>/<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Positioned-class.html">Positioned</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ListView-class.html">ListView</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/GridView-class.html">GridView</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/material/Scrollbar-class.html">Scrollbar</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html">SingleChildScrollView</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/CustomScrollView-class.html">CustomScrollView</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/SliverList-class.html">SliverList</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/SliverGrid-class.html">SliverGrid</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Container-class.html">Container</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Center-class.html">Center</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Padding-class.html">Padding</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/DecoratedBox-class.html">DecoratedBox</a>/<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/painting/BoxDecoration-class.html">BoxDecoration</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ClipRect-class.html">ClipRect</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ClipRRect-class.html">ClipRRect</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Transform-class.html">Transform</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Expanded-class.html">Expanded</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Flexible-class.html">Flexible</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html">ConstrainedBox</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/SizedBox-class.html">SizedBox</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Spacer-class.html">Spacer</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Flex-class.html">Flex</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Wrap-class.html">Wrap</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/dart-developer/Flow-class.html">Flow</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/Align-class.html">Align</a>/<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/painting/Alignment-class.html">Alignment</a>/<a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/painting/FractionalOffset-class.html">FractionalOffset</a></p>
+<h4 id="Animation-Widget"><a href="#Animation-Widget" class="headerlink" title="Animation Widget"></a><a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/ui/animations/overview">Animation</a> Widget</h4><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/animation/Animation-class.html">Animation</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/animation/Tween-class.html">Tween</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/animation/AnimationController-class.html">AnimationController</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/animation/Curve-class.html">Curves</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html">Transition</a>, <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/ImplicitlyAnimatedWidget-class.html">ImplicitlyAnimatedWidget</a></p>
+<h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><p>其他组件的介绍见：<a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/ui/widgets">Widget Catalog</a>, <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLjxrf2q8roU23XGwz3Km7sQZFTdB996iG">Widget of the Week</a></p>
+<h3 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h3><p>大多数情况下，我们都可以通过组合创建出所需要的组件，但是对于一些特别复杂的组件，无法通过组合获得，此时就需要通过自定义的方式创造出我们想要的组件。</p>
+<p>Flutter 中自定义组件的方式主要依赖于 <code>CustomPaint</code> 组件和自定义画笔 <code>CustomerPainter</code>。</p>
+<h4 id="CustomPaint"><a href="#CustomPaint" class="headerlink" title="CustomPaint"></a>CustomPaint</h4><p>用于使用自定义的画笔，其构造方法如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart">CustomPaint(&#123;<br>  Key key,<br>  <span class="hljs-keyword">this</span>.painter, <br>  <span class="hljs-keyword">this</span>.foregroundPainter,<br>  <span class="hljs-keyword">this</span>.size = Size.zero, <br>  <span class="hljs-keyword">this</span>.isComplex = <span class="hljs-keyword">false</span>, <br>  <span class="hljs-keyword">this</span>.willChange = <span class="hljs-keyword">false</span>, <br>  Widget child,<br>&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>其中，<code>painter</code> 最先被绘制，然后是 <code>child</code>，最后是 <code>foregroudnPainter</code>。默认会以 <code>child</code> 作为可绘制区域，如果没有指定 <code>child</code> 则以 <code>size</code> 指定的大小作为可绘制区域，默认值为 <code>Size.zero</code>。<code>painter</code> 默认情况下是可以超出可绘制区域的，如果要改变这种行为，可以使用 <code>ClipRect</code> 组件包裹 <code>CustomerPaint</code> 组件。</p>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><p>为了防止不必要的重绘，可以使用 <code>RepaintBoundary</code> 包裹 <code>CustomPaint</code> 组件。</p>
+<h4 id="CustomPainter"><a href="#CustomPainter" class="headerlink" title="CustomPainter"></a>CustomPainter</h4><p>实现自定义画笔的内容。主要通过在 <code>Canvas</code> 上绘制一系列图形，通过 <code>Paint</code> 指定画笔风格。</p>
+<p>比如画一些常见的几何图形和文字：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart">canvas.drawPoints(PointMode.points, [p1, p2], paint);<br>canvas.drawLine(from, to, paint);<br>canvas.drawRect(rect, paint);<br>canvas.drawCircle(center, radius, paint);<br>canvas.drawArc(rect, startAngle, sweepAngle, userCenter, paint);<br>canvas.drawParagraph(textBuilder.build()..layout(ParagraphConstraints(width: <span class="hljs-number">100</span>)), offset);<br></code></pre></td></tr></table></figure>
+
+<h4 id="Paint"><a href="#Paint" class="headerlink" title="Paint"></a>Paint</h4><p>画笔的使用与其它平台中类似，我们可以设置画笔风格（填充 or 描边）、描边宽度、颜色、反锯齿等。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">final</span> paint = Paint()<br>  ..color = Colors.red<br>  ..style = PaintingStyle.stroke<br>  ..isAntiAlias = <span class="hljs-keyword">true</span><br>  ..strokeWidth = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><p>Flutter 中对动画进行了抽象，主要涉及 Animation、Curve、Controller、Tween 四个部分。</p>
+<h4 id="Animation-1"><a href="#Animation-1" class="headerlink" title="Animation"></a>Animation</h4><p><a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/animation/Animation-class.html">Animation</a> 是一个抽象类，主要的功能是保存动画的<strong>插值</strong>和<strong>状态</strong>。在动画的每一帧中，我们可以通过 <code>Animation</code>对象的 <code>value</code> 属性获取动画的当前状态值，也可以在其上添加每一帧的监听器 (<em>addListener</em>) 和状态变化监听器 (<em>addStatusListener</em>)。</p>
+<h4 id="AnimationController"><a href="#AnimationController" class="headerlink" title="AnimationController"></a>AnimationController</h4><p><code>AnimationController</code> 用于控制动画，它包含动画的启动 <code>forward()</code>、停止 <code>stop()</code> 、反向播放  <code>reverse()</code>、重复播放 <code>repeat()</code> 等方法。<code>AnimationController</code> 会在动画的每一帧生成一个新的值，范围默认是 [0, 1]，可以通过 <code>lowerBound</code> 和 <code>upperBound</code> 进行指定。</p>
+<p>创建 <code>AnimationController</code> 时需要传入一个 <code>vsync</code> 参数，它接收一个 <code>TickerProvider</code> 对象，它负责创建 <code>Ticker</code>，用于在动画的每一帧提供回调。一般可以使用 mixin 类 <code>SingleTickerProviderStateMixin</code> 或者 <code>TickerProviderStateMixin</code> 来实现 <code>TickerProvider</code> 的功能。</p>
+<h4 id="Tween"><a href="#Tween" class="headerlink" title="Tween"></a>Tween</h4><p>默认情况下，<code>AnimationController</code> 控制的值的范围是数字区间 [0.0, 1.0]，如果我们需要构建 UI 的动画值在不同的范围或者使用不同的数据类型，就可以通过 <code>Tween</code> 添加映射来生成不同范围或数据类型的值。</p>
+<h4 id="Curve"><a href="#Curve" class="headerlink" title="Curve"></a>Curve</h4><p>我们通过 <code>Curve</code>（曲线）来描述动画过程，把匀速动画称为线性 (Curves.linear) 的，非匀速动画称为非线性的。</p>
+<h3 id="核心原理"><a href="#核心原理" class="headerlink" title="核心原理"></a>核心原理</h3><h4 id="Widget-Element-RenderObject"><a href="#Widget-Element-RenderObject" class="headerlink" title="Widget/Element/RenderObject"></a>Widget/Element/RenderObject</h4><p>Flutter 中一切都是 Widget，但是所有 widget 最终的 layout 和渲染都是通过 <code>RenderObject</code> 来完成的，从创建到渲染大致的流程是：根据 Widget 树生成 Element 树，然后创建 <code>RenderObject</code> 并关联到 <code>Element.renderObject</code> 属性上，最后再通过 <code>RenderObject</code> 来完成布局和绘制。<a target="_blank" rel="noopener" href="https://book.flutterchina.club/">^注1</a></p>
+<p>Element 是 Widget 在 UI 树中对应的实例对象，大多数 Element 只有一个 <code>renderObject</code>，除了少部分有多个子节点。最终，所有 Element 的 <code>renderObject</code> 构成了一棵 Render Tree，即渲染树。</p>
+<p>即在 Flutter 中主要有三棵树：Widget Tree =&gt; Element Tree =&gt; RenderObejct Tree（其实 Widget Tree 并不存在，只是我们看到的结果，只有 Element 和 RenderObject 才有上下级相互关联的关系）。</p>
+<h5 id="RenderObejct-RenderBox"><a href="#RenderObejct-RenderBox" class="headerlink" title="RenderObejct/RenderBox"></a>RenderObejct/RenderBox</h5><p>每一个 Element 对应一个 RenderObject，它负责布局和绘制，但是它并没有定义子节点模型以及坐标系统，实际完成布局的（确定大小和位置）是通过 RenderBox。</p>
+<h5 id="BuildContext-即-Element"><a href="#BuildContext-即-Element" class="headerlink" title="BuildContext 即 Element"></a><code>BuildContext</code> 即 Element</h5><p>创建这个接口是为了避免开发者直接操作 Element 对象。</p>
+<h4 id="Flutter-应用是如何运行的"><a href="#Flutter-应用是如何运行的" class="headerlink" title="Flutter 应用是如何运行的"></a>Flutter 应用是如何运行的</h4><p>我们知道一个 Flutter 应用的入口是 main() 方法中的 runApp()，那么 runApp() 中主要做了哪些操作呢？</p>
+<p>首先，通过 <code>WidgetsFlutterBinding</code> 绑定 Flutter 框架（widgets、services、gesture、painting 等）和 Flutter engine（sky_engine），<code>WidgetsFlutterBinding</code> 就像胶水一样，而绑定发生的位置是在 <code>BindingBase</code> 中的 <code>window</code>。<code>window</code> 实际是一个 <code>SingletonFlutterWindow</code> 对象，它作为应用的主窗口，继承自 <code>FlutterView</code>，并且提供了设备屏幕相关的信息以及设备设置的回调方法（比如语言、屏幕亮度等）。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">/// <span class="markdown">Inflate the given widget and attach it to the screen.</span></span><br><span class="hljs-keyword">void</span> runApp(Widget app) &#123;<br>  WidgetsFlutterBinding.ensureInitialized()<br>    ..scheduleAttachRootWidget(app)<br>    ..scheduleWarmUpFrame();<br>&#125;<br><br><span class="hljs-comment">/// <span class="markdown">This is the glue that binds the framework to the Flutter engine.</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WidgetsFlutterBinding</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BindingBase</span> <span class="hljs-title">with</span> <span class="hljs-title">GestureBinding</span>, <span class="hljs-title">SchedulerBinding</span>, ... </span>&#123;<br>  <span class="hljs-keyword">static</span> WidgetsBinding ensureInitialized() &#123;<br>    <span class="hljs-keyword">if</span> (WidgetsBinding.instance == <span class="hljs-keyword">null</span>)<br>      WidgetsFlutterBinding();<br>    <span class="hljs-keyword">return</span> WidgetsBinding.instance!;<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">/// <span class="markdown">Base class for mixins that provide singleton services (also known as &quot;bindings&quot;).</span></span><br><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BindingBase</span> </span>&#123;<br>  ui.SingletonFlutterWindow <span class="hljs-keyword">get</span> <span class="hljs-built_in">window</span> =&gt; ui.<span class="hljs-built_in">window</span>;<br>&#125;<br><br><span class="hljs-comment">/// <span class="markdown">A [FlutterWindow] that includes access to setting callbacks and retrieving</span></span><br><span class="hljs-comment">/// <span class="markdown">properties that reside on the [PlatformDispatcher].</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonFlutterWindow</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FlutterWindow</span> </span>&#123;<br>  VoidCallback? <span class="hljs-keyword">get</span> onXxxChanged =&gt; platformDispatcher.onXxxChanged;<br>  ...<br>&#125;<br><br><span class="hljs-comment">/// <span class="markdown">A top-level platform window displaying a Flutter layer tree drawn from a [Scene].</span></span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlutterWindow</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FlutterView</span> </span>&#123;<br>  ...<br>&#125;<br><br><span class="hljs-comment">/// <span class="markdown">A view into which a Flutter [Scene] is drawn.</span></span><br><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FlutterView</span> </span>&#123;<br>	PlatformDispatcher <span class="hljs-keyword">get</span> platformDispatcher;<br>  ViewConfiguration <span class="hljs-keyword">get</span> viewConfiguration;<br>  <br>  <span class="hljs-built_in">double</span> <span class="hljs-keyword">get</span> devicePixelRatio =&gt; viewConfiguration.devicePixelRatio;<br>  Rect <span class="hljs-keyword">get</span> physicalGeometry =&gt; viewConfiguration.geometry;<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>紧接着会调用 <code>WidgetsBinding</code> 中的 <code>attachRootWidget</code> 方法，将根 Widget 添加到 <code>renderViewElement</code> 上，这是一个 <code>RenderView</code> 对象，它作为整个 RenderObejct Tree 的根 <code>RenderObject</code>。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> attachRootWidget(Widget rootWidget) &#123;<br>  _readyToProduceFrames = <span class="hljs-keyword">true</span>;<br>  _renderViewElement = RenderObjectToWidgetAdapter&lt;RenderBox&gt;(<br>    container: renderView,<br>    debugShortDescription: <span class="hljs-string">&#x27;[root]&#x27;</span>,<br>    child: rootWidget,<br>  ).attachToRenderTree(buildOwner!, renderViewElement <br>                       <span class="hljs-keyword">as</span> RenderObjectToWidgetElement&lt;RenderBox&gt;?);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>attachRootWidget</code> 之后，会继续调用 <code>scheduleWarmUpFrame</code> 方法，调用该方法之后会通知框架尽早进行一次绘制，而不是等待 flutter 引擎接收到一次 <code>Vsync</code> 信号之后（正常情况下，每次接受到一次信号会触发一次重绘，也就是一帧，此外还会调用 <code>FrameCallback</code>，Flutter 中一共有 3 种这样的帧回调）。另外，这个方法只会被调用一次，第二次调用无效。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">/// <span class="markdown">ScheduleBinding</span></span><br><span class="hljs-keyword">void</span> scheduleWarmUpFrame() &#123;<br>  ...<br>  Timer.run(() &#123;<br>    handleBeginFrame(<span class="hljs-keyword">null</span>); <span class="hljs-comment">// 会执行 transientCallbacks</span><br>  &#125;);<br>  Timer.run(() &#123;<br>    handleDrawFrame(); <span class="hljs-comment">// 会执行 persistentCallbacks 和 postFrameCallbacks</span><br>    resetEpoch();<br>  &#125;);<br>  <span class="hljs-comment">// 锁定事件，在首帧绘制结束之前不会触发新的重绘，也不会响应任何事件输入</span><br>  lockEvents(() <span class="hljs-keyword">async</span> &#123;<br>    <span class="hljs-keyword">await</span> endOfFrame;<br>    Timeline.finishSync();<br>  &#125;);<br> ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在创建完 <code>RenderObject</code> 以及首帧绘制任务之后，接下来真正执行渲染和绘制任务的地方是在 <code>RendererBinding</code> 中的 <code>drawFrame()</code> 方法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> drawFrame() &#123;<br>  <span class="hljs-keyword">assert</span>(renderView != <span class="hljs-keyword">null</span>);<br>  pipelineOwner.flushLayout(); <span class="hljs-comment">// 布局</span><br>  pipelineOwner.flushCompositingBits(); <span class="hljs-comment">// 重绘之前的预处理操作</span><br>  pipelineOwner.flushPaint(); <span class="hljs-comment">// 重绘</span><br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>另外，在首帧绘制结束后，之后的绘制只有被标记为 dirty 的 Element 才会被重新绘制：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">/// <span class="markdown">framework.dart/BuildOwner</span></span><br><span class="hljs-keyword">void</span> buildScope(<span class="hljs-built_in">Element</span> context, [ VoidCallback? callback ]) &#123;<br>	<span class="hljs-built_in">int</span> dirtyCount = _dirtyElements.length;<br>  <span class="hljs-built_in">int</span> index = <span class="hljs-number">0</span>;<br>  <span class="hljs-keyword">while</span> (index &lt; dirtyCount) &#123;<br>    _dirtyElements[index].rebuild(); <br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="State-Management"><a href="#State-Management" class="headerlink" title="State Management"></a>State Management</h2><h3 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a><a target="_blank" rel="noopener" href="https://github.com/rrousselGit/provider">Provider</a></h3><p>Provider 是基于 <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html">InheritedWidget</a> 的状态管理工具，它的优点是便于理解且使用简单，主要由三个部分组成：</p>
+<ul>
+<li>ChangeNotifier: 提供数据，更新数据并发送通知</li>
+<li>ChangeNotifierProvider: 连接数据和组件</li>
+<li>Consumer: 消费事件，监听数据变化</li>
+</ul>
+<h4 id="ChangeNotifier"><a href="#ChangeNotifier" class="headerlink" title="ChangeNotifier"></a>ChangeNotifier</h4><p>ChangeNotifier 封装了应用状态，使用观察者-被观察者模式，会通知注册处发生的变化。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CartModel</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChangeNotifier</span> </span>&#123;<br><br>  <span class="hljs-keyword">final</span> <span class="hljs-built_in">List</span>&lt;Item&gt; _items = [];<br><br>  <span class="hljs-keyword">void</span> add(Item item) &#123;<br>    _items.add(item);<br>    <br>    <span class="hljs-comment">// This call tells the widgets that are listening to this model to rebuild.</span><br>    notifyListeners();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="ChangeNotifierProvider"><a href="#ChangeNotifierProvider" class="headerlink" title="ChangeNotifierProvider"></a>ChangeNotifierProvider</h4><p>ChangeNotifierProvider 用于给子组件提供一个 ChangeNotifier 实例。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs dart">ChangeNotifierProvider(<br>  create: (context) =&gt; CartModel(),<br>  child: MyApp(),<br>)<br><br><span class="hljs-comment">// 如果有多个 ChangeNotifier 则需要使用 MultiProvider</span><br>MultiProvider(<br>  providers: [<br>    Provider(create: (context) =&gt; SomeClass()),<br>    ChangeNotifierProvider(create: (context) =&gt; SomeModel()),<br>    ChangeNotifierProxyProvider&lt;DataProvider, SomeOtherModel&gt;(<br>      create: (context) =&gt; SomeOtherModel(),<br>      update: (context, newData, previousModel) =&gt; <br>          previousModel.updateModel(newData);<br>    ),<br>  ],<br>  child: MyApp(),<br>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="Consumer"><a href="#Consumer" class="headerlink" title="Consumer"></a>Consumer</h4><p>我们通过 Consumer 组件来消费 ChangeNotifier 产生的事件。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">return</span> Consumer&lt;CartModel&gt;(<br>  builder: (context, cart, child) &#123;<br>    <span class="hljs-keyword">return</span> Text(<span class="hljs-string">&quot;Total price: <span class="hljs-subst">$&#123;cart.totalPrice&#125;</span>&quot;</span>);<br>  &#125;,<br>);<br></code></pre></td></tr></table></figure>
+
+<p>Consumer 的 build 函数一共接收三个参数，第一个参数是 context，第二个参数是 ChangeNotifier 对象，也就是我们需要监听的目标对象，第三个是 child，它的作用是优化性能，比如当一个组件不是每次状态发生更新时都要更新 UI 时，此时就可以根据状态来决定是否需要重新创建。其次，最好的做法是将 Consumer 组件放在组件树底部，这样可以尽可能减少因状态发生变化而需要的组件更新。</p>
+<p>另外，我们也可以使用 <code>Provider</code> 提供的扩展方法 <code>context.watch&lt;T&gt;()</code> 来获得 ChangeNotifier 并触发 rebuild，不过，该方法只能在 build 方法中使用。</p>
+<h4 id="Provider-of-lt-T-gt"><a href="#Provider-of-lt-T-gt" class="headerlink" title="Provider.of&lt;T&gt;()"></a>Provider.of&lt;T&gt;()</h4><p>当你只需要访问 ChangeNotifier 中的方法或者属性而不需要更新 UI 时，可以使用 <code>Provider.of</code>：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">Provider.of&lt;CartModel&gt;(context, listen: <span class="hljs-keyword">false</span>).removeAll();<br></code></pre></td></tr></table></figure>
+
+<p>通过这种方式可以访问到 <code>CartModel</code> 中的方法，但是在数据发生变化时不会收到通知。</p>
+<p>另外，也可以使用 <code>context.read&lt;T&gt;()</code>，它也能获取到 ChangeNotifier，不过只能在 build 方法之外才能被调用（比如在 onPressed 方法中），所以也不会触发 rebuild，而使用 <code>Provider.of&lt;T&gt;(context, listen: false)</code> 则没有这样的限制。</p>
+<h4 id="select-lt-T-R-gt-R-Function-T-value-selector"><a href="#select-lt-T-R-gt-R-Function-T-value-selector" class="headerlink" title="select&lt;T, R&gt;(R Function(T value) selector)"></a>select&lt;T, R&gt;(R Function(T value) selector)</h4><p>当我们只需要监听 ChangeNotifier 中部分发生变化的内容时，就可以使用 select 方法。与 watch 方法类似，select 只有在 build 方法中才能被使用。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">var</span> isInCart = context.select&lt;CartModel, <span class="hljs-built_in">bool</span>&gt;(<br>  (cart) =&gt; cart.items.contains(item),<br>);<br></code></pre></td></tr></table></figure>
+
+<h4 id="完整例子"><a href="#完整例子" class="headerlink" title="完整例子"></a>完整例子</h4><p>使用 Provider 实现一个 Counter 的例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> main() &#123;<br>  runApp(CounterWithProvider());<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CounterWithProvider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>&#123;<br>  <span class="hljs-meta">@override</span><br>  Widget build(BuildContext context) &#123;<br>    <span class="hljs-keyword">return</span> ChangeNotifierProvider(<br>      create: (_) =&gt; Counter(),<br>      <span class="hljs-comment">// 不能直接使用 CounterWithProvider 的 context</span><br>      <span class="hljs-comment">// 因为它的 `BuildContext` 没有 Provider</span><br>      builder: (context, child) =&gt; MaterialApp(<br>        home: Scaffold(<br>            floatingActionButton: FloatingActionButton(<br>              onPressed: () &#123;<br>                <span class="hljs-comment">// 使用 builder 的 context 才是安全的</span><br>                <span class="hljs-keyword">var</span> counter = context.read&lt;Counter&gt;();<br>                <span class="hljs-comment">// 或者使用 Provider.of&lt;T&gt;</span><br>                <span class="hljs-comment">// var counter = Provider.of&lt;Counter&gt;(context, listen: false);</span><br>                counter.add();<br>              &#125;,<br>              tooltip: <span class="hljs-string">&#x27;Add&#x27;</span>,<br>              child: Icon(Icons.add),<br>            ),<br>            appBar: AppBar(<br>              title: Text(<span class="hljs-string">&#x27;Counter App&#x27;</span>),<br>            ),<br>            body: Container(<br>              child: Center(<br>                child: Consumer&lt;Counter&gt;(<br>                  builder: (_, counter, child) =&gt;<br>                      Text(<span class="hljs-string">&#x27;You\&#x27;ve clicked <span class="hljs-subst">$&#123;counter.count&#125;</span> times&#x27;</span>),<br>                ),<br>              ),<br>            )),<br>      ),<br>    );<br>  &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ChangeNotifier</span> </span>&#123;<br>  <span class="hljs-built_in">int</span> count = <span class="hljs-number">0</span>;<br>  <br>  <span class="hljs-keyword">void</span> add() &#123;<br>    count++;<br>    notifyListeners();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h2><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a><a target="_blank" rel="noopener" href="https://flutter.dev/docs/testing/debugging">调试</a></h3><p>Flutter 提供了丰富的调试工具，比如 <a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/tools/devtools/inspector">Flutter Inspector</a>, Flutter Outline, <a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/tools/devtools/performance">Flutter Performance</a> 等。</p>
+<h3 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a><a target="_blank" rel="noopener" href="https://book.flutterchina.club/chapter2/thread_model_and_error_report.html">异常捕获</a></h3><p>Flutter 中，发生异常时不会导致程序退出，只会导致当前任务的后续代码不再继续执行，也就是说一个任务中的异常是不会影响其它任务的执行的。下面是在 Flutter 中捕获异常的简单演示：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">void</span> main() &#123;<br>  <span class="hljs-comment">// 提供一个自定义的错误处理回调</span><br>  FlutterError.onError = (FlutterErrorDetails details) &#123;<br>    reportErrorAndLog(details); <span class="hljs-comment">// 上报错误和日志</span><br>  &#125;;<br><br>  <span class="hljs-comment">// 在指定配置的环境下运行项目</span><br>  runZonedGuarded(<br>    () =&gt; runApp(ErrorReportApp()),<br>    <span class="hljs-comment">// Zone 中未捕获到的异常处理回调</span><br>    (<span class="hljs-built_in">Object</span> obj, StackTrace stack) &#123;<br>      <span class="hljs-keyword">var</span> details = makeDetails(obj, stack);<br>      reportErrorAndLog(details);<br>    &#125;,<br>    zoneSpecification: ZoneSpecification(<br>      <span class="hljs-built_in">print</span>: (Zone self, ZoneDelegate parent, Zone zone, <span class="hljs-built_in">String</span> line) &#123;<br>        collectLog(line); <span class="hljs-comment">// 收集日志</span><br>      &#125;,<br>    ),<br>  );<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>具体的异常上报的例子见：<a target="_blank" rel="noopener" href="https://flutter.dev/docs/cookbook/maintenance/error-reporting">Report errors to a service</a></p>
+<h3 id="平台相关"><a href="#平台相关" class="headerlink" title="平台相关"></a>平台相关</h3><h4 id="Platform-Channel"><a href="#Platform-Channel" class="headerlink" title="Platform Channel"></a>Platform Channel</h4><p>当我们需要执行平台相关的代码时，就需要借助于 <a target="_blank" rel="noopener" href="https://docs.flutter.dev/development/platform-integration/platform-channels">platform channels</a>。工作流程如下：</p>
+<p>首先需要在项目中创建 <a target="_blank" rel="noopener" href="https://api.flutter.dev/flutter/services/MethodChannel-class.html">MethodChannel</a>：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> MethodChannel methodChannel = MethodChannel(<span class="hljs-string">&#x27;method_channel_name&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>接下来，在目标平台创建对应的 MethodChannel，并且对方法调用进行处理。以安卓平台为例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, <span class="hljs-string">&quot;method_channel_name&quot;</span>)<br>methodChannel.setMethodCallHandler &#123; call, result -&gt;<br>    <span class="hljs-keyword">when</span> (call.method) &#123;<br>        <span class="hljs-string">&quot;someMethodCall&quot;</span> -&gt; &#123;<br>            result.success(<span class="hljs-literal">null</span>)<br>        &#125;<br>        <span class="hljs-keyword">else</span> -&gt; &#123;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>假如我们需要监听方法调用结果，则需要通过 EventChannel 和 EventSink，前者用于注册事件监听，后者用于发送事件。</p>
+<p>同样的，我们需要先在 dart 部分创建 EventChannel：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> EventChannel eventChannel = EventChannel(<span class="hljs-string">&#x27;event_channel_name&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<p> 然后在平台部分创建 EventChannel 并对事件流进行监听并处理，以安卓为例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-keyword">private</span> <span class="hljs-keyword">lateinit</span> <span class="hljs-keyword">var</span> eventChannel: EventChannel<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> eventSink: EventSink? = <span class="hljs-literal">null</span><br><br><span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onAttachedToEngine</span><span class="hljs-params">(<span class="hljs-meta">@NonNull</span> flutterPluginBinding: <span class="hljs-type">FlutterPluginBinding</span>)</span></span> &#123;<br>    <span class="hljs-comment">// ...</span><br>    eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, <br>                                <span class="hljs-string">&quot;flutter_nimplayer_event&quot;</span>)<br>    eventChannel.setStreamHandler(<span class="hljs-keyword">object</span> : StreamHandler &#123;<br>        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onListen</span><span class="hljs-params">(arguments: <span class="hljs-type">Any</span>?, eventSink: <span class="hljs-type">EventSink</span>?)</span></span> &#123;<br>            <span class="hljs-keyword">this</span>.eventSink = eventSink<br>        &#125;<br>    <br>        <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">fun</span> <span class="hljs-title">onCancel</span><span class="hljs-params">(arguments: <span class="hljs-type">Any</span>?)</span></span> &#123;<br>        &#125;<br>    &#125;)<br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>向 dart 端传递事件调用结果：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">eventSink?.success(<span class="hljs-keyword">data</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="安卓插件安装流程"><a href="#安卓插件安装流程" class="headerlink" title="安卓插件安装流程"></a>安卓插件安装流程</h4><p>安卓项目下的 <code>app/build.gradle</code> 中有一行：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs groovy">apply <span class="hljs-attr">from:</span> <span class="hljs-string">&quot;$flutterRoot/packages/flutter_tools/gradle/flutter.gradle&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>该文件的位置在：<code>$FLUTTER_HOME/packages/flutter_tools/gradle/flutter.gradle</code>，其中添加项目中的依赖的方法调用路径是：<code>apply() -&gt; addFlutterTasks() -&gt; configurePlugins() -&gt; getPluginList() -&gt; configurePluginProject() &#123; api pluginProject &#125;</code>。</p>
+<p>关键的一步是在 <code>getPluginList()</code> 中，通过读取项目根目录下生成的 <code>.flutter-plugins</code> 文件获取插件列表，然后把它们添加到 android 项目中。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UI"><span class="toc-number">2.</span> <span class="toc-text">UI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Layout-%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">Layout 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Box-%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.1.</span> <span class="toc-text">Box 约束</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%8F%97%E9%99%90%E7%9A%84%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">不受限的约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Flex-Boxes"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">Flex Boxes</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.</span> <span class="toc-text">理解约束</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E7%9A%84%E9%99%90%E5%88%B6"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">约束的限制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%A5%E5%AF%86%E7%BA%A6%E6%9D%9F%E5%92%8C%E5%AE%BD%E6%9D%BE%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">严密约束和宽松约束</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E3%80%8C%E5%8E%BB%E9%99%A4%E3%80%8D%E7%88%B6%E7%BA%A7%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.1.2.3.</span> <span class="toc-text">「去除」父级约束</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B8%83%E5%B1%80%E8%A7%84%E5%88%99"><span class="toc-number">2.1.3.</span> <span class="toc-text">如何学习组件的布局规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%BB%84%E4%BB%B6"><span class="toc-number">2.2.</span> <span class="toc-text">常用组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Basic-Widget"><span class="toc-number">2.2.1.</span> <span class="toc-text">Basic Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Layout-Widget"><span class="toc-number">2.2.2.</span> <span class="toc-text">Layout Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Animation-Widget"><span class="toc-number">2.2.3.</span> <span class="toc-text">Animation Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">2.2.4.</span> <span class="toc-text">Others</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">自定义组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CustomPaint"><span class="toc-number">2.3.1.</span> <span class="toc-text">CustomPaint</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CustomPainter"><span class="toc-number">2.3.2.</span> <span class="toc-text">CustomPainter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Paint"><span class="toc-number">2.3.3.</span> <span class="toc-text">Paint</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Animation"><span class="toc-number">2.4.</span> <span class="toc-text">Animation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Animation-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">Animation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AnimationController"><span class="toc-number">2.4.2.</span> <span class="toc-text">AnimationController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tween"><span class="toc-number">2.4.3.</span> <span class="toc-text">Tween</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Curve"><span class="toc-number">2.4.4.</span> <span class="toc-text">Curve</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">2.5.</span> <span class="toc-text">核心原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Widget-Element-RenderObject"><span class="toc-number">2.5.1.</span> <span class="toc-text">Widget&#x2F;Element&#x2F;RenderObject</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#RenderObejct-RenderBox"><span class="toc-number">2.5.1.1.</span> <span class="toc-text">RenderObejct&#x2F;RenderBox</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BuildContext-%E5%8D%B3-Element"><span class="toc-number">2.5.1.2.</span> <span class="toc-text">BuildContext 即 Element</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flutter-%E5%BA%94%E7%94%A8%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E7%9A%84"><span class="toc-number">2.5.2.</span> <span class="toc-text">Flutter 应用是如何运行的</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#State-Management"><span class="toc-number">3.</span> <span class="toc-text">State Management</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Provider"><span class="toc-number">3.1.</span> <span class="toc-text">Provider</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ChangeNotifier"><span class="toc-number">3.1.1.</span> <span class="toc-text">ChangeNotifier</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ChangeNotifierProvider"><span class="toc-number">3.1.2.</span> <span class="toc-text">ChangeNotifierProvider</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consumer"><span class="toc-number">3.1.3.</span> <span class="toc-text">Consumer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Provider-of-lt-T-gt"><span class="toc-number">3.1.4.</span> <span class="toc-text">Provider.of&lt;T&gt;()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#select-lt-T-R-gt-R-Function-T-value-selector"><span class="toc-number">3.1.5.</span> <span class="toc-text">select&lt;T, R&gt;(R Function(T value) selector)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BE%8B%E5%AD%90"><span class="toc-number">3.1.6.</span> <span class="toc-text">完整例子</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Others-1"><span class="toc-number">4.</span> <span class="toc-text">Others</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-number">4.1.</span> <span class="toc-text">调试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="toc-number">4.2.</span> <span class="toc-text">异常捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%9B%B8%E5%85%B3"><span class="toc-number">4.3.</span> <span class="toc-text">平台相关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Platform-Channel"><span class="toc-number">4.3.1.</span> <span class="toc-text">Platform Channel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B"><span class="toc-number">4.3.2.</span> <span class="toc-text">安卓插件安装流程</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/flutter-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/flutter-notes/&text=Flutter 学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/flutter-notes/&is_video=false&description=Flutter 学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Flutter 学习笔记&body=Check out this article: https://ajiew.me/flutter-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/flutter-notes/&title=Flutter 学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/flutter-notes/&name=Flutter 学习笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-08-23/flutter-and-dart.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Introduction&#34;&gt;&lt;a href=&#34;#Introduction&#34; class=&#34;headerlink&#34; title=&#34;Introduction&#34;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;p&gt;Flutter 采用 Dart 作为主要编程语言，所以应用的入口同样是顶层的 &lt;code&gt;main()&lt;/code&gt; 方法，&lt;code&gt;main()&lt;/code&gt; 方法中调用了 &lt;code&gt;runApp()&lt;/code&gt; 方法，它接收一个 Widget 作为参数。&lt;/p&gt;
+&lt;figure class=&#34;highlight dart&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs dart&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;package:flutter/material.dart&amp;#x27;&lt;/span&gt;;&lt;br&gt;&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;void&lt;/span&gt; main() &amp;#123;&lt;br&gt;  runApp(MaterialApp(&lt;br&gt;    home: Scaffold(&lt;br&gt;      appBar: AppBar(&lt;br&gt;        title: Text(&lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;Demo&amp;#x27;&lt;/span&gt;),&lt;br&gt;      ),&lt;br&gt;      body: Center(&lt;br&gt;        child: Text(&lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;Hello World&amp;#x27;&lt;/span&gt;),&lt;br&gt;      ),&lt;br&gt;    ),&lt;br&gt;  ));&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/flutter-notes/&t=Flutter 学习笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

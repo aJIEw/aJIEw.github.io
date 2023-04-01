@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="本篇介绍下如何在 30 分钟内给自己的博客添加一个域名，其实我只花了十分钟左右。So，现在开始计时吧~  开始前的准备 想好需要注册的域名，同时选择一个域名注册服务提供商 域名注册服务提供商有很多，比如 GoDaddy，Namecheap，BigRock，hover 等等。用哪个其实都差不多，因为这几个用的人都还蛮多的，我用的是 GoDaddy，你可以选择你自己喜欢的。  注册一个 Clo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="30 分钟创建域名并关联 Github Pages">
+<meta property="og:url" content="https://ajiew.me/bind-custom-doman/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="本篇介绍下如何在 30 分钟内给自己的博客添加一个域名，其实我只花了十分钟左右。So，现在开始计时吧~  开始前的准备 想好需要注册的域名，同时选择一个域名注册服务提供商 域名注册服务提供商有很多，比如 GoDaddy，Namecheap，BigRock，hover 等等。用哪个其实都差不多，因为这几个用的人都还蛮多的，我用的是 GoDaddy，你可以选择你自己喜欢的。  注册一个 Clo">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/mydomain.jpg">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/Cloudflare-setup.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/Cloudflare-nameservers.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/update-nameservers.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/auto-minify.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/browser-cache-expiration.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/page-rules-redirect.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/page-rules-https.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/ssl-certificate.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/https-hsts.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/enable-hsts-settings.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/hsts-header.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/github-pages-settings.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-09-10/CNAME.png">
+<meta property="article:published_time" content="2019-09-10T12:12:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.727Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Tricks">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-09-10/mydomain.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>30 分钟创建域名并关联 Github Pages</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/philippines/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/memories-of-matsuko/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/bind-custom-doman/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/bind-custom-doman/&text=30 分钟创建域名并关联 Github Pages"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/bind-custom-doman/&is_video=false&description=30 分钟创建域名并关联 Github Pages"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=30 分钟创建域名并关联 Github Pages&body=Check out this article: https://ajiew.me/bind-custom-doman/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/bind-custom-doman/&name=30 分钟创建域名并关联 Github Pages&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-09-10/mydomain.jpg&#34; alt=&#34;My Domain&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  本篇介绍下如何在 30 分钟内给自己的博客添加一个域名，其实我只花了十分钟左右。So，现在开始计时吧~&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;开始前的准备&#34;&gt;&lt;a href=&#34;#开始前的准备&#34; class=&#34;headerlink&#34; title=&#34;开始前的准备&#34;&gt;&lt;/a&gt;开始前的准备&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;想好需要注册的域名，同时选择一个域名注册服务提供商&lt;/p&gt;
+&lt;p&gt;域名注册服务提供商有很多，比如 &lt;a href=&#34;https://www.godaddy.com/&#34;&gt;GoDaddy&lt;/a&gt;，&lt;a href=&#34;https://www.namecheap.com/&#34;&gt;Namecheap&lt;/a&gt;，&lt;a href=&#34;https://www.bigrock.in/&#34;&gt;BigRock&lt;/a&gt;，&lt;a href=&#34;https://www.hover.com/&#34;&gt;hover&lt;/a&gt; 等等。用哪个其实都差不多，因为这几个用的人都还蛮多的，我用的是 GoDaddy，你可以选择你自己喜欢的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注册一个 &lt;a href=&#34;https://www.cloudflare.com/&#34;&gt;Cloudflare&lt;/a&gt; 账户&lt;/p&gt;
+&lt;p&gt;Cloudflare 应该是目前最好用的域名解析、托管服务提供商了，它不但支持 HTTPS、自定义浏览缓存策略以及 Page Rules，还能自动帮你缩减静态资源，最关键的是它配置起来足够简单而且&lt;strong&gt;免费&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果你以上东西都准备好了，那我们就可以开始了。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/bind-custom-doman/&t=30 分钟创建域名并关联 Github Pages"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">开始前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D"><span class="toc-number">2.</span> <span class="toc-text">第一步：注册域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%9C%A8-Cloudflare-%E4%B8%8A%E6%B7%BB%E5%8A%A0%E4%BD%A0%E7%9A%84%E7%BD%91%E7%AB%99%E5%9F%9F%E5%90%8D"><span class="toc-number">3.</span> <span class="toc-text">第二步：在 Cloudflare 上添加你的网站域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">第三步：修改域名服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloudflare-%E7%9A%84%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">Cloudflare 的其他配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Auto-Minify"><span class="toc-number">5.1.</span> <span class="toc-text">Auto Minify</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Browser-Cache-Expiration"><span class="toc-number">5.2.</span> <span class="toc-text">Browser Cache Expiration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Page-Rules"><span class="toc-number">5.3.</span> <span class="toc-text">配置 Page Rules</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-HSTS"><span class="toc-number">5.4.</span> <span class="toc-text">配置 HSTS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Github-Pages"><span class="toc-number">6.</span> <span class="toc-text">配置 Github Pages</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        30 分钟创建域名并关联 Github Pages
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-09-10T12:12:00.000Z" itemprop="datePublished">2019-09-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Tricks/" rel="tag">Tricks</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2019-09-10/mydomain.jpg" alt="My Domain"></p>
+<blockquote>
+<p>  本篇介绍下如何在 30 分钟内给自己的博客添加一个域名，其实我只花了十分钟左右。So，现在开始计时吧~</p>
+</blockquote>
+<h3 id="开始前的准备"><a href="#开始前的准备" class="headerlink" title="开始前的准备"></a>开始前的准备</h3><ol>
+<li><p>想好需要注册的域名，同时选择一个域名注册服务提供商</p>
+<p>域名注册服务提供商有很多，比如 <a target="_blank" rel="noopener" href="https://www.godaddy.com/">GoDaddy</a>，<a target="_blank" rel="noopener" href="https://www.namecheap.com/">Namecheap</a>，<a target="_blank" rel="noopener" href="https://www.bigrock.in/">BigRock</a>，<a target="_blank" rel="noopener" href="https://www.hover.com/">hover</a> 等等。用哪个其实都差不多，因为这几个用的人都还蛮多的，我用的是 GoDaddy，你可以选择你自己喜欢的。</p>
+</li>
+<li><p>注册一个 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/">Cloudflare</a> 账户</p>
+<p>Cloudflare 应该是目前最好用的域名解析、托管服务提供商了，它不但支持 HTTPS、自定义浏览缓存策略以及 Page Rules，还能自动帮你缩减静态资源，最关键的是它配置起来足够简单而且<strong>免费</strong>。</p>
+</li>
+</ol>
+<p>如果你以上东西都准备好了，那我们就可以开始了。</p>
+<span id="more"></span>
+
+<h3 id="第一步：注册域名"><a href="#第一步：注册域名" class="headerlink" title="第一步：注册域名"></a>第一步：注册域名</h3><p>去<a target="_blank" rel="noopener" href="https://www.godaddy.com/domainsearch/find">域名搜索页面</a>搜索你想要注册的域名，一般后缀为 <code>.me</code> 或者 <code>.cc</code> 之类的域名价格都不贵，适合做个人博客域名。 挑好域名后添加到购物车，选择支付方式（可以用 AliPay），然后填写好账单信息并支付就 ok 了。</p>
+<h3 id="第二步：在-Cloudflare-上添加你的网站域名"><a href="#第二步：在-Cloudflare-上添加你的网站域名" class="headerlink" title="第二步：在 Cloudflare 上添加你的网站域名"></a>第二步：在 Cloudflare 上添加你的网站域名</h3><p>首先登入 <a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Dashboard</a>，选择右上角的 <strong>Add a Site</strong>，然后输入你的域名并确认添加。</p>
+<p>接下来我们需要添加两条 A 记录，用于指向 Github 服务器的 IP 地址，从而实现通过域名访问我们的 Github 静态页面。参考 <a target="_blank" rel="noopener" href="https://help.github.com/en/articles/setting-up-an-apex-domain#configuring-a-records-with-your-dns-provider">Github 帮助页面</a>，添加以下两条 A 记录：</p>
+<ol>
+<li>185.199.109.153</li>
+<li>185.199.110.153</li>
+</ol>
+<p>除了 A 记录之外，我们还需要添加一条 CNAME 记录来为我们的域名设置别名，比如添加 <code>www</code> 的前缀。</p>
+<p>设置完 DNS 之后大概是这样的：</p>
+<p><img src="../assets/2019-09-10/Cloudflare-setup.png" alt="Cloudflare-setup"></p>
+<h3 id="第三步：修改域名服务器"><a href="#第三步：修改域名服务器" class="headerlink" title="第三步：修改域名服务器"></a>第三步：修改域名服务器</h3><p>完成上一步之后还不能直接访问我们的域名，我们会看到 Cloudflare 提示我们需要修改域名服务器：</p>
+<p><img src="../assets/2019-09-10/Cloudflare-nameservers.png" alt="Cloudflare-nameservers"></p>
+<p>首先登录进你注册域名的管理控制台，然后使用自定义的域名，填入 Cloudflare 提供的域名服务器，具体可以参考你的注册商提供的帮助文档：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.godaddy.com/help/set-custom-nameservers-for-domains-registered-with-godaddy-12317">GoDaddy</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain">Namecheap</a></li>
+<li><a target="_blank" rel="noopener" href="https://manage.bigrock.in/kb/servlet/KBServlet/faq455.html">BigRock</a></li>
+</ol>
+<p><img src="../assets/2019-09-10/update-nameservers.png" alt="update-nameservers"></p>
+<p>修改完成之后大概需要十几分钟到几个小时的时间才能生效，生效之后就可以访问你的域名啦，是不是很简单？</p>
+<h3 id="Cloudflare-的其他配置"><a href="#Cloudflare-的其他配置" class="headerlink" title="Cloudflare 的其他配置"></a>Cloudflare 的其他配置</h3><p>以上只是让我们的网站可以通过域名来访问，仅仅能访问当然是不够的，我们一般还需要考虑如何提高网站的访问速度，使用缓存策略、HTTPS 等等。</p>
+<h4 id="Auto-Minify"><a href="#Auto-Minify" class="headerlink" title="Auto Minify"></a>Auto Minify</h4><p>在 <strong>Speed</strong> 一栏找到  <em>Auto Minify</em>，然后选中所有：JavaScript/CSS/HTML。配置完这个之后可以让 Cloudflare 自动帮你缩减网站上的资源，从而减少浏览器请求资源需要的加载时间。</p>
+<p><img src="../assets/2019-09-10/auto-minify.png" alt="auto-minify"></p>
+<h4 id="Browser-Cache-Expiration"><a href="#Browser-Cache-Expiration" class="headerlink" title="Browser Cache Expiration"></a>Browser Cache Expiration</h4><p>在 <strong>Caching</strong> 一栏找到 <em>Browser Cache Expiration</em>，用来配置用户浏览器中我们网站的缓存要保存多久。这里我设置成 8 天，不建议设置成太长。</p>
+<p><img src="../assets/2019-09-10/browser-cache-expiration.png" alt="browser-cache-expiration"></p>
+<h4 id="配置-Page-Rules"><a href="#配置-Page-Rules" class="headerlink" title="配置 Page Rules"></a>配置 Page Rules</h4><p>Page Rules 可以控制当用户访问我们域名下某个特定的 URL 时触发的一些事件，比如重定向等。</p>
+<p>我们需要配置以下 Page Rules，用于：</p>
+<ol>
+<li>将所有 <a target="_blank" rel="noopener" href="http://www.ajiew.me/">www.ajiew.me</a> 下的访问重定向到 ajiew.me 下；</li>
+<li>将所有非 HTTPS 的访问重定向到使用 HTTPS 访问；</li>
+</ol>
+<p>进入 Page Rules 配置栏，选择 Create Page Rule，然后待匹配地址栏填入 <code>www.ajiew.me/*</code>，对应的规则为：Forwarding URL - 301 Permanent Redirect，目标地址为 <code>http://ajiew.me/$1</code>。</p>
+<p><img src="../assets/2019-09-10/page-rules-redirect.png" alt="page-rules-redirect"></p>
+<p>设置完之后点击 Save and Deploy 就可以了。</p>
+<p>然后是默认使用 HTTPS，同样的先创建一条 Page Rule，目标地址为 <code>http://ajiew.me/*</code>，规则选择 Always Use HTTPS，最后 Save and Deploy。</p>
+<p><img src="../assets/2019-09-10/page-rules-https.png" alt="page-rules-https"></p>
+<h4 id="配置-HSTS"><a href="#配置-HSTS" class="headerlink" title="配置 HSTS"></a>配置 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">HSTS</a></h4><p>HSTS 是一种网站安全策略，用于强制让浏览器使用 HTTPS 与网站进行通信。开启之后，如果用户之前访问过你的网站，那么 TA 之后的访问都将直接通过 HTTPS，而不需要 Page Rules 的转发规则来访问了。这样也能变相加快网站的访问速度。</p>
+<p>但是开启这一项之前，需要先保证你的网站上有已激活的 <em>SSL 证书</em>，在 <strong>SSL/TLS</strong> 中，SSL 显示如下：</p>
+<p><img src="../assets/2019-09-10/ssl-certificate.png" alt="ssl-certificate"></p>
+<p>接下来往下拉到 <strong>Always Use HTTPS</strong> 部分，选择开启。</p>
+<p><img src="../assets/2019-09-10/https-hsts.png" alt="https-hsts"></p>
+<p>然后选择 <strong>Change HSTS Settings</strong>，需要你先同意声明，然后再打开所有选项就 ok 了。</p>
+<img src="../assets/2019-09-10/enable-hsts-settings.png" width="50%"/>
+
+<p>使用了 HSTS 之后，所有的返回数据中都会添加以下 Header：</p>
+<p><img src="../assets/2019-09-10/hsts-header.png" alt="hsts-header"></p>
+<p>到这里，Cloudflare 的配置就都搞定了。</p>
+<h3 id="配置-Github-Pages"><a href="#配置-Github-Pages" class="headerlink" title="配置 Github Pages"></a>配置 Github Pages</h3><p>最后一步，打开项目的 Settings，在 <strong>Custom domain</strong> 中填入你的域名并保存。</p>
+<p><img src="../assets/2019-09-10/github-pages-settings.png" alt="github-pages-settings"></p>
+<p>如果你也使用 Hexo 发布博客，还要在你的 _config 文件中将 url 也修改为你的自定义域名。另外，记得在 source 目录下添加 CNAME 文件，内容是你的域名，如下：</p>
+<p><img src="../assets/2019-09-10/CNAME.png" alt="CNAME"></p>
+<p>这样，每次发布新博客的时候，Github Pages 就能自动关联上你的域名了。</p>
+<p>搞定啦，发个朋友圈庆祝一下吧~ ٩(•̤̀ᵕ•̤́๑)ᵒᵏᵎᵎᵎᵎ</p>
+<p>Cheers! 🖖</p>
+<hr>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/an-illustrated-guide-for-setting-up-your-website-using-github-cloudflare-5a7a11ca9465/">An Illustrated Guide for Setting Up Your Website Using Github &amp; Cloudflare</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">开始前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%B3%A8%E5%86%8C%E5%9F%9F%E5%90%8D"><span class="toc-number">2.</span> <span class="toc-text">第一步：注册域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%9C%A8-Cloudflare-%E4%B8%8A%E6%B7%BB%E5%8A%A0%E4%BD%A0%E7%9A%84%E7%BD%91%E7%AB%99%E5%9F%9F%E5%90%8D"><span class="toc-number">3.</span> <span class="toc-text">第二步：在 Cloudflare 上添加你的网站域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E4%BF%AE%E6%94%B9%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">第三步：修改域名服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloudflare-%E7%9A%84%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">Cloudflare 的其他配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Auto-Minify"><span class="toc-number">5.1.</span> <span class="toc-text">Auto Minify</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Browser-Cache-Expiration"><span class="toc-number">5.2.</span> <span class="toc-text">Browser Cache Expiration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Page-Rules"><span class="toc-number">5.3.</span> <span class="toc-text">配置 Page Rules</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-HSTS"><span class="toc-number">5.4.</span> <span class="toc-text">配置 HSTS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Github-Pages"><span class="toc-number">6.</span> <span class="toc-text">配置 Github Pages</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/bind-custom-doman/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/bind-custom-doman/&text=30 分钟创建域名并关联 Github Pages"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/bind-custom-doman/&is_video=false&description=30 分钟创建域名并关联 Github Pages"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=30 分钟创建域名并关联 Github Pages&body=Check out this article: https://ajiew.me/bind-custom-doman/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/bind-custom-doman/&title=30 分钟创建域名并关联 Github Pages"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/bind-custom-doman/&name=30 分钟创建域名并关联 Github Pages&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-09-10/mydomain.jpg&#34; alt=&#34;My Domain&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  本篇介绍下如何在 30 分钟内给自己的博客添加一个域名，其实我只花了十分钟左右。So，现在开始计时吧~&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;开始前的准备&#34;&gt;&lt;a href=&#34;#开始前的准备&#34; class=&#34;headerlink&#34; title=&#34;开始前的准备&#34;&gt;&lt;/a&gt;开始前的准备&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;想好需要注册的域名，同时选择一个域名注册服务提供商&lt;/p&gt;
+&lt;p&gt;域名注册服务提供商有很多，比如 &lt;a href=&#34;https://www.godaddy.com/&#34;&gt;GoDaddy&lt;/a&gt;，&lt;a href=&#34;https://www.namecheap.com/&#34;&gt;Namecheap&lt;/a&gt;，&lt;a href=&#34;https://www.bigrock.in/&#34;&gt;BigRock&lt;/a&gt;，&lt;a href=&#34;https://www.hover.com/&#34;&gt;hover&lt;/a&gt; 等等。用哪个其实都差不多，因为这几个用的人都还蛮多的，我用的是 GoDaddy，你可以选择你自己喜欢的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注册一个 &lt;a href=&#34;https://www.cloudflare.com/&#34;&gt;Cloudflare&lt;/a&gt; 账户&lt;/p&gt;
+&lt;p&gt;Cloudflare 应该是目前最好用的域名解析、托管服务提供商了，它不但支持 HTTPS、自定义浏览缓存策略以及 Page Rules，还能自动帮你缩减静态资源，最关键的是它配置起来足够简单而且&lt;strong&gt;免费&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果你以上东西都准备好了，那我们就可以开始了。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/bind-custom-doman/&t=30 分钟创建域名并关联 Github Pages"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

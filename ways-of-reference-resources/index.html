@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言：安卓开发中我们时常会需要引用一些特殊的资源，比如设置一些可点击组件的波纹效果时，我们会用到：android:foreground&#x3D;”?attr&#x2F;selectableItemBackground”，但是这些引用方式之间有哪些区别呢？  获取资源首先来复习一下安卓中获取资源的几种方式。 1@[&lt;package_name&gt;:]&lt;resource_type&gt;&#x2F;&lt;res">
+<meta property="og:type" content="article">
+<meta property="og:title" content="@android, ?attr&#x2F; 和 ?android 的区别">
+<meta property="og:url" content="https://ajiew.me/ways-of-reference-resources/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="前言：安卓开发中我们时常会需要引用一些特殊的资源，比如设置一些可点击组件的波纹效果时，我们会用到：android:foreground&#x3D;”?attr&#x2F;selectableItemBackground”，但是这些引用方式之间有哪些区别呢？  获取资源首先来复习一下安卓中获取资源的几种方式。 1@[&lt;package_name&gt;:]&lt;resource_type&gt;&#x2F;&lt;res">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c14c67680730.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c13fabc45934.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c12307b23422.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c0b99b369534.png">
+<meta property="article:published_time" content="2018-07-14T04:09:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.724Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c0c14c67680730.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>@android, ?attr/ 和 ?android 的区别</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018-half/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/tinker-hot-update/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/ways-of-reference-resources/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/ways-of-reference-resources/&text=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/ways-of-reference-resources/&is_video=false&description=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=@android, ?attr/ 和 ?android 的区别&body=Check out this article: https://ajiew.me/ways-of-reference-resources/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/ways-of-reference-resources/&name=@android, ?attr/ 和 ?android 的区别&description=&lt;blockquote&gt;
+&lt;p&gt;前言：安卓开发中我们时常会需要引用一些特殊的资源，比如设置一些可点击组件的波纹效果时，我们会用到：android:foreground=”?attr/selectableItemBackground”，但是这些引用方式之间有哪些区别呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;获取资源&#34;&gt;&lt;a href=&#34;#获取资源&#34; class=&#34;headerlink&#34; title=&#34;获取资源&#34;&gt;&lt;/a&gt;获取资源&lt;/h3&gt;&lt;p&gt;首先来复习一下安卓中获取资源的几种方式。&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;@[&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;package_name&lt;/span&gt;&amp;gt;&lt;/span&gt;:]&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;resource_type&lt;/span&gt;&amp;gt;&lt;/span&gt;/&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;resource_name&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;这种方式是最为常见的，直接获取对应的包下的资源，一般在相同的包下，可以省略包名，比如为 TextView 设置文字时，就可以通过这样的方式来获取我们应用内定义的 string 资源：&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;android:text=&amp;quot;@string/hello&amp;quot;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;另一种获取资源的方式是通过引用 &lt;code&gt;style&lt;/code&gt; 属性。&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;android:textColor=&amp;quot;?colorAccent&amp;quot;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;通过这种方式，我们可以获取到当前应用主题下的 &lt;code&gt;style&lt;/code&gt; 属性值，这些属性值一般可以在属性文件夹 &lt;code&gt;values&lt;/code&gt; 下找到。这里由于当前使用的是 &lt;code&gt;Theme.AppCompat&lt;/code&gt; 下的主题，这是 &lt;code&gt;com.android.support:appcompat-v7&lt;/code&gt; 下的 Theme，所以 &lt;code&gt;colorAccent&lt;/code&gt; 会指向该库下的 &lt;code&gt;values&lt;/code&gt; 文件：&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/ways-of-reference-resources/&t=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">获取资源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-android-%E5%BC%95%E7%94%A8%E5%AE%89%E5%8D%93%E5%86%85%E5%BB%BA%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">01 @android: 引用安卓内建的系统资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-attr-%E5%BC%95%E7%94%A8%E5%BA%94%E7%94%A8%E5%86%85%E7%9A%84%E5%B1%9E%E6%80%A7%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">02 ?attr&#x2F;: 引用应用内的属性资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#03-android-%E5%BC%95%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6%E7%9A%84%E5%B1%9E%E6%80%A7%E8%B5%84%E6%BA%90"><span class="toc-number">1.3.</span> <span class="toc-text">03 ?android: 引用系统自带的属性资源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">2.</span> <span class="toc-text">结语</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        @android, ?attr/ 和 ?android 的区别
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-07-14T04:09:00.000Z" itemprop="datePublished">2018-07-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>前言：安卓开发中我们时常会需要引用一些特殊的资源，比如设置一些可点击组件的波纹效果时，我们会用到：android:foreground=”?attr/selectableItemBackground”，但是这些引用方式之间有哪些区别呢？</p>
+</blockquote>
+<h3 id="获取资源"><a href="#获取资源" class="headerlink" title="获取资源"></a>获取资源</h3><p>首先来复习一下安卓中获取资源的几种方式。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">@[<span class="hljs-tag">&lt;<span class="hljs-name">package_name</span>&gt;</span>:]<span class="hljs-tag">&lt;<span class="hljs-name">resource_type</span>&gt;</span>/<span class="hljs-tag">&lt;<span class="hljs-name">resource_name</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这种方式是最为常见的，直接获取对应的包下的资源，一般在相同的包下，可以省略包名，比如为 TextView 设置文字时，就可以通过这样的方式来获取我们应用内定义的 string 资源：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">android:text=&quot;@string/hello&quot;<br></code></pre></td></tr></table></figure>
+
+<p>另一种获取资源的方式是通过引用 <code>style</code> 属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">android:textColor=&quot;?colorAccent&quot;<br></code></pre></td></tr></table></figure>
+
+<p>通过这种方式，我们可以获取到当前应用主题下的 <code>style</code> 属性值，这些属性值一般可以在属性文件夹 <code>values</code> 下找到。这里由于当前使用的是 <code>Theme.AppCompat</code> 下的主题，这是 <code>com.android.support:appcompat-v7</code> 下的 Theme，所以 <code>colorAccent</code> 会指向该库下的 <code>values</code> 文件：</p>
+<span id="more"></span>
+
+<p><img src="https://i.loli.net/2019/07/22/5d35c0c14c67680730.png" alt="appcompat-v7 包下的 colorAccent 属性"></p>
+<p>关于资源引用的方式，具体请参考官方文档：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/resources/providing-resources#Accessing">Accessing your app resources</a></p>
+<h4 id="01-android-引用安卓内建的系统资源"><a href="#01-android-引用安卓内建的系统资源" class="headerlink" title="01 @android: 引用安卓内建的系统资源"></a>01 @android: 引用安卓内建的系统资源</h4><p>除了引用自己应用中的资源外，我们还可以通过指定引用时的包名为 <code>android</code> 来获取安卓平台下的一些系统资源，举个例子：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-symbol">android:</span>background=“<span class="hljs-variable">@android</span><span class="hljs-symbol">:drawable/ic_menu_delete</span>”<br></code></pre></td></tr></table></figure>
+
+<p>我们知道当新建一个项目的时候，必须在 gradle 中设置 <code>compileSdkVersion</code> 来指定编译我们应用的 SDK 版本，这也决定了我们能调用哪个 level 的 API，同时也表明了哪个 level 的系统资源可供我们使用，比如如果指定的 <code>compileSdkVersion</code> 是 27，那么我们调用的就是 Android 8.1 下的系统资源。</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35c0c13fabc45934.png" alt="@android:drawable/ic_menu_delete"></p>
+<h4 id="02-attr-引用应用内的属性资源"><a href="#02-attr-引用应用内的属性资源" class="headerlink" title="02 ?attr/: 引用应用内的属性资源"></a>02 ?attr/: 引用应用内的属性资源</h4><p>通过这种方式可以让我们间接地使用应用内的某些资源。我们知道当我们自定义View的时候，一般会需要自定义一些属性资源，通常我们会在 <code>values/</code> 文件夹下建一个 <code>attrs</code> 文件，在这里保存一些我们自己的 style 属性，其实这些属性就可以通过 <code>?attr/</code> 这种方式来引用了。比如我在 <code>styles</code> 里定义了一个属性：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;attr <span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;colorReallyGreen&quot;</span> <span class="hljs-attribute">format</span>=<span class="hljs-string">&quot;color&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+
+<p>定义完之后，我就可以直接在 <code>layout</code> 中通过引用的方式去使用这个属性了：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">android:background=<span class="hljs-string">&quot;?attr/colorReallyGreen&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>当然，要想让该属性起作用还需要在 Theme 下指定值：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35c0c12307b23422.png" alt="在当前 Theme 下为自定义属性赋值"></p>
+<p>另外，由于在 <code>layout</code> 中，可以自动识别出当前所需的是属性资源，所以可以省略 <code>attr/</code> 而直接使用 <code>?colorReallyGreen</code> 就可以了。</p>
+<h4 id="03-android-引用系统自带的属性资源"><a href="#03-android-引用系统自带的属性资源" class="headerlink" title="03 ?android: 引用系统自带的属性资源"></a>03 ?android: 引用系统自带的属性资源</h4><p>了解了前两种资源引用的方式后，<code>?android</code> 这种引用资源的方式也就不难理解了。与 <code>?attr/</code> 类似，通过这种方式可以直接访问到安卓内建的属性资源，只不过是省略了 <code>attr/</code> 而已。比如给 TextView 引用一个系统内的 style <code>buttonStyleSmall</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">TextView</span></span><br><span class="hljs-tag">    <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;?android:buttonStyleSmall&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_width</span>=<span class="hljs-string">&quot;match_parent&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:layout_height</span>=<span class="hljs-string">&quot;wrap_content&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:text</span>=<span class="hljs-string">&quot;You Are Beautiful&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>然后 TextView 就变成了这样：</p>
+<p><img src="https://i.loli.net/2019/07/22/5d35c0c0b99b369534.png" alt="引用了安卓内建属性作为 style 的 TextView"></p>
+<p>当然如果你尝试去掉 <code>android</code> 包名之后，发现该属性还是可以起作用，说明应用内也是可以引用这个资源的。那么这是不是意味着绝大部分属性资源都不需要加 <code>android</code> 包名呢？其实我觉得是这样的，因为加了包名之后其实限制反而会更多，比如有些内建属性资源是针对某个 API level 以上的 Android 平台才可以使用的，当然这也与你当前使用的 Theme 有关。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>总结下，获取资源有两种方式，一种是通过直接引用（使用 <code>@</code>），一种是通过 style 属性（使用 <code>?</code>，除了自定义属性外，引用的资源类型和当前使用的主题有关）。另外，系统中内置了不少资源，学会合理利用它们可以帮助我们节约不少时间，建议大家花点精力自己探索下。</p>
+<hr>
+<h6 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h6><ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36642430/whats-the-difference-between-androidattr-and-attr-in-an-android-layout">What‘s the difference between “?android:attr/” and “?attr/” in an android layout xml file?</a></li>
+<li><a target="_blank" rel="noopener" href="http://grishma102.blogspot.com/2015/02/difference-between-attr-and-androidattr.html">Difference between “?attr/” and “?android:attr/” in android</a></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">获取资源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#01-android-%E5%BC%95%E7%94%A8%E5%AE%89%E5%8D%93%E5%86%85%E5%BB%BA%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.</span> <span class="toc-text">01 @android: 引用安卓内建的系统资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#02-attr-%E5%BC%95%E7%94%A8%E5%BA%94%E7%94%A8%E5%86%85%E7%9A%84%E5%B1%9E%E6%80%A7%E8%B5%84%E6%BA%90"><span class="toc-number">1.2.</span> <span class="toc-text">02 ?attr&#x2F;: 引用应用内的属性资源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#03-android-%E5%BC%95%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6%E7%9A%84%E5%B1%9E%E6%80%A7%E8%B5%84%E6%BA%90"><span class="toc-number">1.3.</span> <span class="toc-text">03 ?android: 引用系统自带的属性资源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">2.</span> <span class="toc-text">结语</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/ways-of-reference-resources/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/ways-of-reference-resources/&text=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/ways-of-reference-resources/&is_video=false&description=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=@android, ?attr/ 和 ?android 的区别&body=Check out this article: https://ajiew.me/ways-of-reference-resources/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/ways-of-reference-resources/&title=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/ways-of-reference-resources/&name=@android, ?attr/ 和 ?android 的区别&description=&lt;blockquote&gt;
+&lt;p&gt;前言：安卓开发中我们时常会需要引用一些特殊的资源，比如设置一些可点击组件的波纹效果时，我们会用到：android:foreground=”?attr/selectableItemBackground”，但是这些引用方式之间有哪些区别呢？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;获取资源&#34;&gt;&lt;a href=&#34;#获取资源&#34; class=&#34;headerlink&#34; title=&#34;获取资源&#34;&gt;&lt;/a&gt;获取资源&lt;/h3&gt;&lt;p&gt;首先来复习一下安卓中获取资源的几种方式。&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;@[&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;package_name&lt;/span&gt;&amp;gt;&lt;/span&gt;:]&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;resource_type&lt;/span&gt;&amp;gt;&lt;/span&gt;/&lt;span class=&#34;hljs-tag&#34;&gt;&amp;lt;&lt;span class=&#34;hljs-name&#34;&gt;resource_name&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;这种方式是最为常见的，直接获取对应的包下的资源，一般在相同的包下，可以省略包名，比如为 TextView 设置文字时，就可以通过这样的方式来获取我们应用内定义的 string 资源：&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;android:text=&amp;quot;@string/hello&amp;quot;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;另一种获取资源的方式是通过引用 &lt;code&gt;style&lt;/code&gt; 属性。&lt;/p&gt;
+&lt;figure class=&#34;highlight xml&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs xml&#34;&gt;android:textColor=&amp;quot;?colorAccent&amp;quot;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;通过这种方式，我们可以获取到当前应用主题下的 &lt;code&gt;style&lt;/code&gt; 属性值，这些属性值一般可以在属性文件夹 &lt;code&gt;values&lt;/code&gt; 下找到。这里由于当前使用的是 &lt;code&gt;Theme.AppCompat&lt;/code&gt; 下的主题，这是 &lt;code&gt;com.android.support:appcompat-v7&lt;/code&gt; 下的 Theme，所以 &lt;code&gt;colorAccent&lt;/code&gt; 会指向该库下的 &lt;code&gt;values&lt;/code&gt; 文件：&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/ways-of-reference-resources/&t=@android, ?attr/ 和 ?android 的区别"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

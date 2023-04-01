@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 8、10、11 章：Window、线程和线程池、消息机制 相关。  理解 Window 和 WindowManagerQuick Facts   Window 是一个抽象类，它的具体实现是 PhoneWindow。   我们可以使用 WindowManager 创建一个 Window，WindowManage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（五）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-5/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 8、10、11 章：Window、线程和线程池、消息机制 相关。  理解 Window 和 WindowManagerQuick Facts   Window 是一个抽象类，它的具体实现是 PhoneWindow。   我们可以使用 WindowManager 创建一个 Window，WindowManage">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2020-01-04/android-logo.jpg">
+<meta property="og:image" content="https://ajiew.me/assets/2020-01-04/handler_workflow.png">
+<meta property="article:published_time" content="2020-01-04T06:33:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.728Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2020-01-04/android-logo.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 开发艺术探索学习笔记（五）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/notes-on-android-art-part-6/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-5/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-5/&text=Android 开发艺术探索学习笔记（五）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-5/&is_video=false&description=Android 开发艺术探索学习笔记（五）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（五）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-5/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-5/&name=Android 开发艺术探索学习笔记（五）&description=&lt;p&gt;&lt;img src=&#34;/assets/2020-01-04/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 8、10、11 章：&lt;strong&gt;Window&lt;/strong&gt;、&lt;strong&gt;线程和线程池&lt;/strong&gt;、&lt;strong&gt;消息机制&lt;/strong&gt; 相关。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;理解-Window-和-WindowManager&#34;&gt;&lt;a href=&#34;#理解-Window-和-WindowManager&#34; class=&#34;headerlink&#34; title=&#34;理解 Window 和 WindowManager&#34;&gt;&lt;/a&gt;理解 Window 和 WindowManager&lt;/h2&gt;&lt;h3 id=&#34;Quick-Facts&#34;&gt;&lt;a href=&#34;#Quick-Facts&#34; class=&#34;headerlink&#34; title=&#34;Quick Facts&#34;&gt;&lt;/a&gt;&lt;em&gt;Quick Facts&lt;/em&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;  Window 是一个抽象类，它的具体实现是 PhoneWindow。&lt;/li&gt;
+&lt;li&gt;  我们可以使用 WindowManager 创建一个 Window，WindowManager 是外界访问 Window 的入口。&lt;/li&gt;
+&lt;li&gt;  Window 的实现位于系统的 WindowManagerService 中，所以 WindowManager 和 WindowManagerService 的交互是一个 IPC 过程。&lt;/li&gt;
+&lt;li&gt;  Android 中所有的 View 都是通过 Window 来呈现的，不管是 Activity、Dialog 还是 Toast，它们的 View 都是附加在 Window 上的，Window 是 View 的直接管理者。点击事件也是通过 Window 传递给 DecorView 再传递给我们的 View，setContentView 本质也是通过 Window 来添加我们的 View 到 DecorView 上。&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-5/&t=Android 开发艺术探索学习笔记（五）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-Window-%E5%92%8C-WindowManager"><span class="toc-number">1.</span> <span class="toc-text">理解 Window 和 WindowManager</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Facts"><span class="toc-number">1.1.</span> <span class="toc-text">Quick Facts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-amp-WindowManager"><span class="toc-number">1.2.</span> <span class="toc-text">Window &amp; WindowManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">Window 的内部机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">Window 的创建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.</span> <span class="toc-text">Android 的线程和线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%AD%90%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">主线程和子线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%BD%A2%E6%80%81"><span class="toc-number">2.2.</span> <span class="toc-text">Android 中的线程形态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncTask"><span class="toc-number">2.2.1.</span> <span class="toc-text">AsyncTask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HandlerThread"><span class="toc-number">2.2.2.</span> <span class="toc-text">HandlerThread</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IntentService"><span class="toc-number">2.2.3.</span> <span class="toc-text">IntentService</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.3.</span> <span class="toc-text">Android 中的线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ThreadPoolExecutor"><span class="toc-number">2.3.1.</span> <span class="toc-text">ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.3.2.</span> <span class="toc-text">线程池的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FixedThreadPool"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">FixedThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CachedThreadPool"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">CachedThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ScheduledThreadPool"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">ScheduledThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SingleThreadExecutor"><span class="toc-number">2.3.2.4.</span> <span class="toc-text">SingleThreadExecutor</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E7%9A%84%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">Android 的消息机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">Android 消息机制的分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ThreadLocal-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.1.</span> <span class="toc-text">ThreadLocal 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MessageQueue-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.2.</span> <span class="toc-text">MessageQueue 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Looper-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.3.</span> <span class="toc-text">Looper 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.4.</span> <span class="toc-text">Handler 的工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.3.</span> <span class="toc-text">主线程的消息循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 开发艺术探索学习笔记（五）
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-04T06:33:00.000Z" itemprop="datePublished">2020-01-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2020-01-04/android-logo.jpg"></p>
+<blockquote>
+<p>  结合 <a target="_blank" rel="noopener" href="https://developer.android.com/guide">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 8、10、11 章：<strong>Window</strong>、<strong>线程和线程池</strong>、<strong>消息机制</strong> 相关。</p>
+</blockquote>
+<h2 id="理解-Window-和-WindowManager"><a href="#理解-Window-和-WindowManager" class="headerlink" title="理解 Window 和 WindowManager"></a>理解 Window 和 WindowManager</h2><h3 id="Quick-Facts"><a href="#Quick-Facts" class="headerlink" title="Quick Facts"></a><em>Quick Facts</em></h3><ul>
+<li>  Window 是一个抽象类，它的具体实现是 PhoneWindow。</li>
+<li>  我们可以使用 WindowManager 创建一个 Window，WindowManager 是外界访问 Window 的入口。</li>
+<li>  Window 的实现位于系统的 WindowManagerService 中，所以 WindowManager 和 WindowManagerService 的交互是一个 IPC 过程。</li>
+<li>  Android 中所有的 View 都是通过 Window 来呈现的，不管是 Activity、Dialog 还是 Toast，它们的 View 都是附加在 Window 上的，Window 是 View 的直接管理者。点击事件也是通过 Window 传递给 DecorView 再传递给我们的 View，setContentView 本质也是通过 Window 来添加我们的 View 到 DecorView 上。</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="Window-amp-WindowManager"><a href="#Window-amp-WindowManager" class="headerlink" title="Window &amp; WindowManager"></a>Window &amp; WindowManager</h3><p>通过 WindowManager 添加 Window：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">windowManager.addView(View view, ViewGroup.LayoutParams params)<br></code></pre></td></tr></table></figure>
+
+<p>这里的 LayoutParams 有两个重要的参数： <code>flags</code> 和 <code>type</code>。</p>
+<p><code>type</code> 表示 Window 的类型，Window 分为三种类型，最基本的是 application window，层级范围是 1~99，表示普通应用的 Window；第二层是 sub-window，子 Window 的层级范围是 1000~1999，必须依附于父 Window 才能存在，比如常见的 Dialog；最后是 system window，层级范围 2000~2999，表示系统级别的 Window，比如 状态栏、导航栏、系统提醒、Toast 等。层级高的 Window 总是会覆盖层级低的。</p>
+<p>如果我们想要显示系统级别弹窗，只要指定 <code>type</code> 为 <code>TYPE_APPLICATION_OVERLAY</code> 就可以了，不过使用系统级别 Window 需要额外申请 <code>android.permission.SYSTEM_ALERT_WINDOW</code> 权限。</p>
+<p><code>flags</code> 表示 Window 的属性，通过组合使用这些属性，我们可以定制 Window 的显示方式。常用的有：</p>
+<ul>
+<li>  <strong>FLAG_NOT_TOUCH_MODAL</strong>，只处理 Window 所在 View 区域内的点击事件，之外的事件会被传递给下一层的 Window。</li>
+<li>  <strong>FLAG_NOT_FOCUSABLE</strong>，表示 Window 不需要获取焦点，也不需要接收输入事件。默认会开启 FLAG_NOT_TOUCH_MODAL。</li>
+<li>  <strong>FLAG_SHOW_WHEN_LOCKED</strong>，显示在锁屏界面之上。</li>
+</ul>
+<p>其他的 <code>flags</code> 见：<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/WindowManager.LayoutParams">WindowManager.LayoutParams</a></p>
+<p>除了 <code>addView</code> 之外，常用的方法<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/ViewManager">还有</a>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updateViewLayout</span><span class="hljs-params">(View view, ViewGroup.LayoutParams params)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeView</span><span class="hljs-params">(View view)</span></span>;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Window-的内部机制"><a href="#Window-的内部机制" class="headerlink" title="Window 的内部机制"></a>Window 的内部机制</h3><p>Window 是一个抽象的概念，每一个 Window 对应一个 View 和一个 ViewRootImpl，Window 和 View 通过 ViewRootImpl 来建立联系，因此 Window 实际并不存在，它是以 View 的形式存在的。</p>
+<p>WindowManagerImpl 并没有直接实现 Window 的三大操作，而是交给 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/view/WindowManagerGlobal.java?q=WindowManagerGlobal">WindowManagerGlobal</a> 处理。</p>
+<h3 id="Window-的创建过程"><a href="#Window-的创建过程" class="headerlink" title="Window 的创建过程"></a>Window 的创建过程</h3><p>前面说到过所有的 View 都是通过 Window 来呈现的，Window 是 View 的直接管理者，例如 Activity、Dialog、Toast 等的 View 都对应着一个 Window，所以理解 Window 的创建过程也就十分重要。</p>
+<p>&lt;待补充&gt;</p>
+<h2 id="Android-的线程和线程池"><a href="#Android-的线程和线程池" class="headerlink" title="Android 的线程和线程池"></a>Android 的线程和线程池</h2><p>Android 中的线程分为主线程和子线程，主线程也叫 UI 线程，主要用于处理用户输入以及界面交互，主线程中不能进行任何耗时操作，比如网络请求等，只能放到子线程中处理，而子线程中也不能进行更新 UI 的操作。</p>
+<p>Android 中可以扮演子线程的角色有很多，比如 AynscTask 和 IntentService，它们底层依赖的都是线程或线程池，另外 HandlerThread 也是一种特殊的线程。</p>
+<h3 id="主线程和子线程"><a href="#主线程和子线程" class="headerlink" title="主线程和子线程"></a>主线程和子线程</h3><p>主线程指当前进程所拥有的线程，Java 中默认情况下一个进程只有一个线程，那就是主线程 (<code>main()</code> 方法所在的线程)，除了主线程之外的其他线程都是子线程，也叫工作线程。我们一般只在工作线程中执行耗时操作。</p>
+<p>Android 沿用了 Java 的线程模型，也分为主线程和子线程，在主线程或者叫 UI 线程中运行四大组件以及处理用户界面的交互，在子线程中执行网络请求、I/O 等耗时操作。</p>
+<h3 id="Android-中的线程形态"><a href="#Android-中的线程形态" class="headerlink" title="Android 中的线程形态"></a>Android 中的线程形态</h3><h4 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h4><p>AsyncTask 是一种轻量级的异步任务类，它可以在线程池中执行后台任务，然后把执行的进度和结果传递给主线程并更新 UI。从实现上看，AsyncTask 封装了 Thread 和 Handler，<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/AsyncTask">Reference</a> 中也指出它不适合执行特别耗时的后台任务（最长不超过几秒钟）。</p>
+<p>使用 AsyncTask 时需要注意以下一些问题：</p>
+<ul>
+<li>  AsyncTask 类必须在主线程中加载，AsyncTask 对象必须在主线程中创建，execute 方法必须在主线程中调用；</li>
+<li>  不能在程序中直接调用 <code>onPreExecute()</code>, <code>onProgressUpdate()</code>, <code>doInBackground()</code>, <code>onPostExecute()</code> 方法；</li>
+<li>  一个 AsyncTask 只能执行一次 <code>execute()</code> 方法；</li>
+<li>  AsyncTask 默认是串行执行的，我们可以使用 AsyncTask 的 <code>executeOnExecutor()</code> 来并行执行；</li>
+<li>  AsyncTask 未来会被弃用，所以不再推荐使用，对于一些简单的后台任务可以使用 <code>java.util.concurrent</code> 包下提供的类替代，例子见：<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/58767934/4837812">What are the alternatives?</a></li>
+</ul>
+<p>推荐阅读：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/processes-and-threads#AsyncTask">Using AsyncTask</a></p>
+<h4 id="HandlerThread"><a href="#HandlerThread" class="headerlink" title="HandlerThread"></a>HandlerThread</h4><p><strong><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/HandlerThread.html">HandlerThread</a></strong> 顾名思义就是一种可以使用 Handler 的 Thread，它的实现很简单，就是在 <code>run()</code> 方法中通过 <code>Looper.prepare()</code> 创建消息队列，并通过 <code>Looper.loop()</code> 开启消息循环，这样就可以在当前线程中使用 Handler 了。HandlerThread 的具体使用场景是 IntentService。</p>
+<h4 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h4><p>IntentService 是常用的执行后台任务的 Service，一般我们只要继承并实现 <code>onHandleIntent()</code> 方法就可以了。而且 IntentService 会在任务执行完毕后自动停止。</p>
+<p>具体而言，每当我们调用一次 <code>startService()</code> 的时候，<code>onHandleIntent()</code> 都会被调用，只有当所有的任务都结束了，该 IntentService 才会调用 <code>stopSelf()</code> 停止服务。另外，因为它是 Service，所以优先级比一般的子线程高很多。</p>
+<h3 id="Android-中的线程池"><a href="#Android-中的线程池" class="headerlink" title="Android 中的线程池"></a>Android 中的线程池</h3><p>线程池具有以下优点：</p>
+<ul>
+<li>  线程重用，避免线程的频繁创建与销毁带来的额外开销；</li>
+<li>  能有效控制最大并发数，避免大量线程间相互抢占资源带来的阻塞；</li>
+<li>  能对线程进行管理，比如定时执行、指定间隔循环执行等。</li>
+</ul>
+<h4 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/util/concurrent/ThreadPoolExecutor">ThreadPoolExecutor</a> 实现了 Executor，我们可以通过它来配置和管理线程池（虽然我们一般使用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/util/concurrent/Executors.html">Executors</a> 工厂方法来创建）。它的构造方法提供了很多的配置参数以及回调方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">ThreadPoolExecutor(<span class="hljs-keyword">int</span> corePoolSize, <span class="hljs-keyword">int</span> maximumPoolSize, <br>                   <span class="hljs-keyword">long</span> keepAliveTime, TimeUnit unit, <br>                   BlockingQueue&lt;Runnable&gt; workQueue, <br>                   ThreadFactory threadFactory, <br>                   RejectedExecutionHandler handler)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>  corePoolSize: 核心线程数，线程池会自动调整线程数量。例如，当新的任务创建时，线程池中的线程少于核心线程数，那么，即使有线程处于闲置状态，线程池依旧会创建新线程去处理任务；注意这个参数和 maximumPoolSize 的区别，当线程数量达到最大线程数时，后续新任务会被阻塞。</li>
+<li>  keepAliveTime: 非核心线程的闲置时长，超过时长的非核心线程会被回收。我们可以使用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/util/concurrent/ThreadPoolExecutor.html#allowCoreThreadTimeOut(boolean)"><code>allowCoreThreadTimeOut(true)</code></a> 来回收核心线程。</li>
+<li>  unit: keepAliveTime 的时间参数 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/util/concurrent/TimeUnit.html">TimeUnit</a>。</li>
+<li>  workQueue: 线程池中的任务队列，即通过 <code>execute()</code> 方法提交的 Runnable 对象，根据情景使用不同类型的 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>。</li>
+<li>  threadFactory: 为线程池提供新线程，它是一个接口，只需要实现 <code>Thread newThread(Runnable r)</code> 方法。</li>
+<li>  handler: 当线程池无法执行新任务时，ThreadPoolExecutor 会调用此 handler 的 <code>rejectedException()</code> 方法来通知调用者，它有几个可选值：AbortPolicy、CallerRunsPolicy、DiscardPolicy 和 DiscardOldestPolicy，其中，AbortPolicy 是默认值，它会抛出 RejectedExecutionException。</li>
+</ul>
+<h4 id="线程池的分类"><a href="#线程池的分类" class="headerlink" title="线程池的分类"></a>线程池的分类</h4><h5 id="FixedThreadPool"><a href="#FixedThreadPool" class="headerlink" title="FixedThreadPool"></a>FixedThreadPool</h5><p>它是一种线程数量固定的线程池，只有<strong>核心</strong>线程，而且核心线程不会被回收，也没有超时机制，任务队列也没有大小限制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newFixedThreadPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nThreads)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(nThreads, nThreads, <br>                                  <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS,<br>                                  <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用场景：它适用于需要快速响应请求的任务。</p>
+<h5 id="CachedThreadPool"><a href="#CachedThreadPool" class="headerlink" title="CachedThreadPool"></a>CachedThreadPool</h5><p>它是一种线程数量不定的线程池，只有<strong>非核心</strong>线程，线程数量近乎无限大 (Integer.MAX_VALUE)，意味着不需要任务队列，因为任何新的任务都会立即被处理（要么被闲置线程处理要么会创建新线程处理），并且对于闲置线程有超时机制，时长 60 秒。当所有线程都因为闲置而被停止时，线程池几乎不占用系统资源。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newCachedThreadPool</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">0</span>, Integer.MAX_VALUE,<br>                                  <span class="hljs-number">60L</span>, TimeUnit.SECONDS,<br>                                  <span class="hljs-keyword">new</span> SynchronousQueue&lt;Runnable&gt;());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用场景：它适用于执行大量的、耗时较少的任务。</p>
+<h5 id="ScheduledThreadPool"><a href="#ScheduledThreadPool" class="headerlink" title="ScheduledThreadPool"></a>ScheduledThreadPool</h5><p>它是一种核心线程数量固定而非核心线程数量没有限制的线程池，非核心线程闲置时会被回收。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ScheduledExecutorService <span class="hljs-title">newScheduledThreadPool</span><span class="hljs-params">(<span class="hljs-keyword">int</span> corePoolSize)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ScheduledThreadPoolExecutor(corePoolSize);<br>&#125;<br><br><span class="hljs-function">ScheduledThreadPoolExecutor extends ThreadPoolExecutor</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ScheduledThreadPoolExecutor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> corePoolSize)</span> </span>&#123;<br>    <span class="hljs-keyword">super</span>(corePoolSize, Integer.MAX_VALUE,<br>          DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,<br>          <span class="hljs-keyword">new</span> DelayedWorkQueue());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用场景：它适用于执行定时任务以及具有固定周期的重复性任务。</p>
+<h5 id="SingleThreadExecutor"><a href="#SingleThreadExecutor" class="headerlink" title="SingleThreadExecutor"></a>SingleThreadExecutor</h5><p>它只有一个核心线程的线程池，它确保所有任务都在同一个线程中按顺序执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ExecutorService <span class="hljs-title">newSingleThreadExecutor</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FinalizableDelegatedExecutorService<br>      (<span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>,<br>                             <span class="hljs-number">0L</span>,TimeUnit.MILLISECONDS,<br>                             <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用场景：它适用于任务之间不需要线程同步的任务。</p>
+<h2 id="Android-的消息机制"><a href="#Android-的消息机制" class="headerlink" title="Android 的消息机制"></a>Android 的消息机制</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Android 消息机制主要指 Handler 及其所依赖的 MessageQueue 和 Looper 的工作过程。前面说过，Android 中不允许在子线程中访问 UI（通过 ViewRootImpl 的 <code>checkThread()</code> 方法），所以我们有时会通过 Handler 更新 UI。</p>
+<p>至于为什么不允许在子线程中访问 UI，主要是因为 UI 控件不是线程安全的，而且也无法为所有 UI 控件加上锁机制，因为加锁后存在两个主要的缺点：1、UI 的访问逻辑会变复杂；2、降低执行效率，容易引起卡顿。</p>
+<h3 id="Android-消息机制的分析"><a href="#Android-消息机制的分析" class="headerlink" title="Android 消息机制的分析"></a>Android 消息机制的分析</h3><p>Handler 的工作流程是这样的：</p>
+<ul>
+<li>  首先，Handler 在创建之后，会利用当前线程的 Looper 来构建内部的消息循环系统（UI 线程即 <em>ActivityThread</em> 在创建时就会初始化 Looper，所以可以直接使用 Handler）。如果当前线程不存在 Looper 则会抛出异常。</li>
+<li>  然后我们可以通过 Handler 的 <code>sendXXX()</code> 方法发送 Message，Message 会被添加到 MessageQueue 中，Looper 会不断从 MessageQueue 中取出 Message 并处理。也可以通过 <code>postXXX()</code> 方法将一个 Runnable 投递到 Looper 中处理（Runnable 会被转换成 Message 中的 callback，然后添加到 MessageQueue 中，过程和 <code>sendXXX()</code> 方法一样）。</li>
+<li>  最终，Message 中的 Runnable 或者 <code>handleMessage()</code> 方法会被调用。</li>
+</ul>
+<p>这里我们可以<strong>从下往上</strong>依次看消息机制中各个组成部分的原理。</p>
+<h4 id="ThreadLocal-的工作原理"><a href="#ThreadLocal-的工作原理" class="headerlink" title="ThreadLocal 的工作原理"></a>ThreadLocal 的工作原理</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/java/lang/ThreadLocal">ThreadLocal</a> 是一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储之后，只有在指定的线程中才可以获取到存储的数据。也就是说，它可以在多个线程中互不干扰地存储和修改数据。</p>
+<p>简单来说，当我们调用 ThreadLocal 的 set 和 get 方法时，它们所操作的对象都是当前线程的 localValues 对象的 table 数组，因此在不同线程访问同一个 ThreadLocal 的 set 和 get 方法时，它们对 ThreadLocal 所做的读写操作都仅限于各自线程的内部，所以各线程可以互不干扰。</p>
+<p>关于细节请阅读 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:libcore/ojluni/src/main/java/java/lang/ThreadLocal.java?q=threadlocal">ThreadLocal</a> 源码。</p>
+<h4 id="MessageQueue-的工作原理"><a href="#MessageQueue-的工作原理" class="headerlink" title="MessageQueue 的工作原理"></a>MessageQueue 的工作原理</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/MessageQueue">MessageQueue</a> 主要包含两种操作，插入 (<code>enqueueMessage</code>) 和读取 (<code>next</code>) Message。它虽然叫 Queue，但内部其实是一个单链表的结构，我们知道链表在插入和删除上比较有优势。</p>
+<p>具体实现请看源码：<a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/os/MessageQueue.java;bpv=1;bpt=1;l=550">enqueueMessage()</a> 和 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/os/MessageQueue.java;bpv=1;bpt=1;l=320">next()</a>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/* 简化了细节 */</span><br><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">enqueueMessage</span><span class="hljs-params">(Message msg, <span class="hljs-keyword">long</span> when)</span> </span>&#123;<br>    <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>        Message p = mMessages; <span class="hljs-comment">// Head node</span><br>        <span class="hljs-keyword">if</span> (p == <span class="hljs-keyword">null</span>) &#123;<br>            msg.next = p;<br>            mMessages = msg;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            Message prev;<br>            <span class="hljs-comment">// 插入到尾部节点</span><br>            <span class="hljs-keyword">for</span> (;;) &#123;<br>                prev = p;<br>                p = p.next;<br>                <span class="hljs-keyword">if</span> (p == <span class="hljs-keyword">null</span>) &#123;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>            msg.next = p;<br>            prev.next = msg;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/* 简化了细节 */</span><br><span class="hljs-function">Message <span class="hljs-title">next</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">for</span> (;;) &#123;<br>      <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;<br>          Message msg = mMessages; <span class="hljs-comment">// Head node</span><br>          <span class="hljs-keyword">if</span> (msg != <span class="hljs-keyword">null</span>) &#123;<br>              mMessages = msg.next;<br>              msg.next = <span class="hljs-keyword">null</span>;<br>              <span class="hljs-keyword">return</span> msg;<br>          &#125;<br>          <span class="hljs-comment">// 当调用 quit() 方法 mQuiting 被设为 true 后，next() 方法才会退出</span><br>          <span class="hljs-keyword">if</span> (mQuitting) &#123;<br>            dispose();<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>          &#125;<br>      &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看到 next() 方法是一个死循环，当有新消息进入的时候，next() 方法会返回该消息并从链表中移除，当没有消息时，会一直阻塞直到收到新消息。</p>
+<h4 id="Looper-的工作原理"><a href="#Looper-的工作原理" class="headerlink" title="Looper 的工作原理"></a>Looper 的工作原理</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/Looper">Looper</a> 主要用于消息循环，它会不停查看 MessageQueue 中是否有新消息，有则处理，没有则一直阻塞。</p>
+<p>当调用 <code>Looper.prepare()</code> 之后，它内部会创建一个新的 MessageQueue，然后获取当前线程并保存在的 ThreadLocal 中，然后当我们调用 <code>Looper.loop()</code> 方法后，该 Looper 就会开始不停地从 MessageQueue 中读取 Message。它是一个死循环，除非 MessageQueue 的 <code>next()</code> 方法返回 null，否则就不会跳出循环。</p>
+<p>当 MessageQueue 返回了新消息，Looper 就会通过调用 <code>msg.target.dispatchMessage(msg)</code> 处理这条消息。这里的 <code>msg.target</code> 是一个 Handler 对象，所不同的是，这里的 <code>dispatchMessage()</code> 方法是在创建 Handler 所使用的 Looper 中执行的，所以就成功将代码逻辑切换到指定的线程中去执行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">prepare</span><span class="hljs-params">()</span> </span>&#123;<br>    prepare(<span class="hljs-keyword">true</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">prepare</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> quitAllowed)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (sThreadLocal.get() != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">&quot;Only one Looper may be created per thread&quot;</span>);<br>    &#125;<br>    sThreadLocal.set(<span class="hljs-keyword">new</span> Looper(quitAllowed));<br>&#125;<br><br><span class="hljs-comment">/* 简化了细节 */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> Looper me = myLooper();<br>    <span class="hljs-keyword">final</span> MessageQueue queue = me.mQueue;<br>  <br>    <span class="hljs-keyword">for</span> (;;) &#123;<br>        Message msg = queue.next(); <span class="hljs-comment">// might block</span><br>        <span class="hljs-keyword">if</span> (msg == <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-comment">// No message indicates that the message queue is quitting.</span><br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        msg.target.dispatchMessage(msg);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>关于细节请阅读 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/os/Looper.java">Looper</a> 源码。</p>
+<p>另外，需要注意的是，Looper 在被创建后，我们应该调用 <code>quit()</code> 或者 <code>quitSafely()</code> 退出，否则，该子线程就会一直处于等待状态。当然也有一些特殊情况，比如如果该线程如果存在期和应用存在期一样，而且也不持有 View 的强引用，那就没必要退出。这种情况下的 Looper 所在的线程一般用作多用途的 HandlerThread，比如用于处理一些需要后台运行的任务。而除此之外的其他情况，如果线程持有 View，那么就应该及时退出关闭 looper，否则会造成内存泄露。详见：<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/20134464/4837812">where to quit looper?</a></p>
+<h4 id="Handler-的工作原理"><a href="#Handler-的工作原理" class="headerlink" title="Handler 的工作原理"></a>Handler 的工作原理</h4><p>Handler 的主要职责是发送和接收 Message。消息的发送主要通过一系列 <code>postXXX()</code> 方法或 <code>sendXXX()</code> 方法，最终都是通过 <code>enqueueMessage()</code> 向 MessageQueue 中添加一条消息，最终 Looper 循环到消息后再交由 Handler 的 <code>dispatchMessage()</code> 方法中处理，再在其中调用 Callback 或者我们实现的 <code>handleMessage()</code> 方法。</p>
+<img src="../assets/2020-01-04/handler_workflow.png" width=50%/>
+
+<p>另外，当我们用默认构造函数创建 Handler 时，它会调用以下构造函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Handler</span><span class="hljs-params">(Callback callback, <span class="hljs-keyword">boolean</span> async)</span> </span>&#123;<br>    <span class="hljs-comment">// ...</span><br>    mLooper = Looper.myLooper();<br>    <span class="hljs-keyword">if</span> (mLooper == <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<br>            <span class="hljs-string">&quot;Can&#x27;t create handler inside thread &quot;</span> + Thread.currentThread()<br>                    + <span class="hljs-string">&quot; that has not called Looper.prepare()&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这就是为什么如果我们没有调用 Looper.prepare() 而直接使用 Handler 会报错了。</p>
+<p>关于细节请阅读 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/os/Handler.java">Handler</a> 源码。</p>
+<h3 id="主线程的消息循环"><a href="#主线程的消息循环" class="headerlink" title="主线程的消息循环"></a>主线程的消息循环</h3><p>在消息机制的分析一节提到过，Android 的主线程就是 <em>ActivityThread</em>，其入口方法是 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/app/ActivityThread.java;l=7350">main()</a> 方法，它会调用 <code>Looper.prepareMainLooper()</code> 将当前线程标记为主线程，并创建 Looper 和 MessageQueue，因此我们在主线程中直接就可以创建 Handler。随后，主线程的 Looper 开始循环了之后，<em>ActivityThread</em> 的内部还维护了一个 Handler 的子类 <strong>H</strong> 用来和 MessageQueue 进行交互，主要用于基本组件的启动和停止等过程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// ActivityThread.java</span><br><br><span class="hljs-keyword">final</span> H mH = <span class="hljs-keyword">new</span> H();<br><span class="hljs-comment">// ActivityThread 中的 Handler 其实就是由 H 实现的</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> Handler sMainThreadHandler;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// ...</span><br>    Looper.prepareMainLooper();<br>    ActivityThread thread = <span class="hljs-keyword">new</span> ActivityThread();<br>    <span class="hljs-keyword">if</span> (sMainThreadHandler == <span class="hljs-keyword">null</span>) &#123;<br>        sMainThreadHandler = thread.getHandler();<br>    &#125;<br>    Looper.loop();<br>    <span class="hljs-comment">// ...</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">final</span> Handler <span class="hljs-title">getHandler</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> mH;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">H</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Handler</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> BIND_APPLICATION        = <span class="hljs-number">110</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> EXIT_APPLICATION        = <span class="hljs-number">111</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> RECEIVER                = <span class="hljs-number">113</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> CREATE_SERVICE          = <span class="hljs-number">114</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> SERVICE_ARGS            = <span class="hljs-number">115</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> STOP_SERVICE            = <span class="hljs-number">116</span>;<br>  <br>  	<span class="hljs-comment">// ...</span><br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleMessage</span><span class="hljs-params">(Message msg)</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">IApplicationThread</span>.<span class="hljs-title">Stub</span> </span>&#123;<br>    <span class="hljs-comment">// ...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其工作过程如下：ActivityThread 通过 ApplicationThread 和 AMS 进行 IPC，AMS 处理完请求后通过回调 ApplicationThread 中的 Binder 方法，然后 ApplicationThread 会通过 <strong>H</strong> 发送消息，<strong>H</strong> 接收到消息后再将返回的数据放到 ActivityThread 中执行后续的操作。</p>
+<hr>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-1/">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-2/">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-3/">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-4/">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-5/">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-6/">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-Window-%E5%92%8C-WindowManager"><span class="toc-number">1.</span> <span class="toc-text">理解 Window 和 WindowManager</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Quick-Facts"><span class="toc-number">1.1.</span> <span class="toc-text">Quick Facts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-amp-WindowManager"><span class="toc-number">1.2.</span> <span class="toc-text">Window &amp; WindowManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">Window 的内部机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window-%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">Window 的创建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.</span> <span class="toc-text">Android 的线程和线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%AD%90%E7%BA%BF%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">主线程和子线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%BD%A2%E6%80%81"><span class="toc-number">2.2.</span> <span class="toc-text">Android 中的线程形态</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncTask"><span class="toc-number">2.2.1.</span> <span class="toc-text">AsyncTask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HandlerThread"><span class="toc-number">2.2.2.</span> <span class="toc-text">HandlerThread</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IntentService"><span class="toc-number">2.2.3.</span> <span class="toc-text">IntentService</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E4%B8%AD%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="toc-number">2.3.</span> <span class="toc-text">Android 中的线程池</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ThreadPoolExecutor"><span class="toc-number">2.3.1.</span> <span class="toc-text">ThreadPoolExecutor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.3.2.</span> <span class="toc-text">线程池的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FixedThreadPool"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">FixedThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#CachedThreadPool"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">CachedThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ScheduledThreadPool"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">ScheduledThreadPool</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SingleThreadExecutor"><span class="toc-number">2.3.2.4.</span> <span class="toc-text">SingleThreadExecutor</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-%E7%9A%84%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">Android 的消息机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6%E7%9A%84%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">Android 消息机制的分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ThreadLocal-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.1.</span> <span class="toc-text">ThreadLocal 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MessageQueue-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.2.</span> <span class="toc-text">MessageQueue 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Looper-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.3.</span> <span class="toc-text">Looper 的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Handler-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.2.4.</span> <span class="toc-text">Handler 的工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.3.</span> <span class="toc-text">主线程的消息循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-5/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-5/&text=Android 开发艺术探索学习笔记（五）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-5/&is_video=false&description=Android 开发艺术探索学习笔记（五）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（五）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-5/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-5/&title=Android 开发艺术探索学习笔记（五）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-5/&name=Android 开发艺术探索学习笔记（五）&description=&lt;p&gt;&lt;img src=&#34;/assets/2020-01-04/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 8、10、11 章：&lt;strong&gt;Window&lt;/strong&gt;、&lt;strong&gt;线程和线程池&lt;/strong&gt;、&lt;strong&gt;消息机制&lt;/strong&gt; 相关。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;理解-Window-和-WindowManager&#34;&gt;&lt;a href=&#34;#理解-Window-和-WindowManager&#34; class=&#34;headerlink&#34; title=&#34;理解 Window 和 WindowManager&#34;&gt;&lt;/a&gt;理解 Window 和 WindowManager&lt;/h2&gt;&lt;h3 id=&#34;Quick-Facts&#34;&gt;&lt;a href=&#34;#Quick-Facts&#34; class=&#34;headerlink&#34; title=&#34;Quick Facts&#34;&gt;&lt;/a&gt;&lt;em&gt;Quick Facts&lt;/em&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;  Window 是一个抽象类，它的具体实现是 PhoneWindow。&lt;/li&gt;
+&lt;li&gt;  我们可以使用 WindowManager 创建一个 Window，WindowManager 是外界访问 Window 的入口。&lt;/li&gt;
+&lt;li&gt;  Window 的实现位于系统的 WindowManagerService 中，所以 WindowManager 和 WindowManagerService 的交互是一个 IPC 过程。&lt;/li&gt;
+&lt;li&gt;  Android 中所有的 View 都是通过 Window 来呈现的，不管是 Activity、Dialog 还是 Toast，它们的 View 都是附加在 Window 上的，Window 是 View 的直接管理者。点击事件也是通过 Window 传递给 DecorView 再传递给我们的 View，setContentView 本质也是通过 Window 来添加我们的 View 到 DecorView 上。&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-5/&t=Android 开发艺术探索学习笔记（五）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="什么是 RTTI？RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。 最简单的一个例子，比如： 1234List&lt;Shape&gt; shapeList &#x3D; Arrays.asList">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈 RTTI">
+<meta property="og:url" content="https://ajiew.me/talk-about-rtti/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="什么是 RTTI？RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。 最简单的一个例子，比如： 1234List&lt;Shape&gt; shapeList &#x3D; Arrays.asList">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg">
+<meta property="article:published_time" content="2018-04-13T16:28:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.724Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>浅谈 RTTI</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/think-in-java-generics/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2017/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/talk-about-rtti/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.me/talk-about-rtti/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;什么是-RTTI？&#34;&gt;&lt;a href=&#34;#什么是-RTTI？&#34; class=&#34;headerlink&#34; title=&#34;什么是 RTTI？&#34;&gt;&lt;/a&gt;什么是 RTTI？&lt;/h3&gt;&lt;p&gt;RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。&lt;/p&gt;
+&lt;p&gt;最简单的一个例子，比如：&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs java&#34;&gt;List&amp;lt;Shape&amp;gt; shapeList = Arrays.asList(&lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Circle(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Square(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Triangle());&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;for&lt;/span&gt;(Shape shape : shapeList) &amp;#123;&lt;br&gt;    shape.draw();&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;当从 shapeList 中取出元素时（其实元素是用数组保存的，而数组会把所有元素都当作 Object 来持有），会自动将元素转型回对应的对象。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-RTTI%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 RTTI？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-%E5%AF%B9%E8%B1%A1%EF%BC%9A%E7%B1%BB%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">Class 对象：类的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">类字面常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E7%9A%84-Class-%E5%BC%95%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">泛化的 Class 引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instanceof"><span class="toc-number">2.3.</span> <span class="toc-text">instanceof</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%EF%BC%9A%E6%97%A0%E6%89%80%E4%B8%8D%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">反射：无所不能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">动态代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">4.1.</span> <span class="toc-text">使用动态代理的优势</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        浅谈 RTTI
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2018-04-13T16:28:00.000Z" itemprop="datePublished">2018-04-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Java/" rel="tag">Java</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg" alt="Forest in West Virginia"></p>
+<h3 id="什么是-RTTI？"><a href="#什么是-RTTI？" class="headerlink" title="什么是 RTTI？"></a>什么是 RTTI？</h3><p>RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。</p>
+<p>最简单的一个例子，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Shape&gt; shapeList = Arrays.asList(<span class="hljs-keyword">new</span> Circle(), <span class="hljs-keyword">new</span> Square(), <span class="hljs-keyword">new</span> Triangle());<br><span class="hljs-keyword">for</span>(Shape shape : shapeList) &#123;<br>    shape.draw();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当从 shapeList 中取出元素时（其实元素是用数组保存的，而数组会把所有元素都当作 Object 来持有），会自动将元素转型回对应的对象。</p>
+<span id="more"></span>
+
+<p>也就是说在保存对象和取出对象后，会发生以下这两个过程：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">(Object) shape <span class="hljs-regexp">//</span> 向上转型<br>(Shape) object <span class="hljs-regexp">//</span> 向下转型<br></code></pre></td></tr></table></figure>
+
+<p>这其实就是就是 RTTI 最基本的使用形式。在 Java 中，所有的类型转换都是在运行时进行类型正确性检查的。</p>
+<h3 id="Class-对象：类的信息"><a href="#Class-对象：类的信息" class="headerlink" title="Class 对象：类的信息"></a>Class 对象：类的信息</h3><p>Class 对象包含了与类有关的信息，事实上 Java 中是用 Class 对象来创建这个类中的所有的对象的。每当编译完成，就会生成一个 Class 对象，被保存在 .class 文件中。JVM 使用 ClassLoader 来加载对象，所有的类都是在对其第一次使用（静态成员被引用，静态常量除外）或者用 new 关键字创建对象后，动态加载到 JVM 中的。所谓的动态加载也就是在被使用到时才去加载。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;package.name.CanonicalName&quot;</span>)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>这个方法是获取 Class 对象引用的一种方法，调用 Class.forName() 之后该类会被初始化。Class 对象中还有一个 newInstance() 的方法，可以用来创建对象新实例。除此之外，Class 对象中还有很多实用的方法，用来获取类的信息，比如获取类的接口、方法、成员变量等等。</p>
+<h4 id="类字面常量"><a href="#类字面常量" class="headerlink" title="类字面常量"></a>类字面常量</h4><p>我们还可以使用 .class 的形式来引用 Class 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Class intClass = <span class="hljs-keyword">int</span>.class;<br></code></pre></td></tr></table></figure>
+
+<h4 id="泛化的-Class-引用"><a href="#泛化的-Class-引用" class="headerlink" title="泛化的 Class 引用"></a>泛化的 Class 引用</h4><p>从 Java SE 5 开始，我们可以利用泛型对 Class 对象进行类型限定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Class&lt;Integer&gt; intClass = <span class="hljs-keyword">int</span>.class; <span class="hljs-comment">// legal</span><br>intClass = <span class="hljs-keyword">double</span>.class; <span class="hljs-comment">// illegal</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>RTTI 除了可以确保类型转换的正确性和通过 Class 对象获取运行时的类型信息外，还有第三种形式，那就是 instanceof，我们可以用这个关键字来确定某个对象是不是某个类的实例，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java">Animal[] animals = &#123;<span class="hljs-keyword">new</span> Dog(), <span class="hljs-keyword">new</span> Fish()&#125;;<br><span class="hljs-keyword">for</span> (Animal animal : animals) &#123;<br>    <span class="hljs-comment">// 向下转型前，先使用 instanceof 来判断类型</span><br>    <span class="hljs-keyword">if</span> (animal <span class="hljs-keyword">instanceof</span> Fish) &#123;<br>        Fish fish = (Fish) animal;<br>        fish.swim();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="反射：无所不能"><a href="#反射：无所不能" class="headerlink" title="反射：无所不能"></a>反射：无所不能</h3><p>RTTI 会在编译期打开和检查 .class 文件并利用这些信息做一些有用的事，而反射会在运行时打开和检查 .class 文件，这是 RTTI 和反射之间的真正区别。Java 中通过 Class 类和 java.lang.reflect 类库对反射的概念进行了支持。一起来看下这段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">// 在编译期，Class.forName() 的结果是不可知的，只能通过反射去获取运行时的信息</span><br>	Class&lt;?&gt; klass = Class.forName(args[<span class="hljs-number">0</span>]);<br>    Method[] methods = klass.getMethods();<br>    <span class="hljs-keyword">for</span> (Method method : methods) &#123;<br>        System.out.println(method);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>以上 main() 方法中，通过读取命令行参数实例化 Class 对象，然后打印该对象中的方法。此时的 klass 对象完全是未知的，但是我们可以通过反射去获取其中的信息，创建对象或者调用方法。</p>
+<p>反射是无孔不入的，无论是私有方法还是私有内部类的方法，哪怕是匿名类的方法，也无法逃脱反射的调用。对于私有域来说也一样，只有 final 域，才不会被修改。反射可以说是给我们的程序留了一道后门，但是总的来说，从反射给我们带来的优劣对比上看，利大于弊。</p>
+<h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><p>代理是最常见的设计模式之一，它可以让我们的代码更加灵活，比如在进行操作之前做一些额外的工作。下面是一个简单代理的例子：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">interface Interface &#123;<br>    void <span class="hljs-keyword">do</span><span class="hljs-constructor">Something()</span>;<br><br>    void <span class="hljs-keyword">do</span><span class="hljs-constructor">SomethingElse(String <span class="hljs-params">args</span>)</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> RealObject implements Interface &#123;<br><br>    @Override<br>    public void <span class="hljs-keyword">do</span><span class="hljs-constructor">Something()</span> &#123;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;doSomething&quot;</span>);<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-keyword">do</span><span class="hljs-constructor">SomethingElse(String <span class="hljs-params">args</span>)</span> &#123;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;doSomethingElse &quot;</span> + args);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> SimpleProxy implements Interface &#123;<br><br>    Interface mInterface;<br><br>    public <span class="hljs-constructor">SimpleProxy(Interface <span class="hljs-params">anInterface</span>)</span> &#123;<br>        mInterface = anInterface;<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-keyword">do</span><span class="hljs-constructor">Something()</span> &#123;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;SimpleProxy doSomething&quot;</span>);<br>        mInterface.<span class="hljs-keyword">do</span><span class="hljs-constructor">Something()</span>;<br>    &#125;<br><br>    @Override<br>    public void <span class="hljs-keyword">do</span><span class="hljs-constructor">SomethingElse(String <span class="hljs-params">args</span>)</span> &#123;<br>        <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">&quot;SimpleProxy doSomethingElse&quot;</span>);<br>        mInterface.<span class="hljs-keyword">do</span><span class="hljs-constructor">SomethingElse(<span class="hljs-params">args</span>)</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>简单来说，代理就是将实际对象的方法调用分离开来，从而允许我们对一些操作进行修改，或者添加额外的操作。而动态代理比代理的思想更进一步，它允许我们动态地创建代理并动态地处理对所代理方法的调用。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> <span class="hljs-keyword">class</span> SimpleDynamicProxy &#123;<br><br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> consumer(Interface interf) &#123;<br>        interf.doSomething();<br>        interf.doSomethingElse(&quot;args&quot;);<br>    &#125;<br><br>    <span class="hljs-built_in">public</span> static <span class="hljs-type">void</span> main(String[] args) &#123;<br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(&quot;---------- no proxy ----------&quot;);<br>        RealObject <span class="hljs-type">real</span> = <span class="hljs-built_in">new</span> RealObject();<br>        consumer(<span class="hljs-type">real</span>);<br><br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(&quot;---------- simple proxy ----------&quot;);<br>        consumer(<span class="hljs-built_in">new</span> SimpleProxy(<span class="hljs-type">real</span>));<br><br>        <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(&quot;---------- dynamic proxy ----------&quot;);<br>        <br>        // 创建代理对象：设置 ClassLoader、接口 <span class="hljs-keyword">Class</span> 对象、InvocationHandler<br>        Interface proxy = (Interface) Proxy.newProxyInstance(<br>                Interface.<span class="hljs-keyword">class</span>.getClassLoader(),<br>                <span class="hljs-built_in">new</span> <span class="hljs-keyword">Class</span>[]&#123;Interface.<span class="hljs-keyword">class</span>&#125;, // 数组里的 <span class="hljs-keyword">Class</span> 对象必须是接口且不能重复<br>                <span class="hljs-built_in">new</span> DynamicProxyHandler(<span class="hljs-type">real</span>));<br>        consumer(proxy);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 代理对象必须实现自己的 InvocationHandler，所有的调用都会被重定向到这个调用处理器上</span><br><span class="hljs-comment">     */</span><br>    static <span class="hljs-keyword">class</span> DynamicProxyHandler implements InvocationHandler &#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 被代理的对象，调用的请求会转发到这个“实际”对象上</span><br><span class="hljs-comment">         */</span><br>        private <span class="hljs-keyword">Object</span> proxied;<br><br>        <span class="hljs-built_in">public</span> DynamicProxyHandler(<span class="hljs-keyword">Object</span> proxied) &#123;<br>            this.proxied = proxied;<br>        &#125;<br><br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         * 该方法接收三个参数，代理对象的实例、调用的方法的实例以及方法的参数。</span><br><span class="hljs-comment">         * 我们一般在这里确定调用该方法时所采取的措施。</span><br><span class="hljs-comment">         */</span><br>        @Override<br>        <span class="hljs-built_in">public</span> <span class="hljs-keyword">Object</span> invoke(<span class="hljs-keyword">Object</span> proxy, <span class="hljs-keyword">Method</span> <span class="hljs-keyword">method</span>, <span class="hljs-keyword">Object</span>[] args) throws Throwable &#123;<br>            <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(&quot;Proxy: &quot; + proxy.getClass()<br>                    + &quot;, method: &quot; + <span class="hljs-keyword">method</span> + &quot;, args: &quot; + args);<br><br>            // 如果方法参数不为空则输出参数<br>            <span class="hljs-keyword">if</span> (args != <span class="hljs-keyword">null</span>) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; args.length; i++) &#123;<br>                    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(&quot;args[&quot; + i + &quot;] = &quot; + args[i]);<br>                &#125;<br>            &#125;<br><br>            // 转发请求给被代理对象<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">method</span>.invoke(proxied, args);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用动态代理其实很简单，首先要定义一个自己的 <code>InvocationHandler</code>，然后再通过 <code>Proxy.newProxyInstance</code> 创建一个代理对象。</p>
+<h4 id="使用动态代理的优势"><a href="#使用动态代理的优势" class="headerlink" title="使用动态代理的优势"></a>使用动态代理的优势</h4><p>动态代理的优点主要有两个：</p>
+<ol>
+<li>更强的灵活性。我们不用在设计实现的时候就指定某一个代理类来代理某一个被代理对象，而是可以把这种指定延迟到程序<strong>运行时</strong>由 JVM 来实现。</li>
+<li>动态代理更为统一与简洁。</li>
+</ol>
+<p>第一点从上面的例子就能看出，我们必须事先就确定 <code>SimpleProxy</code> 作为 <code>Interface</code> 的代理，并且编写每种方法对应的代码，而动态代理允许我们利用反射机制生成任意类型的动态代理类。第二点也很明显，当使用动态代理的时候，我们只需要在一个地方进行修改，写的代码也变少了。</p>
+<hr>
+<p>参考资料：</p>
+<ul>
+<li>Think in Java（第4版）</li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007089902">Java 动态代理(Dynamic proxy) 小结</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-proxy-pattern/">代理模式原理及实例讲解</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-RTTI%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 RTTI？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class-%E5%AF%B9%E8%B1%A1%EF%BC%9A%E7%B1%BB%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">Class 对象：类的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%AD%97%E9%9D%A2%E5%B8%B8%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">类字面常量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E7%9A%84-Class-%E5%BC%95%E7%94%A8"><span class="toc-number">2.2.</span> <span class="toc-text">泛化的 Class 引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instanceof"><span class="toc-number">2.3.</span> <span class="toc-text">instanceof</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%EF%BC%9A%E6%97%A0%E6%89%80%E4%B8%8D%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">反射：无所不能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">4.</span> <span class="toc-text">动态代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">4.1.</span> <span class="toc-text">使用动态代理的优势</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/talk-about-rtti/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.me/talk-about-rtti/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;什么是-RTTI？&#34;&gt;&lt;a href=&#34;#什么是-RTTI？&#34; class=&#34;headerlink&#34; title=&#34;什么是 RTTI？&#34;&gt;&lt;/a&gt;什么是 RTTI？&lt;/h3&gt;&lt;p&gt;RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。&lt;/p&gt;
+&lt;p&gt;最简单的一个例子，比如：&lt;/p&gt;
+&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs java&#34;&gt;List&amp;lt;Shape&amp;gt; shapeList = Arrays.asList(&lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Circle(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Square(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; Triangle());&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;for&lt;/span&gt;(Shape shape : shapeList) &amp;#123;&lt;br&gt;    shape.draw();&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;当从 shapeList 中取出元素时（其实元素是用数组保存的，而数组会把所有元素都当作 Object 来持有），会自动将元素转型回对应的对象。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

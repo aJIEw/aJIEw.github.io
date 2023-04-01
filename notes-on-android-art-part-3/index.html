@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 3~5 章 View 相关。  View 的事件体系View 基础知识什么是 View？View 是界面层控件的抽象，代表了一个控件。与 Web 中的 DOM 数类似，在 Android 中所有视图共同形成了一个 View 的树形结构。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 开发艺术探索学习笔记（三）">
+<meta property="og:url" content="https://ajiew.me/notes-on-android-art-part-3/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="结合 官方文档 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 3~5 章 View 相关。  View 的事件体系View 基础知识什么是 View？View 是界面层控件的抽象，代表了一个控件。与 Web 中的 DOM 数类似，在 Android 中所有视图共同形成了一个 View 的树形结构。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/android-logo.jpg">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/view-position.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/scroll_conflict.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/view_measue_layout_draw.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/decorview.png">
+<meta property="og:image" content="https://ajiew.me/assets/2019-12-14/measurespec_layoutparam.png">
+<meta property="article:published_time" content="2019-12-14T12:39:00.000Z">
+<meta property="article:modified_time" content="2023-03-13T13:29:42.728Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ajiew.me/assets/2019-12-14/android-logo.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Android 开发艺术探索学习笔记（三）</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/notes-on-android-art-part-4/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/notes-on-android-art-part-2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-3/&text=Android 开发艺术探索学习笔记（三）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-3/&is_video=false&description=Android 开发艺术探索学习笔记（三）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（三）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-3/&name=Android 开发艺术探索学习笔记（三）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-14/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 3~5 章 &lt;strong&gt;View 相关&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;View-的事件体系&#34;&gt;&lt;a href=&#34;#View-的事件体系&#34; class=&#34;headerlink&#34; title=&#34;View 的事件体系&#34;&gt;&lt;/a&gt;View 的事件体系&lt;/h2&gt;&lt;h3 id=&#34;View-基础知识&#34;&gt;&lt;a href=&#34;#View-基础知识&#34; class=&#34;headerlink&#34; title=&#34;View 基础知识&#34;&gt;&lt;/a&gt;View 基础知识&lt;/h3&gt;&lt;h4 id=&#34;什么是-View？&#34;&gt;&lt;a href=&#34;#什么是-View？&#34; class=&#34;headerlink&#34; title=&#34;什么是 View？&#34;&gt;&lt;/a&gt;什么是 View？&lt;/h4&gt;&lt;p&gt;View 是界面层控件的抽象，代表了一个控件。与 Web 中的 DOM 数类似，在 Android 中所有视图共同形成了一个 View 的树形结构。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-3/&t=Android 开发艺术探索学习笔记（三）"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#View-%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">View 的事件体系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">View 基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-View%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是 View？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#View-%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">View 的位置参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MotionEvent-%E5%92%8C-TouchSlop"><span class="toc-number">1.1.3.</span> <span class="toc-text">MotionEvent 和 TouchSlop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VelocityTracker-amp-GestureDetector-amp-Scroller"><span class="toc-number">1.1.4.</span> <span class="toc-text">VelocityTracker &amp; GestureDetector &amp; Scroller</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Track-velocity"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">Track velocity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Detect-common-gestures"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">Detect common gestures</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Animate-a-scroll-gesture"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">Animate a scroll gesture</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">1.1.5.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E6%BB%91%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">View 的滑动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">三种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.2.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">弹性滑动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91"><span class="toc-number">1.4.</span> <span class="toc-text">View 的事件分发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%A0%E9%80%92%E8%A7%84%E5%88%99"><span class="toc-number">1.4.1.</span> <span class="toc-text">点击事件的传递规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81"><span class="toc-number">1.5.</span> <span class="toc-text">View 的滑动冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#View-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">View 的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ViewRoot-%E5%92%8C-DecorView"><span class="toc-number">2.1.</span> <span class="toc-text">ViewRoot 和 DecorView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-MeasureSpec"><span class="toc-number">2.2.</span> <span class="toc-text">理解 MeasureSpec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MeasureSpec"><span class="toc-number">2.2.1.</span> <span class="toc-text">MeasureSpec</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MeasureSpec-%E5%92%8C-LayoutParam-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.2.</span> <span class="toc-text">MeasureSpec 和 LayoutParam 的关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">View 的工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View"><span class="toc-number">2.4.</span> <span class="toc-text">自定义 View</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.4.1.</span> <span class="toc-text">自定义 View 的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E9%A1%BB%E7%9F%A5"><span class="toc-number">2.4.2.</span> <span class="toc-text">自定义 View 须知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.4.3.</span> <span class="toc-text">自定义 View 示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-RemoteViews"><span class="toc-number">3.</span> <span class="toc-text">理解 RemoteViews</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">RemoteViews 的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%E6%A0%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">通知栏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%8C%E9%9D%A2-Widget"><span class="toc-number">3.1.2.</span> <span class="toc-text">桌面 Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-PendingIntent"><span class="toc-number">3.1.3.</span> <span class="toc-text">关于 PendingIntent</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">RemoteViews 的内部机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84-View-%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">支持的 View 类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.2.</span> <span class="toc-text">RemoteViews 的工作机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">3.3.</span> <span class="toc-text">RemoteViews 的意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android 开发艺术探索学习笔记（三）
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2019-12-14T12:39:00.000Z" itemprop="datePublished">2019-12-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="/assets/2019-12-14/android-logo.jpg"></p>
+<blockquote>
+<p>结合 <a target="_blank" rel="noopener" href="https://developer.android.com/guide">官方文档</a> 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 3~5 章 <strong>View 相关</strong>。</p>
+</blockquote>
+<h2 id="View-的事件体系"><a href="#View-的事件体系" class="headerlink" title="View 的事件体系"></a>View 的事件体系</h2><h3 id="View-基础知识"><a href="#View-基础知识" class="headerlink" title="View 基础知识"></a>View 基础知识</h3><h4 id="什么是-View？"><a href="#什么是-View？" class="headerlink" title="什么是 View？"></a>什么是 View？</h4><p>View 是界面层控件的抽象，代表了一个控件。与 Web 中的 DOM 数类似，在 Android 中所有视图共同形成了一个 View 的树形结构。</p>
+<span id="more"></span>
+
+<h4 id="View-的位置参数"><a href="#View-的位置参数" class="headerlink" title="View 的位置参数"></a>View 的位置参数</h4><p>View 的初始位置，相对于父容器的坐标。一图胜千言：</p>
+<img src="../assets/2019-12-14/view-position.png" width=50%/>
+
+<p>另外还有 translationX 和 translationY，表示 View 在 x 轴或者 y 轴上的偏移量，以及 (x,y) 代表当前坐标，可以根据 translationX + left 以及 translationY + top 计算出来。</p>
+<h4 id="MotionEvent-和-TouchSlop"><a href="#MotionEvent-和-TouchSlop" class="headerlink" title="MotionEvent 和 TouchSlop"></a>MotionEvent 和 TouchSlop</h4><p>常用触摸事件，通常是一个事件序列，比如点击的时候是 DOWN+UP，滑动的时候是 DOWN+MOVE(…多个)+UP：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">MotionEvent.ACTION_DOWN<br>MotionEvent.ACTION_MOVE<br>MotionEvent.ACTION_UP<br></code></pre></td></tr></table></figure>
+<p>系统所能识别的最小滑动距离：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> scaledTouchSlop = ViewConfiguration<br>                        .get(getApplicationContext())<br>                        .getScaledTouchSlop();<br></code></pre></td></tr></table></figure>
+
+<h4 id="VelocityTracker-amp-GestureDetector-amp-Scroller"><a href="#VelocityTracker-amp-GestureDetector-amp-Scroller" class="headerlink" title="VelocityTracker &amp; GestureDetector &amp; Scroller"></a>VelocityTracker &amp; GestureDetector &amp; Scroller</h4><h5 id="Track-velocity"><a href="#Track-velocity" class="headerlink" title="Track velocity"></a><a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures/movement#velocity">Track velocity</a></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onTouch</span><span class="hljs-params">(View v, MotionEvent event)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> index = event.getActionIndex();<br>    <span class="hljs-keyword">int</span> action = event.getActionMasked();<br>    <span class="hljs-keyword">int</span> pointerId = event.getPointerId(index);<br>    <span class="hljs-keyword">switch</span> (action) &#123;<br>        <span class="hljs-keyword">case</span> MotionEvent.ACTION_DOWN:<br>            <span class="hljs-keyword">if</span> (mVelocityTracker == <span class="hljs-keyword">null</span>) &#123;<br>                <span class="hljs-comment">// Retrieve a new VelocityTracker object to watch the</span><br>                <span class="hljs-comment">// velocity of a motion.</span><br>                mVelocityTracker = VelocityTracker.obtain();<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-comment">// Reset the velocity tracker back to its initial state.</span><br>                mVelocityTracker.clear();<br>            &#125;<br>            <span class="hljs-comment">// Add a user&#x27;s movement to the tracker.</span><br>            mVelocityTracker.addMovement(event);<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> MotionEvent.ACTION_MOVE:<br>            mVelocityTracker.addMovement(event);<br>            <span class="hljs-comment">// When you want to determine the velocity, call</span><br>            <span class="hljs-comment">// computeCurrentVelocity(). Then call getXVelocity()</span><br>            <span class="hljs-comment">// and getYVelocity() to retrieve the velocity for each pointer ID.</span><br>            mVelocityTracker.computeCurrentVelocity(<span class="hljs-number">1000</span>);<br>            Log.d(ViewEventActivity.class.getSimpleName(), <span class="hljs-string">&quot;X velocity: &quot;</span> + mVelocityTracker.getXVelocity(pointerId));<br>            Log.d(ViewEventActivity.class.getSimpleName(), <span class="hljs-string">&quot;Y velocity: &quot;</span> + mVelocityTracker.getYVelocity(pointerId));<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> MotionEvent.ACTION_CANCEL:<br>            <span class="hljs-comment">// Return a VelocityTracker object back to be re-used by others.</span><br>            mVelocityTracker.recycle();<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="Detect-common-gestures"><a href="#Detect-common-gestures" class="headerlink" title="Detect common gestures"></a><a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures/detector">Detect common gestures</a></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs java">GestureDetector.OnGestureListener listener = <span class="hljs-keyword">new</span> GestureDetector.SimpleOnGestureListener() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onSingleTapUp</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onSingleTapUp(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onLongPress</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onLongPress(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onScroll</span><span class="hljs-params">(MotionEvent e1, MotionEvent e2, <span class="hljs-keyword">float</span> distanceX, <span class="hljs-keyword">float</span> distanceY)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onScroll(e1, e2, distanceX, distanceY);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onFling</span><span class="hljs-params">(MotionEvent e1, MotionEvent e2, <span class="hljs-keyword">float</span> velocityX, <span class="hljs-keyword">float</span> velocityY)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onFling(e1, e2, velocityX, velocityY);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onShowPress</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">super</span>.onShowPress(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onDown</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onDown(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onDoubleTap</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onDoubleTap(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onDoubleTapEvent</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onDoubleTapEvent(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onSingleTapConfirmed</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onSingleTapConfirmed(e);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">onContextClick</span><span class="hljs-params">(MotionEvent e)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onContextClick(e);<br>    &#125;<br>&#125;;<br>GestureDetector gestureDetector = <span class="hljs-keyword">new</span> GestureDetector(<span class="hljs-keyword">this</span>, listener);<br></code></pre></td></tr></table></figure>
+
+<h5 id="Animate-a-scroll-gesture"><a href="#Animate-a-scroll-gesture" class="headerlink" title="Animate a scroll gesture"></a><a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures/scroll">Animate a scroll gesture</a></h5><p>&lt;不贴代码了&gt;</p>
+<h4 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><p>文档：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/input">Touch &amp; input</a></p>
+<h3 id="View-的滑动"><a href="#View-的滑动" class="headerlink" title="View 的滑动"></a>View 的滑动</h3><h4 id="三种类型"><a href="#三种类型" class="headerlink" title="三种类型"></a>三种类型</h4><ul>
+<li>  使用 scrollTo/scrollBy</li>
+<li>  使用动画</li>
+<li>  改变布局参数</li>
+</ul>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><ul>
+<li>  scrollTo/scrollBy：操作简单，适合对 View 的内容的滑动</li>
+<li>  动画：操作简单，适用于没有交互的 View 和实现复杂动画效果</li>
+<li>  改变布局参数：操作稍复杂，适用于有交互的 View</li>
+</ul>
+<h4 id="扩展阅读-1"><a href="#扩展阅读-1" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><p>文档：<a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures">Use touch gestures</a></p>
+<h3 id="弹性滑动"><a href="#弹性滑动" class="headerlink" title="弹性滑动"></a>弹性滑动</h3><p>如果直接滑动，显得比较生硬，所以我们需要实现渐进式滑动也即弹性滑动。</p>
+<ul>
+<li>  使用 Scroller，阅读文档：<a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures/scroll">Animate a scroll gesture</a></li>
+<li>  通过动画，阅读文档：<a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/graphics/spring-animation">Animate movement using spring physics</a></li>
+<li>  使用延时策略，也即利用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/View#postDelayed(java.lang.Runnable,%20long)">View</a> 或者 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/Handler#postDelayed(java.lang.Runnable,%20long)">Handler</a> 的 postDelayed() 方法，例子见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/blob/master/Chapter_3/src/com/ryg/chapter_3/TestActivity.java">android-art-res</a></li>
+</ul>
+<h3 id="View-的事件分发"><a href="#View-的事件分发" class="headerlink" title="View 的事件分发"></a>View 的事件分发</h3><h4 id="点击事件的传递规则"><a href="#点击事件的传递规则" class="headerlink" title="点击事件的传递规则"></a><a target="_blank" rel="noopener" href="https://developer.android.com/training/gestures/viewgroup.html#intercept">点击事件的传递规则</a></h4><p>简单来说 ViewGroup 用 <code>dispatchTouchEvent(MotionEvent e)</code> 来分发事件，如果 View 能接收触摸事件那么该方法一定会被调用到。该方法中，通过 <code>onInterceptTouchEvent(MotionEvent e)</code> 来判断是否需要拦截触摸事件，如果返回 true 则事件不再继续往下传递，那么你就需要通过实现该 ViewGroup 中的 <code>onTouchEvent(MotionEvent e)</code> 来对触摸事件进行处理。</p>
+<h3 id="View-的滑动冲突"><a href="#View-的滑动冲突" class="headerlink" title="View 的滑动冲突"></a>View 的滑动冲突</h3><p>分为三种情况：</p>
+<ul>
+<li>  外部滑动方向与内部滑动方向不一致</li>
+<li>  外部滑动方向与内部一致</li>
+<li>  以上两种的嵌套</li>
+</ul>
+<img src="../assets/2019-12-14/scroll_conflict.png" width=80% />
+
+<p>对于第一种，我们可以根据滑动的方向、角度、距离差、速度差等来判断到底是由内部还是外部的 View 来拦截滑动事件并进行处理。</p>
+<p>对于第二种，则需要根据具体业务来做处理，比如 ScrollView 嵌套一个 RecyclerView，规定当内部的 RecyclerView 滑动到顶部或者底部的时候外部的 ScrollView 就要开始响应滑动事件，我们就可以根据滑动距离以及 Header 是否显示（或者第一个元素是否完全显示）来判断。</p>
+<p>第三种的解决方案和上面两种一样，只不过是多加几种判断并且进行相应地分发给对应的子 View 就可以了。</p>
+<p>具体解决方案：</p>
+<ol>
+<li> 外部拦截法。外部拦截法即所有点击事件都先经过父容器的拦截，父容器中进行判断是否消耗事件或者传递给子元素，需要重写 <code>onInterceptTouchEvent()</code> 方法。</li>
+<li> 内部拦截法。父容器不拦截点击事件，所有事件都传递给子元素，如果子元素需要事件就消耗掉，否则就交给父类处理。需要重写 <code>dispatchTouchEvent()</code> 方法，还需要配合 <code>requestDisallowInterceptTouchEvent()</code> 使用。这种方法与事件分发机制相反，故不推荐使用。</li>
+</ol>
+<h2 id="View-的工作原理"><a href="#View-的工作原理" class="headerlink" title="View 的工作原理"></a>View 的工作原理</h2><h3 id="ViewRoot-和-DecorView"><a href="#ViewRoot-和-DecorView" class="headerlink" title="ViewRoot 和 DecorView"></a>ViewRoot 和 DecorView</h3><p>ViewRoot 是 ViewRootImpl 的基类，后者是连接 WindowManager 和 DecorView 的纽带，View 的三大流程都是通过 ViewRoot 完成的。Activity 创建完成后，会将 DecorView 添加到 Window 中，同时会创建 ViewRootImpl 并将它与 DecorView 建立关联。</p>
+<p>View 的绘制流程从 ViewRoot 的 <code>performTraversals</code> 开始，经过 <strong>measure</strong>（测量 View 的宽高）、<strong>layout</strong>（确定 View 在父容器中的位置）、<strong>draw</strong>（绘制在屏幕上）三个过程完成 View 的绘制。</p>
+<img src="../assets/2019-12-14/view_measue_layout_draw.png" width=80% />
+
+<p>DecorView 是顶级 View，内部包含一个 LinearLayout，分为上下两个部分，上面是 TitleBar，下面是 Content，获取我们的 View 可以通过 <code>findViewById(android.R.id.content).getChildAt(0)</code>，如图：</p>
+<img src="../assets/2019-12-14/decorview.png" width=35% />
+
+<p>另外，DecorView 是一个 FrameLayout，所有事件都会先经过 DecorView 再传递到我们的 View。</p>
+<h3 id="理解-MeasureSpec"><a href="#理解-MeasureSpec" class="headerlink" title="理解 MeasureSpec"></a>理解 MeasureSpec</h3><h4 id="MeasureSpec"><a href="#MeasureSpec" class="headerlink" title="MeasureSpec"></a>MeasureSpec</h4><p>MeasureSpec 通过将 SpecMode 和 SpecSize 打包成一个 int 值来避免过多的对象的内存分配。为了方便操作，其提供了打包和解包的方法，SpecMode 和 SpecSize 也是一个 int 值，一组 SpecMode 和 SpecSize 可以打包为一个 MeasureSpec 的 int 值，而一个 MeasureSpec 的 int 值可以通过解包得到原始的 SpecMode 和 SpecSize。</p>
+<p>SpecMode 有三类：</p>
+<ul>
+<li>  <strong>UNSPECIFIED</strong>，父容器不对 View 的大小进行限制，一般用于系统内部，表示测量的状态；</li>
+<li>  <strong>EXACTLY</strong>，父容器已经测得所需的大小，View 的最终大小就是SpecSize 所指定的值。对应于 LayoutParam 中的 match_parent 和具体数值。</li>
+<li>  <strong>AT_MOST</strong>，父容器指定了一个可用大小即 SpecSize，View 的大小不能大于这个值，具体大小根据 View 的实现而有所不同。对应于 LayoutParam 中的 wrap_content。</li>
+</ul>
+<h4 id="MeasureSpec-和-LayoutParam-的关系"><a href="#MeasureSpec-和-LayoutParam-的关系" class="headerlink" title="MeasureSpec 和 LayoutParam 的关系"></a>MeasureSpec 和 LayoutParam 的关系</h4><p>DecorView 和普通 View 的 MeasureSpec 的转换方式不同，DecorView 通过自身的 LayoutParam 就可以确定 MeasureSpec：</p>
+<ul>
+<li>  LayoutParam.MATCH_PARENT: SpecMode is EXACTLY, SpecSize equal to Window size.</li>
+<li>  LayoutParam.WRAP_CONTENT: SpecMode is AT_MOST, SpecSize is not fixed but cannot be larger than the Window size.</li>
+<li>  Fixed size (e.g. 100dp): SpecMode is EXACTLY, SpecSize as specified.</li>
+</ul>
+<p>而普通 View 的 MeasureSpec 则相对复杂一些，除了 LayoutParam 之外，还需要根据父容器的 MeasureSpec 才能决定：</p>
+<img src="../assets/2019-12-14/measurespec_layoutparam.png" width=90% />
+
+<h3 id="View-的工作流程"><a href="#View-的工作流程" class="headerlink" title="View 的工作流程"></a>View 的工作流程</h3><p>分为 measure 过程、layout 过程、draw 过程，具体请阅读 <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/how-android-draws">How Android Draws Views</a> 以及 <a target="_blank" rel="noopener" href="https://developer.android.com/training/custom-views/custom-drawing">Custom Drawing</a> 部分。</p>
+<h3 id="自定义-View"><a href="#自定义-View" class="headerlink" title="自定义 View"></a>自定义 View</h3><h4 id="自定义-View-的分类"><a href="#自定义-View-的分类" class="headerlink" title="自定义 View 的分类"></a>自定义 View 的分类</h4><ul>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/ui/custom-components">Guide: Custom View Components</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/view/View#implementing-a-custom-view">Reference: Implementing a Custom View</a></li>
+</ul>
+<ol>
+<li> 继承 View 重写 <code>onDraw</code> 方法</li>
+</ol>
+<p>这种方法主要用于实现一些不规则的效果，需要支持 wrap_content 并且 padding 也需要自己处理。</p>
+<ol start="2">
+<li> 继承 ViewGroup 派生特殊 Layout</li>
+</ol>
+<p>用于实现自定义布局，比第一种复杂，需要处理 <code>onMeasure</code> 和 <code>onLayout</code>，还要处理子 View 的 <code>onMeasure</code> 和 <code>onLayout</code></p>
+<ol start="3">
+<li> 继承特定的 View（比如 TextView）</li>
+</ol>
+<p>较为常见，用于扩展某个 View 的功能，实现起来也较为简单。</p>
+<ol start="4">
+<li> 继承特定的 ViewGroup（比如 LinearLayout）</li>
+</ol>
+<p>同样较为常见，比如需要实现类似几个 View 组合在一起的效果的时候，不需要自己处理 ViewGroup 的 <code>onMeasure</code> 和 <code>onLayout</code>，方法 2 比这个方法更底层，实现起来更复杂。 </p>
+<h4 id="自定义-View-须知"><a href="#自定义-View-须知" class="headerlink" title="自定义 View 须知"></a>自定义 View 须知</h4><ol>
+<li> 让 View 支持 wrap_content</li>
+<li> 让 View 支持 padding</li>
+<li> 尽量不要使用 Handler，使用 View 自身的 post 方法</li>
+<li> 在 <code>View.onDetachedFromWindow()</code> 中停止动画</li>
+<li> 如果 View 带有滑动嵌套，需要处理好滑动冲突</li>
+</ol>
+<h4 id="自定义-View-示例"><a href="#自定义-View-示例" class="headerlink" title="自定义 View 示例"></a>自定义 View 示例</h4><p>见：<a target="_blank" rel="noopener" href="https://github.com/singwhatiwanna/android-art-res/tree/master/Chapter_4/src/com/ryg/chapter_4/ui">android-art-res / Chapter_4</a></p>
+<h2 id="理解-RemoteViews"><a href="#理解-RemoteViews" class="headerlink" title="理解 RemoteViews"></a>理解 RemoteViews</h2><h3 id="RemoteViews-的应用"><a href="#RemoteViews-的应用" class="headerlink" title="RemoteViews 的应用"></a>RemoteViews 的应用</h3><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/widget/RemoteViews">RemoteViews</a> 可以在其他进程中显示并更新界面，主要用于通知栏和桌面部件。</p>
+<h4 id="通知栏"><a href="#通知栏" class="headerlink" title="通知栏"></a>通知栏</h4><p>通过 RemoteViews 和 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/NotificationManager">NotificationManager</a> 加载通知栏的<a target="_blank" rel="noopener" href="https://developer.android.com/training/notify-user/custom-notification">自定义布局</a>。</p>
+<h4 id="桌面-Widget"><a href="#桌面-Widget" class="headerlink" title="桌面 Widget"></a>桌面 Widget</h4><p>通过 RemoteViews 和 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/appwidget/AppWidgetProvider">AppWidgetProvider</a> 创建<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/NotificationManager">桌面小部件</a>。</p>
+<h4 id="关于-PendingIntent"><a href="#关于-PendingIntent" class="headerlink" title="关于 PendingIntent"></a>关于 PendingIntent</h4><p><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/app/PendingIntent">PendingIntent</a> 在我看来是包含了一个可以稍后执行的 Intent 的容器，我们可以用它启动 Activity、Service 以及发送广播。它由系统执行，意味着即使我们的 app 被杀死了，依旧可以利用它启动我们想要的组件。系统通过 requestCode 和 Intent 区分不同的 PendingIntent，只是更改 Intent 的 extra 不会起作用。如果我们需要启动两个不同的通知，也可以通过使用不同的 notificationId。</p>
+<h3 id="RemoteViews-的内部机制"><a href="#RemoteViews-的内部机制" class="headerlink" title="RemoteViews 的内部机制"></a>RemoteViews 的内部机制</h3><h4 id="支持的-View-类型"><a href="#支持的-View-类型" class="headerlink" title="支持的 View 类型"></a>支持的 View 类型</h4><p>四大 layout, ListView, Button, ImageButton, ImageView, TextView, ProgressBar 等，不支持 EditText，其它具体见文档：<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/widget/RemoteViews#top_of_page">RemoteViews</a>。</p>
+<h4 id="RemoteViews-的工作机制"><a href="#RemoteViews-的工作机制" class="headerlink" title="RemoteViews 的工作机制"></a>RemoteViews 的工作机制</h4><p>由于 RemoteViews 在远程进程显示，所以没法通过 findViewById 来获取 View，只能通过反射实现，即一系列的 setXXX 方法（大部分是通过反射）。</p>
+<p>RemoteViews 实现了 Parcelable 所以可以跨进程传输，首先通过 Binder 传递到 SystemService 进程，然后系统通过 RemoteViews 中的包名信息获取对应的布局文件并加载。</p>
+<p>所以当我们调用一系列的 set 方法其实也都是跨进程的。之所以不直接让 View 支持跨进程，是因为开销太大，毕竟 View 的方法很多，而是巧妙地通过一个 <code>Action</code>（封装了对 View 的操作）来进行 IPC。</p>
+<h3 id="RemoteViews-的意义"><a href="#RemoteViews-的意义" class="headerlink" title="RemoteViews 的意义"></a>RemoteViews 的意义</h3><p>可以利用 RemoteViews 进行跨进程更新 UI（限制比较大，但是挺有趣的）。</p>
+<hr>
+<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ul>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-1/">Android 开发艺术探索学习笔记（一）</a> - 第 1 章：生命周期和启动模式</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-2/">Android 开发艺术探索学习笔记（二）</a> - 第 2 章：IPC 机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-3/">Android 开发艺术探索学习笔记（三）</a> - 第 3~5 章：View 事件机制等</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-4/">Android 开发艺术探索学习笔记（四）</a> - 第 6, 7, 12 章：Drawable，动画，Bitmap</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-5/">Android 开发艺术探索学习笔记（五）</a> - 第 8, 10, 11 章：Window，线程和线程池，消息机制</li>
+<li>  <a target="_blank" rel="noopener" href="https://ajiew.github.io/notes-on-android-art-part-6/">Android 开发艺术探索学习笔记（六）</a> - 第 13~15 章：综合技术，JNI 和 NDK，性能优化</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#View-%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BD%93%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">View 的事件体系</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">View 基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-View%EF%BC%9F"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是 View？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#View-%E7%9A%84%E4%BD%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.1.2.</span> <span class="toc-text">View 的位置参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MotionEvent-%E5%92%8C-TouchSlop"><span class="toc-number">1.1.3.</span> <span class="toc-text">MotionEvent 和 TouchSlop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VelocityTracker-amp-GestureDetector-amp-Scroller"><span class="toc-number">1.1.4.</span> <span class="toc-text">VelocityTracker &amp; GestureDetector &amp; Scroller</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Track-velocity"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">Track velocity</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Detect-common-gestures"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">Detect common gestures</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Animate-a-scroll-gesture"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">Animate a scroll gesture</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="toc-number">1.1.5.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E6%BB%91%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">View 的滑动</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">三种类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.2.</span> <span class="toc-text">对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB-1"><span class="toc-number">1.2.3.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E6%BB%91%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">弹性滑动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91"><span class="toc-number">1.4.</span> <span class="toc-text">View 的事件分发</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%A0%E9%80%92%E8%A7%84%E5%88%99"><span class="toc-number">1.4.1.</span> <span class="toc-text">点击事件的传递规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81"><span class="toc-number">1.5.</span> <span class="toc-text">View 的滑动冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#View-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">View 的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ViewRoot-%E5%92%8C-DecorView"><span class="toc-number">2.1.</span> <span class="toc-text">ViewRoot 和 DecorView</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-MeasureSpec"><span class="toc-number">2.2.</span> <span class="toc-text">理解 MeasureSpec</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MeasureSpec"><span class="toc-number">2.2.1.</span> <span class="toc-text">MeasureSpec</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MeasureSpec-%E5%92%8C-LayoutParam-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.2.</span> <span class="toc-text">MeasureSpec 和 LayoutParam 的关系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">2.3.</span> <span class="toc-text">View 的工作流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View"><span class="toc-number">2.4.</span> <span class="toc-text">自定义 View</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">2.4.1.</span> <span class="toc-text">自定义 View 的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E9%A1%BB%E7%9F%A5"><span class="toc-number">2.4.2.</span> <span class="toc-text">自定义 View 须知</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-View-%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.4.3.</span> <span class="toc-text">自定义 View 示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%90%86%E8%A7%A3-RemoteViews"><span class="toc-number">3.</span> <span class="toc-text">理解 RemoteViews</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">RemoteViews 的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%E6%A0%8F"><span class="toc-number">3.1.1.</span> <span class="toc-text">通知栏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%8C%E9%9D%A2-Widget"><span class="toc-number">3.1.2.</span> <span class="toc-text">桌面 Widget</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-PendingIntent"><span class="toc-number">3.1.3.</span> <span class="toc-text">关于 PendingIntent</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%86%85%E9%83%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">RemoteViews 的内部机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84-View-%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">支持的 View 类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.2.</span> <span class="toc-text">RemoteViews 的工作机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RemoteViews-%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">3.3.</span> <span class="toc-text">RemoteViews 的意义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">系列文章</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/notes-on-android-art-part-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/notes-on-android-art-part-3/&text=Android 开发艺术探索学习笔记（三）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/notes-on-android-art-part-3/&is_video=false&description=Android 开发艺术探索学习笔记（三）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 开发艺术探索学习笔记（三）&body=Check out this article: https://ajiew.me/notes-on-android-art-part-3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/notes-on-android-art-part-3/&title=Android 开发艺术探索学习笔记（三）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/notes-on-android-art-part-3/&name=Android 开发艺术探索学习笔记（三）&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-12-14/android-logo.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;结合 &lt;a href=&#34;https://developer.android.com/guide&#34;&gt;官方文档&lt;/a&gt; 阅读《Android 开发艺术探索》时所做的学习笔记。本篇记录第 3~5 章 &lt;strong&gt;View 相关&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;View-的事件体系&#34;&gt;&lt;a href=&#34;#View-的事件体系&#34; class=&#34;headerlink&#34; title=&#34;View 的事件体系&#34;&gt;&lt;/a&gt;View 的事件体系&lt;/h2&gt;&lt;h3 id=&#34;View-基础知识&#34;&gt;&lt;a href=&#34;#View-基础知识&#34; class=&#34;headerlink&#34; title=&#34;View 基础知识&#34;&gt;&lt;/a&gt;View 基础知识&lt;/h3&gt;&lt;h4 id=&#34;什么是-View？&#34;&gt;&lt;a href=&#34;#什么是-View？&#34; class=&#34;headerlink&#34; title=&#34;什么是 View？&#34;&gt;&lt;/a&gt;什么是 View？&lt;/h4&gt;&lt;p&gt;View 是界面层控件的抽象，代表了一个控件。与 Web 中的 DOM 数类似，在 Android 中所有视图共同形成了一个 View 的树形结构。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/notes-on-android-art-part-3/&t=Android 开发艺术探索学习笔记（三）"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
