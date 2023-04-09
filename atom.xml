@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-04-01T04:23:58.975Z</updated>
+  <updated>2023-04-09T15:42:13.757Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Stay Curious</title>
+    <link href="https://ajiew.me/2022/"/>
+    <id>https://ajiew.me/2022/</id>
+    <published>2023-04-09T12:30:00.000Z</published>
+    <updated>2023-04-09T15:42:13.757Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;现在是四月，2023 年已经过去了一整个季度，距离下一个新年还剩下不到九个月。&lt;/p&gt;
+&lt;p&gt;其实我一直在纠结还要不要写年终总结，写年终总结对我来说到底还有没有意义。翻了下过去几年的年终总结，看到我在 &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="随笔" scheme="https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="年终总结" scheme="https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Reviews" scheme="https://ajiew.me/tags/Reviews/"/>
+    
+  </entry>
+  
+  <entry>
     <title>接受不完美</title>
     <link href="https://ajiew.me/2023-3/"/>
     <id>https://ajiew.me/2023-3/</id>
     <published>2023-03-31T12:30:00.000Z</published>
-    <updated>2023-04-01T04:23:58.975Z</updated>
+    <updated>2023-04-05T02:33:59.476Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -63,7 +91,7 @@
     <link href="https://ajiew.me/2023-1/"/>
     <id>https://ajiew.me/2023-1/</id>
     <published>2023-01-31T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.740Z</updated>
+    <updated>2023-04-04T02:17:00.102Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -619,7 +647,7 @@
     <link href="https://ajiew.me/2021/"/>
     <id>https://ajiew.me/2021/</id>
     <published>2022-01-22T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.737Z</updated>
+    <updated>2023-04-09T06:12:04.694Z</updated>
     
     
     <summary type="html">&lt;p&gt;在一个阴雨绵绵的周末下午，我终于还是下定决心坐下来把这篇年终总结给写完。因为拖延是个无底洞，只要你愿意，你可以一直拖下去，最终我很有可能会拖到过年，我不想回家之后还抱着个电脑写 2021 年的年终总结。&lt;/p&gt;
@@ -703,37 +731,6 @@
     <category term="Android" scheme="https://ajiew.me/tags/Android/"/>
     
     <category term="GIS" scheme="https://ajiew.me/tags/GIS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>依赖注入框架 Hilt 的使用</title>
-    <link href="https://ajiew.me/hilt-notes/"/>
-    <id>https://ajiew.me/hilt-notes/</id>
-    <published>2021-12-12T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.737Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这篇记录下 Hilt 最基本的使用方法。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞生了许多基于 Kotlin 依赖注入框架，比如 &lt;a href=&quot;https://github.com/InsertKoinIO/koin&quot;&gt;Koin&lt;/a&gt; 和 &lt;a href=&quot;https://github.com/Kodein-Framework/Kodein-DI&quot;&gt;Kodein&lt;/a&gt;。谷歌当然也注意到了这一点，所以也基于 Dagger 推出了更简单易上手的 Hilt，它的主要优势是：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;基于 Android 简化了 Dagger 相关的基础架构；&lt;/li&gt;
-&lt;li&gt;提供了一组标准的 Component 和 Scope 以简化使用、提升可读性以及便于代码共享；&lt;/li&gt;
-&lt;li&gt;简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="技术" scheme="https://ajiew.me/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="Notes" scheme="https://ajiew.me/tags/Notes/"/>
-    
-    <category term="Android" scheme="https://ajiew.me/tags/Android/"/>
     
   </entry>
   
