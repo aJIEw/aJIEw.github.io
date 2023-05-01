@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-04-09T15:42:13.757Z</updated>
+  <updated>2023-05-01T09:21:45.312Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>写作是时光机</title>
+    <link href="https://ajiew.me/2023-4/"/>
+    <id>https://ajiew.me/2023-4/</id>
+    <published>2023-04-30T12:30:00.000Z</published>
+    <updated>2023-05-01T09:21:45.312Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;写作的意义是什么？对我来说，最大的意义可能在于让我能有机会反思自己的生活吧。每天早上或者入睡前坐下来，把原本只是脑海中一闪而过的想法，组织成语言、写成文字，这一过程本身就是非常奇妙的。这也是一个人抵抗孤独的最佳方式。生命不断向前，而我们留下的文字却可以穿越时间，使得我们的思考得以被保留。哪怕仅仅只是记录，也是在给未来的自己提供一个回望过去的时光机。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Stay Curious</title>
     <link href="https://ajiew.me/2022/"/>
     <id>https://ajiew.me/2022/</id>
     <published>2023-04-09T12:30:00.000Z</published>
-    <updated>2023-04-09T15:42:13.757Z</updated>
+    <updated>2023-04-09T15:47:19.215Z</updated>
     
     
       
@@ -705,32 +726,6 @@
     
     
     <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在高德地图上展示 Shapefile 中的数据</title>
-    <link href="https://ajiew.me/shapefile-to-wms/"/>
-    <id>https://ajiew.me/shapefile-to-wms/</id>
-    <published>2021-12-21T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.737Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;img src=&quot;/assets/2021-12-21/ganymede_globes.png&quot; alt=&quot;ganymede_globes&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这篇介绍一下如何将 &lt;a href=&quot;https://desktop.arcgis.com/zh-cn/arcmap/10.3/manage-data/shapefiles/what-is-a-shapefile.htm&quot;&gt;Shapefile&lt;/a&gt; 转换为 WMS 图层并在高德地图上展示出来。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;如果你是一名 GIS 开发者，那么你对 Shapefile 一定不陌生，它是一种用于存储地理要素的几何位置和属性信息的文件格式。具体来说，它主要通过几何图形（点、折线、多边形）存储道路、桥梁、河流等空间对象的几何位置。另外，它还可以通过不同的文字、颜色等标识出这些空间对象的属性。&lt;/p&gt;
-&lt;p&gt;很多地图制作工具都支持导出 shp 格式的数据（比如 &lt;a href=&quot;https://www.esri.com/zh-cn/arcgis/products/arcgis-desktop/resources&quot;&gt;ArcGIS&lt;/a&gt;），但是，如果想要通过第三方地图 SDK 加载这些数据，往往需要先做一步转换操作，比如转换为 &lt;a href=&quot;https://lbs.amap.com/api/javascript-api/guide/layers/wms&quot;&gt;WMS 图层&lt;/a&gt; 或者 &lt;a href=&quot;https://developers.google.com/maps/documentation/javascript/kmllayer&quot;&gt;KML 图层&lt;/a&gt;。这里，我就以高德地图为例，介绍如何通过 &lt;a href=&quot;http://geoserver.org/&quot;&gt;GeoServer&lt;/a&gt; 将 Shapefile 转换为 WMS 图层并加载到 Android 地图 SDK 中。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="技术" scheme="https://ajiew.me/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="Android" scheme="https://ajiew.me/tags/Android/"/>
-    
-    <category term="GIS" scheme="https://ajiew.me/tags/GIS/"/>
     
   </entry>
   
