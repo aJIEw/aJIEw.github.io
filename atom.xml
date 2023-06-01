@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-05-01T09:21:45.312Z</updated>
+  <updated>2023-06-01T14:42:02.891Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>心中要有牵挂</title>
+    <link href="https://ajiew.me/2023-5/"/>
+    <id>https://ajiew.me/2023-5/</id>
+    <published>2023-05-31T12:30:00.000Z</published>
+    <updated>2023-06-01T14:42:02.891Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;又是漫长的一个月，好像发生了很多事，但是停下来回忆的时候，却又想不起来有什么让我印象特别深刻的事情。唯一让我有点惊讶的是，原以为搬家会让我伤感一阵子，但结果并没有。可能也是因为离开原来的生活环境对我来说并没有造成特别大的变化吧。而且搬家给我带来的好处多过坏处，自然也就不会特别伤感了。况且让我们感到伤感的往往是人，假如你心中并没有特别牵挂的人，也没有让你觉得要和过去告别的回忆，那即使是再大的变化，在你眼中也只是一件普通、平淡的事件而已。所以，也算是给自己提了一个醒，要认真生活，要多去和不同的人接触，没有什么比拥有丰富的回忆更让人幸福的了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>写作是时光机</title>
     <link href="https://ajiew.me/2023-4/"/>
     <id>https://ajiew.me/2023-4/</id>
     <published>2023-04-30T12:30:00.000Z</published>
-    <updated>2023-05-01T09:21:45.312Z</updated>
+    <updated>2023-05-29T03:33:36.016Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -42,7 +63,7 @@
     <link href="https://ajiew.me/2022/"/>
     <id>https://ajiew.me/2022/</id>
     <published>2023-04-09T12:30:00.000Z</published>
-    <updated>2023-04-09T15:47:19.215Z</updated>
+    <updated>2023-05-30T12:37:54.374Z</updated>
     
     
       
@@ -177,7 +198,7 @@
     <link href="https://ajiew.me/2022-11/"/>
     <id>https://ajiew.me/2022-11/</id>
     <published>2022-11-30T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.740Z</updated>
+    <updated>2023-05-30T12:25:14.350Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -683,49 +704,6 @@
     <category term="年终总结" scheme="https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
     <category term="Reviews" scheme="https://ajiew.me/tags/Reviews/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面向未来思考</title>
-    <link href="https://ajiew.me/2021-12/"/>
-    <id>https://ajiew.me/2021-12/</id>
-    <published>2021-12-31T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.737Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/XofZMIczTDo&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;我发现每到年底的最后一个月，人总是会变得忙碌起来，可能是内心的焦虑在起作用吧：一看还有那么多未完成的目标，心底的不安会让人想要补救式地勤奋一阵子。再加上周围舆论环境渲染出的氛围，大家都在谈论自己这一年的得失，如果你的内心不够坚定，可能还会忍不住拿自己和他人比较。不过，在坐下来整理自己的碎碎念的时候，内心会慢慢变得平静下来。过去的就让它过去吧，我们能把握的只有未来。写碎碎念的目的不也是为了记录以及给未来的自己做参考吗？要学会面向未来思考，不要浪费时间在抱怨和后悔上。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
     
   </entry>
   
