@@ -205,7 +205,7 @@
 </blockquote>
 <p>系统正是通过该方法来判断当前 fragment 的 UI 是否对用户可见，而该方法被暴露出来的主要目的也是让我们可以提醒系统当前 fragment 已经不可见了，是时候重新更新 fragment 的生命周期了。</p>
 <p>不过如果只是实现数据懒加载，我们不需要直接去调用该方法，只要覆写它并实现控制数据加载的逻辑就可以了。</p>
-<p>这里我参考了一种比较简便的做法，原文来自 <a target="_blank" rel="noopener" href="https://www.jianshu.com/u/bd3befbe51d0">尹star</a> 的 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5d29a0c3f4c">ViewPager+Fragment LazyLoad 最优解</a>。</p>
+<p>这里我参考了一种比较简便的做法，原文来自 <a target="_blank" rel="noopener" href="https://www.jianshu.com/u/bd3befbe51d0">尹star</a> 的 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5d29a0c3f4c#">ViewPager+Fragment LazyLoad 最优解</a>。</p>
 <p>实现效果：</p>
 <img src="https://i.loli.net/2019/09/09/GoTrE7uSw6ZJICj.gif" width="40%"/>
 
