@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-07-31T14:18:17.748Z</updated>
+  <updated>2023-09-03T13:40:05.438Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>按你想的那样去生活</title>
+    <link href="https://ajiew.me/2023-8/"/>
+    <id>https://ajiew.me/2023-8/</id>
+    <published>2023-08-31T12:30:00.000Z</published>
+    <updated>2023-09-03T13:40:05.438Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;八月，对大部分学生来说，这个月到末尾的时候也就意外着暑假要结束了，所以总会有点不开心。然而我的学生时代已经过去很久了，现在，这个月的结束对我来说意味着秋天马上要来了，天气也会变凉快，所以是一件好事。这个月看了 8 本书，跑步 90 公里左右，整理了年度计划，意识到 2023 已经过去 2/3 了。不过，假如从现在开始好好执行自己的计划，还是有机会完成自己的年度目标的。除此之外，这个月发生的一件重要的事是表弟马上要上大学了，他和我刚好差了十岁。回想十年前的自己，感觉未来有无限的可能。但是，现在回过头来看，虽然此刻我的生活和我当初想象的不太一样，不过我还是比较知足了。不知道未来十年会发生什么，但是，我觉得只要一直努力下去，追求自己想要的生活，哪怕最终不能如愿，至少会感到心安，而不是感到后悔或者遗憾。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>心安</title>
     <link href="https://ajiew.me/2023-7/"/>
     <id>https://ajiew.me/2023-7/</id>
     <published>2023-07-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:18:17.748Z</updated>
+    <updated>2023-09-03T13:30:12.782Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -657,27 +678,6 @@
     
     
     <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>键盘特殊符号中英文名称对照表</title>
-    <link href="https://ajiew.me/keyboard-special-symbols/"/>
-    <id>https://ajiew.me/keyboard-special-symbols/</id>
-    <published>2022-02-12T12:30:00.000Z</published>
-    <updated>2023-03-13T13:29:42.737Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;该表主要是通过&lt;a href=&quot;http://wason21cn.blogspot.com/2008/01/english-name-for-character-in-keyboard.html&quot;&gt;这篇&lt;/a&gt;博客整理而来的，某些符号有多种英文读法，所以我在 “Also:” 后添加了该符号的其它读法。中文名称部分我只写出了常见的读法。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="小技巧" scheme="https://ajiew.me/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-    
-    <category term="小知识" scheme="https://ajiew.me/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
-    
-    <category term="Cheatsheet" scheme="https://ajiew.me/tags/Cheatsheet/"/>
     
   </entry>
   
