@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-10-01T07:39:28.206Z</updated>
+  <updated>2023-10-31T12:36:26.565Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Live A Little</title>
+    <link href="https://ajiew.me/2023-10/"/>
+    <id>https://ajiew.me/2023-10/</id>
+    <published>2023-10-31T12:30:00.000Z</published>
+    <updated>2023-10-31T12:36:26.565Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;这个月好像过得挺漫长的，可能是国庆假期的缘故吧，虽然并没有出门玩，但是能够有段时间在家放松也挺不错的。除此之外，看完了 3 本书，其中两本是一直想看的科幻小说《银河系搭车客指南》系列，当然也是因为看了《宇宙》之后才重新激起了兴趣。跑步 100km 左右，这还挺让我惊讶的，原本以为天气转凉之后会花更多的时间在轮滑上，可能是因为重新发现了跑步的乐趣吧。这个月最大的感受是，其实一切都没有那么重要。我们所在的星球、我们自己，包括人类的历史，其实都只是沧海一粟。这样一来，其实更说明了活在当下的重要性。除了更多的探索未知之外，我们自己的感受也非常重要，有的时候放松一点、随心一点，其实没什么不好。大多数时候都要记得锻炼自己的 resilience，但偶尔也要学会 live a little。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>宇宙、爱和创造</title>
     <link href="https://ajiew.me/2023-9/"/>
     <id>https://ajiew.me/2023-9/</id>
     <published>2023-09-30T12:30:00.000Z</published>
-    <updated>2023-10-01T07:39:28.206Z</updated>
+    <updated>2023-10-31T11:18:15.231Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
@@ -280,7 +301,7 @@
     <link href="https://ajiew.me/2022-11/"/>
     <id>https://ajiew.me/2022-11/</id>
     <published>2022-11-30T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:25.344Z</updated>
+    <updated>2023-10-12T03:37:23.972Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -300,8 +321,9 @@
   }
   &lt;/style&gt;
 
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/WOBHXxiZyZM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/wccRif2DaGs&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
+
 
 &lt;br/&gt;
 
@@ -323,7 +345,7 @@
     <link href="https://ajiew.me/2022-10/"/>
     <id>https://ajiew.me/2022-10/</id>
     <published>2022-10-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:28.661Z</updated>
+    <updated>2023-10-10T14:25:51.043Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -606,49 +628,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;四月，工作上非常清闲，于是也重新拾起了阅读。文字是最能抚慰人心的，尤其是阅读哲学类的书，除了让自己的心安静下来，也让我开始学会接受现状，逐渐发现独处的意义。另外一个转变是，月底的时候重新开始在网上阅读他人的信件以及给人写回信。通过解答他人的问题，透过他人的视角看待自己的生活，让我意识到其实每个人都有自己的问题。说到底，我们都是孤独的灵魂。这个世界上，除了我们自己，没有人可以真正理解我们。向外寻找答案是没有用的，一些最根本的问题只有靠自己去想明白了，才能有勇气去面对生活。而生活有趣的地方在于，你越是觉得困难重重，越想逃避，出现新问题的可能性也越大；相反，如果你选择直面困难，迎难而上，恐惧的情绪消失之后，剩下的就只有轻松以及眼前具体的问题。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优雅和质朴</title>
-    <link href="https://ajiew.me/2022-3/"/>
-    <id>https://ajiew.me/2022-3/</id>
-    <published>2022-03-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:50.019Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/NPZQm2AE5vU&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月过得非常缓慢，可能是生活节奏慢下来的原因吧。另一方面，我也刻意地让自己把更多的注意力放在当下，感受工作和生活中的每个细节，用心去体会那些过去不曾注意到的事情。比如仔细看着镜子前刷牙的自己，体会脚踩在落叶上发出的声音，经过路口时看到的行人脸上的表情，夜跑完走在人群中感到孤独的时刻。我觉得当你认真开始体会生活的时候，你会发现其实琐碎的生活也非常有意思。我们不需要像电视剧或者小说中那样刺激、有意思的情节来让自己的生活变得丰富，我们需要的只是一颗足够敏感的心。过去，我以为优雅的前提是体面的生活，但是，现在我才意识到，优雅和质朴是可以共存的，而这，全都取决于一个人具有什么样的信念。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
