@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-10-31T12:36:26.565Z</updated>
+  <updated>2023-11-01T10:38:37.104Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -21,10 +21,32 @@
     <link href="https://ajiew.me/2023-10/"/>
     <id>https://ajiew.me/2023-10/</id>
     <published>2023-10-31T12:30:00.000Z</published>
-    <updated>2023-10-31T12:36:26.565Z</updated>
+    <updated>2023-11-01T10:38:37.104Z</updated>
     
     
-    <summary type="html">&lt;blockquote&gt;
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/C75X1dprPAM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
 &lt;p&gt;这个月好像过得挺漫长的，可能是国庆假期的缘故吧，虽然并没有出门玩，但是能够有段时间在家放松也挺不错的。除此之外，看完了 3 本书，其中两本是一直想看的科幻小说《银河系搭车客指南》系列，当然也是因为看了《宇宙》之后才重新激起了兴趣。跑步 100km 左右，这还挺让我惊讶的，原本以为天气转凉之后会花更多的时间在轮滑上，可能是因为重新发现了跑步的乐趣吧。这个月最大的感受是，其实一切都没有那么重要。我们所在的星球、我们自己，包括人类的历史，其实都只是沧海一粟。这样一来，其实更说明了活在当下的重要性。除了更多的探索未知之外，我们自己的感受也非常重要，有的时候放松一点、随心一点，其实没什么不好。大多数时候都要记得锻炼自己的 resilience，但偶尔也要学会 live a little。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
@@ -473,7 +495,7 @@
     <link href="https://ajiew.me/2022-7/"/>
     <id>https://ajiew.me/2022-7/</id>
     <published>2022-07-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:38.252Z</updated>
+    <updated>2023-11-01T08:13:50.915Z</updated>
     
     
     <summary type="html">&lt;div&gt;
