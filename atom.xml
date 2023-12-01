@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-11-01T10:38:37.104Z</updated>
+  <updated>2023-12-01T14:23:50.280Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>加速流逝的时间</title>
+    <link href="https://ajiew.me/2023-11/"/>
+    <id>https://ajiew.me/2023-11/</id>
+    <published>2023-11-30T12:30:00.000Z</published>
+    <updated>2023-12-01T14:23:50.280Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/m78etvVHEeA&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月的天气变化得有点快，可能是因为换季吧，感觉一下子从夏末初秋到了初冬，换了床单和被套，于是早上起床也开始变得磨蹭起来。不过，我还是挺喜欢这种季节的变化的，它可以提醒我们去注意到岁月的流逝。随着年龄的增长，人感知到的时间流逝，好像真的会变得越来越快，我觉得这也正是记录的意义所在吧。很快地，这一年就会结束，然后是 2024 年，然后是下一年。如果你不去珍惜时间，利用有限的生命去创造、分享、体验、感受，你的一生也会很快地就过去了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Live A Little</title>
     <link href="https://ajiew.me/2023-10/"/>
     <id>https://ajiew.me/2023-10/</id>
     <published>2023-10-31T12:30:00.000Z</published>
-    <updated>2023-11-01T10:38:37.104Z</updated>
+    <updated>2023-12-01T13:47:27.485Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -607,49 +650,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;在碎碎念这个分类下写日记满两年了，这两年来，虽然换了工作，搬了家，也尝试了新技术和新项目，但是我觉得自己最大的收获无疑是创建了这个碎碎念分类。每天写作真的完全改变了我的生活，虽然偶尔有几天是敷衍了事的，或者是第二天补写的，但是每一段文字都是自己当时真实想法的记录。翻看过去写下的文字，有的感觉非常熟悉，就像是昨天写的，有的也让我感到惊讶，原来那个时候的自己就有这样的想法了。无论如何，我觉得这是件非常有意义的事，也让我有了很多收获。写作是抵御孤独的武器，也是使人保持思考的动力，我会努力坚持下去。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>不要怕啊</title>
-    <link href="https://ajiew.me/2022-4/"/>
-    <id>https://ajiew.me/2022-4/</id>
-    <published>2022-04-30T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:57.096Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/JbvY1Ig9iVg&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;四月，工作上非常清闲，于是也重新拾起了阅读。文字是最能抚慰人心的，尤其是阅读哲学类的书，除了让自己的心安静下来，也让我开始学会接受现状，逐渐发现独处的意义。另外一个转变是，月底的时候重新开始在网上阅读他人的信件以及给人写回信。通过解答他人的问题，透过他人的视角看待自己的生活，让我意识到其实每个人都有自己的问题。说到底，我们都是孤独的灵魂。这个世界上，除了我们自己，没有人可以真正理解我们。向外寻找答案是没有用的，一些最根本的问题只有靠自己去想明白了，才能有勇气去面对生活。而生活有趣的地方在于，你越是觉得困难重重，越想逃避，出现新问题的可能性也越大；相反，如果你选择直面困难，迎难而上，恐惧的情绪消失之后，剩下的就只有轻松以及眼前具体的问题。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
