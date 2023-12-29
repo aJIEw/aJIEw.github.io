@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-12-01T14:23:50.280Z</updated>
+  <updated>2023-12-29T09:38:17.252Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>去接纳一切</title>
+    <link href="https://ajiew.me/2023/"/>
+    <id>https://ajiew.me/2023/</id>
+    <published>2023-12-30T12:30:00.000Z</published>
+    <updated>2023-12-29T09:38:17.252Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/vbvyNnw8Qjg&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;p&gt;又到了坐下来写总结的时候了，2023 这一年，对我来说应该是挺不一样的一年，上半年被老板约谈然后离职，换了一个 base 在新加坡但是主要开发团队在澳洲的远程工作，接着搬家到银湖，以及开始准备新房装修的事。这一切在回想起来的时候，有些让我感到意外，有些也让我觉得自己真的挺幸运的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="随笔" scheme="https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="年终总结" scheme="https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Reviews" scheme="https://ajiew.me/tags/Reviews/"/>
+    
+  </entry>
+  
+  <entry>
     <title>加速流逝的时间</title>
     <link href="https://ajiew.me/2023-11/"/>
     <id>https://ajiew.me/2023-11/</id>
     <published>2023-11-30T12:30:00.000Z</published>
-    <updated>2023-12-01T14:23:50.280Z</updated>
+    <updated>2023-12-29T09:33:59.050Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -233,7 +276,7 @@
     <link href="https://ajiew.me/2022/"/>
     <id>https://ajiew.me/2022/</id>
     <published>2023-04-09T12:30:00.000Z</published>
-    <updated>2023-05-30T12:37:54.374Z</updated>
+    <updated>2023-12-29T02:57:45.194Z</updated>
     
     
       
@@ -607,49 +650,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;六月了，夏天也来了，又一次迎来了这个午后的天空和云都特别好看的季节，坏处是天气闷热起来之后会让人只想待在空调房里不想出门，好处是又可以一边吹着空调喝着冰镇饮料，一边看自己喜欢的书和电影了。过去我总觉得自己可以逃脱年龄定律，也就是永远也不会因为到了某个年纪而去做一些事情，但是，最近我的想法却发生了一些变化。人多少还是会受到自身生理上的一些影响的，到了一定的年龄，激素水平、身体器官的工作状态都会发生变化，因此心理状态也会连带着发生改变，再加上人自身的想法也在不停发生变化，你的价值取向和过去也不再相同了。所以，很多事情在你眼里的重要性会产生一些微妙的改变。我以前觉得一个人也没什么问题，只要有事做、有期待就可以了，至于有没有人爱，关系不大。现在觉得，可能后者的重要性一直在被我刻意忽略了。不过，既然明白了这一点，这也算是改变的开始吧。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在写作中成长</title>
-    <link href="https://ajiew.me/2022-5/"/>
-    <id>https://ajiew.me/2022-5/</id>
-    <published>2022-05-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:44.212Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/KOQQjucbIOg&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;在碎碎念这个分类下写日记满两年了，这两年来，虽然换了工作，搬了家，也尝试了新技术和新项目，但是我觉得自己最大的收获无疑是创建了这个碎碎念分类。每天写作真的完全改变了我的生活，虽然偶尔有几天是敷衍了事的，或者是第二天补写的，但是每一段文字都是自己当时真实想法的记录。翻看过去写下的文字，有的感觉非常熟悉，就像是昨天写的，有的也让我感到惊讶，原来那个时候的自己就有这样的想法了。无论如何，我觉得这是件非常有意义的事，也让我有了很多收获。写作是抵御孤独的武器，也是使人保持思考的动力，我会努力坚持下去。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
