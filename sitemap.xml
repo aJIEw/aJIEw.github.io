@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://ajiew.me/macos-config/</loc>
+    
+    <lastmod>2024-01-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/2023-11/</loc>
     
     <lastmod>2024-01-01</lastmod>
@@ -362,15 +371,6 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/macos-config/</loc>
-    
-    <lastmod>2023-03-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/tags/index.html</loc>
     
     <lastmod>2023-03-13</lastmod>
@@ -488,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2021-6/</loc>
+    <loc>https://ajiew.me/2021-5/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -506,7 +506,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2021-5/</loc>
+    <loc>https://ajiew.me/2021-6/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -524,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/layout-and-state/</loc>
+    <loc>https://ajiew.me/2021-2/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -542,7 +542,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2021-2/</loc>
+    <loc>https://ajiew.me/layout-and-state/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -659,6 +659,15 @@
   </url>
   
   <url>
+    <loc>https://ajiew.me/2020-5/</loc>
+    
+    <lastmod>2023-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/2020-6/</loc>
     
     <lastmod>2023-03-13</lastmod>
@@ -668,7 +677,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2020-5/</loc>
+    <loc>https://ajiew.me/notes-on-android-art-part-1/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -723,15 +732,6 @@
   
   <url>
     <loc>https://ajiew.me/notes-on-android-art-part-6/</loc>
-    
-    <lastmod>2023-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/notes-on-android-art-part-1/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -857,6 +857,15 @@
   </url>
   
   <url>
+    <loc>https://ajiew.me/android-phone-call-app-and-listen-phone-calls/</loc>
+    
+    <lastmod>2023-03-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/android-call-forward/</loc>
     
     <lastmod>2023-03-13</lastmod>
@@ -867,15 +876,6 @@
   
   <url>
     <loc>https://ajiew.me/talk-about-change/</loc>
-    
-    <lastmod>2023-03-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/android-phone-call-app-and-listen-phone-calls/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -929,7 +929,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/vmware-install-macosx-and-chromeos/</loc>
+    <loc>https://ajiew.me/2017/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -938,7 +938,7 @@
   </url>
   
   <url>
-    <loc>https://ajiew.me/2017/</loc>
+    <loc>https://ajiew.me/vmware-install-macosx-and-chromeos/</loc>
     
     <lastmod>2023-03-13</lastmod>
     
@@ -1010,13 +1010,6 @@
 
   
   <url>
-    <loc>https://ajiew.me/tags/Tricks/</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -1025,6 +1018,13 @@
   
   <url>
     <loc>https://ajiew.me/tags/Reviews/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ajiew.me/tags/Tricks/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1122,6 +1122,13 @@
   </url>
   
   <url>
+    <loc>https://ajiew.me/tags/Skateboard/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://ajiew.me/tags/Tools/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -1130,13 +1137,6 @@
   
   <url>
     <loc>https://ajiew.me/tags/Softwares/</loc>
-    <lastmod>2024-01-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ajiew.me/tags/Skateboard/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1208,14 +1208,14 @@
 
   
   <url>
-    <loc>https://ajiew.me/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
+    <loc>https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://ajiew.me/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2024-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
