@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2023-12-29T09:38:17.252Z</updated>
+  <updated>2024-01-01T06:32:06.246Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>思考、感受和回顾</title>
+    <link href="https://ajiew.me/2023-12/"/>
+    <id>https://ajiew.me/2023-12/</id>
+    <published>2023-12-31T12:30:00.000Z</published>
+    <updated>2024-01-01T06:32:06.246Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/yNX4HHMcAlE&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;每到十二月才能真正感受到冬天来了，所以出门的频率就更低了，大多数时候都是宅在家里看电影、玩游戏，天气好的周末偶尔也会出门玩轮滑，但是大多数周末还是更喜欢靠在窗台晒着太阳看书、发呆。我有时候觉得，发呆也是一种培养创造力的方法，因为很多知识并不能马上被大脑理解和接受，有时候需要实践，有时候需要时间，哪怕是奇迹也需要耐心等待才能发生。常常在想，也许我们不需要过一百种人生，因为眼下的那一种就是最好的，只要你能接纳它，让它变得充实、丰富、有意义，而这离不开不断的思考、感受和回顾。这样的人生就是最好的人生。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>去接纳一切</title>
     <link href="https://ajiew.me/2023/"/>
     <id>https://ajiew.me/2023/</id>
     <published>2023-12-30T12:30:00.000Z</published>
-    <updated>2023-12-29T09:38:17.252Z</updated>
+    <updated>2023-12-31T15:24:22.362Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -64,7 +107,7 @@
     <link href="https://ajiew.me/2023-11/"/>
     <id>https://ajiew.me/2023-11/</id>
     <published>2023-11-30T12:30:00.000Z</published>
-    <updated>2023-12-29T09:33:59.050Z</updated>
+    <updated>2024-01-01T06:25:47.155Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -607,49 +650,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;七月，感觉时间过得非常缓慢，但是回忆的时候，就只剩下在车库练轮滑的画面了。有时候觉得自己阅读了太多的文章，看了太多的视频，如果那些时间不是这样被「荒废」掉，也许就能产出更大的价值，比如完成自己早就想要完成的开源库，看完只看了一半的书，安静地听一首歌，学会一个新的单词或短语。然而，说到底，不浪费自己的时间的想法就是一个妄念，无论一个人处于什么样的阶段，只要他做的事不是被视为最有价值的，只要他内心还在自我怀疑，那他就永远也不会感到满足。为自己做一些无意义的事真的是在浪费时间吗？真的很难说。但是，维持个人基本的纪律和养成好习惯还是有必要的，如果不加限制，每个人都希望生活在无止境的放纵中，一个人懒惰、贪婪、暴虐的本性也就会逐渐滋长。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>心力</title>
-    <link href="https://ajiew.me/2022-6/"/>
-    <id>https://ajiew.me/2022-6/</id>
-    <published>2022-06-30T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:41.411Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/Qn_pDASw0-I&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;六月了，夏天也来了，又一次迎来了这个午后的天空和云都特别好看的季节，坏处是天气闷热起来之后会让人只想待在空调房里不想出门，好处是又可以一边吹着空调喝着冰镇饮料，一边看自己喜欢的书和电影了。过去我总觉得自己可以逃脱年龄定律，也就是永远也不会因为到了某个年纪而去做一些事情，但是，最近我的想法却发生了一些变化。人多少还是会受到自身生理上的一些影响的，到了一定的年龄，激素水平、身体器官的工作状态都会发生变化，因此心理状态也会连带着发生改变，再加上人自身的想法也在不停发生变化，你的价值取向和过去也不再相同了。所以，很多事情在你眼里的重要性会产生一些微妙的改变。我以前觉得一个人也没什么问题，只要有事做、有期待就可以了，至于有没有人爱，关系不大。现在觉得，可能后者的重要性一直在被我刻意忽略了。不过，既然明白了这一点，这也算是改变的开始吧。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
