@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2024-01-31T13:52:06.685Z</updated>
+  <updated>2024-03-03T03:28:11.121Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>下一个四年</title>
+    <link href="https://ajiew.me/2024-2/"/>
+    <id>https://ajiew.me/2024-2/</id>
+    <published>2024-02-29T12:30:00.000Z</published>
+    <updated>2024-03-03T03:28:11.121Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/YCnGPRcd4fw&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;今年是闰年，看到论坛上的一个帖子：下一个 2 月 29 号，你想要达成什么样的目标？思考良久，好像除了工作上继续进步，最希望自己能达成的目标应该是遇到一个合适的人一起生活下去吧。这好像是我第一次出现这样的想法，不知道是不是受到了家人的影响，又或者只是因为年纪到了？不过，我算是个成长得比较慢的人，什么事都比别人慢几拍，一直以来也都活得比较自我。但我觉得都没关系，不想要就大胆说不要，想要的话就去争取，人的确应该活得自我一些，毕竟他人无法替你过你的人生。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>保持新鲜感</title>
     <link href="https://ajiew.me/2024-1/"/>
     <id>https://ajiew.me/2024-1/</id>
     <published>2024-01-31T12:30:00.000Z</published>
-    <updated>2024-01-31T13:52:06.685Z</updated>
+    <updated>2024-02-29T13:22:30.472Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -43,7 +86,6 @@
 
 &lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/DM8Tm9ycGz4&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;br/&gt;
 
 &lt;blockquote&gt;
@@ -607,49 +649,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;这个月应该是我中断碎碎念写作次数最多的一个月，但是，无论是生活上的变故，还是自己情绪上经历的起落变化，我觉得都敌不过时间。时间本身是中性的，只不过我们站在了不同的角度。有时候它是友人，帮助我们忘掉痛苦和不幸，有时候它是敌人，杀死了我们的激情和活力。但我还是愿意相信，时间总体上是公平的，无论你是抱着手机刷视频，还是选择在自习室里学习一整天，又或者是和自己喜欢的人散步、聊天、吃饭，你们度过的这一天都只有 24 小时。所以，我们真正需要问自己的问题是：我今天有没有在用自己想要的方式度过这一天？&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我爱轮滑</title>
-    <link href="https://ajiew.me/2022-8/"/>
-    <id>https://ajiew.me/2022-8/</id>
-    <published>2022-08-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:35.098Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/jbPLUrBzNFs&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;夏天马上就要结束了，如果要为这个夏天打分的话，我觉得可以给它打 7 分吧，关键词有：烈日下的柏油路、车库里的轮滑印、带着冰霜的绿豆雪糕、柳树荫之下水面之上成群的蜻蜓、不同饱和度的粉色晚霞，以及流汗、流汗还是流汗。如果要用一句话总结的话，那应该是：我终于可以出门刷街啦！&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
