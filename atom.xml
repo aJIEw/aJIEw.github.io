@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2024-04-04T14:48:55.841Z</updated>
+  <updated>2024-05-04T15:25:11.544Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>找到你该做的事</title>
+    <link href="https://ajiew.me/2024-4/"/>
+    <id>https://ajiew.me/2024-4/</id>
+    <published>2024-04-30T12:30:00.000Z</published>
+    <updated>2024-05-04T15:25:11.544Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/7114QsAjPSo&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;四月是晚春，即将入夏的月份，也是万物开始蓬勃发展的季节，人的心情多少也会受到些影响开始变得活跃起来，总想要出去走走看看，所以，人终归还是自然的一部分吧。的确，人只有把自己放到更大的环境中，才能把自己和这个世界联系起来，我们作为一个物种在自然中的位置，以及我们每个个体所扮演的角色，等等。当你找到了自己在这个世界上的位置的时候，你的心才会安定下来，然后才开始去寻找自己真正应该做的事情。或许需要很长的时间，但是没关系，重要的是要相信自己最终一定能找到它。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>平凡最珍贵</title>
     <link href="https://ajiew.me/2024-3/"/>
     <id>https://ajiew.me/2024-3/</id>
     <published>2024-03-31T12:30:00.000Z</published>
-    <updated>2024-04-04T14:48:55.841Z</updated>
+    <updated>2024-04-28T05:38:06.746Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -43,8 +85,6 @@
 
 &lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/uVKabHaI_TA&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-
 &lt;br/&gt;
 
 &lt;blockquote&gt;
@@ -608,48 +648,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;这个月尝试了一些新技术，浪费了一些时间在关注新闻热点上，也重新开始审视过去习以为常的东西。人内心总是同时拥有两股力量，一股把我们推向前方，使我们能够守时、履约，做一个负责任的人，而另一股力量总是喜欢时不时地出来捣乱，给我们制造一些麻烦，让我们熬夜看剧、刷手机忘了时间、吃得太多、做出冲动的决定，等等。我们总是想要拥有控制后一种力量的能力，但往往发现这种控制是徒劳的，因为我们生来如此。越是控制它，这股力量反弹得越是厉害。唯一的办法是学会和它积极相处，讨好它，和它谈判，告诉它只要不在重要的时刻出来作妖，就能每隔一段时间享受到不被束缚的自由。就在我写下这段文字的时候，我能感觉到它已经迫不及待地想要出来了，因为它知道这段文字敲完发布之后就意味着它即将成为意识的主人。但是，正是因为有了这样的约定，我才能完成大部分自己想要完成的工作。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>接受自然的安排</title>
-    <link href="https://ajiew.me/2022-10/"/>
-    <id>https://ajiew.me/2022-10/</id>
-    <published>2022-10-31T12:30:00.000Z</published>
-    <updated>2023-10-10T14:25:51.043Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/ci67LphFIFM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月回了两次家，一次是国庆，一次是参加表妹的婚礼。每次回家都是一种抽离，也让我有机会感受下另外一种生活节奏。这次回家感觉爸妈好像和上次看到的时候不太一样了，白头发多了，皱纹也多了。有时候觉得这会不会是我的内心想法的投射，因为我觉得他们实在是太操心我的事了。不过，没办法，我改变不了他们的想法，也做不到完全顺从他们，更不能阻止他们变老。这是一个不完美的世界，我们也没有人是完美的。既然如此，那就接受这个自然的安排吧。努力过好每一天，做好手头的每一件事，这样就很好。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
