@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2024-05-04T15:25:11.544Z</updated>
+  <updated>2024-06-09T15:54:57.873Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>配得上幸运</title>
+    <link href="https://ajiew.me/2024-5/"/>
+    <id>https://ajiew.me/2024-5/</id>
+    <published>2024-05-31T12:30:00.000Z</published>
+    <updated>2024-06-09T15:54:57.873Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/nWlEsta4xS8&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月在忙装修的一些小尾巴，所以感觉时间过得有些快，中间碎碎念也有好多天都落下了。不过，总算是搬进了新家，虽然还是有很多小东西没准备，但至少可以在接下来的这段时间里慢慢买了。最大的感想是，我真的是个非常幸运的人。除了感恩之外，也提醒自己要多多做一些善事，要让自己配得上这份幸运。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>找到你该做的事</title>
     <link href="https://ajiew.me/2024-4/"/>
     <id>https://ajiew.me/2024-4/</id>
     <published>2024-04-30T12:30:00.000Z</published>
-    <updated>2024-05-04T15:25:11.544Z</updated>
+    <updated>2024-06-09T15:54:53.250Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -604,50 +647,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;这个月对我来说还是比较特殊的，生活方面，第一次感染新冠，第一次居家隔离那么长时间，第一次有那么多的时间用于阅读，因此，对科技和生命有了更多的新想法，这点从碎碎念的内容中也可以看得出来。除此之外，诸如 ChapGPT 这样的新技术让我感受到，未来一定会有许多值得期待的新产品出现，未来的工作也会更多地要求一个人具备原创性，这是技术永远无法取代人的地方。但是，我们要如何提升自己的原创性呢？除了大量输入信息和刻意练习之外，很多时候需要的只是专注和耐心，等待大脑的神经链路在偶然间被打通，“天才想法”突然出现的那一刻。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>约定</title>
-    <link href="https://ajiew.me/2022-11/"/>
-    <id>https://ajiew.me/2022-11/</id>
-    <published>2022-11-30T12:30:00.000Z</published>
-    <updated>2023-10-12T03:37:23.972Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/wccRif2DaGs&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月尝试了一些新技术，浪费了一些时间在关注新闻热点上，也重新开始审视过去习以为常的东西。人内心总是同时拥有两股力量，一股把我们推向前方，使我们能够守时、履约，做一个负责任的人，而另一股力量总是喜欢时不时地出来捣乱，给我们制造一些麻烦，让我们熬夜看剧、刷手机忘了时间、吃得太多、做出冲动的决定，等等。我们总是想要拥有控制后一种力量的能力，但往往发现这种控制是徒劳的，因为我们生来如此。越是控制它，这股力量反弹得越是厉害。唯一的办法是学会和它积极相处，讨好它，和它谈判，告诉它只要不在重要的时刻出来作妖，就能每隔一段时间享受到不被束缚的自由。就在我写下这段文字的时候，我能感觉到它已经迫不及待地想要出来了，因为它知道这段文字敲完发布之后就意味着它即将成为意识的主人。但是，正是因为有了这样的约定，我才能完成大部分自己想要完成的工作。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
