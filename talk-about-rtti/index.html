@@ -172,11 +172,11 @@
 <span id="more"></span>
 
 <p>也就是说在保存对象和取出对象后，会发生以下这两个过程：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">(Object) shape <span class="hljs-regexp">//</span> 向上转型<br>(Shape) object <span class="hljs-regexp">//</span> 向下转型<br></code></pre></td></tr></table></figure>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs delphi">(<span class="hljs-keyword">Object</span>) shape <span class="hljs-comment">// 向上转型</span><br>(Shape) <span class="hljs-keyword">object</span> <span class="hljs-comment">// 向下转型</span><br></code></pre></td></tr></table></figure>
 
 <p>这其实就是就是 RTTI 最基本的使用形式。在 Java 中，所有的类型转换都是在运行时进行类型正确性检查的。</p>
 <h3 id="Class-对象：类的信息"><a href="#Class-对象：类的信息" class="headerlink" title="Class 对象：类的信息"></a>Class 对象：类的信息</h3><p>Class 对象包含了与类有关的信息，事实上 Java 中是用 Class 对象来创建这个类中的所有的对象的。每当编译完成，就会生成一个 Class 对象，被保存在 .class 文件中。JVM 使用 ClassLoader 来加载对象，所有的类都是在对其第一次使用（静态成员被引用，静态常量除外）或者用 new 关键字创建对象后，动态加载到 JVM 中的。所谓的动态加载也就是在被使用到时才去加载。</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;package.name.CanonicalName&quot;</span>)</span>;<br></code></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">Class.forName(<span class="hljs-string">&quot;package.name.CanonicalName&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
 <p>这个方法是获取 Class 对象引用的一种方法，调用 Class.forName() 之后该类会被初始化。Class 对象中还有一个 newInstance() 的方法，可以用来创建对象新实例。除此之外，Class 对象中还有很多实用的方法，用来获取类的信息，比如获取类的接口、方法、成员变量等等。</p>
 <h4 id="类字面常量"><a href="#类字面常量" class="headerlink" title="类字面常量"></a>类字面常量</h4><p>我们还可以使用 .class 的形式来引用 Class 对象。</p>
@@ -286,13 +286,13 @@
     
     
       
-        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fab fa-github"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fa-brands fa-github"></i></a>
       
       , 
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fa-brands fa-twitter"></i></a>
       
        or 
       
@@ -311,7 +311,7 @@
 
 
 
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
     <!-- jquery -->

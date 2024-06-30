@@ -6,7 +6,7 @@
   <link href="https://ajiew.me/atom.xml" rel="self"/>
   
   <link href="https://ajiew.me/"/>
-  <updated>2024-06-09T15:54:57.873Z</updated>
+  <updated>2024-06-30T15:53:17.128Z</updated>
   <id>https://ajiew.me/</id>
   
   <author>
@@ -17,11 +17,53 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>拥抱不确定</title>
+    <link href="https://ajiew.me/2024-6/"/>
+    <id>https://ajiew.me/2024-6/</id>
+    <published>2024-06-30T12:30:00.000Z</published>
+    <updated>2024-06-30T15:53:17.128Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/3DB-uJ0TxKQ&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月是搬进新家后的第一个月，月初的时候处于一种发现缺这缺那、不停买买买的状态中，到了月底才开始慢慢适应新的生活环境。某天早上在床上醒来突然有一种 “I’m on my own” 的感觉，觉得挺奇怪的，毕竟一直以来我都是 on my own 啊，可能多少还是受到了家人的一些影响吧。人总是喜欢确定的东西，这没什么错，但我们不能要求所有人都去追求一样的东西，那样的世界太无趣了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>配得上幸运</title>
     <link href="https://ajiew.me/2024-5/"/>
     <id>https://ajiew.me/2024-5/</id>
     <published>2024-05-31T12:30:00.000Z</published>
-    <updated>2024-06-09T15:54:57.873Z</updated>
+    <updated>2024-06-30T15:19:13.385Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -605,48 +647,6 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;隔了一段时间之后再来看这个月写下的碎碎念，意识到文字真的可以抚慰人心，尤其是阅读自己在不同时期写下的文字。照片也许可以记录下一个人的外貌变化，但是只有通过文字记录才能真实还原一个人当时的心理状态。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>原创性无法被替代</title>
-    <link href="https://ajiew.me/2022-12/"/>
-    <id>https://ajiew.me/2022-12/</id>
-    <published>2022-12-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:21.388Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/rEXUxVzJhuM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月对我来说还是比较特殊的，生活方面，第一次感染新冠，第一次居家隔离那么长时间，第一次有那么多的时间用于阅读，因此，对科技和生命有了更多的新想法，这点从碎碎念的内容中也可以看得出来。除此之外，诸如 ChapGPT 这样的新技术让我感受到，未来一定会有许多值得期待的新产品出现，未来的工作也会更多地要求一个人具备原创性，这是技术永远无法取代人的地方。但是，我们要如何提升自己的原创性呢？除了大量输入信息和刻意练习之外，很多时候需要的只是专注和耐心，等待大脑的神经链路在偶然间被打通，“天才想法”突然出现的那一刻。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
