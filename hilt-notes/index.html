@@ -9,7 +9,7 @@
     <meta name="description" content="这篇记录下 Hilt 最基本的使用方法。  Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞">
 <meta property="og:type" content="article">
 <meta property="og:title" content="依赖注入框架 Hilt 的使用">
-<meta property="og:url" content="https://ajiew.me/hilt-notes/index.html">
+<meta property="og:url" content="https://ajiew.github.io/hilt-notes/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="这篇记录下 Hilt 最基本的使用方法。  Hilt 是基于 Dagger 开发的依赖注入框架。我们知道 Dagger 是 Java 开发中无可否认的功能最为强大的依赖注入框架，但是它的缺点是使用起来比较复杂，尤其是对于初学者而言，学习曲线异常陡峭。而依赖注入框架在 Android 开发中又是一个非常重要的工具，因此，在 Kotlin 成为了 Android 开发者的首选语言之后，开源社区中诞">
 <meta property="og:locale" content="en_US">
@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2021-12-12T12:30:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.737Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png">
     
@@ -94,16 +94,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/hilt-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.me/hilt-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/hilt-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.github.io/hilt-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这篇记录下 Hilt 最基本的使用方法。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -114,7 +114,7 @@
 &lt;li&gt;简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -319,16 +319,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/hilt-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.me/hilt-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/hilt-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/hilt-notes/&text=依赖注入框架 Hilt 的使用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/hilt-notes/&is_video=false&description=依赖注入框架 Hilt 的使用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=依赖注入框架 Hilt 的使用&body=Check out this article: https://ajiew.github.io/hilt-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/hilt-notes/&title=依赖注入框架 Hilt 的使用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/hilt-notes/&name=依赖注入框架 Hilt 的使用&description=&lt;p&gt;&lt;img src=&#34;https://miro.medium.com/max/1200/1*WH1qbEWjpri3p5HkBzboiQ.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这篇记录下 Hilt 最基本的使用方法。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -339,7 +339,7 @@
 &lt;li&gt;简化针对不同的构建类型（比如测试、调试或发布类型）配置不同的绑定。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;之所以能做到以上这几点，是因为 Hilt 自动帮我们做了很多工作，比如自动生成用于和 Android Framwork 绑定的 Component/Scoped annotations/Bindings/Qualifier 等，而如果使用 Dagger 的话，这些都是需要我们自己手动编写代码来管理的。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/hilt-notes/&t=依赖注入框架 Hilt 的使用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -381,7 +381,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

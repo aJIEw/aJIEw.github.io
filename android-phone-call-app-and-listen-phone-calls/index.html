@@ -9,20 +9,20 @@
     <meta name="description" content="Android 6.0 之后开始支持修改默认电话应用，刚好最近有个相关的需求，于是记录下自己探索之旅。  00 Android Telecom framework从 API 21 开始，谷歌添加了 TelecomManager 用于提供对电话通讯状态的监听，而 API 23 之后，又开放了 Telecom framework，这个框架允许第三方应用开发者编写应用来替换系统默认电话应用，而其中大">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听">
-<meta property="og:url" content="https://ajiew.me/android-phone-call-app-and-listen-phone-calls/index.html">
+<meta property="og:url" content="https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="Android 6.0 之后开始支持修改默认电话应用，刚好最近有个相关的需求，于是记录下自己探索之旅。  00 Android Telecom framework从 API 21 开始，谷歌添加了 TelecomManager 用于提供对电话通讯状态的监听，而 API 23 之后，又开放了 Telecom framework，这个框架允许第三方应用开发者编写应用来替换系统默认电话应用，而其中大">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c2c08ec1575678.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c2e340e9371588.gif">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c2fd6d30a17925.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c3386355e80306.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-08-11/instant-gratification-monkey.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-08-11/in-call-demo.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-08-11/set-default-phone-app-dialog.jpg">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-08-11/phone-call-state-listening.gif">
 <meta property="article:published_time" content="2018-08-11T02:42:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:modified_time" content="2024-07-21T07:16:57.688Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c2c08ec1575678.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-08-11/instant-gratification-monkey.png">
     
     
       
@@ -96,22 +96,22 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&text=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&is_video=false&description=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&body=Check out this article: https://ajiew.me/android-phone-call-app-and-listen-phone-calls/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&name=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c2c08ec1575678.png&#34; alt=&#34;Procrastinator&amp;#39;s Brain&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&text=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&is_video=false&description=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&body=Check out this article: https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&name=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-08-11/instant-gratification-monkey.png&#34; alt=&#34;Procrastinator&amp;#39;s Brain&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Android 6.0 之后开始支持修改默认电话应用，刚好最近有个相关的需求，于是记录下自己探索之旅。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;00-Android-Telecom-framework&#34;&gt;&lt;a href=&#34;#00-Android-Telecom-framework&#34; class=&#34;headerlink&#34; title=&#34;00 Android Telecom framework&#34;&gt;&lt;/a&gt;00 Android Telecom framework&lt;/h3&gt;&lt;p&gt;从 API 21 开始，谷歌添加了 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/TelecomManager&#34;&gt;&lt;code&gt;TelecomManager&lt;/code&gt;&lt;/a&gt; 用于提供对电话通讯状态的监听，而 API 23 之后，又开放了 &lt;a href=&#34;https://developer.android.com/guide/topics/connectivity/telecom/&#34;&gt;Telecom framework&lt;/a&gt;，这个框架允许第三方应用开发者编写应用来替换系统默认电话应用，而其中大部分接口就添加在 &lt;code&gt;android.telecom&lt;/code&gt; 包下。&lt;/p&gt;
 &lt;p&gt; Telecom framework 其实提供了两个方面的 API，一个是 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/ConnectionService.html&#34;&gt;ConnectionService&lt;/a&gt; 用于实现通讯（比如通过电信服务商提供的电话连接服务），另一个就是我们这次的需要用到的 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/InCallService.html&#34;&gt;InCallService&lt;/a&gt;，它主要负责提供 UI 来管理电话。一般系统自带的电话应用同样也是实现这套 API 来提供电话通信的交互界面的。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&t=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&t=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -166,7 +166,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c2c08ec1575678.png" alt="Procrastinator&#39;s Brain"></p>
+    <p><img src="/assets/2018-08-11/instant-gratification-monkey.png" alt="Procrastinator&#39;s Brain"></p>
 <blockquote>
 <p>Android 6.0 之后开始支持修改默认电话应用，刚好最近有个相关的需求，于是记录下自己探索之旅。</p>
 </blockquote>
@@ -198,18 +198,18 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">case</span> Call.STATE_DISCONNECTED: &#123;<br>	<span class="hljs-comment">// 通话结束</span><br>	ActivityStack.getInstance().finishActivity(PhoneCallActivity.class);<br>	<span class="hljs-keyword">break</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>至于 UI 界面如何实现，取决于你的需求了，这里我只是提供了接听和挂断的按钮用于演示，来看下效果图：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35c2e340e9371588.gif" alt="In Call Demo"></p>
+<p><img src="/assets/2018-08-11/in-call-demo.gif" alt="In Call Demo"></p>
 <p>最后，既然要替换系统默认电话应用，当然要提醒用户将我们的应用设置为默认应用了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MainActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AppCompatActivity</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCreate</span><span class="hljs-params">(<span class="hljs-meta">@Nullable</span> Bundle savedInstanceState)</span> &#123;<br>        <span class="hljs-built_in">super</span>.onCreate(savedInstanceState);<br>        setContentView(R.layout.activity_main);<br><br>        <span class="hljs-comment">// Android M 以上的系统则发起将本应用设为默认电话应用的请求</span><br>        <span class="hljs-keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;<br>            <span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER);<br>            intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, <br>            		getPackageName());<br>            startActivity(intent);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这段代码会在我们的 Actiivty 中启动这样一个 Dialog，如果用户点击确定后我们的应用就变成了默认电话应用啦╭(๑•̀ㅂ•́)و✧</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35c2fd6d30a17925.jpg" alt="请求将App设置为默认应用"></p>
+<p><img src="/assets/2018-08-11/set-default-phone-app-dialog.jpg" alt="请求将App设置为默认应用"></p>
 <h3 id="02-电话状态监听"><a href="#02-电话状态监听" class="headerlink" title="02 电话状态监听"></a>02 电话状态监听</h3><p>以上实现的功能只能在 Android M 以上的系统才有效，那么 Android M 以下怎么办呢？其实我们可以通过监听电话状态然后做一些操作。</p>
 <p>之前说过从 API 21 开始 Google 添加了 <code>TelecomManager</code> 类，所以我们可以借助这个类来监听电话状态。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">initPhoneStateListener</span><span class="hljs-params">()</span> &#123;<br>    phoneStateListener = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PhoneStateListener</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCallStateChanged</span><span class="hljs-params">(<span class="hljs-type">int</span> state, String incomingNumber)</span> &#123;<br>            <span class="hljs-built_in">super</span>.onCallStateChanged(state, incomingNumber);<br><br>            <span class="hljs-keyword">switch</span> (state) &#123;<br>                <span class="hljs-keyword">case</span> TelephonyManager.CALL_STATE_IDLE: <span class="hljs-comment">// 待机，即无电话时，挂断时触发</span><br>                    <span class="hljs-keyword">break</span>;<br>                <span class="hljs-keyword">case</span> TelephonyManager.CALL_STATE_RINGING: <span class="hljs-comment">// 响铃，来电时触发</span><br>                    <span class="hljs-keyword">break</span>;<br>                <span class="hljs-keyword">case</span> TelephonyManager.CALL_STATE_OFFHOOK: <span class="hljs-comment">// 摘机，接听或打电话时触发</span><br>                    <span class="hljs-keyword">break</span>;<br>                <span class="hljs-keyword">default</span>:<br>                    <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>    &#125;;<br><br>    telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);<br>    <span class="hljs-keyword">if</span> (telephonyManager != <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-comment">// 设置来电监听</span><br>        telephonyManager.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>我们可以把监听放到 Service 中，然后再注册一个电话变化的广播接收器来启动这个 Service，这样无论何时电话状态发生变化我们都可以接收到并做出一些操作。比如这里我监听了来电并弹出一个顶级弹框覆盖默认的电话应用，然后提供一个按钮用于打开App。</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35c3386355e80306.gif" alt="电话状态的监听"></p>
+<p><img src="/assets/2018-08-11/phone-call-state-listening.gif" alt="电话状态的监听"></p>
 <p>具体代码请看我写的 Demo，Github 地址：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/PhoneCallApp">aJIEw/PhoneCallApp</a></p>
 <p>Demo 包括两部分，代替默认电话应用以及电话监听。</p>
 <p>这里记录一个小坑，一般情况下，Android M 以下只要在 <code>manifest</code> 中声明权限就可以显示顶级弹框了，但是在某些国产 Rom 上顶级弹框默认是禁止的，需要在<strong>悬浮窗管理</strong>中允许后才可以。所以这里有个三方库就非常值得推荐了：<a target="_blank" rel="noopener" href="https://github.com/czy1121/settingscompat">czy1121/SettingsCompact</a></p>
@@ -252,22 +252,22 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&text=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&is_video=false&description=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&body=Check out this article: https://ajiew.me/android-phone-call-app-and-listen-phone-calls/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&name=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c2c08ec1575678.png&#34; alt=&#34;Procrastinator&amp;#39;s Brain&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&text=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&is_video=false&description=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&body=Check out this article: https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&title=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&name=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-08-11/instant-gratification-monkey.png&#34; alt=&#34;Procrastinator&amp;#39;s Brain&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Android 6.0 之后开始支持修改默认电话应用，刚好最近有个相关的需求，于是记录下自己探索之旅。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;00-Android-Telecom-framework&#34;&gt;&lt;a href=&#34;#00-Android-Telecom-framework&#34; class=&#34;headerlink&#34; title=&#34;00 Android Telecom framework&#34;&gt;&lt;/a&gt;00 Android Telecom framework&lt;/h3&gt;&lt;p&gt;从 API 21 开始，谷歌添加了 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/TelecomManager&#34;&gt;&lt;code&gt;TelecomManager&lt;/code&gt;&lt;/a&gt; 用于提供对电话通讯状态的监听，而 API 23 之后，又开放了 &lt;a href=&#34;https://developer.android.com/guide/topics/connectivity/telecom/&#34;&gt;Telecom framework&lt;/a&gt;，这个框架允许第三方应用开发者编写应用来替换系统默认电话应用，而其中大部分接口就添加在 &lt;code&gt;android.telecom&lt;/code&gt; 包下。&lt;/p&gt;
 &lt;p&gt; Telecom framework 其实提供了两个方面的 API，一个是 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/ConnectionService.html&#34;&gt;ConnectionService&lt;/a&gt; 用于实现通讯（比如通过电信服务商提供的电话连接服务），另一个就是我们这次的需要用到的 &lt;a href=&#34;https://developer.android.com/reference/android/telecom/InCallService.html&#34;&gt;InCallService&lt;/a&gt;，它主要负责提供 UI 来管理电话。一般系统自带的电话应用同样也是实现这套 API 来提供电话通信的交互界面的。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-phone-call-app-and-listen-phone-calls/&t=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/android-phone-call-app-and-listen-phone-calls/&t=安卓代替系统默认电话应用 (Android 6.0+) 与电话状态监听"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -309,7 +309,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

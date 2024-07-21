@@ -9,30 +9,30 @@
     <meta name="description" content="Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。  起因最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。 我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fragment 数据懒加载及原理">
-<meta property="og:url" content="https://ajiew.me/fragment-lazy-load/index.html">
+<meta property="og:url" content="https://ajiew.github.io/fragment-lazy-load/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。  起因最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。 我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/09/GoTrE7uSw6ZJICj.gif">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cdfce7f2152354.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb257ca6954004.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb256a36494392.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb252b52141814.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb254eed164238.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb255caec88812.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb2589c6023546.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb259764165004.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25759f172652.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25af55128015.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35cb25a20ad73908.png">
-<meta property="og:image" content="https://ajiew.me/assets/2018-12-27/nested_viewpager.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/blow-thou-winter-wind.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/lazy-load-fragment-demo.webp">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/1.1-FirstFragment_creation.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/1.2-SecondFragment_creation.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/2.1-SecondFragment_visible.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/2.2-FirstFragment_not_visible.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/2.3-ThirdFragment_creation.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/3.1-ThirdFragment_visible.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/3.2-SecondFragment_not_visible.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/3.3-FirstFragment_destroyed.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/4.1-SecondFragment_visible_again.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/4.2-FirstFragment_recreation.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/5.1-FirstFragment_visible_again.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-12-27/nested_viewpager.png">
 <meta property="article:published_time" content="2018-12-27T12:35:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.726Z">
+<meta property="article:modified_time" content="2024-07-21T08:10:52.801Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-12-27/blow-thou-winter-wind.png">
     
     
       
@@ -106,23 +106,23 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/fragment-lazy-load/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.me/fragment-lazy-load/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c962c25ad56668.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/fragment-lazy-load/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.github.io/fragment-lazy-load/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-12-27/blow-thou-winter-wind.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;起因&#34;&gt;&lt;a href=&#34;#起因&#34; class=&#34;headerlink&#34; title=&#34;起因&#34;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。&lt;/p&gt;
 &lt;p&gt;我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之后嵌套使用了 ViewPager，业务未完全开放的那个 fragment 里嵌套了一个 ViewPager，里面有多个 fragment，这样每次打开首页都会去加载该 page，然后是一连串的 fragment 初始化以及网络请求，所以为了解决该问题就不得不使用懒加载。&lt;/p&gt;
 &lt;p&gt;最终想要实现的效果是：1) 当 fragment 不可见的时候不加载数据；2) 当数据已经加载过之后，除非手动刷新否则不重新请求数据。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -177,7 +177,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c962c25ad56668.png" alt="Blow, Blow Thou Winter Wind - John Everett Millais"></p>
+    <p><img src="/assets/2018-12-27/blow-thou-winter-wind.png" alt="Blow, Blow Thou Winter Wind - John Everett Millais"></p>
 <blockquote>
 <p>Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。</p>
 </blockquote>
@@ -207,7 +207,7 @@
 <p>不过如果只是实现数据懒加载，我们不需要直接去调用该方法，只要覆写它并实现控制数据加载的逻辑就可以了。</p>
 <p>这里我参考了一种比较简便的做法，原文来自 <a target="_blank" rel="noopener" href="https://www.jianshu.com/u/bd3befbe51d0">尹star</a> 的 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5d29a0c3f4c#">ViewPager+Fragment LazyLoad 最优解</a>。</p>
 <p>实现效果：</p>
-<img src="https://i.loli.net/2019/09/09/GoTrE7uSw6ZJICj.gif" width="40%"/>
+<img src="../assets/2018-12-27/lazy-load-fragment-demo.webp" width="40%"/>
 
 <p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/DemoUI/tree/7360c2bc21eed4bb63645fcb2eba46997025b543/app/src/main/java/com/ajiew/demoui/ui/lazyloadfragment">aJIEw/DemoUI-LazyLoadFragment</a></p>
 <p>可以看到只有第一次进入 fragment 的时候才会加载数据，而且也不会主动加载相邻的 fragment 或者已经加载过的数据了。</p>
@@ -231,28 +231,28 @@
 <p>这样一个完整的数据懒加载就实现完毕了。</p>
 <h3 id="验证想法"><a href="#验证想法" class="headerlink" title="验证想法"></a>验证想法</h3><p>我们可以看下以上操作的日志来验证下我们的想法。</p>
 <h4 id="1-首次打开"><a href="#1-首次打开" class="headerlink" title="1. 首次打开"></a>1. 首次打开</h4><p>第一次打开，FirstFragment 作为第一个可见的 fragment 立马被初始化：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cdfce7f2152354.png" alt="1.1-FirstFragment_creation.png"></p>
+<p><img src="../assets/2018-12-27/1.1-FirstFragment_creation.png" alt="1.1-FirstFragment_creation.png"></p>
 <p>此时 isVisibleToUser 会在 isViewInitiated 之前设为 true，所以 FirstFragment 会在 onActivityCreated() 中真正开始获取数据。</p>
 <p>另外，由于预加载的存在，SecondFragment 也会被创建，但是此时还不可见：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb257ca6954004.png" alt="1.2-SecondFragment_creation.png"></p>
+<p><img src="../assets/2018-12-27/1.2-SecondFragment_creation.png" alt="1.2-SecondFragment_creation.png"></p>
 <h4 id="2-移动到-SecondFragment"><a href="#2-移动到-SecondFragment" class="headerlink" title="2. 移动到 SecondFragment"></a>2. 移动到 SecondFragment</h4><p>当滑动到 SecondFragment 的时候，SecondFragment 状态变为可见，setUserVisibleHint(true) 被调用，所以开始获取数据：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb256a36494392.png" alt="2.1-SecondFragment_visible.png"></p>
+<p><img src="../assets/2018-12-27/2.1-SecondFragment_visible.png" alt="2.1-SecondFragment_visible.png"></p>
 <p>而此时 FirstFragment 由可见变为不可见：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb252b52141814.png" alt="2.2-FirstFragment_not_visible.png"></p>
+<p><img src="../assets/2018-12-27/2.2-FirstFragment_not_visible.png" alt="2.2-FirstFragment_not_visible.png"></p>
 <p>ThirdFragment 则开始第一次被创建，同样此时并不可见：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb254eed164238.png" alt="2.3-ThirdFragment_creation.png"></p>
+<p><img src="../assets/2018-12-27/2.3-ThirdFragment_creation.png" alt="2.3-ThirdFragment_creation.png"></p>
 <h4 id="3-移动到-ThirdFragment"><a href="#3-移动到-ThirdFragment" class="headerlink" title="3. 移动到 ThirdFragment"></a>3. 移动到 ThirdFragment</h4><p>当滑动到 ThirdFragment 的时候，状态变为可见，所以也就开始获取数据：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb255caec88812.png" alt="3.1-ThirdFragment_visible.png"></p>
+<p><img src="../assets/2018-12-27/3.1-ThirdFragment_visible.png" alt="3.1-ThirdFragment_visible.png"></p>
 <p>此时 SecondFragment 由可见变为不可见： </p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb2589c6023546.png" alt="3.2-SecondFragment_not_visible.png"></p>
+<p><img src="../assets/2018-12-27/3.2-SecondFragment_not_visible.png" alt="3.2-SecondFragment_not_visible.png"></p>
 <p>而 FirstFragment 由于超出了 ViewPager 可以保存的 Fragment 的数量，所以被销毁：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb259764165004.png" alt="3.3-FirstFragment_destroyed.png"></p>
+<p><img src="../assets/2018-12-27/3.3-FirstFragment_destroyed.png" alt="3.3-FirstFragment_destroyed.png"></p>
 <h4 id="4-回到-SecondFragment"><a href="#4-回到-SecondFragment" class="headerlink" title="4. 回到 SecondFragment"></a>4. 回到 SecondFragment</h4><p>此时 SecondFragment 重新变得可见：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb25759f172652.png" alt="4.1-SecondFragment_visible_again.png"></p>
+<p><img src="../assets/2018-12-27/4.1-SecondFragment_visible_again.png" alt="4.1-SecondFragment_visible_again.png"></p>
 <p>而 FirstFragment 也开始重新被创建：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb25af55128015.png" alt="4.2-FirstFragment_recreation.png"></p>
+<p><img src="../assets/2018-12-27/4.2-FirstFragment_recreation.png" alt="4.2-FirstFragment_recreation.png"></p>
 <h4 id="5-回到-FirstFragment"><a href="#5-回到-FirstFragment" class="headerlink" title="5. 回到 FirstFragment"></a>5. 回到 FirstFragment</h4><p>此时 FirstFragment 重新变得可见，虽然 FirstFragment 之前被销毁了，但是由于之前获取的数据会被恢复，所以现在不会重新去获取数据：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35cb25a20ad73908.png" alt="5.1-FirstFragment_visible_again.png"></p>
+<p><img src="../assets/2018-12-27/5.1-FirstFragment_visible_again.png" alt="5.1-FirstFragment_visible_again.png"></p>
 <p>当然我们也可以选择在 onDestroy() 中将 isDataInitiated 置为 false，这样每次 fragment 重新创建都会重新获取数据。当然前提是你使用的是 <code>FragmentStatePagerAdapter</code>，因为如果使用 <code>FragmentPagerAdapter</code>，不会每次都调用 onDestroy()，fragment 实例会被保存。而 SecondFragment 再次变得不可见，ThirdFragment 被销毁，过程与 3 中移动到 ThirdFragment 类似，这里就不截图了。</p>
 <p>通过以上日志，验证了我们的想法是对的。</p>
 <p>另外，如果是 ViewPager 嵌套 ViewPager 其实效果也是一样的，如果不做特殊处理，相邻的 fragment 的会被加载，导致该 fragment 中的 ViewPager 会去加载其中的 fragment。</p>
@@ -286,23 +286,23 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/fragment-lazy-load/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.me/fragment-lazy-load/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c962c25ad56668.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/fragment-lazy-load/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/fragment-lazy-load/&text=Fragment 数据懒加载及原理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/fragment-lazy-load/&is_video=false&description=Fragment 数据懒加载及原理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Fragment 数据懒加载及原理&body=Check out this article: https://ajiew.github.io/fragment-lazy-load/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/fragment-lazy-load/&title=Fragment 数据懒加载及原理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/fragment-lazy-load/&name=Fragment 数据懒加载及原理&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-12-27/blow-thou-winter-wind.png&#34; alt=&#34;Blow, Blow Thou Winter Wind - John Everett Millais&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fragment 的懒加载算是比较常见的功能了，但是之前一直没有仔细研究过，直到最近有这方面的需求，所以就写下这篇文章记录下自己的探索过程。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;起因&#34;&gt;&lt;a href=&#34;#起因&#34; class=&#34;headerlink&#34; title=&#34;起因&#34;&gt;&lt;/a&gt;起因&lt;/h3&gt;&lt;p&gt;最近据后台同事反馈说，某些接口调用的频率有点高，而这块业务还没完全开放，照理说很少会用到，于是让我查查怎么回事。&lt;/p&gt;
 &lt;p&gt;我看了下日志，把网络请求日志过滤出来，发现的确有问题，每次打开首页后都有许多那块业务相关的网络请求。于是马上联想到可能是因为首页改版之后嵌套使用了 ViewPager，业务未完全开放的那个 fragment 里嵌套了一个 ViewPager，里面有多个 fragment，这样每次打开首页都会去加载该 page，然后是一连串的 fragment 初始化以及网络请求，所以为了解决该问题就不得不使用懒加载。&lt;/p&gt;
 &lt;p&gt;最终想要实现的效果是：1) 当 fragment 不可见的时候不加载数据；2) 当数据已经加载过之后，除非手动刷新否则不重新请求数据。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/fragment-lazy-load/&t=Fragment 数据懒加载及原理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -344,7 +344,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

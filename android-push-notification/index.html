@@ -9,18 +9,18 @@
     <meta name="description" content="最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。  首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。 而安卓上的推送，由于国内无法使用 FCM (谷歌服务被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 推送调研">
-<meta property="og:url" content="https://ajiew.me/android-push-notification/index.html">
+<meta property="og:url" content="https://ajiew.github.io/android-push-notification/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。  首先，iOS 设备的推送都会通过 APNS，所以不需要担心到达率的问题。 而安卓上的推送，由于国内无法使用 FCM (谷歌服务被阉割)，也没有统一的推送平台，所以种类就比较繁多了。主要分为两种，一种是手机厂商自己做的推送服务，这种大都是集成到厂商系统级的 ROM 当中的，所以到达率较高。缺点是对于">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-10-08/Android-Push.png">
 <meta property="article:published_time" content="2018-10-08T08:51:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:modified_time" content="2024-07-21T07:31:52.044Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="推送">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-10-08/Android-Push.png">
     
     
       
@@ -94,16 +94,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-push-notification/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.me/android-push-notification/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c75e88a6368765.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/android-push-notification/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.github.io/android-push-notification/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-08/Android-Push.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -117,7 +117,7 @@
 &lt;li&gt;&lt;a href=&#34;https://dev.vivo.com.cn/openAbility/pushNews&#34;&gt;vivo FuntouchOS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://open.flyme.cn/open-web/views/push.html&#34;&gt;魅族 Flyme&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -172,7 +172,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c75e88a6368765.png" alt="Android Push  Notification"></p>
+    <p><img src="/assets/2018-10-08/Android-Push.png" alt="Android Push  Notification"></p>
 <blockquote>
 <p>最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。</p>
 </blockquote>
@@ -290,16 +290,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/android-push-notification/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.me/android-push-notification/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c75e88a6368765.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/android-push-notification/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/android-push-notification/&text=Android 推送调研"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/android-push-notification/&is_video=false&description=Android 推送调研"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Android 推送调研&body=Check out this article: https://ajiew.github.io/android-push-notification/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/android-push-notification/&title=Android 推送调研"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/android-push-notification/&name=Android 推送调研&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-08/Android-Push.png&#34; alt=&#34;Android Push  Notification&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;最近开始做推送，发现 Android 平台的推送服务实在是太多了，于是就有了这篇推送调研文章。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -313,7 +313,7 @@
 &lt;li&gt;&lt;a href=&#34;https://dev.vivo.com.cn/openAbility/pushNews&#34;&gt;vivo FuntouchOS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://open.flyme.cn/open-web/views/push.html&#34;&gt;魅族 Flyme&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/android-push-notification/&t=Android 推送调研"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -355,7 +355,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

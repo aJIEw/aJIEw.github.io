@@ -9,21 +9,21 @@
     <meta name="description" content="从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。  （长文预警：本文最佳阅读方式是先把 Redux 文档 以及 React Redux API 文档 在另一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native - Redux 入门">
-<meta property="og:url" content="https://ajiew.me/rn-redux-introduction/index.html">
+<meta property="og:url" content="https://ajiew.github.io/rn-redux-introduction/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。  （长文预警：本文最佳阅读方式是先把 Redux 文档 以及 React Redux API 文档 在另一个">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c63419cc231618.png">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c65aca52827258.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/09/09/gQ3Vn4bSArMwsUp.gif">
-<meta property="og:image" content="https://ajiew.me/assets/2018-09-24/redux_flow_full.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-09-24/react-redux-jsapi-overview.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-09-24/redux_flow_simple.jpg">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-09-24/20180919_224024.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-09-24/redux_flow_full.gif">
 <meta property="article:published_time" content="2018-09-24T14:28:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.725Z">
+<meta property="article:modified_time" content="2024-07-21T07:28:53.580Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="React Native">
 <meta property="article:tag" content="Redux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c63419cc231618.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-09-24/react-redux-jsapi-overview.png">
     
     
       
@@ -97,23 +97,23 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/rn-redux-introduction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.me/rn-redux-introduction/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c63419cc231618.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/rn-redux-introduction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.github.io/rn-redux-introduction/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-09-24/react-redux-jsapi-overview.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;（长文预警：本文最佳阅读方式是先把 &lt;a href=&#34;https://redux.js.org/&#34;&gt;Redux 文档&lt;/a&gt; 以及 &lt;a href=&#34;https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api&#34;&gt;React Redux API 文档 &lt;/a&gt;在另一个浏览器中打开，随时对比参考，然后把 &lt;a href=&#34;https://github.com/aJIEw/HeadFirstRN/tree/master/src/redux&#34;&gt;Demo 项目&lt;/a&gt;打开，看到有疑惑的地方，随时停下来动手写一写、改一改代码，debug 下，然后再接着看）&lt;/p&gt;
 &lt;h3 id=&#34;00-What’s-Redux&#34;&gt;&lt;a href=&#34;#00-What’s-Redux&#34; class=&#34;headerlink&#34; title=&#34;00 What’s Redux?&#34;&gt;&lt;/a&gt;00 What’s Redux?&lt;/h3&gt;&lt;p&gt;首先看下官方文档的解释『Redux is a predictable state container for JavaScript apps』，大致可以翻译为 Redux 是一个专为 JavaScript 应用设计的可预测的&lt;strong&gt;状态&lt;/strong&gt;容器。&lt;/p&gt;
 &lt;p&gt;我的理解：如果把我们的 app 比做销售柜台的话，Redux 其实就像一个自动售货机，它可以帮助我们&lt;strong&gt;管理&lt;/strong&gt;商品（&lt;strong&gt;组件&lt;/strong&gt;）的各种&lt;strong&gt;状态&lt;/strong&gt;。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -168,7 +168,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c63419cc231618.png" alt="React Redux API Overview"></p>
+    <p><img src="/assets/2018-09-24/react-redux-jsapi-overview.png" alt="React Redux API Overview"></p>
 <blockquote>
 <p>从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。</p>
 </blockquote>
@@ -182,7 +182,7 @@
 <h3 id="01-Core-Concept"><a href="#01-Core-Concept" class="headerlink" title="01 Core Concept"></a>01 Core Concept</h3><p>Redux 中有四个核心的概念是需要我们掌握的，分别是 <code>Actions</code>, <code>Reducers</code>, <code>Store</code> 以及 <code>Data Flow</code>（强烈推荐看一遍 <a target="_blank" rel="noopener" href="https://redux.js.org/introduction/core-concepts">Redux 文档</a> 里对这几个概念的介绍）。</p>
 <p>看过文档后差不多就可以知道，我们通过在需要改变 state 的地方发送(dispatch) action，然后在 reducer 中根据 action 的 type 进行处理（返回增删改后的 state），而 state 则是根据 reducer 的组合结构保存在 store 的 state 树中的。</p>
 <p>文字太枯燥，来看下面这张图辅助理解：</p>
-<p><img src="https://i.loli.net/2019/07/22/5d35c65aca52827258.jpg" alt="Redux Data Flow (simple)"></p>
+<p><img src="/assets/2018-09-24/redux_flow_simple.jpg" alt="Redux Data Flow (simple)"></p>
 <p>我简单分析下这张图吧：</p>
 <ol>
 <li>首先 React 组件绑定了 Redux 之后（主要借助 React-Redux，下面会说到），就可以使用 <code>store.dispatch()</code> 去发送事件了，比如在按钮的点击事件中发送 action；</li>
@@ -315,7 +315,7 @@
 <p>而 Containers 指的是一个小的模块，用来连接数据并且可以修改数据的组件。Containers 一般会通过组合 Components 来使用，我们会在其中处理用户输入、状态变化，也可以发起网络请求等操作。Components 和 Containers 的最简单的区分方法是：有没有使用 React-Redux 的 <code>connect()</code> 连接组件。</p>
 <p>而 redux 包下存放的当然就是和 Redux 相关的内容啦，actions 下存放 Action Creator，reducers 下存放 reducer，最外面的 store.js 则是创建 store 的地方了。</p>
 <h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>看代码之前先看下我们的 demo 实现的效果吧：</p>
-<img src="https://i.loli.net/2019/09/09/gQ3Vn4bSArMwsUp.gif" width="40%"/>
+<img src="../assets/2018-09-24/20180919_224024.gif" width="40%"/>
 
 <p>根据最近学到的 <a target="_blank" rel="noopener" href="http://sscce.org/">SSCCE</a> 原则，我尽可能把这个 demo 写的足够简单，目的是帮助理解 React Redux 的使用。</p>
 <h5 id="ChangeableText"><a href="#ChangeableText" class="headerlink" title="ChangeableText"></a>ChangeableText</h5><p>这个 Component 的作用很简单——显示文字，不过文字和颜色是可以改变的。</p>
@@ -375,23 +375,23 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/rn-redux-introduction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.me/rn-redux-introduction/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c63419cc231618.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/rn-redux-introduction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/rn-redux-introduction/&text=React Native - Redux 入门"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/rn-redux-introduction/&is_video=false&description=React Native - Redux 入门"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - Redux 入门&body=Check out this article: https://ajiew.github.io/rn-redux-introduction/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/rn-redux-introduction/&title=React Native - Redux 入门"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/rn-redux-introduction/&name=React Native - Redux 入门&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-09-24/react-redux-jsapi-overview.png&#34; alt=&#34;React Redux API Overview&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;从上周开始一直在看 Redux 相关的文档和资料，一开始一连几天都没有进展，只能一边看文档一边默默 debug，到今天总算稍微理解了一点儿，于是赶紧开始写这篇博客，目的是一点点记录下自己入门 Redux 的过程以及作为一个 React Native 菜鸟对使用 Redux 的心得体会。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;（长文预警：本文最佳阅读方式是先把 &lt;a href=&#34;https://redux.js.org/&#34;&gt;Redux 文档&lt;/a&gt; 以及 &lt;a href=&#34;https://github.com/reduxjs/react-redux/blob/master/docs/api.md#api&#34;&gt;React Redux API 文档 &lt;/a&gt;在另一个浏览器中打开，随时对比参考，然后把 &lt;a href=&#34;https://github.com/aJIEw/HeadFirstRN/tree/master/src/redux&#34;&gt;Demo 项目&lt;/a&gt;打开，看到有疑惑的地方，随时停下来动手写一写、改一改代码，debug 下，然后再接着看）&lt;/p&gt;
 &lt;h3 id=&#34;00-What’s-Redux&#34;&gt;&lt;a href=&#34;#00-What’s-Redux&#34; class=&#34;headerlink&#34; title=&#34;00 What’s Redux?&#34;&gt;&lt;/a&gt;00 What’s Redux?&lt;/h3&gt;&lt;p&gt;首先看下官方文档的解释『Redux is a predictable state container for JavaScript apps』，大致可以翻译为 Redux 是一个专为 JavaScript 应用设计的可预测的&lt;strong&gt;状态&lt;/strong&gt;容器。&lt;/p&gt;
 &lt;p&gt;我的理解：如果把我们的 app 比做销售柜台的话，Redux 其实就像一个自动售货机，它可以帮助我们&lt;strong&gt;管理&lt;/strong&gt;商品（&lt;strong&gt;组件&lt;/strong&gt;）的各种&lt;strong&gt;状态&lt;/strong&gt;。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/rn-redux-introduction/&t=React Native - Redux 入门"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -433,7 +433,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

@@ -9,19 +9,19 @@
     <meta name="description" content="一个 React Native 应用在启动的时候往往不如原生快，这主要是因为 RN 比原生应用多了一层 JS Bridge，需要的初始化的时间也就更长一些。所以如果不做任何改动的话，我们打开应用的瞬间就会观察到短暂的白屏现象。为了更好的用户体验，我们需要想办法去掉这个讨厌的白屏，使得应用在打开时就显示启动页。 本文主要讨论如何使用 react-native-splash-screen 在 And">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native 实现无白屏启动页">
-<meta property="og:url" content="https://ajiew.me/react-native-splash-screen/index.html">
+<meta property="og:url" content="https://ajiew.github.io/react-native-splash-screen/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="一个 React Native 应用在启动的时候往往不如原生快，这主要是因为 RN 比原生应用多了一层 JS Bridge，需要的初始化的时间也就更长一些。所以如果不做任何改动的话，我们打开应用的瞬间就会观察到短暂的白屏现象。为了更好的用户体验，我们需要想办法去掉这个讨厌的白屏，使得应用在打开时就显示启动页。 本文主要讨论如何使用 react-native-splash-screen 在 And">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/08/23/5mfsv7tSWwo6Hhj.png">
-<meta property="og:image" content="https://i.loli.net/2019/08/23/pQ3ITXtCWePM51D.gif">
-<meta property="og:image" content="https://i.loli.net/2019/08/23/AUw3T5sBoXevWCr.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2019-08-18/change-rn-splash-screen.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2019-08-18/splash_screen_android.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2019-08-18/splash_screen_ios.gif">
 <meta property="article:published_time" content="2019-08-18T10:44:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.727Z">
+<meta property="article:modified_time" content="2024-07-21T08:32:40.216Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="React Native">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/08/23/5mfsv7tSWwo6Hhj.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2019-08-18/change-rn-splash-screen.png">
     
     
       
@@ -95,19 +95,19 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/react-native-splash-screen/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/react-native-splash-screen/&text=React Native 实现无白屏启动页"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/react-native-splash-screen/&is_video=false&description=React Native 实现无白屏启动页"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native 实现无白屏启动页&body=Check out this article: https://ajiew.me/react-native-splash-screen/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/react-native-splash-screen/&name=React Native 实现无白屏启动页&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/08/23/5mfsv7tSWwo6Hhj.png&#34; alt=&#34;change-rn-splash-screen.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/react-native-splash-screen/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/react-native-splash-screen/&text=React Native 实现无白屏启动页"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/react-native-splash-screen/&is_video=false&description=React Native 实现无白屏启动页"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native 实现无白屏启动页&body=Check out this article: https://ajiew.github.io/react-native-splash-screen/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/react-native-splash-screen/&name=React Native 实现无白屏启动页&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-08-18/change-rn-splash-screen.png&#34; alt=&#34;change-rn-splash-screen.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;一个 React Native 应用在启动的时候往往不如原生快，这主要是因为 RN 比原生应用多了一层 JS Bridge，需要的初始化的时间也就更长一些。所以如果不做任何改动的话，我们打开应用的瞬间就会观察到短暂的白屏现象。为了更好的用户体验，我们需要想办法去掉这个讨厌的白屏，使得应用在打开时就显示启动页。&lt;/p&gt;
 &lt;p&gt;本文主要讨论如何使用 &lt;a href=&#34;https://github.com/crazycodeboy/react-native-splash-screen&#34;&gt;&lt;strong&gt;react-native-splash-screen&lt;/strong&gt;&lt;/a&gt; 在 Android 和 iOS 上实现无白屏启动页效果。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/react-native-splash-screen/&t=React Native 实现无白屏启动页"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/react-native-splash-screen/&t=React Native 实现无白屏启动页"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -162,7 +162,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/08/23/5mfsv7tSWwo6Hhj.png" alt="change-rn-splash-screen.png"></p>
+    <p><img src="/assets/2019-08-18/change-rn-splash-screen.png" alt="change-rn-splash-screen.png"></p>
 <p>一个 React Native 应用在启动的时候往往不如原生快，这主要是因为 RN 比原生应用多了一层 JS Bridge，需要的初始化的时间也就更长一些。所以如果不做任何改动的话，我们打开应用的瞬间就会观察到短暂的白屏现象。为了更好的用户体验，我们需要想办法去掉这个讨厌的白屏，使得应用在打开时就显示启动页。</p>
 <p>本文主要讨论如何使用 <a target="_blank" rel="noopener" href="https://github.com/crazycodeboy/react-native-splash-screen"><strong>react-native-splash-screen</strong></a> 在 Android 和 iOS 上实现无白屏启动页效果。</p>
 <span id="more"></span>
@@ -186,14 +186,14 @@
 
 <p>这里我将开屏页的主题和 App 主题设置为同一个，这样状态栏颜色就不会发生变化。因为我发现如果开屏页和 App 主题的状态栏颜色不一致的话，会造成启动时状态栏从 App 主题颜色过渡到启动页状态栏颜色，进入主页面后再过渡到 App 主题，效果不是很好。</p>
 <p>看下效果：</p>
-<img src="https://i.loli.net/2019/08/23/pQ3ITXtCWePM51D.gif" width="30%" />
+<img src="../assets/2019-08-18/splash_screen_android.gif" width="40%" />
 
 <p>由于设置了背景图，冷启动时会观察到从背景图切换到启动页图的效果。</p>
 <h3 id="iOS-上启动页的实现"><a href="#iOS-上启动页的实现" class="headerlink" title="iOS 上启动页的实现"></a>iOS 上启动页的实现</h3><p>iOS 实现原理与 Android 类似，通过添加一个 Launch Image 或者修改 LaunchScreen.xib 来控制启动屏的显示内容，然后等到 JS Bundle 加载完再显示主页面。</p>
 <p>这里我同样通过添加启动页图片来实现，xCode 中选择 Images.xcassets，然后 + → App Icons &amp; Launch Images → New iOS Launch Image，选中 LaunchImage 并在右侧的 Attribute Inspector 中选择你需要支持的屏幕。最后将准备好的启动页图片拖到对应的型号下就可以了。附上启动页图片大小参照：<a target="_blank" rel="noopener" href="https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/launch-screen/">Static Launch Screen Images</a></p>
 <p>添加完启动页图片后，还需要修改以我们新添加的图片作为启动页，在 xCode 中选择 General → App Icons and Launch Images → Launch Images Source → Use Asset Catalog，再选择我们新添加的 LaunchImage 就可以了。注意可能要将 app 卸载后重新安装后，修改的启动页图片才可能生效。</p>
 <p>效果图如下：</p>
-<img src="https://i.loli.net/2019/08/23/AUw3T5sBoXevWCr.gif" width="30%" />
+<img src="../assets/2019-08-18/splash_screen_ios.gif" width="40%" />
 
 <p>可以看到 iOS 上有一点和 Android 不同，由于 iOS 没有冷启动机制，所以不会出现背景图切换的问题。</p>
 <p>代码见：<a target="_blank" rel="noopener" href="https://github.com/aJIEw/HeadFirstRN/blob/master/app/redux/router/AppRouter.js">AppRouter</a></p>
@@ -225,19 +225,19 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/react-native-splash-screen/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/react-native-splash-screen/&text=React Native 实现无白屏启动页"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/react-native-splash-screen/&is_video=false&description=React Native 实现无白屏启动页"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native 实现无白屏启动页&body=Check out this article: https://ajiew.me/react-native-splash-screen/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/react-native-splash-screen/&name=React Native 实现无白屏启动页&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/08/23/5mfsv7tSWwo6Hhj.png&#34; alt=&#34;change-rn-splash-screen.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/react-native-splash-screen/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/react-native-splash-screen/&text=React Native 实现无白屏启动页"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/react-native-splash-screen/&is_video=false&description=React Native 实现无白屏启动页"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native 实现无白屏启动页&body=Check out this article: https://ajiew.github.io/react-native-splash-screen/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/react-native-splash-screen/&title=React Native 实现无白屏启动页"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/react-native-splash-screen/&name=React Native 实现无白屏启动页&description=&lt;p&gt;&lt;img src=&#34;/assets/2019-08-18/change-rn-splash-screen.png&#34; alt=&#34;change-rn-splash-screen.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;一个 React Native 应用在启动的时候往往不如原生快，这主要是因为 RN 比原生应用多了一层 JS Bridge，需要的初始化的时间也就更长一些。所以如果不做任何改动的话，我们打开应用的瞬间就会观察到短暂的白屏现象。为了更好的用户体验，我们需要想办法去掉这个讨厌的白屏，使得应用在打开时就显示启动页。&lt;/p&gt;
 &lt;p&gt;本文主要讨论如何使用 &lt;a href=&#34;https://github.com/crazycodeboy/react-native-splash-screen&#34;&gt;&lt;strong&gt;react-native-splash-screen&lt;/strong&gt;&lt;/a&gt; 在 Android 和 iOS 上实现无白屏启动页效果。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/react-native-splash-screen/&t=React Native 实现无白屏启动页"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/react-native-splash-screen/&t=React Native 实现无白屏启动页"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -279,7 +279,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

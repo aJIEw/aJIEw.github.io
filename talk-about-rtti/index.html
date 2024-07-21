@@ -9,17 +9,17 @@
     <meta name="description" content="什么是 RTTI？RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。 最简单的一个例子，比如： 1234List&lt;Shape&gt; shapeList &#x3D; Arrays.asList">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈 RTTI">
-<meta property="og:url" content="https://ajiew.me/talk-about-rtti/index.html">
+<meta property="og:url" content="https://ajiew.github.io/talk-about-rtti/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="什么是 RTTI？RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。 最简单的一个例子，比如： 1234List&lt;Shape&gt; shapeList &#x3D; Arrays.asList">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-04-14/sunrise-at-mountain-top.jpg">
 <meta property="article:published_time" content="2018-04-13T16:28:00.000Z">
-<meta property="article:modified_time" content="2023-06-30T02:48:19.446Z">
+<meta property="article:modified_time" content="2024-07-21T06:55:44.514Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-04-14/sunrise-at-mountain-top.jpg">
     
     
       
@@ -93,22 +93,22 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/talk-about-rtti/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.me/talk-about-rtti/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/talk-about-rtti/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.github.io/talk-about-rtti/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-04-14/sunrise-at-mountain-top.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;什么是-RTTI？&#34;&gt;&lt;a href=&#34;#什么是-RTTI？&#34; class=&#34;headerlink&#34; title=&#34;什么是 RTTI？&#34;&gt;&lt;/a&gt;什么是 RTTI？&lt;/h3&gt;&lt;p&gt;RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。&lt;/p&gt;
 &lt;p&gt;最简单的一个例子，比如：&lt;/p&gt;
 &lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs java&#34;&gt;List&amp;lt;Shape&amp;gt; shapeList = Arrays.asList(&lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Circle&lt;/span&gt;(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Square&lt;/span&gt;(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Triangle&lt;/span&gt;());&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;for&lt;/span&gt;(Shape shape : shapeList) &amp;#123;&lt;br&gt;    shape.draw();&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;当从 shapeList 中取出元素时（其实元素是用数组保存的，而数组会把所有元素都当作 Object 来持有），会自动将元素转型回对应的对象。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -163,7 +163,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg" alt="Forest in West Virginia"></p>
+    <p><img src="/assets/2018-04-14/sunrise-at-mountain-top.jpg" alt="Forest in West Virginia"></p>
 <h3 id="什么是-RTTI？"><a href="#什么是-RTTI？" class="headerlink" title="什么是 RTTI？"></a>什么是 RTTI？</h3><p>RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。</p>
 <p>最简单的一个例子，比如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;Shape&gt; shapeList = Arrays.asList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Circle</span>(), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Square</span>(), <span class="hljs-keyword">new</span> <span class="hljs-title class_">Triangle</span>());<br><span class="hljs-keyword">for</span>(Shape shape : shapeList) &#123;<br>    shape.draw();<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -241,22 +241,22 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/talk-about-rtti/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.me/talk-about-rtti/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c103a5814619.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/talk-about-rtti/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/talk-about-rtti/&text=浅谈 RTTI"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/talk-about-rtti/&is_video=false&description=浅谈 RTTI"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=浅谈 RTTI&body=Check out this article: https://ajiew.github.io/talk-about-rtti/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/talk-about-rtti/&title=浅谈 RTTI"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/talk-about-rtti/&name=浅谈 RTTI&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-04-14/sunrise-at-mountain-top.jpg&#34; alt=&#34;Forest in West Virginia&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;什么是-RTTI？&#34;&gt;&lt;a href=&#34;#什么是-RTTI？&#34; class=&#34;headerlink&#34; title=&#34;什么是 RTTI？&#34;&gt;&lt;/a&gt;什么是 RTTI？&lt;/h3&gt;&lt;p&gt;RTTI 即 Runtime Type Information，顾名思义，也就是在运行时，识别对象和类的信息。RTTI 有两种，一种是“传统的” RTTI，它假定我们在编译时就已经知道了所有的类型；另一种是“反射”机制，它允许我们在运行时发现和使用类的信息。&lt;/p&gt;
 &lt;p&gt;最简单的一个例子，比如：&lt;/p&gt;
 &lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs java&#34;&gt;List&amp;lt;Shape&amp;gt; shapeList = Arrays.asList(&lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Circle&lt;/span&gt;(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Square&lt;/span&gt;(), &lt;span class=&#34;hljs-keyword&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;hljs-title class_&#34;&gt;Triangle&lt;/span&gt;());&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;for&lt;/span&gt;(Shape shape : shapeList) &amp;#123;&lt;br&gt;    shape.draw();&lt;br&gt;&amp;#125;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;当从 shapeList 中取出元素时（其实元素是用数组保存的，而数组会把所有元素都当作 Object 来持有），会自动将元素转型回对应的对象。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/talk-about-rtti/&t=浅谈 RTTI"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -298,7 +298,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

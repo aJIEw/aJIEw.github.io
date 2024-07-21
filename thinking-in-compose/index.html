@@ -9,7 +9,7 @@
     <meta name="description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Thinking in Compose">
-<meta property="og:url" content="https://ajiew.me/thinking-in-compose/index.html">
+<meta property="og:url" content="https://ajiew.github.io/thinking-in-compose/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了官方文档后做的笔记，关于 Compose 的开发模式以及需要注意的地方。 什么是 Compose Jetpack Compose is a modern declarative UI Toolkit for Android. Compose">
 <meta property="og:locale" content="en_US">
@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2021-03-09T12:30:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.733Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Compose">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png">
@@ -95,23 +95,23 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/thinking-in-compose/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.me/thinking-in-compose/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/thinking-in-compose/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.github.io/thinking-in-compose/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
 
 &lt;p&gt;Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了&lt;a href=&#34;https://developer.android.com/jetpack/compose/mental-model&#34;&gt;官方文档&lt;/a&gt;后做的笔记，关于 Compose 的开发模式以及需要注意的地方。&lt;/p&gt;
 &lt;h2 id=&#34;什么是-Compose&#34;&gt;&lt;a href=&#34;#什么是-Compose&#34; class=&#34;headerlink&#34; title=&#34;什么是 Compose&#34;&gt;&lt;/a&gt;什么是 Compose&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;Jetpack Compose is a modern &lt;strong&gt;declarative UI&lt;/strong&gt; Toolkit for Android. Compose makes it easier to write and maintain your app UI by providing a &lt;em&gt;declarative API&lt;/em&gt; that allows you to render your app UI without imperatively mutating frontend views.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;和 React-Native、Flutter、SwiftUI 一样，Compose 是一种声明式编程的 UI 框架。简单来说，就是让你可以直接使用 Kotlin 代码编写视图，而不需要每次从视图树中获取视图并进行修改。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -236,23 +236,23 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/thinking-in-compose/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.me/thinking-in-compose/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/thinking-in-compose/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/thinking-in-compose/&text=Thinking in Compose"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/thinking-in-compose/&is_video=false&description=Thinking in Compose"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Thinking in Compose&body=Check out this article: https://ajiew.github.io/thinking-in-compose/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/thinking-in-compose/&title=Thinking in Compose"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/thinking-in-compose/&name=Thinking in Compose&description=&lt;img src=&#39;https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png&#39; width=90%/&gt;
 
 &lt;p&gt;Compose 终于迎来了第一个 Beta 版本，这意味着其 API 已经基本稳定了，所以这个时候开始学习 Compose 是最合适的。这篇主要是我在读了&lt;a href=&#34;https://developer.android.com/jetpack/compose/mental-model&#34;&gt;官方文档&lt;/a&gt;后做的笔记，关于 Compose 的开发模式以及需要注意的地方。&lt;/p&gt;
 &lt;h2 id=&#34;什么是-Compose&#34;&gt;&lt;a href=&#34;#什么是-Compose&#34; class=&#34;headerlink&#34; title=&#34;什么是 Compose&#34;&gt;&lt;/a&gt;什么是 Compose&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;Jetpack Compose is a modern &lt;strong&gt;declarative UI&lt;/strong&gt; Toolkit for Android. Compose makes it easier to write and maintain your app UI by providing a &lt;em&gt;declarative API&lt;/em&gt; that allows you to render your app UI without imperatively mutating frontend views.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;和 React-Native、Flutter、SwiftUI 一样，Compose 是一种声明式编程的 UI 框架。简单来说，就是让你可以直接使用 Kotlin 代码编写视图，而不需要每次从视图树中获取视图并进行修改。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/thinking-in-compose/&t=Thinking in Compose"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -294,7 +294,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

@@ -9,19 +9,19 @@
     <meta name="description" content="这篇介绍一下如何将 Shapefile 转换为 WMS 图层并在高德地图上展示出来。  如果你是一名 GIS 开发者，那么你对 Shapefile 一定不陌生，它是一种用于存储地理要素的几何位置和属性信息的文件格式。具体来说，它主要通过几何图形（点、折线、多边形）存储道路、桥梁、河流等空间对象的几何位置。另外，它还可以通过不同的文字、颜色等标识出这些空间对象的属性。 很多地图制作工具都支持导出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在高德地图上展示 Shapefile 中的数据">
-<meta property="og:url" content="https://ajiew.me/shapefile-to-wms/index.html">
+<meta property="og:url" content="https://ajiew.github.io/shapefile-to-wms/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="这篇介绍一下如何将 Shapefile 转换为 WMS 图层并在高德地图上展示出来。  如果你是一名 GIS 开发者，那么你对 Shapefile 一定不陌生，它是一种用于存储地理要素的几何位置和属性信息的文件格式。具体来说，它主要通过几何图形（点、折线、多边形）存储道路、桥梁、河流等空间对象的几何位置。另外，它还可以通过不同的文字、颜色等标识出这些空间对象的属性。 很多地图制作工具都支持导出">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ajiew.me/assets/2021-12-21/ganymede_globes.png">
-<meta property="og:image" content="https://ajiew.me/assets/2021-12-21/shapefile-to-wms-demo-min.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2021-12-21/ganymede_globes.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2021-12-21/shapefile-to-wms-demo-min.gif">
 <meta property="article:published_time" content="2021-12-21T12:30:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.737Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="GIS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ajiew.me/assets/2021-12-21/ganymede_globes.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2021-12-21/ganymede_globes.png">
     
     
       
@@ -95,22 +95,22 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/shapefile-to-wms/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/shapefile-to-wms/&text=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/shapefile-to-wms/&is_video=false&description=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=在高德地图上展示 Shapefile 中的数据&body=Check out this article: https://ajiew.me/shapefile-to-wms/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/shapefile-to-wms/&name=在高德地图上展示 Shapefile 中的数据&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-12-21/ganymede_globes.png&#34; alt=&#34;ganymede_globes&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/shapefile-to-wms/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/shapefile-to-wms/&text=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/shapefile-to-wms/&is_video=false&description=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=在高德地图上展示 Shapefile 中的数据&body=Check out this article: https://ajiew.github.io/shapefile-to-wms/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/shapefile-to-wms/&name=在高德地图上展示 Shapefile 中的数据&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-12-21/ganymede_globes.png&#34; alt=&#34;ganymede_globes&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这篇介绍一下如何将 &lt;a href=&#34;https://desktop.arcgis.com/zh-cn/arcmap/10.3/manage-data/shapefiles/what-is-a-shapefile.htm&#34;&gt;Shapefile&lt;/a&gt; 转换为 WMS 图层并在高德地图上展示出来。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;如果你是一名 GIS 开发者，那么你对 Shapefile 一定不陌生，它是一种用于存储地理要素的几何位置和属性信息的文件格式。具体来说，它主要通过几何图形（点、折线、多边形）存储道路、桥梁、河流等空间对象的几何位置。另外，它还可以通过不同的文字、颜色等标识出这些空间对象的属性。&lt;/p&gt;
 &lt;p&gt;很多地图制作工具都支持导出 shp 格式的数据（比如 &lt;a href=&#34;https://www.esri.com/zh-cn/arcgis/products/arcgis-desktop/resources&#34;&gt;ArcGIS&lt;/a&gt;），但是，如果想要通过第三方地图 SDK 加载这些数据，往往需要先做一步转换操作，比如转换为 &lt;a href=&#34;https://lbs.amap.com/api/javascript-api/guide/layers/wms&#34;&gt;WMS 图层&lt;/a&gt; 或者 &lt;a href=&#34;https://developers.google.com/maps/documentation/javascript/kmllayer&#34;&gt;KML 图层&lt;/a&gt;。这里，我就以高德地图为例，介绍如何通过 &lt;a href=&#34;http://geoserver.org/&#34;&gt;GeoServer&lt;/a&gt; 将 Shapefile 转换为 WMS 图层并加载到 Android 地图 SDK 中。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/shapefile-to-wms/&t=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/shapefile-to-wms/&t=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -218,22 +218,22 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/shapefile-to-wms/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/shapefile-to-wms/&text=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/shapefile-to-wms/&is_video=false&description=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=在高德地图上展示 Shapefile 中的数据&body=Check out this article: https://ajiew.me/shapefile-to-wms/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/shapefile-to-wms/&name=在高德地图上展示 Shapefile 中的数据&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-12-21/ganymede_globes.png&#34; alt=&#34;ganymede_globes&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/shapefile-to-wms/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/shapefile-to-wms/&text=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/shapefile-to-wms/&is_video=false&description=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=在高德地图上展示 Shapefile 中的数据&body=Check out this article: https://ajiew.github.io/shapefile-to-wms/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/shapefile-to-wms/&title=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/shapefile-to-wms/&name=在高德地图上展示 Shapefile 中的数据&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-12-21/ganymede_globes.png&#34; alt=&#34;ganymede_globes&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这篇介绍一下如何将 &lt;a href=&#34;https://desktop.arcgis.com/zh-cn/arcmap/10.3/manage-data/shapefiles/what-is-a-shapefile.htm&#34;&gt;Shapefile&lt;/a&gt; 转换为 WMS 图层并在高德地图上展示出来。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;如果你是一名 GIS 开发者，那么你对 Shapefile 一定不陌生，它是一种用于存储地理要素的几何位置和属性信息的文件格式。具体来说，它主要通过几何图形（点、折线、多边形）存储道路、桥梁、河流等空间对象的几何位置。另外，它还可以通过不同的文字、颜色等标识出这些空间对象的属性。&lt;/p&gt;
 &lt;p&gt;很多地图制作工具都支持导出 shp 格式的数据（比如 &lt;a href=&#34;https://www.esri.com/zh-cn/arcgis/products/arcgis-desktop/resources&#34;&gt;ArcGIS&lt;/a&gt;），但是，如果想要通过第三方地图 SDK 加载这些数据，往往需要先做一步转换操作，比如转换为 &lt;a href=&#34;https://lbs.amap.com/api/javascript-api/guide/layers/wms&#34;&gt;WMS 图层&lt;/a&gt; 或者 &lt;a href=&#34;https://developers.google.com/maps/documentation/javascript/kmllayer&#34;&gt;KML 图层&lt;/a&gt;。这里，我就以高德地图为例，介绍如何通过 &lt;a href=&#34;http://geoserver.org/&#34;&gt;GeoServer&lt;/a&gt; 将 Shapefile 转换为 WMS 图层并加载到 Android 地图 SDK 中。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/shapefile-to-wms/&t=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/shapefile-to-wms/&t=在高德地图上展示 Shapefile 中的数据"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -275,7 +275,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

@@ -9,19 +9,19 @@
     <meta name="description" content="记录下 Flutter 开发过程中遇到的问题。  UIWidgetsAppBar当自定义导航栏中的标题栏之后，配合 route 使用有时候会发现导航栏左边会有空白出现，后来才发现，原来是系统默认给添加了返回按钮，解决该问题的方法也很简单，只要在 AppBar 中将 automaticallyImplyLeading 属性设为 false 就可以了，下面是文档中的注释： 123456&#x2F;&#x2F;&#x2F; Co">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flutter 开发笔记">
-<meta property="og:url" content="https://ajiew.me/flutter-dev-notes/index.html">
+<meta property="og:url" content="https://ajiew.github.io/flutter-dev-notes/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="记录下 Flutter 开发过程中遇到的问题。  UIWidgetsAppBar当自定义导航栏中的标题栏之后，配合 route 使用有时候会发现导航栏左边会有空白出现，后来才发现，原来是系统默认给添加了返回按钮，解决该问题的方法也很简单，只要在 AppBar 中将 automaticallyImplyLeading 属性设为 false 就可以了，下面是文档中的注释： 123456&#x2F;&#x2F;&#x2F; Co">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ajiew.me/assets/2021-10-11/flutter-dev.png">
-<meta property="og:image" content="https://ajiew.me/assets/2022-flutter/hero-text-clipped.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2021-10-11/flutter-dev.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2022-flutter/hero-text-clipped.gif">
 <meta property="article:published_time" content="2021-04-28T12:30:00.000Z">
 <meta property="article:modified_time" content="2024-02-06T03:06:17.909Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Notes">
 <meta property="article:tag" content="Flutter">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ajiew.me/assets/2021-10-11/flutter-dev.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2021-10-11/flutter-dev.png">
     
     
       
@@ -95,16 +95,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/flutter-dev-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/flutter-dev-notes/&text=Flutter 开发笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/flutter-dev-notes/&is_video=false&description=Flutter 开发笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Flutter 开发笔记&body=Check out this article: https://ajiew.me/flutter-dev-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/flutter-dev-notes/&name=Flutter 开发笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-10-11/flutter-dev.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/flutter-dev-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/flutter-dev-notes/&text=Flutter 开发笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/flutter-dev-notes/&is_video=false&description=Flutter 开发笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Flutter 开发笔记&body=Check out this article: https://ajiew.github.io/flutter-dev-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/flutter-dev-notes/&name=Flutter 开发笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-10-11/flutter-dev.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;记录下 Flutter 开发过程中遇到的问题。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -112,7 +112,7 @@
 &lt;figure class=&#34;highlight dart&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs dart&#34;&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;Controls whether we should try to imply the leading widget if null.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;///&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;If true and [leading] is null, automatically try to deduce what the leading&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;widget should be. If false and [leading] is null, leading space is given to [title].&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;If leading widget is not null, this parameter has no effect.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;hljs-built_in&#34;&gt;bool&lt;/span&gt; automaticallyImplyLeading;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;该属性表示是否应该在未提供 &lt;code&gt;leading&lt;/code&gt; 属性时自动检测应该使用何种 &lt;code&gt;leading&lt;/code&gt; 组件。设为 &lt;code&gt;false&lt;/code&gt; 之后，如果 &lt;code&gt;leading&lt;/code&gt; 为空，则 &lt;code&gt;leading&lt;/code&gt; 位置会默认让位给标题，也就不会产生上面的空白占位现象了。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/flutter-dev-notes/&t=Flutter 开发笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/flutter-dev-notes/&t=Flutter 开发笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -397,16 +397,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/flutter-dev-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/flutter-dev-notes/&text=Flutter 开发笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/flutter-dev-notes/&is_video=false&description=Flutter 开发笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Flutter 开发笔记&body=Check out this article: https://ajiew.me/flutter-dev-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/flutter-dev-notes/&name=Flutter 开发笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-10-11/flutter-dev.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/flutter-dev-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/flutter-dev-notes/&text=Flutter 开发笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/flutter-dev-notes/&is_video=false&description=Flutter 开发笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Flutter 开发笔记&body=Check out this article: https://ajiew.github.io/flutter-dev-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/flutter-dev-notes/&title=Flutter 开发笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/flutter-dev-notes/&name=Flutter 开发笔记&description=&lt;p&gt;&lt;img src=&#34;/assets/2021-10-11/flutter-dev.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;记录下 Flutter 开发过程中遇到的问题。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -414,7 +414,7 @@
 &lt;figure class=&#34;highlight dart&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs dart&#34;&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;Controls whether we should try to imply the leading widget if null.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;///&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;If true and [leading] is null, automatically try to deduce what the leading&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;widget should be. If false and [leading] is null, leading space is given to [title].&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-comment&#34;&gt;/// &lt;span class=&#34;language-markdown&#34;&gt;If leading widget is not null, this parameter has no effect.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;hljs-built_in&#34;&gt;bool&lt;/span&gt; automaticallyImplyLeading;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;该属性表示是否应该在未提供 &lt;code&gt;leading&lt;/code&gt; 属性时自动检测应该使用何种 &lt;code&gt;leading&lt;/code&gt; 组件。设为 &lt;code&gt;false&lt;/code&gt; 之后，如果 &lt;code&gt;leading&lt;/code&gt; 为空，则 &lt;code&gt;leading&lt;/code&gt; 位置会默认让位给标题，也就不会产生上面的空白占位现象了。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/flutter-dev-notes/&t=Flutter 开发笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/flutter-dev-notes/&t=Flutter 开发笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -456,7 +456,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

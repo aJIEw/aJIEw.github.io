@@ -9,18 +9,18 @@
     <meta name="description" content="个人笔记整理系列，本文整理自张哥 QQ 聊天群 (2016-6-24)  Gradle 是什么?简单来说，Gradle 是一种构建系统，但是什么是构建系统呢？ 当我们使用 Android Studio，写完代码，编译、运行、生成 apk 包并且安装到手机上，这一系列过程都可以算是 Android 应用程序构建的一部分。在 Gradle 之前，Google 开发了 ADT (Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle 介绍及解惑">
-<meta property="og:url" content="https://ajiew.me/introducing-gradle-and-faq/index.html">
+<meta property="og:url" content="https://ajiew.github.io/introducing-gradle-and-faq/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="个人笔记整理系列，本文整理自张哥 QQ 聊天群 (2016-6-24)  Gradle 是什么?简单来说，Gradle 是一种构建系统，但是什么是构建系统呢？ 当我们使用 Android Studio，写完代码，编译、运行、生成 apk 包并且安装到手机上，这一系列过程都可以算是 Android 应用程序构建的一部分。在 Gradle 之前，Google 开发了 ADT (Android">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ajiew.me/assets/2017-12-24/gradle-logo.png">
+<meta property="og:image" content="https://ajiew.github.io/assets/2017-12-24/gradle-logo.png">
 <meta property="article:published_time" content="2017-12-24T11:35:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.724Z">
+<meta property="article:modified_time" content="2024-07-21T07:00:56.049Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Gradle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ajiew.me/assets/2017-12-24/gradle-logo.png">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2017-12-24/gradle-logo.png">
     
     
       
@@ -94,16 +94,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/introducing-gradle-and-faq/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/introducing-gradle-and-faq/&text=Gradle 介绍及解惑"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/introducing-gradle-and-faq/&is_video=false&description=Gradle 介绍及解惑"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Gradle 介绍及解惑&body=Check out this article: https://ajiew.me/introducing-gradle-and-faq/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/introducing-gradle-and-faq/&name=Gradle 介绍及解惑&description=&lt;p&gt;&lt;img src=&#34;/assets/2017-12-24/gradle-logo.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/introducing-gradle-and-faq/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/introducing-gradle-and-faq/&text=Gradle 介绍及解惑"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/introducing-gradle-and-faq/&is_video=false&description=Gradle 介绍及解惑"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Gradle 介绍及解惑&body=Check out this article: https://ajiew.github.io/introducing-gradle-and-faq/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/introducing-gradle-and-faq/&name=Gradle 介绍及解惑&description=&lt;p&gt;&lt;img src=&#34;/assets/2017-12-24/gradle-logo.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;  个人笔记整理系列，本文整理自张哥 QQ 聊天群 (2016-6-24)&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -114,7 +114,7 @@
 &lt;figure class=&#34;highlight gradle&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs gradle&#34;&gt;implementation &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;androidx.xxx:version_name&amp;#x27;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;类似这样的依赖方式，既方便又直观，升级的话直接改下版本号就可以了。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/introducing-gradle-and-faq/&t=Gradle 介绍及解惑"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/introducing-gradle-and-faq/&t=Gradle 介绍及解惑"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -299,16 +299,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/introducing-gradle-and-faq/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/introducing-gradle-and-faq/&text=Gradle 介绍及解惑"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/introducing-gradle-and-faq/&is_video=false&description=Gradle 介绍及解惑"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Gradle 介绍及解惑&body=Check out this article: https://ajiew.me/introducing-gradle-and-faq/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/introducing-gradle-and-faq/&name=Gradle 介绍及解惑&description=&lt;p&gt;&lt;img src=&#34;/assets/2017-12-24/gradle-logo.png&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/introducing-gradle-and-faq/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/introducing-gradle-and-faq/&text=Gradle 介绍及解惑"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/introducing-gradle-and-faq/&is_video=false&description=Gradle 介绍及解惑"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Gradle 介绍及解惑&body=Check out this article: https://ajiew.github.io/introducing-gradle-and-faq/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/introducing-gradle-and-faq/&title=Gradle 介绍及解惑"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/introducing-gradle-and-faq/&name=Gradle 介绍及解惑&description=&lt;p&gt;&lt;img src=&#34;/assets/2017-12-24/gradle-logo.png&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;  个人笔记整理系列，本文整理自张哥 QQ 聊天群 (2016-6-24)&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -319,7 +319,7 @@
 &lt;figure class=&#34;highlight gradle&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs gradle&#34;&gt;implementation &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;androidx.xxx:version_name&amp;#x27;&lt;/span&gt;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;类似这样的依赖方式，既方便又直观，升级的话直接改下版本号就可以了。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/introducing-gradle-and-faq/&t=Gradle 介绍及解惑"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/introducing-gradle-and-faq/&t=Gradle 介绍及解惑"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -361,7 +361,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

@@ -9,18 +9,18 @@
     <meta name="description" content="继上次写完 Redux 之后，留下了很多坑，其实这篇也不算是进阶，毕竟只是一些库的使用以及一些小技巧而已，权当是上一篇的填坑了吧。  01 Middleware &amp; ThunkWhat’s Middlewares?当我们发送 action 的时候，正常情况下是从 action -&gt; reducer，引入中间件后变为 action -&gt; middlewares -&gt; r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native - 从 Redux 进阶谈起">
-<meta property="og:url" content="https://ajiew.me/dive-into-rn-redux/index.html">
+<meta property="og:url" content="https://ajiew.github.io/dive-into-rn-redux/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="继上次写完 Redux 之后，留下了很多坑，其实这篇也不算是进阶，毕竟只是一些库的使用以及一些小技巧而已，权当是上一篇的填坑了吧。  01 Middleware &amp; ThunkWhat’s Middlewares?当我们发送 action 的时候，正常情况下是从 action -&gt; reducer，引入中间件后变为 action -&gt; middlewares -&gt; r">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ajiew.me/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg">
-<meta property="og:image" content="https://ajiew.me/assets/2018-10-12/788577-480f5f8b10cc5cfe.gif">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-10-12/788577-480f5f8b10cc5cfe.gif">
 <meta property="article:published_time" content="2018-10-12T06:15:00.000Z">
 <meta property="article:modified_time" content="2023-03-13T13:29:42.726Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="React Native">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ajiew.me/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg">
     
     
       
@@ -94,21 +94,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/dive-into-rn-redux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/dive-into-rn-redux/&text=React Native - 从 Redux 进阶谈起"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/dive-into-rn-redux/&is_video=false&description=React Native - 从 Redux 进阶谈起"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native - 从 Redux 进阶谈起&body=Check out this article: https://ajiew.me/dive-into-rn-redux/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/dive-into-rn-redux/&name=React Native - 从 Redux 进阶谈起&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg&#34; alt=&#34;Autumn Wind&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/dive-into-rn-redux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/dive-into-rn-redux/&text=React Native - 从 Redux 进阶谈起"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/dive-into-rn-redux/&is_video=false&description=React Native - 从 Redux 进阶谈起"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - 从 Redux 进阶谈起&body=Check out this article: https://ajiew.github.io/dive-into-rn-redux/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/dive-into-rn-redux/&name=React Native - 从 Redux 进阶谈起&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg&#34; alt=&#34;Autumn Wind&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;继上次写完 Redux 之后，留下了很多坑，其实这篇也不算是进阶，毕竟只是一些库的使用以及一些小技巧而已，权当是上一篇的填坑了吧。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;01-Middleware-amp-Thunk&#34;&gt;&lt;a href=&#34;#01-Middleware-amp-Thunk&#34; class=&#34;headerlink&#34; title=&#34;01 Middleware &amp;amp; Thunk&#34;&gt;&lt;/a&gt;01 Middleware &amp;amp; Thunk&lt;/h3&gt;&lt;h4 id=&#34;What’s-Middlewares&#34;&gt;&lt;a href=&#34;#What’s-Middlewares&#34; class=&#34;headerlink&#34; title=&#34;What’s Middlewares?&#34;&gt;&lt;/a&gt;What’s Middlewares?&lt;/h4&gt;&lt;p&gt;当我们发送 action 的时候，正常情况下是从 action -&amp;gt; reducer，引入中间件后变为 action -&amp;gt; middlewares -&amp;gt; reducer。为什么要这么做？因为很多时候我们想在 action 传送到 reducer 之前，对数据流进行改变或者进行一些别的什么操作，比如对 action 添加日志，如果一个个去更改 Action Creator 未免太过麻烦，而使用 Middleware 的话就简单很多，可以帮我们省去很多重复代码。最重要的一点，我们可以通过使用 &lt;a href=&#34;https://github.com/reduxjs/redux-thunk&#34;&gt;Thunk Middleware&lt;/a&gt; 来实现异步 action。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/dive-into-rn-redux/&t=React Native - 从 Redux 进阶谈起"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/dive-into-rn-redux/&t=React Native - 从 Redux 进阶谈起"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -232,7 +232,7 @@
 <h3 id="04-Sum-Up"><a href="#04-Sum-Up" class="headerlink" title="04 Sum Up"></a>04 Sum Up</h3><p>这篇写的比较杂，一开始只是想写下 Redux 中的 middleware，后来看了这篇 <a target="_blank" rel="noopener" href="https://medium.com/@shoshanarosenfield/redux-thunk-vs-redux-saga-93fe82878b2d">Redux-Thunk vs. Redux-Saga</a>，发现对于大多数场景下，的确使用 Redux-Thunk 就足够了。而 HOC 也是临时想到要写一写的，毕竟也算是 React 中一种常见的模式了吧。最后这个结合 react-native-router 写的例子也比较简单，主要用来说明 Redux-Thunk 发异步请求以及 HOC 的大致用法。</p>
 <p>好了，写完这篇有种『我已经掌握 React Native 开发了』的错觉，但其是内心还是很慌的，因为知道要掌握的东西还有太多。不过一口吃不成个胖子，只能静下心来一步一脚印慢慢往前走了。每天进步一点点，坚持下去，收获就是巨大的。嗯，加油~(•̀ᴗ•́)و ̑̑</p>
 <hr>
-<p>相关文章：<a target="_blank" rel="noopener" href="https://ajiew.github.io/rn-redux-introduction/">React Native - Redux 入门</a></p>
+<p>相关文章：<a href="https://ajiew.github.io/rn-redux-introduction/">React Native - Redux 入门</a></p>
 <p>参考文章：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000007843340">React 项目中 Redux 中间件的理解</a></li>
@@ -270,21 +270,21 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/dive-into-rn-redux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/dive-into-rn-redux/&text=React Native - 从 Redux 进阶谈起"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/dive-into-rn-redux/&is_video=false&description=React Native - 从 Redux 进阶谈起"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=React Native - 从 Redux 进阶谈起&body=Check out this article: https://ajiew.me/dive-into-rn-redux/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/dive-into-rn-redux/&name=React Native - 从 Redux 进阶谈起&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg&#34; alt=&#34;Autumn Wind&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/dive-into-rn-redux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/dive-into-rn-redux/&text=React Native - 从 Redux 进阶谈起"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/dive-into-rn-redux/&is_video=false&description=React Native - 从 Redux 进阶谈起"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=React Native - 从 Redux 进阶谈起&body=Check out this article: https://ajiew.github.io/dive-into-rn-redux/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/dive-into-rn-redux/&title=React Native - 从 Redux 进阶谈起"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/dive-into-rn-redux/&name=React Native - 从 Redux 进阶谈起&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-10-12/reeds_in_the_autumn_wind_by_sunny_2011.jpg&#34; alt=&#34;Autumn Wind&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;继上次写完 Redux 之后，留下了很多坑，其实这篇也不算是进阶，毕竟只是一些库的使用以及一些小技巧而已，权当是上一篇的填坑了吧。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;01-Middleware-amp-Thunk&#34;&gt;&lt;a href=&#34;#01-Middleware-amp-Thunk&#34; class=&#34;headerlink&#34; title=&#34;01 Middleware &amp;amp; Thunk&#34;&gt;&lt;/a&gt;01 Middleware &amp;amp; Thunk&lt;/h3&gt;&lt;h4 id=&#34;What’s-Middlewares&#34;&gt;&lt;a href=&#34;#What’s-Middlewares&#34; class=&#34;headerlink&#34; title=&#34;What’s Middlewares?&#34;&gt;&lt;/a&gt;What’s Middlewares?&lt;/h4&gt;&lt;p&gt;当我们发送 action 的时候，正常情况下是从 action -&amp;gt; reducer，引入中间件后变为 action -&amp;gt; middlewares -&amp;gt; reducer。为什么要这么做？因为很多时候我们想在 action 传送到 reducer 之前，对数据流进行改变或者进行一些别的什么操作，比如对 action 添加日志，如果一个个去更改 Action Creator 未免太过麻烦，而使用 Middleware 的话就简单很多，可以帮我们省去很多重复代码。最重要的一点，我们可以通过使用 &lt;a href=&#34;https://github.com/reduxjs/redux-thunk&#34;&gt;Thunk Middleware&lt;/a&gt; 来实现异步 action。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/dive-into-rn-redux/&t=React Native - 从 Redux 进阶谈起"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/dive-into-rn-redux/&t=React Native - 从 Redux 进阶谈起"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -326,7 +326,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

@@ -9,7 +9,7 @@
     <meta name="description" content="阅读 language-tour 时做的一些笔记。  Important concepts Dart 中一切皆对象，除了 null 之外，所有对象都继承自 Object Dart 是强类型语言，但是类型标注是可选的，因为 Dart 中存在类型推断的机制，使用 var 关键字后编译器可以推断出具体的类型 当开启了空安全（dart ≧ v2.12）之后，对于可为空的值必须明确指出（用 ?），可为空">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dart 学习笔记">
-<meta property="og:url" content="https://ajiew.me/dart-notes/index.html">
+<meta property="og:url" content="https://ajiew.github.io/dart-notes/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="阅读 language-tour 时做的一些笔记。  Important concepts Dart 中一切皆对象，除了 null 之外，所有对象都继承自 Object Dart 是强类型语言，但是类型标注是可选的，因为 Dart 中存在类型推断的机制，使用 var 关键字后编译器可以推断出具体的类型 当开启了空安全（dart ≧ v2.12）之后，对于可为空的值必须明确指出（用 ?），可为空">
 <meta property="og:locale" content="en_US">
@@ -94,16 +94,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/dart-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/dart-notes/&text=Dart 学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/dart-notes/&is_video=false&description=Dart 学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Dart 学习笔记&body=Check out this article: https://ajiew.me/dart-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/dart-notes/&name=Dart 学习笔记&description=&lt;p&gt;&lt;img src=&#34;https://dart.dev/assets/shared/dart-logo-for-shares.png&#34; alt=&#34;dart-logo&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/dart-notes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/dart-notes/&text=Dart 学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/dart-notes/&is_video=false&description=Dart 学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Dart 学习笔记&body=Check out this article: https://ajiew.github.io/dart-notes/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/dart-notes/&name=Dart 学习笔记&description=&lt;p&gt;&lt;img src=&#34;https://dart.dev/assets/shared/dart-logo-for-shares.png&#34; alt=&#34;dart-logo&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;阅读 &lt;a href=&#34;https://dart.dev/guides/language/language-tour&#34;&gt;language-tour&lt;/a&gt; 时做的一些笔记。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -118,7 +118,7 @@
 &lt;li&gt;Dart 中也分为表达式 &lt;em&gt;expressions&lt;/em&gt; 和声明 &lt;em&gt;statements&lt;/em&gt;，表达式有返回值而声明无返回值&lt;/li&gt;
 &lt;li&gt;Dart 工具提供了两种类型的问题：警告和错误。警告表示代码可能无法正确执行，错误分为编译期错误和运行时错误，编译期错误会导致程序无法执行，而运行时错误是代码执行过程中抛出的异常。&lt;/li&gt;
 &lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/dart-notes/&t=Dart 学习笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/dart-notes/&t=Dart 学习笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -465,16 +465,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/dart-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/dart-notes/&text=Dart 学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/dart-notes/&is_video=false&description=Dart 学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Dart 学习笔记&body=Check out this article: https://ajiew.me/dart-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/dart-notes/&title=Dart 学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/dart-notes/&name=Dart 学习笔记&description=&lt;p&gt;&lt;img src=&#34;https://dart.dev/assets/shared/dart-logo-for-shares.png&#34; alt=&#34;dart-logo&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/dart-notes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/dart-notes/&text=Dart 学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/dart-notes/&is_video=false&description=Dart 学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Dart 学习笔记&body=Check out this article: https://ajiew.github.io/dart-notes/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/dart-notes/&title=Dart 学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/dart-notes/&name=Dart 学习笔记&description=&lt;p&gt;&lt;img src=&#34;https://dart.dev/assets/shared/dart-logo-for-shares.png&#34; alt=&#34;dart-logo&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;阅读 &lt;a href=&#34;https://dart.dev/guides/language/language-tour&#34;&gt;language-tour&lt;/a&gt; 时做的一些笔记。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -489,7 +489,7 @@
 &lt;li&gt;Dart 中也分为表达式 &lt;em&gt;expressions&lt;/em&gt; 和声明 &lt;em&gt;statements&lt;/em&gt;，表达式有返回值而声明无返回值&lt;/li&gt;
 &lt;li&gt;Dart 工具提供了两种类型的问题：警告和错误。警告表示代码可能无法正确执行，错误分为编译期错误和运行时错误，编译期错误会导致程序无法执行，而运行时错误是代码执行过程中抛出的异常。&lt;/li&gt;
 &lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/dart-notes/&t=Dart 学习笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/dart-notes/&t=Dart 学习笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -531,7 +531,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       

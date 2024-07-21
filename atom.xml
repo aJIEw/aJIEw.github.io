@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>aJIEw</title>
-  <icon>https://www.gravatar.com/avatar/d85550c51f1285e009f2753167ba7aa2</icon>
+  <icon>https://www.gravatar.com/avatar/d0278eb2fe0d9116938773c5fd74a1ca</icon>
   <subtitle>Think | Write | Share</subtitle>
-  <link href="https://ajiew.me/atom.xml" rel="self"/>
+  <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
-  <link href="https://ajiew.me/"/>
+  <link href="https://ajiew.github.io/"/>
   <updated>2024-07-01T11:35:06.888Z</updated>
-  <id>https://ajiew.me/</id>
+  <id>https://ajiew.github.io/</id>
   
   <author>
     <name>aJIEw</name>
-    <email>hi@ajiew.me</email>
+    <email>ajiew42@gmail.com</email>
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>拥抱不确定</title>
-    <link href="https://ajiew.me/2024-6/"/>
-    <id>https://ajiew.me/2024-6/</id>
+    <link href="https://ajiew.github.io/2024-6/"/>
+    <id>https://ajiew.github.io/2024-6/</id>
     <published>2024-06-30T12:30:00.000Z</published>
     <updated>2024-07-01T11:35:06.888Z</updated>
     
@@ -52,17 +52,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>配得上幸运</title>
-    <link href="https://ajiew.me/2024-5/"/>
-    <id>https://ajiew.me/2024-5/</id>
+    <link href="https://ajiew.github.io/2024-5/"/>
+    <id>https://ajiew.github.io/2024-5/</id>
     <published>2024-05-31T12:30:00.000Z</published>
     <updated>2024-06-30T15:19:13.385Z</updated>
     
@@ -95,17 +95,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>找到你该做的事</title>
-    <link href="https://ajiew.me/2024-4/"/>
-    <id>https://ajiew.me/2024-4/</id>
+    <link href="https://ajiew.github.io/2024-4/"/>
+    <id>https://ajiew.github.io/2024-4/</id>
     <published>2024-04-30T12:30:00.000Z</published>
     <updated>2024-06-09T15:54:53.250Z</updated>
     
@@ -137,17 +137,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>平凡最珍贵</title>
-    <link href="https://ajiew.me/2024-3/"/>
-    <id>https://ajiew.me/2024-3/</id>
+    <link href="https://ajiew.github.io/2024-3/"/>
+    <id>https://ajiew.github.io/2024-3/</id>
     <published>2024-03-31T12:30:00.000Z</published>
     <updated>2024-04-28T05:38:06.746Z</updated>
     
@@ -179,17 +179,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>下一个四年</title>
-    <link href="https://ajiew.me/2024-2/"/>
-    <id>https://ajiew.me/2024-2/</id>
+    <link href="https://ajiew.github.io/2024-2/"/>
+    <id>https://ajiew.github.io/2024-2/</id>
     <published>2024-02-29T12:30:00.000Z</published>
     <updated>2024-03-29T10:03:43.384Z</updated>
     
@@ -222,17 +222,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>保持新鲜感</title>
-    <link href="https://ajiew.me/2024-1/"/>
-    <id>https://ajiew.me/2024-1/</id>
+    <link href="https://ajiew.github.io/2024-1/"/>
+    <id>https://ajiew.github.io/2024-1/</id>
     <published>2024-01-31T12:30:00.000Z</published>
     <updated>2024-02-29T13:22:30.472Z</updated>
     
@@ -264,17 +264,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>思考、感受和回顾</title>
-    <link href="https://ajiew.me/2023-12/"/>
-    <id>https://ajiew.me/2023-12/</id>
+    <link href="https://ajiew.github.io/2023-12/"/>
+    <id>https://ajiew.github.io/2023-12/</id>
     <published>2023-12-31T12:30:00.000Z</published>
     <updated>2024-01-30T14:58:37.126Z</updated>
     
@@ -306,17 +306,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>去接纳一切</title>
-    <link href="https://ajiew.me/2023/"/>
-    <id>https://ajiew.me/2023/</id>
+    <link href="https://ajiew.github.io/2023/"/>
+    <id>https://ajiew.github.io/2023/</id>
     <published>2023-12-30T12:30:00.000Z</published>
     <updated>2023-12-31T15:24:22.362Z</updated>
     
@@ -347,19 +347,19 @@
     
     
     
-    <category term="随笔" scheme="https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    <category term="随笔" scheme="https://ajiew.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="年终总结" scheme="https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
-    <category term="Reviews" scheme="https://ajiew.me/tags/Reviews/"/>
+    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
     
   </entry>
   
   <entry>
     <title>加速流逝的时间</title>
-    <link href="https://ajiew.me/2023-11/"/>
-    <id>https://ajiew.me/2023-11/</id>
+    <link href="https://ajiew.github.io/2023-11/"/>
+    <id>https://ajiew.github.io/2023-11/</id>
     <published>2023-11-30T12:30:00.000Z</published>
     <updated>2024-01-01T06:25:47.155Z</updated>
     
@@ -392,17 +392,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>Live A Little</title>
-    <link href="https://ajiew.me/2023-10/"/>
-    <id>https://ajiew.me/2023-10/</id>
+    <link href="https://ajiew.github.io/2023-10/"/>
+    <id>https://ajiew.github.io/2023-10/</id>
     <published>2023-10-31T12:30:00.000Z</published>
     <updated>2023-12-01T13:47:27.485Z</updated>
     
@@ -435,17 +435,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>宇宙、爱和创造</title>
-    <link href="https://ajiew.me/2023-9/"/>
-    <id>https://ajiew.me/2023-9/</id>
+    <link href="https://ajiew.github.io/2023-9/"/>
+    <id>https://ajiew.github.io/2023-9/</id>
     <published>2023-09-30T12:30:00.000Z</published>
     <updated>2023-10-31T11:18:15.231Z</updated>
     
@@ -456,17 +456,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>按你想的那样去生活</title>
-    <link href="https://ajiew.me/2023-8/"/>
-    <id>https://ajiew.me/2023-8/</id>
+    <link href="https://ajiew.github.io/2023-8/"/>
+    <id>https://ajiew.github.io/2023-8/</id>
     <published>2023-08-31T12:30:00.000Z</published>
     <updated>2023-09-29T09:57:05.340Z</updated>
     
@@ -477,17 +477,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>心安</title>
-    <link href="https://ajiew.me/2023-7/"/>
-    <id>https://ajiew.me/2023-7/</id>
+    <link href="https://ajiew.github.io/2023-7/"/>
+    <id>https://ajiew.github.io/2023-7/</id>
     <published>2023-07-31T12:30:00.000Z</published>
     <updated>2023-09-03T13:30:12.782Z</updated>
     
@@ -498,17 +498,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>Your Mind Follows Your Body</title>
-    <link href="https://ajiew.me/2023-6/"/>
-    <id>https://ajiew.me/2023-6/</id>
+    <link href="https://ajiew.github.io/2023-6/"/>
+    <id>https://ajiew.github.io/2023-6/</id>
     <published>2023-06-30T12:30:00.000Z</published>
     <updated>2023-07-31T14:13:55.627Z</updated>
     
@@ -519,17 +519,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>心中要有牵挂</title>
-    <link href="https://ajiew.me/2023-5/"/>
-    <id>https://ajiew.me/2023-5/</id>
+    <link href="https://ajiew.github.io/2023-5/"/>
+    <id>https://ajiew.github.io/2023-5/</id>
     <published>2023-05-31T12:30:00.000Z</published>
     <updated>2023-07-31T14:13:58.898Z</updated>
     
@@ -540,17 +540,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>写作是时光机</title>
-    <link href="https://ajiew.me/2023-4/"/>
-    <id>https://ajiew.me/2023-4/</id>
+    <link href="https://ajiew.github.io/2023-4/"/>
+    <id>https://ajiew.github.io/2023-4/</id>
     <published>2023-04-30T12:30:00.000Z</published>
     <updated>2023-07-31T14:14:01.999Z</updated>
     
@@ -561,17 +561,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>Stay Curious</title>
-    <link href="https://ajiew.me/2022/"/>
-    <id>https://ajiew.me/2022/</id>
+    <link href="https://ajiew.github.io/2022/"/>
+    <id>https://ajiew.github.io/2022/</id>
     <published>2023-04-09T12:30:00.000Z</published>
     <updated>2023-12-29T02:57:45.194Z</updated>
     
@@ -587,19 +587,19 @@
     
     
     
-    <category term="随笔" scheme="https://ajiew.me/categories/%E9%9A%8F%E7%AC%94/"/>
+    <category term="随笔" scheme="https://ajiew.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="年终总结" scheme="https://ajiew.me/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
-    <category term="Reviews" scheme="https://ajiew.me/tags/Reviews/"/>
+    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
     
   </entry>
   
   <entry>
     <title>接受不完美</title>
-    <link href="https://ajiew.me/2023-3/"/>
-    <id>https://ajiew.me/2023-3/</id>
+    <link href="https://ajiew.github.io/2023-3/"/>
+    <id>https://ajiew.github.io/2023-3/</id>
     <published>2023-03-31T12:30:00.000Z</published>
     <updated>2023-07-31T14:14:06.565Z</updated>
     
@@ -610,17 +610,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>意义与意识</title>
-    <link href="https://ajiew.me/2023-2/"/>
-    <id>https://ajiew.me/2023-2/</id>
+    <link href="https://ajiew.github.io/2023-2/"/>
+    <id>https://ajiew.github.io/2023-2/</id>
     <published>2023-02-28T12:30:00.000Z</published>
     <updated>2023-07-31T14:14:10.035Z</updated>
     
@@ -631,17 +631,17 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
   <entry>
     <title>新年快乐，兔年大吉</title>
-    <link href="https://ajiew.me/2023-1/"/>
-    <id>https://ajiew.me/2023-1/</id>
+    <link href="https://ajiew.github.io/2023-1/"/>
+    <id>https://ajiew.github.io/2023-1/</id>
     <published>2023-01-31T12:30:00.000Z</published>
     <updated>2023-07-31T14:14:13.060Z</updated>
     
@@ -652,10 +652,10 @@
     
     
     
-    <category term="碎碎念" scheme="https://ajiew.me/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
     
-    <category term="Journal" scheme="https://ajiew.me/tags/Journal/"/>
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   

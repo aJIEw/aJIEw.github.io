@@ -9,17 +9,17 @@
     <meta name="description" content="什么是泛型？Java SE 5 开始引入了泛型的概念，泛型即参数化类型，利用泛型我们可以编写出更通用的代码（先不指定类型，使用时再指定类型）。泛型出现的最大的目的之一就是用来指定容器要持有的对象的类型，而且这种指定是由编译器来保证其正确性的。来看个例子：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Think in Java 回顾之泛型">
-<meta property="og:url" content="https://ajiew.me/think-in-java-generics/index.html">
+<meta property="og:url" content="https://ajiew.github.io/think-in-java-generics/index.html">
 <meta property="og:site_name" content="aJIEw">
 <meta property="og:description" content="什么是泛型？Java SE 5 开始引入了泛型的概念，泛型即参数化类型，利用泛型我们可以编写出更通用的代码（先不指定类型，使用时再指定类型）。泛型出现的最大的目的之一就是用来指定容器要持有的对象的类型，而且这种指定是由编译器来保证其正确性的。来看个例子：">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://i.loli.net/2019/07/22/5d35c0c10f71571932.jpg">
+<meta property="og:image" content="https://ajiew.github.io/assets/2018-04-19/sand-at-the-beach.jpg">
 <meta property="article:published_time" content="2018-04-19T14:25:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T13:29:42.724Z">
+<meta property="article:modified_time" content="2024-07-21T06:57:08.136Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/22/5d35c0c10f71571932.jpg">
+<meta name="twitter:image" content="https://ajiew.github.io/assets/2018-04-19/sand-at-the-beach.jpg">
     
     
       
@@ -93,18 +93,18 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/think-in-java-generics/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/think-in-java-generics/&text=Think in Java 回顾之泛型"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/think-in-java-generics/&is_video=false&description=Think in Java 回顾之泛型"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Think in Java 回顾之泛型&body=Check out this article: https://ajiew.me/think-in-java-generics/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/think-in-java-generics/&name=Think in Java 回顾之泛型&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c10f71571932.jpg&#34; alt=&#34;想去海边玩沙子&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/think-in-java-generics/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/think-in-java-generics/&text=Think in Java 回顾之泛型"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/think-in-java-generics/&is_video=false&description=Think in Java 回顾之泛型"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Think in Java 回顾之泛型&body=Check out this article: https://ajiew.github.io/think-in-java-generics/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/think-in-java-generics/&name=Think in Java 回顾之泛型&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-04-19/sand-at-the-beach.jpg&#34; alt=&#34;想去海边玩沙子&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;什么是泛型？&#34;&gt;&lt;a href=&#34;#什么是泛型？&#34; class=&#34;headerlink&#34; title=&#34;什么是泛型？&#34;&gt;&lt;/a&gt;什么是泛型？&lt;/h3&gt;&lt;p&gt;Java SE 5 开始引入了泛型的概念，泛型即&lt;strong&gt;参数化类型&lt;/strong&gt;，利用泛型我们可以编写出更通用的代码（先不指定类型，使用时再指定类型）。泛型出现的最大的目的之一就是用来指定容器要持有的对象的类型，而且这种指定是由编译器来保证其正确性的。来看个例子：&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/think-in-java-generics/&t=Think in Java 回顾之泛型"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/think-in-java-generics/&t=Think in Java 回顾之泛型"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -159,7 +159,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="https://i.loli.net/2019/07/22/5d35c0c10f71571932.jpg" alt="想去海边玩沙子"></p>
+    <p><img src="/assets/2018-04-19/sand-at-the-beach.jpg" alt="想去海边玩沙子"></p>
 <h3 id="什么是泛型？"><a href="#什么是泛型？" class="headerlink" title="什么是泛型？"></a>什么是泛型？</h3><p>Java SE 5 开始引入了泛型的概念，泛型即<strong>参数化类型</strong>，利用泛型我们可以编写出更通用的代码（先不指定类型，使用时再指定类型）。泛型出现的最大的目的之一就是用来指定容器要持有的对象的类型，而且这种指定是由编译器来保证其正确性的。来看个例子：</p>
 <span id="more"></span>
 
@@ -246,18 +246,18 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.me/think-in-java-generics/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.me/think-in-java-generics/&text=Think in Java 回顾之泛型"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.me/think-in-java-generics/&is_video=false&description=Think in Java 回顾之泛型"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
-  <li><a class="icon" href="mailto:?subject=Think in Java 回顾之泛型&body=Check out this article: https://ajiew.me/think-in-java-generics/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.me/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.me/think-in-java-generics/&name=Think in Java 回顾之泛型&description=&lt;p&gt;&lt;img src=&#34;https://i.loli.net/2019/07/22/5d35c0c10f71571932.jpg&#34; alt=&#34;想去海边玩沙子&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/think-in-java-generics/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/think-in-java-generics/&text=Think in Java 回顾之泛型"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/think-in-java-generics/&is_video=false&description=Think in Java 回顾之泛型"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Think in Java 回顾之泛型&body=Check out this article: https://ajiew.github.io/think-in-java-generics/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/think-in-java-generics/&title=Think in Java 回顾之泛型"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/think-in-java-generics/&name=Think in Java 回顾之泛型&description=&lt;p&gt;&lt;img src=&#34;/assets/2018-04-19/sand-at-the-beach.jpg&#34; alt=&#34;想去海边玩沙子&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;什么是泛型？&#34;&gt;&lt;a href=&#34;#什么是泛型？&#34; class=&#34;headerlink&#34; title=&#34;什么是泛型？&#34;&gt;&lt;/a&gt;什么是泛型？&lt;/h3&gt;&lt;p&gt;Java SE 5 开始引入了泛型的概念，泛型即&lt;strong&gt;参数化类型&lt;/strong&gt;，利用泛型我们可以编写出更通用的代码（先不指定类型，使用时再指定类型）。泛型出现的最大的目的之一就是用来指定容器要持有的对象的类型，而且这种指定是由编译器来保证其正确性的。来看个例子：&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
-<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.me/think-in-java-generics/&t=Think in Java 回顾之泛型"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/think-in-java-generics/&t=Think in Java 回顾之泛型"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
 </ul>
 
     </div>
@@ -299,7 +299,7 @@
       
     
       
-        <a class="icon" target="_blank" rel="noopener" href="mailto:hi@ajiew.me" aria-label="mail"><i class="fas fa-envelope"></i></a>
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
       
       
       
