@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2024-09-01T07:25:55.950Z</updated>
+  <updated>2024-10-02T06:35:00.102Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>多出门走走</title>
+    <link href="https://ajiew.github.io/2024-9/"/>
+    <id>https://ajiew.github.io/2024-9/</id>
+    <published>2024-09-30T12:30:00.000Z</published>
+    <updated>2024-10-02T06:35:00.102Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/dBvDTdG31Mk&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;秋天是我最喜欢的季节，喜欢这个季节的天气、景色以及给人的感觉。不过这个月的前半段是夏天的延续，后半段才开始有秋天的感觉，接下来希望自己能多出门走走吧。我发现“出门走走”这样一个简单的动作就能极大提升一个人的幸福感，可能是因为沉浸在网络世界里的我们，容易形成这个世界非常糟糕的错误印象，然而事实并非如此。我们应该抓住人生中每一个机会，散布积极和爱，而不是消极和刻薄，以丰富回报丰富，然后你会发现到处都是机会，以及充满善意的人和给他人造成正面影响的人。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>每一刻都算数</title>
     <link href="https://ajiew.github.io/2024-8/"/>
     <id>https://ajiew.github.io/2024-8/</id>
     <published>2024-08-31T12:30:00.000Z</published>
-    <updated>2024-09-01T07:25:55.950Z</updated>
+    <updated>2024-09-30T15:03:45.845Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -63,7 +106,7 @@
     <link href="https://ajiew.github.io/2024-7/"/>
     <id>https://ajiew.github.io/2024-7/</id>
     <published>2024-07-31T12:30:00.000Z</published>
-    <updated>2024-08-03T10:03:54.604Z</updated>
+    <updated>2024-09-01T07:36:10.989Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -677,27 +720,6 @@
     <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
     
     <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>接受不完美</title>
-    <link href="https://ajiew.github.io/2023-3/"/>
-    <id>https://ajiew.github.io/2023-3/</id>
-    <published>2023-03-31T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:06.565Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;这个月是我在最近一年中发生变化最大的一个月（主要是心理上的），这点最主要的原因当然是外部环境的刺激，引发了我对自我的反思以及产生了一些行动。不过，很难说最终的结果完全是由自己当下的行为带来的，也许有自己过去的积累，也许有一些运气的成分，还有缘分和天意。但无论如何，我接受这样的安排。因为无论是好是坏，它们都是我生命的一部分，某种程度上也变成了我身体的一部分。我接受它们，就像我接受自己并不完美这个事实一样。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
     
   </entry>
   
