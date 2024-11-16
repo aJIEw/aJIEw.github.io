@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2024-11-03T14:52:11.225Z</updated>
+  <updated>2024-11-16T09:58:18.949Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Pixel 配置指南</title>
+    <link href="https://ajiew.github.io/pixel-setup/"/>
+    <id>https://ajiew.github.io/pixel-setup/</id>
+    <published>2024-11-15T06:00:00.000Z</published>
+    <updated>2024-11-16T09:58:18.949Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="小技巧" scheme="https://ajiew.github.io/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
+    
+    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
+    
+  </entry>
   
   <entry>
     <title>熟悉和舒适</title>
@@ -705,27 +726,6 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;又是漫长的一个月，好像发生了很多事，但是停下来回忆的时候，却又想不起来有什么让我印象特别深刻的事情。唯一让我有点惊讶的是，原以为搬家会让我伤感一阵子，但结果并没有。可能也是因为离开原来的生活环境对我来说并没有造成特别大的变化吧。而且搬家给我带来的好处多过坏处，自然也就不会特别伤感了。况且让我们感到伤感的往往是人，假如你心中并没有特别牵挂的人，也没有让你觉得要和过去告别的回忆，那即使是再大的变化，在你眼中也只是一件普通、平淡的事件而已。所以，也算是给自己提了一个醒，要认真生活，要多去和不同的人接触，没有什么比拥有丰富的回忆更让人幸福的了。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>写作是时光机</title>
-    <link href="https://ajiew.github.io/2023-4/"/>
-    <id>https://ajiew.github.io/2023-4/</id>
-    <published>2023-04-30T12:30:00.000Z</published>
-    <updated>2023-07-31T14:14:01.999Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;写作的意义是什么？对我来说，最大的意义可能在于让我能有机会反思自己的生活吧。每天早上或者入睡前坐下来，把原本只是脑海中一闪而过的想法，组织成语言、写成文字，这一过程本身就是非常奇妙的。这也是一个人抵抗孤独的最佳方式。生命不断向前，而我们留下的文字却可以穿越时间，使得我们的思考得以被保留。哪怕仅仅只是记录，也是在给未来的自己提供一个回望过去的时光机。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     

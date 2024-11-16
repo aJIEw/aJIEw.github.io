@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Pixel 配置指南</title>
+      <link href="/pixel-setup/"/>
+      <url>/pixel-setup/</url>
+      
+        <content type="html"><![CDATA[<p>时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。</p><span id="more"></span><h2 id="刷机和-Root"><a href="#刷机和-Root" class="headerlink" title="刷机和 Root"></a>刷机和 Root</h2><p>国内用户选择 Pixel 估计都是看中了解锁和刷机上的便利吧，国产手机厂商对解锁做了越来越多的限制，对于想要折腾的人来说，选择 Pixel 是最简单的做法，而且还能体验到最新的 Android 系统。当然，前提是你知道自己在做什么，而且也愿意花时间折腾。</p><h3 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h3><p>到 <a href="https://developers.google.com/android/images">Factory Images</a> 下载对应机型的系统镜像刷机压缩包，然后跟随<a href="https://developers.google.com/android/images#instructions">教程</a>解锁和刷机。</p><p>如果你也和我一样，遇到了运行刷机脚本 (<code>flash-all</code>) 时卡住的问题，大概率是因为 bootloader 在重启结束之前就运行了下一个指令，推荐复制 <code>flash-all</code> 里的命令，手动刷入 bootloader/radio/image，或者打开脚本文件增加等待的时间，我是改到了 20 秒 (默认是 5 秒) 后才解决这一问题。</p><p>另外，假如你已经更改了系统设置，想要保留已有的数据，可以在刷入系统镜像的时候选择保留数据，也就是去掉 <code>fastboot update</code> 的 <code>-w</code> 选项。</p><h3 id="Root-方案选择"><a href="#Root-方案选择" class="headerlink" title="Root 方案选择"></a>Root 方案选择</h3><p>之前写过一篇 <a href="https://ajiew.github.io/android-root-tips/">Android Root</a> 指南，当时用的是 <a href="https://topjohnwu.github.io/Magisk/install.html">Magisk</a>，时隔六年，Magisk 依旧是主流的 root 手段之一。但是，这次想要试下不同的方案，并不是觉得 Magisk 不好，毕竟它的使用人数更多，社区生态也非常丰富，但是，折腾的意义不就是为了尝试吗？所以，这次我选择 <a href="https://kernelsu.org/">Kernel SU</a>，关于它的优缺点下面再说。</p><h3 id="Root-过程"><a href="#Root-过程" class="headerlink" title="Root 过程"></a>Root 过程</h3><p>和 <a href="https://topjohnwu.github.io/Magisk/install.html#patching-images">Magisk</a> 类似，对于 Pixel 设备，Kernel Su 也可以通过 <a href="https://kernelsu.org/guide/installation.html#lkm-installation">patched image</a> 来安装。</p><p>具体步骤：</p><ol><li>解压系统镜像文件，找到 <code>init_boot.img</code> 文件（Android 13 之后开始使用该文件而不是 <code>boot.img</code>）</li><li>打开 Kernel Su 管理器，右上角点击安装，选择 <code>init_boot.img</code> 后等待 patch 完成</li><li>把 patched 后的文件 pull 到电脑上</li><li>使用 <code>fastboot flash init_boot kernelsu_patched_xxx.img</code> 刷入 patch 后的 <code>init_boot</code> 镜像</li></ol><p>重启手机之后 root 就算完成了，打开 Kernel Su 管理器，可以在 Superuser 里控制哪些 app 拥有 root 权限。</p><h2 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h2><p>原本想要通过数据线迁移数据的，但是似乎一加并不支持 Pixel 的迁移方式，连接上之后却没有反应。所以，只能用比较笨的方法：手动迁移数据。这真的真的非常耗时，虽然大部分应用的数据都支持云端存储，但是还是有很多数据是不支持自动备份和同步的，比如微信聊天记录和记账 app 的数据，而且几乎所有的应用都得重新登录和设置一遍。不过，我也因此有机会重新 review 了手机上的 app，只保留下最核心的和最常用的应用。</p><p>另外，<a href="https://play.google.com/store/apps/details?id=ch.deletescape.lawnchair.plah">Lawnchair</a> 真的帮了我大忙，只要把桌面设置通过备份文件恢复之后，即便应用还没有安装，也只要点击一下 app 就能跳转到应用商店下载安装。对于国内的应用，我安装了应用宝，Play Store 没有的应用就跳转到应用宝来安装。虽然我也尝试了新版本的 <a href="https://play.google.com/store/apps/details?id=app.lawnchair.play">Lawnchair</a>，但还是觉得更喜欢 legacy 的版本，即使它从 5 年前开始就不再更新了，但对我来说它已经足够好用了，也有可能只是用习惯了吧。</p><h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>到这里才算是进入正题了，写这篇笔记的主要目的也是为了以后能更轻松的完成基本的定制化任务。</p><h3 id="开启-VoLTE-和-5G-支持"><a href="#开启-VoLTE-和-5G-支持" class="headerlink" title="开启 VoLTE 和 5G 支持"></a>开启 VoLTE 和 5G 支持</h3><p>Pixel 一直以来对国内的网络支持都不是太好，只支持移动和联通，不支持电信和 5G 网络，所以电信用户或者想要使用 5G 的话就必须进行一些额外的操作。</p><p>我参考的是这篇文章：<a href="https://imum.me/posts/googlepixel8pro%E4%B9%8B%E7%94%B5%E4%BF%A1volte%E5%B9%B6%E8%AE%BE%E7%BD%AE5g/">Google Pixel 8 Pro之电信开启 VOLTE 并设置 5G</a>，操作如下：</p><ol><li>下载 <a href="https://github.com/RikkaApps/Shizuku/releases">Shizuku</a> 并按照 app 上的提示开启服务</li><li>下载 <a href="https://github.com/kyujin-cho/pixel-volte-patch/releases">Pixel IMS</a>，允许授权后刷新界面，会出现电信卡的 IMS Status，并且首页会增加一个 Sim 标签页</li><li>在 Sim Config 中开启 Enable VoLTE 以及 Show IMS Status in Sim Info，其他选项根据个人需要打开</li></ol><p>到这里电信 4G 就已经可以使用了，接下来是 5G 网络的支持。</p><p>首先，去 Play Store 下载安装 <a href="https://play.google.com/store/apps/details?id=com.qtrun.QuickTest">Network Signal Guru</a>，授予 root 权限后，在右上角的菜单中选择 Forcing Control (假如没找到这个选项可以选择重启后再试)，然后依次选择 <strong>[1]SIM 1</strong> &gt; <strong>[3]NR MODE SETTINGS</strong> &gt; <strong>[4]SA+NSA</strong>，重启之后设备就可以支持 5G 网络了，另外，SIM 卡的设置中还会多出一个 Vo5G (VoNR) 的开关。</p><h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>之前用一加系统被锁定在了 Android 12，现在升级到 15 之后才发现，原来 Android 系统还是有在改变的。所以，多去设置里翻翻，也许会有惊喜，比如发现某些意想不到的小功能，我现在最喜欢的 Pixel 新功能是 Now Playing 和 Quick Tap，还有就是 Private Space (系统级的应用双开功能)。另外，Pixel 用户也可以通过 Pixel Tips 来探索手机上的新功能。</p><h4 id="🚧问题记录"><a href="#🚧问题记录" class="headerlink" title="🚧问题记录"></a>🚧问题记录</h4><h5 id="“Hey-Google”-提示音缺失的问题"><a href="#“Hey-Google”-提示音缺失的问题" class="headerlink" title="“Hey Google” 提示音缺失的问题"></a>“Hey Google” 提示音缺失的问题</h5><p>Google Assistance 是我尝试的第一个也是唯一还在继续使用的语音助手服务，有时候我也会用它来找不知道放到哪里的手机，可是不知道从什么时候开始，“Hey Google” 的提示音就消失了，于是我用它的次数也逐渐减少了。</p><p>去网上搜了一下，发现被这个问题困扰的人不在少数，一大堆人都在吐槽谷歌为什么要把这个提示音给取消掉。不过，其实也还是有办法恢复的。</p><p>首先，在设置中搜索 “Assistant”，打开后找到 Accessibility，确保选中 Mic-open notification 和 Mic-close notification，然后在系统的 Accessibility 中找到 Voice Access，选择开启。之后再次尝试 Hey Google，你会发现提示音又回来了。</p><p>如果尝试上述手段后还是没有提示音，可以尝试在 Assistant Language 中添加一门新的语言，也许也能有效果。参考：<a href="https://www.reddit.com/r/GooglePixel/comments/12i80nq/how_to_make_google_assistant_giving_a_beep_after/">How to make Google Assistant give a BEEP</a></p><h3 id="核心-Modules"><a href="#核心-Modules" class="headerlink" title="核心 Modules"></a>核心 Modules</h3><p>Kernel Su 的模块虽然不如 Magisk 丰富，但是大多数常见的模块都已经适配了 Kernel SU，因此基本可以满足大部分人的需求。</p><p>在尝试新模块之前，建议先阅读一遍 <a href="https://kernelsu.org/guide/rescue-from-bootloop.html">Rescue from bootloop</a>，这里不得不提一下 KSU 的优点了，由于它的实现机制与 Magisk 全然不同，当出现 bootloop 时，永远可以快速恢复到原来的状态，无论是通过重新刷入 stock boot image 还是通过 disable 模块 (进入开机页后连按音量减键三次)，总之，你再也不用担心手机变砖无法恢复了。不过，为了快速定位到出问题的模块，最好还是一次只安装一个新模块，重启之后确认模块可以正常工作后再尝试安装下一个模块。</p><p>下面记录一些我觉得在 Pixel 上必备的 Kernel SU 模块。</p><h4 id="基础模块"><a href="#基础模块" class="headerlink" title="基础模块"></a>基础模块</h4><ul><li><a href="https://github.com/Dr-TSNG/ZygiskNext"><strong>Zygisk Next</strong></a>: Zygisk 的全新实现。</li><li><a href="https://github.com/mywalkb/LSPosed_mod"><strong>LSPosed_mod</strong></a>: 现在已经闭源的 <a href="https://github.com/LSPosed/LSPosed">LSPosed</a> 的全新实现。需要 Zygisk Next 模块的支持。</li><li><a href="https://github.com/chiteroman/PlayIntegrityFix"><strong>PlayIntegrityFix</strong></a>: 用于通过 Play Integrity 完整性验证。需要 Zygisk Next 模块的支持。</li></ul><h4 id="功能增强模块"><a href="#功能增强模块" class="headerlink" title="功能增强模块"></a>功能增强模块</h4><ul><li><a href="https://github.com/chenxiaolong/BCR"><strong>BCR</strong></a>: Basic Call Recorder, 添加通话录音功能。</li><li><a href="https://github.com/AndroidAudioMods/ViPER4Android/releases"><strong>ViPER4Android</strong></a>: 提升音频 (包括扬声器) 功能的模块。</li></ul><h4 id="定制化-UI"><a href="#定制化-UI" class="headerlink" title="定制化 UI"></a>定制化 UI</h4><ul><li><a href="https://github.com/siavash79/PixelXpert"><strong>PixelXpert</strong></a>: 深度定制 Pixel 的系统 UI，如状态栏、管理 Cloned App 等。需要 LSPosed_mod 模块的支持。</li><li><a href="https://play.google.com/store/apps/details?id=com.bryancandi.android.uituner">System UI Tuner</a>: 一个应用，但是也能定制化部分系统 UI，比如修改状态栏电量显示。</li></ul><h4 id="🚧问题记录-1"><a href="#🚧问题记录-1" class="headerlink" title="🚧问题记录"></a>🚧问题记录</h4><h5 id="Card-Emulator-Pro"><a href="#Card-Emulator-Pro" class="headerlink" title="Card Emulator Pro"></a>Card Emulator Pro</h5><p>由于 KSU 不支持直接以 r/w 模式挂载 system/vendor 分区，所以我们必须以模块的方式刷入：</p><ul><li>点击卡片，选择 Generate Magisk/KernelSU module</li><li>将导出后的 module 在 KernelSU 中进行安装</li><li>重启手机</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 小技巧 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tricks </tag>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>熟悉和舒适</title>
       <link href="/2024-10/"/>
       <url>/2024-10/</url>
@@ -1030,9 +1057,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -1444,9 +1471,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
             <tag> Compose </tag>
             
@@ -1473,9 +1500,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
             <tag> Compose </tag>
             
@@ -1991,9 +2018,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2018,9 +2045,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2072,9 +2099,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2099,9 +2126,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2126,9 +2153,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2153,9 +2180,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2280,9 +2307,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2563,9 +2590,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Tricks </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2617,9 +2644,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Tricks </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
@@ -2746,9 +2773,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> Notes </tag>
+            
+            <tag> Android </tag>
             
         </tags>
       
