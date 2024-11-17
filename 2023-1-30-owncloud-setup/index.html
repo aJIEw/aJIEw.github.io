@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="CentOS 8 简易版快速安装不使用自定义域名，10 分钟内搞定。 安装 LAMP 依赖1234567891011121314151617181920212223242526272829303132333435dnf update# install web serverdnf install httpd httpd-tools -ysystemctl enable httpdsystemctl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Owncloud Server 端配置指南">
+<meta property="og:url" content="https://ajiew.github.io/2023-1-30-owncloud-setup/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="CentOS 8 简易版快速安装不使用自定义域名，10 分钟内搞定。 安装 LAMP 依赖1234567891011121314151617181920212223242526272829303132333435dnf update# install web serverdnf install httpd httpd-tools -ysystemctl enable httpdsystemctl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-30T12:30:00.000Z">
+<meta property="article:modified_time" content="2024-11-17T06:17:18.845Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Owncloud Server 端配置指南</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022-12/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/2023-1-30-owncloud-setup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&text=Owncloud Server 端配置指南"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&is_video=false&description=Owncloud Server 端配置指南"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Owncloud Server 端配置指南&body=Check out this article: https://ajiew.github.io/2023-1-30-owncloud-setup/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&name=Owncloud Server 端配置指南&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/2023-1-30-owncloud-setup/&t=Owncloud Server 端配置指南"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-8-%E7%AE%80%E6%98%93%E7%89%88"><span class="toc-number">1.</span> <span class="toc-text">CentOS 8 简易版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">快速安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LAMP-%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装 LAMP 依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-OwnCloud"><span class="toc-number">1.1.2.</span> <span class="toc-text">安装 OwnCloud</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Web-Server"><span class="toc-number">1.1.3.</span> <span class="toc-text">配置 Web Server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">配置数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Ubuntu 自定义域名安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisite"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">2.1.1.</span> <span class="toc-text">设置初始数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-occ-%E8%84%9A%E6%9C%AC"><span class="toc-number">2.1.2.</span> <span class="toc-text">创建 occ 脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.3.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Apache"><span class="toc-number">2.1.4.</span> <span class="toc-text">配置 Apache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.1.5.</span> <span class="toc-text">创建数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-OwnCloud-1"><span class="toc-number">2.2.</span> <span class="toc-text">安装 OwnCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.1.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-IP-%E5%92%8C%E5%9F%9F%E5%90%8D"><span class="toc-number">2.2.3.</span> <span class="toc-text">配置 IP 和域名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.2.4.</span> <span class="toc-text">配置定时任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E5%92%8C%E6%96%87%E4%BB%B6%E9%94%81"><span class="toc-number">2.2.5.</span> <span class="toc-text">配置缓存和文件锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E6%8B%A5%E6%9C%89%E6%9D%83%E9%99%90"><span class="toc-number">2.2.6.</span> <span class="toc-text">确保拥有权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">测试和使用</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Owncloud Server 端配置指南
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2023-01-30T12:30:00.000Z" itemprop="datePublished">2023-01-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Cheatsheet/" rel="tag">Cheatsheet</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="CentOS-8-简易版"><a href="#CentOS-8-简易版" class="headerlink" title="CentOS 8 简易版"></a>CentOS 8 简易版</h2><h3 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a>快速安装</h3><p>不使用自定义域名，10 分钟内搞定。</p>
+<h4 id="安装-LAMP-依赖"><a href="#安装-LAMP-依赖" class="headerlink" title="安装 LAMP 依赖"></a>安装 LAMP 依赖</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs sh">dnf update<br><br><span class="hljs-comment"># install web server</span><br>dnf install httpd httpd-tools -y<br>systemctl <span class="hljs-built_in">enable</span> httpd<br>systemctl start httpd<br><br><span class="hljs-comment"># install MariaDB</span><br>dnf install mariadb-server mariadb -y<br>systemctl start mariadb<br>systemctl <span class="hljs-built_in">enable</span> mariadb<br><br><span class="hljs-comment"># install PHP 7</span><br>dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y<br>dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm -y<br>dnf module list php<br>dnf module reset php<br>dnf module <span class="hljs-built_in">enable</span> php:remi-7.4<br>dnf install php php-opcache php-gd php-curl php-mysqlnd -y<br>php -v<br><br>systemctl <span class="hljs-built_in">enable</span> php-fpm<br>systemctl start php-fpm<br>systemctl status php-fpm<br><br>setsebool -P httpd_execmem 1<br>systemctl restart httpd<br><br><span class="hljs-comment"># vim /var/www/html/info.php</span><br>&lt;?php phpinfo(); ?&gt;<br><span class="hljs-comment"># check it at http://ip_address/info.php</span><br><br><span class="hljs-comment"># install PHP extensions</span><br>dnf install php-curl php-gd php-intl php-json php-ldap \<br>  php-mbstring php-mysqlnd php-xml php-zip php-opcache -y<br></code></pre></td></tr></table></figure>
+
+<h4 id="安装-OwnCloud"><a href="#安装-OwnCloud" class="headerlink" title="安装 OwnCloud"></a>安装 OwnCloud</h4><p>在 <a target="_blank" rel="noopener" href="https://download.owncloud.com/server/">https://download.owncloud.com/server/</a> 上找到需要安装的版本，复制下载链接：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">wget https://download.owncloud.com/server/owncloud-version.tar.bz2<br>dnf install bzip2 -y<br>tar -jxf owncloud-version.tar.bz2 -C /var/www/<br><span class="hljs-built_in">chown</span> -R apache: /var/www/owncloud<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-Web-Server"><a href="#配置-Web-Server" class="headerlink" title="配置 Web Server"></a>配置 Web Server</h4><p>创建 <code>owncloud.conf</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">vim /etc/httpd/conf.d/owncloud.conf<br></code></pre></td></tr></table></figure>
+<p>保存以下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sh">Alias / <span class="hljs-string">&quot;/var/www/owncloud/&quot;</span><br><br>&lt;Directory /var/www/owncloud/&gt;<br>  Options +FollowSymlinks<br>  AllowOverride All<br><br> &lt;IfModule mod_dav.c&gt;<br>  Dav off<br> &lt;/IfModule&gt;<br><br> SetEnv HOME /var/www/owncloud<br> SetEnv HTTP_HOME /var/www/owncloud<br><br>&lt;/Directory&gt;<br></code></pre></td></tr></table></figure>
+
+<p>重启 web 服务器：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">systemctl restart httpd<br>setsebool -P httpd_unified 1<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h4><p>在网页端打开 <a target="_blank" rel="noopener" href="http://your-server-ip/owncloud%EF%BC%8C%E8%BE%93%E5%85%A5">http://your-server-ip/owncloud，输入</a> admin 账号和密码，保存并登录即可。</p>
+<h2 id="Ubuntu-自定义域名安装"><a href="#Ubuntu-自定义域名安装" class="headerlink" title="Ubuntu 自定义域名安装"></a>Ubuntu 自定义域名安装</h2><h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>参考文档：<a target="_blank" rel="noopener" href="https://doc.owncloud.com/server/">OwnCloud Server</a></p>
+<h4 id="设置初始数据"><a href="#设置初始数据" class="headerlink" title="设置初始数据"></a>设置初始数据</h4><p>更新系统：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt update<br></code></pre></td></tr></table></figure>
+
+<p>设置域名（可选）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">my_domain=<span class="hljs-string">&quot;cloud.ajiew.me&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>设置管理员和数据库密码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">sec_admin_pwd=$(openssl rand -<span class="hljs-built_in">base64</span> 18)<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$sec_admin_pwd</span> &gt; /etc/.sec_admin_pwd.txt<br><br>sec_db_pwd=$(openssl rand -<span class="hljs-built_in">base64</span> 18)<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$sec_db_pwd</span> &gt; /etc/.sec_db_pwd.txt<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建-occ-脚本"><a href="#创建-occ-脚本" class="headerlink" title="创建 occ 脚本"></a>创建 occ 脚本</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh">FILE=<span class="hljs-string">&quot;/usr/local/bin/occ&quot;</span><br><br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOM &gt;$FILE</span><br><span class="hljs-string">#! /bin/bash</span><br><span class="hljs-string">cd /var/www/owncloud</span><br><span class="hljs-string">sudo -E -u www-data /usr/bin/php /var/www/owncloud/occ &quot;\$@&quot;</span><br><span class="hljs-string">EOM</span><br><br><span class="hljs-built_in">chmod</span> +x <span class="hljs-variable">$FILE</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><p>如果是 Ubuntu 20+ 以上的系统，按照以下步骤（参考 <a target="_blank" rel="noopener" href="https://doc.owncloud.com/server/10.11/admin_manual/installation/manual_installation/manual_installation.html">manual_installation</a>）：</p>
+<p>安装 PHP：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install php7.4-fpm php-cgi php-pear -y<br></code></pre></td></tr></table></figure>
+
+<p>如果已经安装了其它版本的 PHP，需要切换成 php7.4：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">update-alternatives --<span class="hljs-built_in">set</span> php /usr/bin/php7.4<br></code></pre></td></tr></table></figure>
+
+<p>更新 PEAR：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">mkdir</span> -p /tmp/pear/cache<br><br>pear clear-cache<br>pear update-channels<br>pear upgrade --force<br>pear version<br></code></pre></td></tr></table></figure>
+
+<p>安装核心依赖：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install -y \<br>  apache2 libapache2-mod-php \<br>  mariadb-server openssl redis-server wget php-imagick \<br>  php-common php-curl php-gd php-gmp php-bcmath php-imap \<br>  php-intl php-json php-mbstring php-mysql php-ssh2 php-xml \<br>  php-zip php-apcu php-redis php-ldap php-phpseclib \<br>  smbclient redis-server unzip openssl rsync imagemagick \<br></code></pre></td></tr></table></figure>
+
+<p>安装其它依赖：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install -y \<br>  unzip bzip2 rsync curl jq \<br>  inetutils-ping  ldap-utils\<br>  smbclient<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-Apache"><a href="#配置-Apache" class="headerlink" title="配置 Apache"></a>配置 Apache</h4><p>创建 VirtualHost 配置文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sh">FILE=<span class="hljs-string">&quot;/etc/apache2/sites-available/owncloud.conf&quot;</span><br><br><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOM &gt;$FILE</span><br><span class="hljs-string">&lt;VirtualHost *:8000&gt;</span><br><span class="hljs-string">ServerName $my_domain</span><br><span class="hljs-string">DirectoryIndex index.php index.html</span><br><span class="hljs-string">DocumentRoot /var/www/owncloud</span><br><span class="hljs-string">&lt;Directory /var/www/owncloud&gt;</span><br><span class="hljs-string">  Options +FollowSymlinks -Indexes</span><br><span class="hljs-string">  AllowOverride All</span><br><span class="hljs-string">  Require all granted</span><br><span class="hljs-string"></span><br><span class="hljs-string"> &lt;IfModule mod_dav.c&gt;</span><br><span class="hljs-string">  Dav off</span><br><span class="hljs-string"> &lt;/IfModule&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string"> SetEnv HOME /var/www/owncloud</span><br><span class="hljs-string"> SetEnv HTTP_HOME /var/www/owncloud</span><br><span class="hljs-string">&lt;/Directory&gt;</span><br><span class="hljs-string">&lt;/VirtualHost&gt;</span><br><span class="hljs-string">EOM</span><br></code></pre></td></tr></table></figure>
+
+<p>启用配置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">a2dissite 000-default<br>a2ensite owncloud.conf<br><br><span class="hljs-comment"># 如果修改了配置，需要重新加载</span><br>systemctl reload apache2<br></code></pre></td></tr></table></figure>
+
+<h4 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">sed -i <span class="hljs-string">&quot;/\[mysqld\]/atransaction-isolation = READ-COMMITTED\nperformance_schema = on&quot;</span> /etc/mysql/mariadb.conf.d/50-server.cnf<br><br>systemctl start mariadb<br><br>mysql -u root -e <span class="hljs-string">&quot;CREATE DATABASE IF NOT EXISTS owncloud; \</span><br><span class="hljs-string">GRANT ALL PRIVILEGES ON owncloud.* \</span><br><span class="hljs-string">  TO owncloud@localhost \</span><br><span class="hljs-string">  IDENTIFIED BY &#x27;<span class="hljs-variable">$&#123;sec_db_pwd&#125;</span>&#x27;&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>启用推荐的模块：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">a2enmod <span class="hljs-built_in">dir</span> <span class="hljs-built_in">env</span> headers mime rewrite setenvif<br>systemctl restart apache2<br></code></pre></td></tr></table></figure>
+
+<h3 id="安装-OwnCloud-1"><a href="#安装-OwnCloud-1" class="headerlink" title="安装 OwnCloud"></a>安装 OwnCloud</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cd</span> /var/www/<br><br>wget https://download.owncloud.com/server/stable/owncloud-complete-latest.tar.bz2 &amp;&amp; \<br>tar -xjf owncloud-complete-latest.tar.bz2 &amp;&amp; <span class="hljs-built_in">chown</span> -R www-data. owncloud<br></code></pre></td></tr></table></figure>
+
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">occ maintenance:install \<br>    --database <span class="hljs-string">&quot;mysql&quot;</span> \<br>    --database-name <span class="hljs-string">&quot;owncloud&quot;</span> \<br>    --database-user <span class="hljs-string">&quot;owncloud&quot;</span> \<br>    --database-pass <span class="hljs-variable">$&#123;sec_db_pwd&#125;</span> \<br>    --data-dir <span class="hljs-string">&quot;/var/www/owncloud/data&quot;</span> \<br>    --admin-user <span class="hljs-string">&quot;admin&quot;</span> \<br>    --admin-pass <span class="hljs-variable">$&#123;sec_admin_pwd&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-IP-和域名"><a href="#配置-IP-和域名" class="headerlink" title="配置 IP 和域名"></a>配置 IP 和域名</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">my_ip=$(hostname -I|<span class="hljs-built_in">cut</span> -f1 -d <span class="hljs-string">&#x27; &#x27;</span>)<br>occ config:system:<span class="hljs-built_in">set</span> trusted_domains 1 --value=<span class="hljs-string">&quot;<span class="hljs-variable">$my_ip</span>&quot;</span><br>occ config:system:<span class="hljs-built_in">set</span> trusted_domains 2 --value=<span class="hljs-string">&quot;<span class="hljs-variable">$my_domain</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="配置定时任务"><a href="#配置定时任务" class="headerlink" title="配置定时任务"></a>配置定时任务</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh">occ background:cron<br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;*/15  *  *  *  * /var/www/owncloud/occ system:cron&quot;</span> \<br>  | sudo -u www-data -g crontab <span class="hljs-built_in">tee</span> -a \<br>  /var/spool/cron/crontabs/www-data<br>  <br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;0  2  *  *  * /var/www/owncloud/occ dav:cleanup-chunks&quot;</span> \<br>  | sudo -u www-data -g crontab <span class="hljs-built_in">tee</span> -a \<br>  /var/spool/cron/crontabs/www-data<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置缓存和文件锁"><a href="#配置缓存和文件锁" class="headerlink" title="配置缓存和文件锁"></a>配置缓存和文件锁</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">occ config:system:<span class="hljs-built_in">set</span> memcache.local --value <span class="hljs-string">&#x27;\OC\Memcache\APCu&#x27;</span><br><br>occ config:system:<span class="hljs-built_in">set</span> memcache.locking --value <span class="hljs-string">&#x27;\OC\Memcache\Redis&#x27;</span><br><br>occ config:system:<span class="hljs-built_in">set</span> redis --value <span class="hljs-string">&#x27;&#123;&quot;host&quot;: &quot;127.0.0.1&quot;, &quot;port&quot;: &quot;6379&quot;&#125;&#x27;</span> --<span class="hljs-built_in">type</span> json<br></code></pre></td></tr></table></figure>
+
+<h4 id="确保拥有权限"><a href="#确保拥有权限" class="headerlink" title="确保拥有权限"></a>确保拥有权限</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">chown</span> -R www-data. owncloud<br></code></pre></td></tr></table></figure>
+
+<h3 id="测试和使用"><a href="#测试和使用" class="headerlink" title="测试和使用"></a>测试和使用</h3><p>首先，使用服务器 IP 地址登录：your.ip.address/index.php/login，如果测试能够打开，则说明服务安装成功，接下来可以配置自定义域名。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">vim /var/www/owncloud/config/config.php<br></code></pre></td></tr></table></figure>
+
+<p>找到 <code>trusted_domains</code> 在其下的数组中添加你的域名：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">array (<br>  0 =&gt; <span class="hljs-string">&#x27;localhost&#x27;</span>,<br>  1 =&gt; <span class="hljs-string">&#x27;your.ip.address&#x27;</span>,<br>  3 =&gt; <span class="hljs-string">&#x27;your.domain.name&#x27;</span>,<br>),<br></code></pre></td></tr></table></figure>
+
+<p>最后，打开你的域名的 DNS 配置，将目标域名解析到你的服务器地址。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-8-%E7%AE%80%E6%98%93%E7%89%88"><span class="toc-number">1.</span> <span class="toc-text">CentOS 8 简易版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">快速安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-LAMP-%E4%BE%9D%E8%B5%96"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装 LAMP 依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-OwnCloud"><span class="toc-number">1.1.2.</span> <span class="toc-text">安装 OwnCloud</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Web-Server"><span class="toc-number">1.1.3.</span> <span class="toc-text">配置 Web Server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.4.</span> <span class="toc-text">配置数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ubuntu-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">Ubuntu 自定义域名安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisite"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%88%9D%E5%A7%8B%E6%95%B0%E6%8D%AE"><span class="toc-number">2.1.1.</span> <span class="toc-text">设置初始数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-occ-%E8%84%9A%E6%9C%AC"><span class="toc-number">2.1.2.</span> <span class="toc-text">创建 occ 脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.3.</span> <span class="toc-text">安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Apache"><span class="toc-number">2.1.4.</span> <span class="toc-text">配置 Apache</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.1.5.</span> <span class="toc-text">创建数据库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-OwnCloud-1"><span class="toc-number">2.2.</span> <span class="toc-text">安装 OwnCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.2.1.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.2.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-IP-%E5%92%8C%E5%9F%9F%E5%90%8D"><span class="toc-number">2.2.3.</span> <span class="toc-text">配置 IP 和域名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">2.2.4.</span> <span class="toc-text">配置定时任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%BC%93%E5%AD%98%E5%92%8C%E6%96%87%E4%BB%B6%E9%94%81"><span class="toc-number">2.2.5.</span> <span class="toc-text">配置缓存和文件锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E6%8B%A5%E6%9C%89%E6%9D%83%E9%99%90"><span class="toc-number">2.2.6.</span> <span class="toc-text">确保拥有权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">测试和使用</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/2023-1-30-owncloud-setup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&text=Owncloud Server 端配置指南"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&is_video=false&description=Owncloud Server 端配置指南"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Owncloud Server 端配置指南&body=Check out this article: https://ajiew.github.io/2023-1-30-owncloud-setup/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&title=Owncloud Server 端配置指南"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/2023-1-30-owncloud-setup/&name=Owncloud Server 端配置指南&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/2023-1-30-owncloud-setup/&t=Owncloud Server 端配置指南"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fa-brands fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fa-brands fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

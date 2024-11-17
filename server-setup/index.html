@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="科学上网安装 V2ray通过 fhs-install-v2ray 安装（未配置代理的情况下，通过 github 下载文件会比较慢）： 12345678# installbash &lt;(curl -L https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;v2fly&#x2F;fhs-install-v2ray&#x2F;master&#x2F;install-release.sh)# setup client">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 服务器配置指南">
+<meta property="og:url" content="https://ajiew.github.io/server-setup/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="科学上网安装 V2ray通过 fhs-install-v2ray 安装（未配置代理的情况下，通过 github 下载文件会比较慢）： 12345678# installbash &lt;(curl -L https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;v2fly&#x2F;fhs-install-v2ray&#x2F;master&#x2F;install-release.sh)# setup client">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-15T12:30:00.000Z">
+<meta property="article:modified_time" content="2024-11-17T06:23:32.415Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Ubuntu 服务器配置指南</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022-2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/keyboard-symbols/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/server-setup/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/server-setup/&text=Ubuntu 服务器配置指南"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/server-setup/&is_video=false&description=Ubuntu 服务器配置指南"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Ubuntu 服务器配置指南&body=Check out this article: https://ajiew.github.io/server-setup/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/server-setup/&name=Ubuntu 服务器配置指南&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/server-setup/&t=Ubuntu 服务器配置指南"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">科学上网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-V2ray"><span class="toc-number">1.1.</span> <span class="toc-text">安装 V2ray</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-Proxy"><span class="toc-number">1.1.1.</span> <span class="toc-text">设置 Proxy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">2.</span> <span class="toc-text">Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="toc-number">2.1.</span> <span class="toc-text">安装 oh-my-zsh</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">Vim 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-vim-plug"><span class="toc-number">2.2.1.</span> <span class="toc-text">插件管理器 vim-plug</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-%E7%99%BB%E5%BD%95"><span class="toc-number">2.3.</span> <span class="toc-text">SSH 登录</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Ubuntu 服务器配置指南
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2022-02-15T12:30:00.000Z" itemprop="datePublished">2022-02-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Cheatsheet/" rel="tag">Cheatsheet</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="科学上网"><a href="#科学上网" class="headerlink" title="科学上网"></a>科学上网</h2><h3 id="安装-V2ray"><a href="#安装-V2ray" class="headerlink" title="安装 V2ray"></a>安装 V2ray</h3><p>通过 <a target="_blank" rel="noopener" href="https://github.com/v2fly/fhs-install-v2ray">fhs-install-v2ray</a> 安装（未配置代理的情况下，通过 github 下载文件会比较慢）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># install</span><br>bash &lt;(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)<br><br><span class="hljs-comment"># setup client config json (for outbound not inbound!)</span><br>vim /usr/local/etc/v2ray/config.json<br><br><span class="hljs-comment"># start service</span><br>systemctl start v2ray<br></code></pre></td></tr></table></figure>
+
+<h4 id="设置-Proxy"><a href="#设置-Proxy" class="headerlink" title="设置 Proxy"></a>设置 Proxy</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># ~/.bashrc</span><br><span class="hljs-built_in">export</span> http_proxy=http://127.0.0.1:1087; <span class="hljs-built_in">export</span> https_proxy=http://127.0.0.1:1087; <span class="hljs-built_in">export</span> ALL_PROXY=socks5://127.0.0.1:1080; <span class="hljs-built_in">export</span> NO_PROXY=<span class="hljs-string">&quot;localhost,127.0.0.1,::1&quot;</span><br><br><span class="hljs-comment"># or create aliases</span><br><span class="hljs-built_in">alias</span> proxy=<span class="hljs-string">&#x27;export http_proxy=&quot;http://127.0.0.1:1087&quot;;export https_proxy=&quot;http://127.0.0.1:1087&quot;;&#x27;</span><br><span class="hljs-built_in">alias</span> unproxy=<span class="hljs-string">&#x27;unset http_proxy https_proxy&#x27;</span><br><br><span class="hljs-comment"># setup proxy for git, or edit ~/.gitconfig</span><br>git config --global http.proxy http://127.0.0.1:1087<br>git config --global https.proxy http://127.0.0.1:1087<br></code></pre></td></tr></table></figure>
+
+<h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h3 id="安装-oh-my-zsh"><a href="#安装-oh-my-zsh" class="headerlink" title="安装 oh-my-zsh"></a>安装 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">oh-my-zsh</a></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install zsh -y<br><br>sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL \</span></span><br><span class="hljs-subst"><span class="hljs-string">    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># vim ~/.zshrc</span><br>plugins=(<br>  autojump<br>  dirhistory<br>  git<br>  ubuntu<br>  zsh-autosuggestions<br>  zsh-hist<br>  zsh-syntax-highlighting<br>)<br></code></pre></td></tr></table></figure>
+
+<p>其中 <code>autojump</code> 需要先安装依赖：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install autojump -y<br></code></pre></td></tr></table></figure>
+
+<p>有的插件需要单独安装到第三方插件目录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sh">git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions<br><br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting<br><br>git <span class="hljs-built_in">clone</span> https://github.com/marlonrichert/zsh-hist.git <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-hist<br></code></pre></td></tr></table></figure>
+
+<h3 id="Vim-配置"><a href="#Vim-配置" class="headerlink" title="Vim 配置"></a>Vim 配置</h3><h4 id="插件管理器-vim-plug"><a href="#插件管理器-vim-plug" class="headerlink" title="插件管理器 vim-plug"></a>插件管理器 <a target="_blank" rel="noopener" href="https://github.com/junegunn/vim-plug">vim-plug</a></h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -fLo ~/.vim/autoload/plug.vim --create-dirs \<br>    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim<br></code></pre></td></tr></table></figure>
+
+<p>安装插件只需要在  <code>~/.vimrc</code>  中添加插件名称，然后重新加载  <code>~/.vimrc</code> 并执行 <code>:PlugInstall</code> 就可以了。</p>
+<p>其它见 <a href="https://ajiew.github.io/vim-cheatsheet#Vim-%E9%85%8D%E7%BD%AE">vim-cheatsheet</a>。</p>
+<h3 id="SSH-登录"><a href="#SSH-登录" class="headerlink" title="SSH 登录"></a>SSH 登录</h3><p>创建 .ssh 文件夹：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">mkdir</span> ~/.ssh<br></code></pre></td></tr></table></figure>
+
+<p>复制客户端的 ssh  公钥（macOS）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub | pbcopy<br></code></pre></td></tr></table></figure>
+
+<p> 编辑服务端的 <code>authorized_keys</code>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 粘贴公钥到该文件的最后一行</span><br>vim ~/.ssh/authorized_keys<br><span class="hljs-comment"># 修改为读写权限</span><br><span class="hljs-built_in">chmod</span> 600 ~/.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">科学上网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-V2ray"><span class="toc-number">1.1.</span> <span class="toc-text">安装 V2ray</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-Proxy"><span class="toc-number">1.1.1.</span> <span class="toc-text">设置 Proxy</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell"><span class="toc-number">2.</span> <span class="toc-text">Shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-oh-my-zsh"><span class="toc-number">2.1.</span> <span class="toc-text">安装 oh-my-zsh</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">2.1.1.</span> <span class="toc-text">安装插件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vim-%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text">Vim 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-vim-plug"><span class="toc-number">2.2.1.</span> <span class="toc-text">插件管理器 vim-plug</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-%E7%99%BB%E5%BD%95"><span class="toc-number">2.3.</span> <span class="toc-text">SSH 登录</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/server-setup/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/server-setup/&text=Ubuntu 服务器配置指南"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/server-setup/&is_video=false&description=Ubuntu 服务器配置指南"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=Ubuntu 服务器配置指南&body=Check out this article: https://ajiew.github.io/server-setup/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/server-setup/&title=Ubuntu 服务器配置指南"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/server-setup/&name=Ubuntu 服务器配置指南&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/server-setup/&t=Ubuntu 服务器配置指南"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fa-brands fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fa-brands fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

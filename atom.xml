@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2024-11-16T09:58:18.949Z</updated>
+  <updated>2024-11-17T06:31:30.785Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://ajiew.github.io/pixel-setup/"/>
     <id>https://ajiew.github.io/pixel-setup/</id>
     <published>2024-11-15T06:00:00.000Z</published>
-    <updated>2024-11-16T09:58:18.949Z</updated>
+    <updated>2024-11-17T06:31:30.785Z</updated>
     
     
     <summary type="html">&lt;p&gt;时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。&lt;/p&gt;</summary>
@@ -31,9 +31,11 @@
     <category term="小技巧" scheme="https://ajiew.github.io/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
     
+    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
+    
     <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
     
-    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
+    <category term="Cheatsheet" scheme="https://ajiew.github.io/tags/Cheatsheet/"/>
     
   </entry>
   

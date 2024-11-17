@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="梅林固件（ASUSWRT-MERLIN）是基于华硕官方固件 ASUS-WRT 开发而来的开源固件，而 ASUS-WRT 则是基于 Tomato-9 开发的。酷软固件在原有梅林固件的基础上添加了软件中心，可以把酷软看作是路由器的应用商店，通过它我们可以更方便地安装各种第三方软件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华硕路由器安装 v2ray">
+<meta property="og:url" content="https://ajiew.github.io/router/index.html">
+<meta property="og:site_name" content="aJIEw">
+<meta property="og:description" content="梅林固件（ASUSWRT-MERLIN）是基于华硕官方固件 ASUS-WRT 开发而来的开源固件，而 ASUS-WRT 则是基于 Tomato-9 开发的。酷软固件在原有梅林固件的基础上添加了软件中心，可以把酷软看作是路由器的应用商店，通过它我们可以更方便地安装各种第三方软件。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-13T12:30:00.000Z">
+<meta property="article:modified_time" content="2024-11-17T06:23:23.111Z">
+<meta property="article:author" content="aJIEw">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>华硕路由器安装 v2ray</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="aJIEw" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/blog/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022-12/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022-11/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/router/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/router/&text=华硕路由器安装 v2ray"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/router/&is_video=false&description=华硕路由器安装 v2ray"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=华硕路由器安装 v2ray&body=Check out this article: https://ajiew.github.io/router/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-digg " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/router/&name=华硕路由器安装 v2ray&description=&lt;p&gt;梅林固件（&lt;a href=&#34;https://www.asuswrt-merlin.net/&#34;&gt;ASUSWRT-MERLIN&lt;/a&gt;）是基于华硕官方固件 ASUS-WRT 开发而来的开源固件，而 ASUS-WRT 则是基于 Tomato-9 开发的。酷软固件在原有梅林固件的基础上添加了软件中心，可以把酷软看作是路由器的应用商店，通过它我们可以更方便地安装各种第三方软件。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/router/&t=华硕路由器安装 v2ray"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">通过梅林固件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E9%85%B7%E8%BD%AF%E5%9B%BA%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">通过酷软固件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">3.</span> <span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E8%A7%A3%E9%87%8A"><span class="toc-number">3.1.</span> <span class="toc-text">名字解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.</span> <span class="toc-text">工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Troubleshot"><span class="toc-number">4.</span> <span class="toc-text">Troubleshot</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%B7%AF%E7%94%B1%E5%99%A8%E6%97%A0%E6%B3%95%E7%99%BB%E5%BD%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 路由器无法登录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%97%A0%E6%B3%95%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-shadowsocks-%E6%8F%92%E4%BB%B6%EF%BC%9F"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 无法手动安装 shadowsocks  插件？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%B8%8D%E8%83%BD%E7%BC%96%E8%BE%91%E8%8A%82%E7%82%B9"><span class="toc-number">4.0.3.</span> <span class="toc-text">3. 不能编辑节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%AE%8C%E5%85%A8%E6%96%AD%E7%94%B5%E9%87%8D%E5%90%AF%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">4.0.4.</span> <span class="toc-text">4. 路由器完全断电重启的方法？</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        华硕路由器安装 v2ray
+    </h1>
+
+
+
+    <div class="meta">
+      <p/>
+      <!-- <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">aJIEw</span>
+      </span> -->
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-13T12:30:00.000Z" itemprop="datePublished">2022-12-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/">小技巧</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Cheatsheet/" rel="tag">Cheatsheet</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>梅林固件（<a target="_blank" rel="noopener" href="https://www.asuswrt-merlin.net/">ASUSWRT-MERLIN</a>）是基于华硕官方固件 ASUS-WRT 开发而来的开源固件，而 ASUS-WRT 则是基于 Tomato-9 开发的。酷软固件在原有梅林固件的基础上添加了软件中心，可以把酷软看作是路由器的应用商店，通过它我们可以更方便地安装各种第三方软件。</p>
+<span id="more"></span>
+
+<h3 id="通过梅林固件安装"><a href="#通过梅林固件安装" class="headerlink" title="通过梅林固件安装"></a>通过梅林固件安装</h3><ul>
+<li>安装梅林固件<ul>
+<li>下载<a target="_blank" rel="noopener" href="https://www.asuswrt-merlin.net/download">梅林固件</a>后解压</li>
+<li>系统管理 &gt; 固件升级 &gt; 手动固件更新，选择解压出的文件上传，等待更新完毕</li>
+<li>重新登录后，路由器管理首页显示「Powered by Asuswrt-Merlin」文字，说明梅林固件安装成功</li>
+</ul>
+</li>
+<li>系统管理-系统设置，选中 <code>Format JFFS partition at next boot</code> 和 <code>Enable JFFS custom scripts and configs</code>，以及启用 SSH 同时复制本机 ssh 公钥，然后重启路由器<ul>
+<li>ssh 登录：<code>ssh ajiew@192.168.50.1 -p 22</code></li>
+</ul>
+</li>
+<li>通过 opkg 安装 v2ray 相关的依赖和工具</li>
+<li>配置 v2ray 并启动（参考 <strong><a target="_blank" rel="noopener" href="https://github.com/zw963/asuswrt-merlin-v2ray">asuswrt-merlin-v2ray</a></strong> 项目）</li>
+</ul>
+<h3 id="通过酷软固件"><a href="#通过酷软固件" class="headerlink" title="通过酷软固件"></a>通过酷软固件</h3><ul>
+<li>安装<a target="_blank" rel="noopener" href="https://www.koolcenter.com/">酷软</a>梅林改版固件<ul>
+<li>下载<a target="_blank" rel="noopener" href="https://fw.koolcenter.com/">对应版本</a>的固件后安装，步骤与安装梅林固件相同</li>
+<li>安装成功后，路由器主页左侧菜单最下方会出现 「koolshare - 软件中心」</li>
+</ul>
+</li>
+<li>通过酷软中心安装「虚拟内存插件」<ul>
+<li>安装后插入 U 盘，创建虚拟内存（如果遇到读写速度太低，可以通过修改 <code>/jffs/.koolshare/scripts/swap.make</code> 中 <code>R_LIMIT</code> 和 <code>W_LIMIT</code> 来绕过限制）</li>
+<li>创建成功后重启路由器</li>
+</ul>
+</li>
+<li>下载并安装<a target="_blank" rel="noopener" href="https://github.com/hq450/fancyss_history_package">科学上网</a>插件<ul>
+<li>配置好账号，打开科学上网开关，最后「保存&amp;应用」即可。</li>
+</ul>
+</li>
+</ul>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><h4 id="名字解释"><a href="#名字解释" class="headerlink" title="名字解释"></a>名字解释</h4><ul>
+<li><strong>软路由</strong>：是指利用台式机或服务器配合软件形成路由解决方案，主要靠软件的设置，达成路由器的功能；而<strong>硬路由</strong>则是以特有的硬设备，包括处理器、电源供应、嵌入式软件，提供设定的路由器功能。推荐使用硬路，因为这样只需要一个路由器，外加一些简单的配置，我们就可以做到路由器翻墙了。</li>
+<li><strong>旁路由</strong>：指挂靠在主路由网络下的旁路网关。</li>
+<li><a target="_blank" rel="noopener" href="https://www.koolcenter.com/article/firmware/1_introduce/platform/">固件平台</a>：华硕针对不同机型的路由器，所使用的 CPU 芯片和 WiFi 芯片有所不同，因此各种型号的路由器都有自己的平台名称。较新的型号一般都包含 hnd 后缀，推荐使用固件版本 386 以上的梅林固件。</li>
+</ul>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Entware/Entware"><strong>Entware</strong></a>：可以理解为嵌入式设备的包管理器，命令为 <code>opkg</code>，被看作是 <a target="_blank" rel="noopener" href="https://github.com/Optware/Optware-ng">Optware</a> 的替代者。我们可以通过 amtm <a target="_blank" rel="noopener" href="https://github.com/RMerl/asuswrt-merlin.ng/wiki/Entware#setup">安装</a>，另外，由于路由器没有硬盘且可写入的闪存空间有限（JFFS 只有 60MB 左右），所以我们一般需要外接一个移动硬盘作为各种第三方包的安装位置，同时也可以用于备份 <a target="_blank" rel="noopener" href="https://github.com/RMerl/asuswrt-merlin.ng/wiki/JFFS">JFFS</a>。</p>
+</li>
+<li><p><strong>amtm</strong>：用于安装 Entware，需要先插入一个 USB 硬盘并且将其格式化为 ext4 格式：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 列出可用的硬盘设备</span><br>fdisk -l<br><br><span class="hljs-comment"># 格式化为 ext4 格式</span><br>mke2fs -t ext4 /dev/sda1<br><br><span class="hljs-comment"># 进入 jffs</span><br><span class="hljs-built_in">cd</span> /jffs/scripts<br><br><span class="hljs-comment"># 下载 amtm 并使用</span><br>curl -Os https://diversion.ch/amtm/amtm &amp;&amp; sh amtm<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Troubleshot"><a href="#Troubleshot" class="headerlink" title="Troubleshot"></a>Troubleshot</h3><h5 id="1-路由器无法登录"><a href="#1-路由器无法登录" class="headerlink" title="1. 路由器无法登录"></a>1. 路由器无法登录</h5><p>默认登录地址：router.asus.com，如遇到无法跳转登录页面 (ERR_NAME_NOT_RESOLVED)，可以尝试通过路由器的 IP 地址登录，查看 WiFi 设置中的路由器 IP，Mac 下通过 <kbd>option</kbd> + 点击状态栏 WiFi 图标即可查看。</p>
+<h5 id="2-无法手动安装-shadowsocks-插件？"><a href="#2-无法手动安装-shadowsocks-插件？" class="headerlink" title="2. 无法手动安装 shadowsocks  插件？"></a>2. 无法手动安装 shadowsocks  插件？</h5><p>当遇到「根据国家相关法律法规，无法安装该插件」时，可以通过 ssh 登录后，执行下面的命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">sed -i <span class="hljs-string">&#x27;s/\tdetect_package/\t# detect_package/g&#x27;</span> /koolshare/scripts/ks_tar_install.sh<br></code></pre></td></tr></table></figure>
+
+<h5 id="3-不能编辑节点"><a href="#3-不能编辑节点" class="headerlink" title="3. 不能编辑节点"></a>3. 不能编辑节点</h5><p>尝试卸载重装科学上网插件。</p>
+<h5 id="4-路由器完全断电重启的方法？"><a href="#4-路由器完全断电重启的方法？" class="headerlink" title="4. 路由器完全断电重启的方法？"></a>4. 路由器完全断电重启的方法？</h5><ol>
+<li>关闭路由器</li>
+<li>拔掉插座</li>
+<li>开启路由器，耗尽路由器中剩余电量</li>
+<li>重新关机</li>
+<li>插上插座</li>
+<li>开机启动</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/blog/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">通过梅林固件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E9%85%B7%E8%BD%AF%E5%9B%BA%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">通过酷软固件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83"><span class="toc-number">3.</span> <span class="toc-text">其它</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E8%A7%A3%E9%87%8A"><span class="toc-number">3.1.</span> <span class="toc-text">名字解释</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-number">3.2.</span> <span class="toc-text">工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Troubleshot"><span class="toc-number">4.</span> <span class="toc-text">Troubleshot</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E8%B7%AF%E7%94%B1%E5%99%A8%E6%97%A0%E6%B3%95%E7%99%BB%E5%BD%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 路由器无法登录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E6%97%A0%E6%B3%95%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85-shadowsocks-%E6%8F%92%E4%BB%B6%EF%BC%9F"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 无法手动安装 shadowsocks  插件？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%B8%8D%E8%83%BD%E7%BC%96%E8%BE%91%E8%8A%82%E7%82%B9"><span class="toc-number">4.0.3.</span> <span class="toc-text">3. 不能编辑节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%AE%8C%E5%85%A8%E6%96%AD%E7%94%B5%E9%87%8D%E5%90%AF%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9F"><span class="toc-number">4.0.4.</span> <span class="toc-text">4. 路由器完全断电重启的方法？</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://ajiew.github.io/router/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://ajiew.github.io/router/&text=华硕路由器安装 v2ray"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ajiew.github.io/router/&is_video=false&description=华硕路由器安装 v2ray"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li> -->
+  <li><a class="icon" href="mailto:?subject=华硕路由器安装 v2ray&body=Check out this article: https://ajiew.github.io/router/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://ajiew.github.io/router/&title=华硕路由器安装 v2ray"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://ajiew.github.io/router/&name=华硕路由器安装 v2ray&description=&lt;p&gt;梅林固件（&lt;a href=&#34;https://www.asuswrt-merlin.net/&#34;&gt;ASUSWRT-MERLIN&lt;/a&gt;）是基于华硕官方固件 ASUS-WRT 开发而来的开源固件，而 ASUS-WRT 则是基于 Tomato-9 开发的。酷软固件在原有梅林固件的基础上添加了软件中心，可以把酷软看作是路由器的应用商店，通过它我们可以更方便地安装各种第三方软件。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li> -->
+<!--   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://ajiew.github.io/router/&t=华硕路由器安装 v2ray"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    aJIEw
+  </div>
+  <div class="footer-right">
+    Find me on
+    
+    
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://github.com/aJIEw" aria-label="github"><i class="fa-brands fa-github"></i></a>
+      
+      , 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="https://twitter.com/ajiew42" aria-label="twitter"><i class="fa-brands fa-twitter"></i></a>
+      
+       or 
+      
+    
+      
+        <a class="icon" target="_blank" rel="noopener" href="mailto:ajiew42@gmail.com" aria-label="mail"><i class="fas fa-envelope"></i></a>
+      
+      
+      
+    
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
