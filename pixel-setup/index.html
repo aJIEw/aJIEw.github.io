@@ -14,10 +14,10 @@
 <meta property="og:description" content="时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-11-15T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-11-17T06:31:30.785Z">
+<meta property="article:modified_time" content="2024-11-30T13:22:28.164Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Tricks">
+<meta property="article:tag" content="Android">
 <meta property="article:tag" content="Cheatsheet">
 <meta name="twitter:card" content="summary">
     
@@ -76,6 +76,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024-11/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/2024-10/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -173,6 +175,7 @@
 <li>使用 <code>fastboot flash init_boot kernelsu_patched_xxx.img</code> 刷入 patch 后的 <code>init_boot</code> 镜像</li>
 </ol>
 <p>重启手机之后 root 就算完成了，打开 Kernel Su 管理器，可以在 Superuser 里控制哪些 app 拥有 root 权限。</p>
+<p>另外，和 Magisk 类似，在系统 OTA 升级之后，只需要在 Kernel SU Manager 中将 Kernel SU 安装到 inactive slot 就可以保留 Kernel SU 了。</p>
 <h2 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h2><p>原本想要通过数据线迁移数据的，但是似乎一加并不支持 Pixel 的迁移方式，连接上之后却没有反应。所以，只能用比较笨的方法：手动迁移数据。这真的真的非常耗时，虽然大部分应用的数据都支持云端存储，但是还是有很多数据是不支持自动备份和同步的，比如微信聊天记录和记账 app 的数据，而且几乎所有的应用都得重新登录和设置一遍。不过，我也因此有机会重新 review 了手机上的 app，只保留下最核心的和最常用的应用。</p>
 <p>另外，<a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=ch.deletescape.lawnchair.plah">Lawnchair</a> 真的帮了我大忙，只要把桌面设置通过备份文件恢复之后，即便应用还没有安装，也只要点击一下 app 就能跳转到应用商店下载安装。对于国内的应用，我安装了应用宝，Play Store 没有的应用就跳转到应用宝来安装。虽然我也尝试了新版本的 <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=app.lawnchair.play">Lawnchair</a>，但还是觉得更喜欢 legacy 的版本，即使它从 5 年前开始就不再更新了，但对我来说它已经足够好用了，也有可能只是用习惯了吧。</p>
 <h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>到这里才算是进入正题了，写这篇笔记的主要目的也是为了以后能更轻松的完成基本的定制化任务。</p>
@@ -201,6 +204,7 @@
 <h4 id="功能增强模块"><a href="#功能增强模块" class="headerlink" title="功能增强模块"></a>功能增强模块</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/chenxiaolong/BCR"><strong>BCR</strong></a>: Basic Call Recorder, 添加通话录音功能。</li>
 <li><a target="_blank" rel="noopener" href="https://github.com/WSTxda/ViperFX-RE-Releases"><strong>ViPER4Android FX</strong></a>: 提升音频 (主要是扬声器) 功能的模块。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/eritpchy/FingerprintPay"><strong>FingerprintPay</strong></a>: 为微信等应用添加指纹支付的模块 (由于解锁后 <a target="_blank" rel="noopener" href="https://source.android.com/docs/security/features/trusty">TEE</a> 失效的问题)。KSU 中需要 Zygisk Next 模块的支持。</li>
 </ul>
 <h4 id="定制化-UI"><a href="#定制化-UI" class="headerlink" title="定制化 UI"></a>定制化 UI</h4><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/siavash79/PixelXpert"><strong>PixelXpert</strong></a>: 深度定制 Pixel 的系统 UI，如状态栏、管理 Cloned App 等。需要 LSPosed_mod 模块的支持。</li>
