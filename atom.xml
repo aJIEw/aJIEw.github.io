@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2024-12-01T15:23:49.307Z</updated>
+  <updated>2024-12-28T09:01:31.814Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,75 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>优化生活习惯</title>
+    <link href="https://ajiew.github.io/2024-12/"/>
+    <id>https://ajiew.github.io/2024-12/</id>
+    <published>2024-12-31T12:30:00.000Z</published>
+    <updated>2024-12-28T09:01:31.814Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/oTWULU0vBaQ&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月过得和上个月差不太多，大部分时间还是待在家里，周末偶尔出门骑车闲逛，当然，依旧觉得自己花在网上的时间太多了，还是应该和现实生活中的人多接触才行啊。另外，整理碎碎念的时候也发现，自己好像又进入了一个低潮期，想要寻求改变但是不知道该从哪里开始，也许可以从日常生活习惯上入手吧。早睡早起，恢复运动的习惯，休息时间远离手机和电脑，多自己做饭少点外卖，多看书和电影少看视频，多玩游戏少胡思乱想，饮食、睡眠、运动都调整好了，其他方面就很难变得有多糟糕。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android TV 配置指南</title>
+    <link href="https://ajiew.github.io/android-tv-setup/"/>
+    <id>https://ajiew.github.io/android-tv-setup/</id>
+    <published>2024-12-14T06:00:00.000Z</published>
+    <updated>2024-12-29T08:46:35.646Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;入手了一台投影仪放在卧室用，因此记录下配置过程。虽然是投影仪，但是使用方式和 Android TV 差不太多，所以应该可以归为同一类。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="小技巧" scheme="https://ajiew.github.io/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
+    
+    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Tune Your Heart</title>
     <link href="https://ajiew.github.io/2024-11/"/>
     <id>https://ajiew.github.io/2024-11/</id>
     <published>2024-11-30T12:30:00.000Z</published>
-    <updated>2024-12-01T15:23:49.307Z</updated>
+    <updated>2024-12-28T08:47:40.900Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -63,7 +127,7 @@
     <link href="https://ajiew.github.io/pixel-setup/"/>
     <id>https://ajiew.github.io/pixel-setup/</id>
     <published>2024-11-15T06:00:00.000Z</published>
-    <updated>2024-11-30T13:22:28.164Z</updated>
+    <updated>2024-12-29T08:46:31.516Z</updated>
     
     
     <summary type="html">&lt;p&gt;时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。&lt;/p&gt;</summary>
@@ -76,8 +140,6 @@
     <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
     
     <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
-    
-    <category term="Cheatsheet" scheme="https://ajiew.github.io/tags/Cheatsheet/"/>
     
   </entry>
   
@@ -707,48 +769,6 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;八月，对大部分学生来说，这个月到末尾的时候也就意外着暑假要结束了，所以总会有点不开心。然而我的学生时代已经过去很久了，现在，这个月的结束对我来说意味着秋天马上要来了，天气也会变凉快，所以是一件好事。这个月看了 8 本书，跑步 90 公里左右，OA 移动端功能开发完毕开始回归测试阶段，正式开始开发 Kiosk 项目。整理年度计划的时候，意识到 2023 已经过去 2/3 了，不过，假如从现在开始好好执行自己的计划，还是有机会完成一部分的年度目标的。除此之外，这个月发生的一件重要的事是表弟马上要上大学了，他和我刚好差了十岁。回想十年前的自己，感觉未来有无限的可能。但是，现在回过头来看，虽然此刻我的生活和我当初想象的不太一样，我还是比较知足了。不知道未来十年会发生什么，但是，我觉得只要一直努力下去，追求自己想要的生活，哪怕最终不能如愿，至少会感到心安，而不是感到后悔或者遗憾。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>心安</title>
-    <link href="https://ajiew.github.io/2023-7/"/>
-    <id>https://ajiew.github.io/2023-7/</id>
-    <published>2023-07-31T12:30:00.000Z</published>
-    <updated>2023-09-03T13:30:12.782Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;七月是这个夏天最热的一个月，所以基本没怎么出过门，不过，每天除了工作之外，也还是坚持了一些习惯，比如跑步 120+ km，看完了 4 本书。虽然中间也有一段时间过得不太自律，但是终归还是恢复过来了，而且我也发现只有当过着看似重复的生活，才能让人觉得内心踏实，尤其是在完成一天的工作、运动之后，坐下来安静地看几页书，那种简单、平静的满足感，最让人放松。月底回了一趟家，我现在觉得，每次和家人们在一起都有种内心平静的感觉。家其实不仅仅是一座房子这么简单，它其实是人的一种感受。因为熟悉，所以心安，而只有心安才能给人一种「家」的感觉。希望我们都能找到能让自己感到心安的地方。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Your Mind Follows Your Body</title>
-    <link href="https://ajiew.github.io/2023-6/"/>
-    <id>https://ajiew.github.io/2023-6/</id>
-    <published>2023-06-30T12:30:00.000Z</published>
-    <updated>2023-07-31T14:13:55.627Z</updated>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;六月，手机相册里多了很多晚霞和天际线的照片。一直觉得自己不太喜欢夏天，但是现在发现人的心情其实是会随着季节、温度、气候变化的，比如有时候光是看着窗外热烈、明亮的画面，心情也会变得明朗起来。环境对人的影响真的太大了。另外，这个月重新开始跑步了。这个中断了快要一年的习惯，没想到重新捡起来也挺快的。我喜欢跑完之后汗水浸透衣服但却身心舒畅的那种状态，心里有种克服困难、掌控身体的感觉，运动是最简单的改变人心理状态的手段吧。除此之外，这个月也看了几本书、看了几部电影，回了一趟家，有了一些新的感悟。希望这种状态能继续保持下去吧。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
