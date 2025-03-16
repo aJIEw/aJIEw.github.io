@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2025-02-09T07:18:45.691Z</updated>
+  <updated>2025-03-16T13:55:19.282Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>顺其自然</title>
+    <link href="https://ajiew.github.io/2025-2/"/>
+    <id>https://ajiew.github.io/2025-2/</id>
+    <published>2025-02-28T12:30:00.000Z</published>
+    <updated>2025-03-16T13:55:19.282Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/mwJEkTUp9NI&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月好像发生了很多事情，但静下来的时候却不知道该从哪里开始回忆。整理碎碎念的时候发现，好像越是有痛苦时刻出现的时候，往往碎碎念的质量就越高，可能大多数人的确都是被痛苦驱动的吧。这也符合过去我对自己的一贯印象，往往只有在被外界逼迫着的时候，才能成长得更快，而且我的性格也决定了我很少会主动去承担挑战。喊了那么久的打破舒适区，但实际上大多数情况下我都是被迫离开自己的舒适区的。不过，也没关系，每个人都有自己的应对方式，有的时候也许顺其自然才是最佳的做法。要相信一切都是最好的安排。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
   
   <entry>
     <title>向上生长</title>
@@ -769,49 +813,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;这个月的天气变化得有点快，可能是因为换季吧，感觉一下子从夏末初秋到了初冬，换了床单和被套，于是早上起床也开始变得磨蹭起来。不过，我还是挺喜欢这种季节的变化的，它可以提醒我们去注意到岁月的流逝。随着年龄的增长，人感知到的时间流逝，好像真的会变得越来越快，我觉得这也正是记录的意义所在吧。很快地，这一年就会结束，然后是 2024 年，然后是下一年。如果你不去珍惜时间，利用有限的生命去创造、分享、体验、感受，你的一生也会很快地就过去了。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Live A Little</title>
-    <link href="https://ajiew.github.io/2023-10/"/>
-    <id>https://ajiew.github.io/2023-10/</id>
-    <published>2023-10-31T12:30:00.000Z</published>
-    <updated>2023-12-01T13:47:27.485Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/C75X1dprPAM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月好像过得挺漫长的，可能是国庆假期的缘故吧，虽然并没有出门玩，但是能够有段时间在家放松也挺不错的。除此之外，看完了 3 本书，其中两本是一直想看的科幻小说《银河系搭车客指南》系列，当然也是因为看了《宇宙》之后才重新激起了兴趣。跑步 100km 左右，这还挺让我惊讶的，原本以为天气转凉之后会花更多的时间在轮滑上，可能是因为重新发现了跑步的乐趣吧。这个月最大的感受是，其实一切都没有那么重要。我们所在的星球、我们自己，包括人类的历史，其实都只是沧海一粟。这样一来，其实更说明了活在当下的重要性。除了更多的探索未知之外，我们自己的感受也非常重要，有的时候放松一点、随心一点，其实没什么不好。大多数时候都要记得锻炼自己的 resilience，但偶尔也要学会 live a little。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
