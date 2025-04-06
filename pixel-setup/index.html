@@ -14,10 +14,10 @@
 <meta property="og:description" content="时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-11-15T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-29T08:46:31.516Z">
+<meta property="article:modified_time" content="2025-03-20T15:18:03.432Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Tricks">
 <meta property="article:tag" content="Android">
+<meta property="article:tag" content="Tricks">
 <meta name="twitter:card" content="summary">
     
     
@@ -175,6 +175,7 @@
 </ol>
 <p>重启手机之后 root 就算完成了，打开 Kernel Su 管理器，可以在 Superuser 里控制哪些 app 拥有 root 权限。</p>
 <p>另外，和 Magisk 类似，在系统 OTA 升级之后，只需要在 Kernel SU Manager 中将 Kernel SU 安装到 inactive slot 就可以保留 Kernel SU 了。</p>
+<p>假如 OTA 之后发现 root 丢失了，不要惊慌，我们依旧可以通过 <a target="_blank" rel="noopener" href="https://developers.google.com/android/ota">OTA 镜像文件</a>来恢复，下载 <code>.zip</code> 文件后使用 <a target="_blank" rel="noopener" href="https://github.com/vm03/payload_dumper">payload_dumper</a> 提取 <code>init_boot.img</code> 文件，接着重复以上步骤即可。</p>
 <h2 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h2><p>原本想要通过数据线迁移数据的，但是似乎一加并不支持 Pixel 的迁移方式，连接上之后却没有反应。所以，只能用比较笨的方法：手动迁移数据。这真的真的非常耗时，虽然大部分应用的数据都支持云端存储，但是还是有很多数据是不支持自动备份和同步的，比如微信聊天记录和记账 app 的数据，而且几乎所有的应用都得重新登录和设置一遍。不过，我也因此有机会重新 review 了手机上的 app，只保留下最核心的和最常用的应用。</p>
 <p>另外，<a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=app.lawnchair.play">Lawnchair</a> 真的帮了我大忙，只要把桌面设置通过备份文件恢复之后，即便应用还没有安装，也只要点击一下 app 就能跳转到应用商店下载安装。对于国内的应用，我安装了应用宝，Play Store 没有的应用就跳转到应用宝来安装。</p>
 <h2 id="定制化"><a href="#定制化" class="headerlink" title="定制化"></a>定制化</h2><p>到这里才算是进入正题了，写这篇笔记的主要目的也是为了以后能更轻松的完成基本的定制化任务。</p>
@@ -183,15 +184,15 @@
 <ol>
 <li>下载 <a target="_blank" rel="noopener" href="https://github.com/RikkaApps/Shizuku/releases">Shizuku</a> 并按照 app 上的提示开启服务</li>
 <li>下载 <a target="_blank" rel="noopener" href="https://github.com/kyujin-cho/pixel-volte-patch/releases">Pixel IMS</a>，允许授权后刷新界面，会出现电信卡的 IMS Status，并且首页会增加一个 Sim 标签页</li>
-<li>在 Sim Config 中开启 Enable VoLTE 以及 Show IMS Status in Sim Info，其他选项根据个人需要打开</li>
+<li>在 Sim Config 中开启 <strong>Enable VoLTE</strong> 以及 <strong>Show IMS Status in Sim Info</strong>，其他选项根据个人需要打开</li>
 </ol>
 <p>到这里电信 4G 就已经可以使用了，接下来是 5G 网络的支持。</p>
-<p>首先，去 Play Store 下载安装 <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.qtrun.QuickTest">Network Signal Guru</a>，授予 root 权限后，在右上角的菜单中选择 Forcing Control (假如没找到这个选项可以选择重启后再试)，然后依次选择 <strong>[1]SIM 1</strong> &gt; <strong>[3]NR MODE SETTINGS</strong> &gt; <strong>[4]SA+NSA</strong>，重启之后设备就可以支持 5G 网络了，另外，SIM 卡的设置中还会多出一个 Vo5G (VoNR) 的开关。</p>
+<p>首先，去 Play Store 下载安装 <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.qtrun.QuickTest">Network Signal Guru</a>，授予 root 权限后，在右上角的菜单中选择 <strong>Forcing Control</strong> (假如没找到这个选项可以选择重启后再试)，然后依次选择 <strong>[1]SIM 1</strong> &gt; <strong>[3]NR MODE SETTINGS</strong> &gt; <strong>[4]SA+NSA</strong>，重启之后设备就可以支持 5G 网络了，另外，SIM 卡的设置中还会多出一个 <strong>Vo5G (VoNR)</strong> 的开关。</p>
 <p>需要注意的是，以上配置在系统升级之后不会被保留，也就是说每次 OTA 升级之后都需要再配置一遍。不过，开了 root 权限之后，操作还是挺方便的，一分钟之内可以搞定。</p>
 <h3 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h3><p>之前用一加系统被锁定在了 Android 12，现在升级到 15 之后才发现，原来 Android 系统还是有在改变的。所以，多去设置里翻翻，也许会有惊喜，比如发现某些意想不到的小功能，我现在最喜欢的 Pixel 新功能是 Now Playing 和 Quick Tap，还有就是 Private Space (系统级的应用双开功能)。另外，Pixel 用户也可以通过 Pixel Tips 来探索手机上的新功能。</p>
 <h4 id="🚧问题记录"><a href="#🚧问题记录" class="headerlink" title="🚧问题记录"></a>🚧问题记录</h4><h5 id="“Hey-Google”-提示音缺失的问题"><a href="#“Hey-Google”-提示音缺失的问题" class="headerlink" title="“Hey Google” 提示音缺失的问题"></a>“Hey Google” 提示音缺失的问题</h5><p>Google Assistance 是我尝试的第一个也是唯一还在继续使用的语音助手服务，有时候我也会用它来找不知道放到哪里的手机，可是不知道从什么时候开始，“Hey Google” 的提示音就消失了，于是我用它的次数也逐渐减少了。</p>
 <p>去网上搜了一下，发现被这个问题困扰的人不在少数，一大堆人都在吐槽谷歌为什么要把这个提示音给取消掉。不过，其实也还是有办法恢复的。</p>
-<p>首先，在设置中搜索 “Assistant”，打开后找到 Accessibility，确保选中 Mic-open notification 和 Mic-close notification，然后在系统的 Accessibility 中找到 Voice Access，选择开启。之后再次尝试 Hey Google，你会发现提示音又回来了。</p>
+<p>首先，在设置中搜索 “Assistant”，打开后找到 <strong>Accessibility</strong>，确保选中 <strong>Mic-open notification</strong> 和 <strong>Mic-close notification</strong>，然后在系统的 Accessibility 中找到 <strong>Voice Access</strong>，选择开启。之后再次尝试 Hey Google，你会发现提示音又回来了。</p>
 <p>如果尝试上述手段后还是没有提示音，可以尝试在 Assistant Language 中添加一门新的语言，也许也能有效果。参考：<a target="_blank" rel="noopener" href="https://www.reddit.com/r/GooglePixel/comments/12i80nq/how_to_make_google_assistant_giving_a_beep_after/">How to make Google Assistant give a BEEP</a></p>
 <h3 id="核心-Modules"><a href="#核心-Modules" class="headerlink" title="核心 Modules"></a>核心 Modules</h3><p>Kernel Su 的模块虽然不如 Magisk 丰富，但是大多数常见的模块都已经适配了 Kernel SU，因此基本可以满足大部分人的需求。</p>
 <p>在尝试新模块之前，建议先阅读一遍 <a target="_blank" rel="noopener" href="https://kernelsu.org/guide/rescue-from-bootloop.html">Rescue from bootloop</a>，这里不得不提一下 KSU 的优点了，由于它的实现机制与 Magisk 全然不同，当出现 bootloop 时，永远可以快速恢复到原来的状态，无论是通过重新刷入 stock boot image 还是通过 disable 模块 (进入开机页后连按音量减键三次)，总之，你再也不用担心手机变砖无法恢复了。不过，为了快速定位到出问题的模块，最好还是一次只安装一个新模块，重启之后确认模块可以正常工作后再尝试安装下一个模块。</p>

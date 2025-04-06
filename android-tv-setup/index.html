@@ -14,10 +14,10 @@
 <meta property="og:description" content="入手了一台投影仪放在卧室用，因此记录下配置过程。虽然是投影仪，但是使用方式和 Android TV 差不太多，所以应该可以归为同一类。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-14T06:00:00.000Z">
-<meta property="article:modified_time" content="2024-12-29T08:46:35.646Z">
+<meta property="article:modified_time" content="2025-03-19T07:15:02.535Z">
 <meta property="article:author" content="aJIEw">
-<meta property="article:tag" content="Tricks">
 <meta property="article:tag" content="Android">
+<meta property="article:tag" content="Tricks">
 <meta name="twitter:card" content="summary">
     
     
@@ -166,7 +166,7 @@
 <p>连接同一 WiFi 之后，在网络设置中找到设备的 IP 地址，然后在电脑上输入 <code>adb connect ip_address</code>，命令行有可能会提示 “failed to authenticate to xxx”，但是一般可以忽略，只要 <code>adb devices</code> 可以看到设备已连接就可以了。接下来就是下载你想要的应用然后安装就可以了。</p>
 <h3 id="YouTube"><a href="#YouTube" class="headerlink" title="YouTube"></a>YouTube</h3><p>我发现网上很多教程都会推荐一些诸如 <a target="_blank" rel="noopener" href="https://opengapps.org/">Open GApps</a> 之类的打包后的安装包，但是，我发现这些工具要么太过复杂 (需要通过 recovery 刷入)，要么就是根本不适配 (安装过程中会卡住)。所以，我觉得最好的做法还是根据你自己设备的安卓版本，去找到对应的安装包来安装。</p>
 <p>比如，我的投影仪安卓版本是 11，那么我就去下载对应版本的 Google Service Framework 11 以及最新版本的 Google Play services (Android TV) 和 YouTube for Android TV，然后逐个安装就可以了。</p>
-<p>另外，我也发现 Google Play Store (Android TV) 似乎并不能在投影仪上正常运行，不过其实也没关系，反正大部分应用可以直接通过 adb 来安装。唯一的缺点是应用将会无法自动更新，这样的话有些应用可能会停止工作，比如 Steam Link，如果版本相差太多，有可能会无法识别到主机端。</p>
+<p>另外，我也发现 Google Play Store (Android TV) 似乎并不能在投影仪上正常运行，不过其实也没关系，反正大部分应用都可以直接通过 adb 安装。唯一的缺点是应用将会无法自动更新，这样的话有些应用未来可能会停止工作，比如 Steam Link，如果客户端和主机端的版本相差太多，有可能会无法识别到主机。</p>
 
   </div>
 </article>
