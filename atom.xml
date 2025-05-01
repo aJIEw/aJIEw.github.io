@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2025-04-06T15:53:01.561Z</updated>
+  <updated>2025-05-01T10:00:54.008Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,55 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>重新定义经历</title>
+    <link href="https://ajiew.github.io/2025-4/"/>
+    <id>https://ajiew.github.io/2025-4/</id>
+    <published>2025-04-30T12:30:00.000Z</published>
+    <updated>2025-05-01T10:00:54.008Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/QwYVYodNjs4&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月过得好像特别漫长，可能是因为生活中出现了一些变化吧。我觉得找工作其实也是一种锻炼的过程，因为你被逼着去总结自己过去在一家家公司的经历，去反思自己有哪些成长，并且也有机会去发现自己在这段时间内所发生的转变。经历塑造我们，但是当我们回头看的时候，其实也在重新定义自己过去的那些经历。尽量发现其中好的一面，从错误中学习，忘掉那些不愉快而且也无法改变的事情，能做到这样就很好了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Sprint downhill</title>
     <link href="https://ajiew.github.io/2025-3/"/>
     <id>https://ajiew.github.io/2025-3/</id>
     <published>2025-03-31T12:30:00.000Z</published>
-    <updated>2025-04-06T15:53:01.561Z</updated>
+    <updated>2025-04-12T15:37:40.883Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -106,7 +150,7 @@
     <link href="https://ajiew.github.io/2025-1/"/>
     <id>https://ajiew.github.io/2025-1/</id>
     <published>2025-01-31T12:30:00.000Z</published>
-    <updated>2025-02-09T07:18:45.691Z</updated>
+    <updated>2025-05-01T09:41:14.086Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -530,7 +574,7 @@
     <link href="https://ajiew.github.io/2024-5/"/>
     <id>https://ajiew.github.io/2024-5/</id>
     <published>2024-05-31T12:30:00.000Z</published>
-    <updated>2024-06-30T15:19:13.385Z</updated>
+    <updated>2025-04-11T16:56:33.471Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -552,7 +596,6 @@
 
 &lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/nWlEsta4xS8&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;br/&gt;
 
 &lt;blockquote&gt;
@@ -776,49 +819,6 @@
     
     
     <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>去接纳一切</title>
-    <link href="https://ajiew.github.io/2023/"/>
-    <id>https://ajiew.github.io/2023/</id>
-    <published>2023-12-30T12:30:00.000Z</published>
-    <updated>2025-01-01T07:21:03.646Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/vbvyNnw8Qjg&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;p&gt;又到了坐下来写总结的时候了，2023 这一年，对我来说应该是挺不一样的一年，上半年被老板约谈然后离职，换了一个 base 在新加坡但是主要开发团队在澳洲的远程工作，接着搬家到银湖，以及开始准备新房装修的事。这一切在回想起来的时候，有些让我感到意外，有些也让我觉得自己真的挺幸运的。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="随笔" scheme="https://ajiew.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
-    
-    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
     
   </entry>
   
