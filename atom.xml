@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2025-12-02T15:07:45.442Z</updated>
+  <updated>2026-01-04T06:16:15.108Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>那些“无用功”</title>
+    <link href="https://ajiew.github.io/2025-12/"/>
+    <id>https://ajiew.github.io/2025-12/</id>
+    <published>2025-12-31T12:30:00.000Z</published>
+    <updated>2026-01-04T06:16:15.108Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/gRUyC9veWtw&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;虽然12月正式迎来了冬季，但这个月的绝大部分时间里还是在骑车。偶尔参加过几场面试，虽然没有获得自己想要的结果，但是也让我意识到了自己的劣势以及需要提升的地方，所以它们也都是有意义的。此外，在整理这个月碎碎念的过程中，发现挺喜欢自己这个月的一些表达，虽然有些文字还是显得有些矫揉造作，但至少某些部分的思考都是挺有意义的，只不过可能文字需要多打磨几次。我觉得这也是支撑我写碎碎念的动力之一吧，记录下那些有意义的思考，待日后也许还能给自己带来更多的启发。我们还是不要太功利主义了，觉得一件事情不能给自己带来实际的功效就选择放弃。恰恰相反，生活在这个时代的我们，要多去探索那些看似意义不大的事情，因为只有那些事才是我们人类相比起 AI 最独特的地方。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>骑行的意义</title>
     <link href="https://ajiew.github.io/2025-11/"/>
     <id>https://ajiew.github.io/2025-11/</id>
     <published>2025-11-30T12:30:00.000Z</published>
-    <updated>2025-12-02T15:07:45.442Z</updated>
+    <updated>2026-01-01T04:31:12.140Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -774,48 +817,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;虽然已经立秋了，但是这段时间的天气还是非常热，所以依旧不想出门。这个月好像和上个月过得差不太多，大部分时间都宅在家，并且几乎把所有的空余时间都花在了刷过去看过的剧、玩一些好久没玩的游戏上了，所以也勾起了很多怀旧的情绪。想起以前的事情，感觉它们都是非常久远之前发生的，但也感到有点神奇，多年之后的我竟然会出现在这里、做着这些事情。尽管总是强调要活在当下，但是时间的确是人类体验中非常重要的一部分，每一个片段是独立的，但同时又是彼此联系在一起的。假如纯粹用这样的角度来看待我们的生命，也许就不会再感到焦虑了，每一刻的发生都是为了让我们来到现在的位置，哪怕是痛苦的经历也不会是一种浪费，而是我们生命的一部分。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>珍惜缘分</title>
-    <link href="https://ajiew.github.io/2024-7/"/>
-    <id>https://ajiew.github.io/2024-7/</id>
-    <published>2024-07-31T12:30:00.000Z</published>
-    <updated>2024-09-01T07:36:10.989Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/pki-fmZxIas&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月过得好像挺放松的，一口气看了好多部电影，重新开始刷一些经典的剧，看了两本小书。我觉得能够保持住这样的生活状态也挺好的，不花太多精力去关注外界的新闻，专注活在自己的小世界里。但人总归会有很多的欲望，总是喜欢看看别人再看看自己。这也无可厚非，因为这是写在我们基因里的，其实没必要去抵抗或者屈从，把它看作是自己的一部分就好。到头来我们都是匆匆过客，既然能够相遇并且陪伴彼此走上一小段路，那就好好珍惜这份缘分吧。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
