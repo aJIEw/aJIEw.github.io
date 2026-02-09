@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2026-01-04T06:16:15.108Z</updated>
+  <updated>2026-02-09T08:10:37.594Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>悠长假期</title>
+    <link href="https://ajiew.github.io/2026-1/"/>
+    <id>https://ajiew.github.io/2026-1/</id>
+    <published>2026-01-31T12:30:00.000Z</published>
+    <updated>2026-02-09T08:10:37.594Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/TXPtG02Nf1Q&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;新的一个月，依旧是失业的状态，但是整理碎碎念的时候发现，好像碎碎念文字的质量比过去更高了，可能是因为时间变多之后能用来反省的时间也变多了吧。虽然长时间失业对人的心理是种考验，但是，往好的方面想，我至少也因此有了很多时间去做自己以前想做但没能做的事情。也许可以把它看作是一个特别长的假期，尽管不是所有时间都过得很愉快，但至少大部分情况下，我都是自得其乐的。而且此刻的我毕竟还算年轻，也许这是我人生中最后一个不需要承担太多责任以及让人产生负罪感的“悠长假期”了。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>那些“无用功”</title>
     <link href="https://ajiew.github.io/2025-12/"/>
     <id>https://ajiew.github.io/2025-12/</id>
     <published>2025-12-31T12:30:00.000Z</published>
-    <updated>2026-01-04T06:16:15.108Z</updated>
+    <updated>2026-02-09T05:54:55.210Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -320,7 +363,7 @@
     <link href="https://ajiew.github.io/2025-5/"/>
     <id>https://ajiew.github.io/2025-5/</id>
     <published>2025-05-31T12:30:00.000Z</published>
-    <updated>2025-06-30T03:38:22.802Z</updated>
+    <updated>2026-02-09T05:38:02.037Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -343,8 +386,6 @@
 &lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/5p6lCoPaSrs&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
 
-
-
 &lt;br/&gt;
 
 &lt;blockquote&gt;
@@ -365,7 +406,7 @@
     <link href="https://ajiew.github.io/2025-4/"/>
     <id>https://ajiew.github.io/2025-4/</id>
     <published>2025-04-30T12:30:00.000Z</published>
-    <updated>2025-05-31T08:57:47.793Z</updated>
+    <updated>2026-02-09T05:37:47.757Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -387,8 +428,6 @@
 
 &lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/QwYVYodNjs4&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-
 &lt;br/&gt;
 
 &lt;blockquote&gt;
@@ -452,7 +491,7 @@
     <link href="https://ajiew.github.io/2025-2/"/>
     <id>https://ajiew.github.io/2025-2/</id>
     <published>2025-02-28T12:30:00.000Z</published>
-    <updated>2025-03-29T16:24:43.842Z</updated>
+    <updated>2026-02-09T07:27:51.097Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -632,9 +671,9 @@
     <category term="小技巧" scheme="https://ajiew.github.io/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
     
-    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
-    
     <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
+    
+    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
     
   </entry>
   
@@ -685,7 +724,7 @@
     <link href="https://ajiew.github.io/pixel-setup/"/>
     <id>https://ajiew.github.io/pixel-setup/</id>
     <published>2024-11-15T06:00:00.000Z</published>
-    <updated>2025-11-13T14:10:06.873Z</updated>
+    <updated>2026-01-28T01:28:36.640Z</updated>
     
     
     <summary type="html">&lt;p&gt;时隔六年，再一次入手了 Pixel，其实信仰早就欠费了，也是因为之前用的一加系统真的太省心了，陪伴了我五年多的时间，直到最近因为电池续航的原因才不得不遗憾地让它退役了。&lt;/p&gt;</summary>
@@ -695,9 +734,9 @@
     <category term="小技巧" scheme="https://ajiew.github.io/categories/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
     
-    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
-    
     <category term="Tricks" scheme="https://ajiew.github.io/tags/Tricks/"/>
+    
+    <category term="Android" scheme="https://ajiew.github.io/tags/Android/"/>
     
   </entry>
   
@@ -775,48 +814,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;秋天是我最喜欢的季节，喜欢这个季节的天气、景色以及给人的感觉。不过这个月的前半段是夏天的延续，后半段才开始有秋天的感觉，接下来希望自己能多出门走走吧。我发现“出门走走”这样一个简单的动作就能极大提升一个人的幸福感，可能是因为沉浸在网络世界里的我们，容易形成这个世界非常糟糕的错误印象，然而事实并非如此。我们应该抓住人生中每一个机会，散布积极和爱，而不是消极和刻薄，以丰富回报丰富，然后你会发现到处都是机会，以及充满善意的人和给他人造成正面影响的人。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>每一刻都算数</title>
-    <link href="https://ajiew.github.io/2024-8/"/>
-    <id>https://ajiew.github.io/2024-8/</id>
-    <published>2024-08-31T12:30:00.000Z</published>
-    <updated>2024-09-30T15:03:45.845Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/w46bWxS9IjY&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;虽然已经立秋了，但是这段时间的天气还是非常热，所以依旧不想出门。这个月好像和上个月过得差不太多，大部分时间都宅在家，并且几乎把所有的空余时间都花在了刷过去看过的剧、玩一些好久没玩的游戏上了，所以也勾起了很多怀旧的情绪。想起以前的事情，感觉它们都是非常久远之前发生的，但也感到有点神奇，多年之后的我竟然会出现在这里、做着这些事情。尽管总是强调要活在当下，但是时间的确是人类体验中非常重要的一部分，每一个片段是独立的，但同时又是彼此联系在一起的。假如纯粹用这样的角度来看待我们的生命，也许就不会再感到焦虑了，每一刻的发生都是为了让我们来到现在的位置，哪怕是痛苦的经历也不会是一种浪费，而是我们生命的一部分。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
