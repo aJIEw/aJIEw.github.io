@@ -14,7 +14,7 @@
 <meta property="og:description" content="科学上网安装 V2ray通过 fhs-install-v2ray 安装（未配置代理的情况下，通过 github 下载文件会比较慢）： 12345678# installbash &lt;(curl -L https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;v2fly&#x2F;fhs-install-v2ray&#x2F;master&#x2F;install-release.sh)# setup client">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-15T12:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-02T07:59:06.595Z">
+<meta property="article:modified_time" content="2026-04-28T04:53:04.430Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Cheatsheet">
 <meta name="twitter:card" content="summary">
@@ -163,7 +163,7 @@
 
 <h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><h3 id="安装-oh-my-zsh"><a href="#安装-oh-my-zsh" class="headerlink" title="安装 oh-my-zsh"></a>安装 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh">oh-my-zsh</a></h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install zsh -y<br><br>sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL \</span></span><br><span class="hljs-subst"><span class="hljs-string">    https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># vim ~/.zshrc</span><br>plugins=(<br>  autojump<br>  dirhistory<br>  git<br>  ubuntu<br>  zsh-autosuggestions<br>  zsh-hist<br>  zsh-syntax-highlighting<br>)<br></code></pre></td></tr></table></figure>
+<h4 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># vim ~/.zshrc</span><br>plugins=(<br>  autojump<br>  dirhistory<br>  git<br>  zsh-autosuggestions<br>  zsh-hist<br>  zsh-syntax-highlighting<br>)<br></code></pre></td></tr></table></figure>
 
 <p>其中 <code>autojump</code> 需要先安装依赖：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">apt install autojump -y<br></code></pre></td></tr></table></figure>
