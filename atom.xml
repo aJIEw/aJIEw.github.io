@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2026-05-31T16:07:39.513Z</updated>
+  <updated>2026-08-04T09:10:33.570Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,96 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>认可和鼓励</title>
+    <link href="https://ajiew.github.io/2026-7/"/>
+    <id>https://ajiew.github.io/2026-7/</id>
+    <published>2026-07-31T12:30:00.000Z</published>
+    <updated>2026-08-04T09:10:33.570Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/e1WLYcV_5z0&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月又是秩序和混乱交织在一起的一个月，有主动学习到一些新知识，扫清了过去的某些盲点，但是，也浪费了很多时间在那些不重要的事情上。不过，对于一个有拖延症倾向以及自信心不足的人来说，事后回想起来，总是会先看到那些自己做得不足的地方。然而，意识到自己有在进步也是非常重要的，对于一个 underdog，最不需要的是自我批评和过度反省，最需要的是认可和鼓励，只有这样，才能有利于重新找回信心，才能有动力挣扎着摆脱泥潭。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>“惬意人生”感</title>
+    <link href="https://ajiew.github.io/2026-6/"/>
+    <id>https://ajiew.github.io/2026-6/</id>
+    <published>2026-06-30T12:30:00.000Z</published>
+    <updated>2026-08-04T09:11:49.181Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/2JB_nG_KMCs&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月依旧是东一榔头西一棒槌的模式，到处缝缝补补、敲敲打打，似乎做了很多事情，但好像看不到多大的产出。有学到一些新知识，但没有真正让自己感到兴奋的东西。内心似乎还是放不下骑行，几乎一有机会就会出门来一次不算短的短途骑行，哪怕只是去看那些略显重复的山水，也比强迫自己坐在一个小房间里对着屏幕敲打一些自己也不甚感到满意的代码强。说实话，内心甚至有点希望自己能彻底摆烂，但好像也不太可能做得到。所以啊，这再一次证明了自己只是一个普通人而已，还是有一些不得不去做的事情，有不得不去面对的现实，得学会向生活低头。但即使如此，也不影响我们在琐碎的日常之中，去寻找到那些能够给自己带来哪怕只是一丝丝的“惬意人生”的感受的东西。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>直面问题</title>
     <link href="https://ajiew.github.io/2026-5/"/>
     <id>https://ajiew.github.io/2026-5/</id>
     <published>2026-05-31T12:30:00.000Z</published>
-    <updated>2026-05-31T16:07:39.513Z</updated>
+    <updated>2026-07-11T15:45:33.764Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -224,9 +309,9 @@
     <category term="随笔" scheme="https://ajiew.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
     
     
-    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
-    
     <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
     
   </entry>
   
@@ -774,91 +859,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;这个月过得似乎特别漫长，可能是因为新年和农历新年都在同一个月吧。每当年末或年初的时候，人的心境都会发生一些变化，再加上和家人的团聚以及节日的氛围，总归会让我们有机会静下心来重新审视过去的这一年。我对过去一年的总结和感受其实已经在&lt;a href=&quot;https://ajiew.github.io/2024/&quot;&gt;这篇&lt;/a&gt;里说过了，但还是想强调一下，新的一年里，希望自己能花更多的时间在热爱的事情上面，然后照顾好自己的身心灵，不断努力成长下去。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>追寻热爱</title>
-    <link href="https://ajiew.github.io/2024/"/>
-    <id>https://ajiew.github.io/2024/</id>
-    <published>2025-01-05T12:30:00.000Z</published>
-    <updated>2025-02-09T07:13:52.812Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/GHJmyLnzc8Y&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;p&gt;看了很多人分享的 2024 年的总结，总体而言似乎透露出一种对未来悲观的态度。想要尽量远离这种心态，但事实是很难保证自己完全不受到影响。每个人都很难逃脱自证预言的影响，所以，我们能做的也许就是尽量让自己保持乐观，用更积极的态度看待身边的一切。即使真的无法改变现实，至少能让自己更有勇气去面对它们。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="随笔" scheme="https://ajiew.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="Reviews" scheme="https://ajiew.github.io/tags/Reviews/"/>
-    
-    <category term="年终总结" scheme="https://ajiew.github.io/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优化习惯</title>
-    <link href="https://ajiew.github.io/2024-12/"/>
-    <id>https://ajiew.github.io/2024-12/</id>
-    <published>2024-12-31T12:30:00.000Z</published>
-    <updated>2025-02-09T06:27:05.453Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/oTWULU0vBaQ&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月过得和上个月差不太多，大部分时间还是待在家里，周末偶尔出门骑车闲逛，当然，依旧觉得自己花在网上的时间太多了，还是应该和现实生活中的人多接触才行啊。另外，整理碎碎念的时候也发现，自己好像又进入了一个低潮期，想要寻求改变但是不知道该从哪里开始。也许可以从日常生活习惯上入手吧。早睡早起，恢复运动的习惯，休息时间远离手机和电脑，多自己做饭少点外卖，多看书和电影少看视频，多玩游戏少胡思乱想，饮食、睡眠、运动都调整好了，其他方面就很难变得有多糟糕。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
