@@ -14,7 +14,7 @@
 <meta property="og:description" content="该 Cheatsheet 是我在通过 vimtutor 学习 Vim 以及日常使用中整理出来的，主要面向初学者。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-21T12:30:00.000Z">
-<meta property="article:modified_time" content="2024-11-17T05:59:36.746Z">
+<meta property="article:modified_time" content="2026-08-06T08:33:14.344Z">
 <meta property="article:author" content="aJIEw">
 <meta property="article:tag" content="Cheatsheet">
 <meta name="twitter:card" content="summary">
@@ -241,6 +241,7 @@
 <h3 id="其它-Tips"><a href="#其它-Tips" class="headerlink" title="其它 Tips"></a>其它 Tips</h3><ul>
 <li>  <code>:set textwidth=&lt;n&gt;</code> 设置字符换行最大长度，之后按 <kbd>gql</kbd> 就可以将使得当前行超出部分自动换行</li>
 <li>  <code>:retab</code> 格式化 Tab 为空格，使得当前文件符合 <code>.vimrc</code> 中的 <code>tabstop</code> 等配置</li>
+<li>  <code>=G</code> 从当前位置重新缩紧到文件末尾，<code>=</code> 后可以跟任何动作命令</li>
 </ul>
 <h4 id="iTerm-快捷键"><a href="#iTerm-快捷键" class="headerlink" title="iTerm 快捷键"></a>iTerm 快捷键</h4><ul>
 <li>  <kbd>command</kbd> + <kbd>/</kbd> 高亮当前文件中光标所在的位置</li>
@@ -280,7 +281,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">imap jk &lt;Esc&gt;<br></code></pre></td></tr></table></figure>
 
 <p>映射默认是 <strong>re</strong>cursive 的，意思是如果有两个相互映射的按键，它们会相互循环映射彼此。比如 x 映射成 y，y 映射成 x，这样，当你输入 x 的时候，y 也会被输入，之后 x 会被输入，这样就会循环输入下去。好处是可以执行一些需要递归执行的任务。</p>
-<p>如果你不需要递归映射，可以使用 <strong>no</strong>n-<strong>re</strong>cursive 的映射模式，用 <code>nore</code> 表示。比如 normal 模式下的非递归映射：</p>
+<p>如果你不需要递归映射，可以使用 <strong>no</strong>n-<strong>re</strong>cursive 的映射模式，用 <code>nore</code> 表示。比如 <strong>n</strong>ormal 模式下的非递归映射：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 将 normal 模式下的键盘输入 control + L 替换为输入命令 set nu</span><br>nnoremap &lt;C-L&gt; :<span class="hljs-built_in">set</span> nu<br></code></pre></td></tr></table></figure>
 
 <h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">h mapping<br>h recursive_mapping<br></code></pre></td></tr></table></figure>
