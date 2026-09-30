@@ -6,7 +6,7 @@
   <link href="https://ajiew.github.io/atom.xml" rel="self"/>
   
   <link href="https://ajiew.github.io/"/>
-  <updated>2026-09-03T07:08:09.429Z</updated>
+  <updated>2026-09-30T10:08:21.799Z</updated>
   <id>https://ajiew.github.io/</id>
   
   <author>
@@ -17,11 +17,54 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>知行合一</title>
+    <link href="https://ajiew.github.io/2026-9/"/>
+    <id>https://ajiew.github.io/2026-9/</id>
+    <published>2026-09-30T12:30:00.000Z</published>
+    <updated>2026-09-30T10:08:21.799Z</updated>
+    
+    
+    <summary type="html">&lt;div&gt;
+&lt;style&gt;.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .embed-container iframe, .embed-container object, .embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &lt;/style&gt;
+
+&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/aF-KBopytaM&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;br/&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;这个月体感上比上个月过得要快，可能是因为月底有几个假期的缘故吧。月初进行了几次小长途骑行，探索了之前没去过的地区，对长途骑行又有了新的期待。然后也经历了第一次骑车被举报，虽然只是普通的交通处罚，但这也提醒了自己，骑摩托车更要守规矩一点，毕竟出现意外之后受伤最大的还是自己。除此之外，这个月好多次熬夜通宵玩游戏，频率和年初那段时间差不多，本来应该都是找工作的黄金时期，但却没有利用好这段时间。回过头总结，应该还是逃避心理在起作用，即使内心知道拖延和逃避无法解决问题，但似乎总是无法控制住自己。用游戏或者别的手段来逃避现实中遇到的困难，只会让处境变得更加困难。说到底，还是知行合一的问题。大多数人冷静下来之后都能看到自己身上的问题，但关键在于，有多少人能用行动打破这种恶性循环呢？&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+    
+    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
+    
+  </entry>
+  
+  <entry>
     <title>骑行是一场修行</title>
     <link href="https://ajiew.github.io/2026-8/"/>
     <id>https://ajiew.github.io/2026-8/</id>
     <published>2026-08-31T12:30:00.000Z</published>
-    <updated>2026-09-03T07:08:09.429Z</updated>
+    <updated>2026-09-30T09:58:59.932Z</updated>
     
     
     <summary type="html">&lt;div&gt;
@@ -817,48 +860,6 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;三月是春暖花开的季节，天气是越来越好了，但是心情却好像并没有变得阳光起来，主要还是因为工作的问题吧。不过，焦虑也没用，还是只能先走一步看一步。整理碎碎念的时候发现，阅读自己写下的文字也有种鼓舞和宽慰的作用，这大概就是写作和记录的意义吧。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    
-    
-    
-    <category term="碎碎念" scheme="https://ajiew.github.io/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-    
-    <category term="Journal" scheme="https://ajiew.github.io/tags/Journal/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>顺其自然</title>
-    <link href="https://ajiew.github.io/2025-2/"/>
-    <id>https://ajiew.github.io/2025-2/</id>
-    <published>2025-02-28T12:30:00.000Z</published>
-    <updated>2026-02-09T07:27:51.097Z</updated>
-    
-    
-    <summary type="html">&lt;div&gt;
-&lt;style&gt;.embed-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-  }
-  .embed-container iframe, .embed-container object, .embed-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &lt;/style&gt;
-
-&lt;div class=&quot;embed-container&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/mwJEkTUp9NI&quot; allowfullscreen frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;br/&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;这个月好像发生了很多事情，但静下来的时候却不知道该从哪里开始回忆。整理碎碎念的时候发现，好像越是有痛苦时刻出现的时候，往往碎碎念的质量就越高，可能大多数人的确都是被痛苦驱动的吧。这也符合过去我对自己的一贯印象，往往只有在被外界逼迫着的时候，才能成长得更快，而且我的性格也决定了我很少会主动去承担挑战。喊了那么久的打破舒适区，但实际上大多数情况下我都是被迫离开自己的舒适区的。不过，也没关系，每个人都有自己的应对方式，有的时候也许顺其自然才是最佳的做法。要相信一切都是最好的安排。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
